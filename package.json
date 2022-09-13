@@ -1,14 +1,27 @@
 {
+  "private": true,
   "name": "headless-core",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "set of reusable helpers",
+  "bugs": "https://github.com/MichalTarasiuk/headless-core/issues",
+  "keywords": [
+    "react",
+    "helpers",
+    "utils",
+    "monorepo",
+    "typescript",
+    "next.js"
+  ],
   "license": "ISC",
+  "author": {
+    "name": "Michał Tarasiuk",
+    "email": "tarasiuk.michal03@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MichalTarasiuk/headless-core"
+  },
+  "scripts": {},
   "devDependencies": {
     "typescript": "^4.8.3"
   }
