@@ -23,6 +23,7 @@
   },
   "scripts": {},
   "devDependencies": {
+    "@changesets/cli": "^2.24.4",
     "typescript": "^4.8.3"
   }
 }
