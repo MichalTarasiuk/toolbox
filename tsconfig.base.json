@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "target": "ES2022",
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noFallthroughCasesInSwitch": true,
