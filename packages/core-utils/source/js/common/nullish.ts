@@ -1,3 +1,5 @@
+// @TODO: Move Nullish type to core-typescript
+
 /**
  * `null` or `undefined`.
  *
