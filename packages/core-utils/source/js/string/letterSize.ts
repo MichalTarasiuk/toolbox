@@ -4,7 +4,7 @@ type UppercaseFirst<Word extends string> =
     : Word
 ;``
 
-export const uppercaseFirst = <Word extends string>(word: string) =>
+export const uppercaseFirst = <Word extends string>(word: Word) =>
   (word.at(0)?.toUpperCase() + word.slice(1)) as UppercaseFirst<Word>
 
 type LowercaseFirst<Word extends string> =
@@ -12,5 +12,5 @@ type LowercaseFirst<Word extends string> =
     ? `${Lowercase<Letter>}${Letters}`
     : Word
 
-export const lowercaseFirst = <Word extends string>(word: string) =>
+export const lowercaseFirst = <Word extends string>(word: Word) =>
   (word.at(0)?.toLowerCase() + word.slice(1)) as LowercaseFirst<Word>
