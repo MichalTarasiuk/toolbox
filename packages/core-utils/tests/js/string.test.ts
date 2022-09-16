@@ -1,4 +1,8 @@
-import { lowercaseFirst, uppercaseFirst } from '../../source/js/string/string'
+import {
+  lowercaseFirst,
+  uppercaseFirst,
+  truncate,
+} from '../../source/js/string/string'
 
 describe('js:string', () => {
   it('js:string:letterSize', () => {
@@ -7,5 +11,10 @@ describe('js:string', () => {
 
     // uppercaseFirst
     expect(uppercaseFirst('hello world')).toBe('Hello world')
+  })
+
+  it('js:string:truncate', () => {
+    expect(truncate('hello, world', 5, '...')).toBe('hello...')
+    expect(truncate('hello, world', 0, '...')).toBe('...')
   })
 })
