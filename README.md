@@ -1,5 +1,7 @@
 # headless-core
 
+![Headless core banner](./media/images/headless-core_banner.png)
+
 # Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
