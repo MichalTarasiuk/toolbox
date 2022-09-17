@@ -1,4 +1,5 @@
 import { timeout, settled, sleep } from '../../source/js/promise/promise'
+import { expectType } from '../../source/ts/typescript'
 
 describe('js:promise', () => {
   it('js:promise:sleep', async () => {
@@ -32,12 +33,12 @@ describe('js:promise', () => {
     const [fetchedUser, error] = await settled(fetchUserPromise)
 
     if (error) {
-      // expectType<undefined>(fetchedUser)
+      expectType<undefined>(fetchedUser)
 
       return
     }
 
-    // expectType<AnyObject>(fetchedUser)
+    expectType<AnyObject>(fetchedUser)
 
     expect(fetchedUser).toBe(user)
   })
