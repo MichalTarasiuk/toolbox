@@ -1,10 +1,6 @@
 /**
  * Create a new function that calls the provided `fn` and negates the result.
  *
- * Time complexity: _O(1)_
- *
- * Space complexity: _O(1)_
- *
  * @example
  * ```js
  * const array = [0, null, '', undefined, false];

@@ -6,10 +6,6 @@ const ERROR_TIMEOUT_MESSAGE = 'timed out'
 /**
  * Reject if the given promise does not resolve within the given timeout.
  *
- * Time complexity: _O(1)_
- *
- * Space complexity: _O(1)_
- *
  * @param promise - The promise to wait for
  * @param timeoutMs - The timeout in milliseconds
  *
@@ -19,7 +15,7 @@ export const timeout = async <Resolved>(
   promise: Promise<Resolved>,
   timeoutMs: number,
 ) => {
-  const [timer, timeoutPromise] = sleep(timeoutMs, RESOLVED_TIMEOUT_PROMISE)
+  const [timeoutPromise, timer] = sleep(timeoutMs, RESOLVED_TIMEOUT_PROMISE)
 
   const resolved = await Promise.race([promise, timeoutPromise]).finally(() => {
     if (timer) {

@@ -1,10 +1,6 @@
 /**
  * Round a number to n digits of precision after the decimal point.
  *
- * Time complexity: _O(1)_
- *
- * Space complexity: _O(1)_
- *
  * @example
  * ```js
  * const value = 12.345;
