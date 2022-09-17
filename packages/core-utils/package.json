@@ -8,6 +8,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "core-typescript": "1.0.0"
+    "core-typescript": "0.0.1"
   }
 }
