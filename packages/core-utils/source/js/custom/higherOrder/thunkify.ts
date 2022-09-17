@@ -22,17 +22,15 @@
  *
  * @returns A function that returns whatever the first call of `fn` returns for the given arguments
  */
-export const thunkify = <AnyFunction extends (...args: unknown[]) => unknown>(
-  fn: AnyFunction,
-) => {
+export const thunkify = <Fn extends AnyFunction>(fn: Fn) => {
   let wasCalled = false
-  let result: ReturnType<AnyFunction>
+  let result: ReturnType<Fn>
 
-  return (...parameters: Parameters<AnyFunction>) => {
+  return (...parameters: Parameters<Fn>) => {
     if (!wasCalled) {
       wasCalled = true
 
-      result = fn(...parameters) as ReturnType<AnyFunction>
+      result = fn(...parameters) as ReturnType<Fn>
     }
 
     return result

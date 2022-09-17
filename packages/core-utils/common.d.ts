@@ -2,7 +2,7 @@
 
 /**
  * `null` or `undefined`.
- */
+ * */
 type Nullish = null | undefined
 
 // common:functions

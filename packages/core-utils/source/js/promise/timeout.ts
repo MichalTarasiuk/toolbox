@@ -14,9 +14,6 @@ const ERROR_TIMEOUT_MESSAGE = 'timed out'
  * @param timeoutMs - The timeout in milliseconds
  *
  * @returns The resolved value of the promise
- *
- * @public
- * @category Promise
  */
 export const timeout = async <Resolved>(
   promise: Promise<Resolved>,

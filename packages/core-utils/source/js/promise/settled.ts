@@ -1,15 +1,9 @@
 /**
  * A result type for a `Promise` that resolved.
- *
- * @public
- * @category Promise
  */
 export type ResolvedResult<Resolved> = [resolved: Resolved, error: undefined]
 /**
  * A result type for a `Promise` that rejected.
- *
- * @public
- * @category Promise
  */
 export type RejectedResult<AnyError extends Error> = [
   value: undefined,
@@ -17,8 +11,6 @@ export type RejectedResult<AnyError extends Error> = [
 ]
 /**
  * A result type to represent a resolved or rejected `Promise`.
- * @public
- * @category Promise
  */
 export type Result<Resolved, AnyError extends Error> =
   | ResolvedResult<Resolved>
@@ -26,10 +18,6 @@ export type Result<Resolved, AnyError extends Error> =
 /**
  * Settle a promise by returning a tuple of the resolved value or rejected error.
  * This function never rejects.
- *
- * Time complexity: _O(1)_
- *
- * Space complexity: _O(1)_
  *
  * @example
  * ```js
@@ -39,9 +27,6 @@ export type Result<Resolved, AnyError extends Error> =
  * @param promise - The promise to settle
  *
  * @returns A tuple of the resolved value or rejected error
- *
- * @public
- * @category Promise
  */
 export const settled = async <Resolved, AnyError extends Error>(
   promise: PromiseLike<Resolved>,

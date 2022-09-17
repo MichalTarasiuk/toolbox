@@ -1,12 +1,6 @@
 /**
  * Set of HTTP request methods to indicate the desired action to be performed for a given resource.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods | MDN docs}
- *
- * @public
- * @category HTTP
- *
- * @public
- * @category HTTP
  */
 export enum Method {
   /**

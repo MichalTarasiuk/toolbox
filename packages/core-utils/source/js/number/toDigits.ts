@@ -16,8 +16,6 @@
  * @param precision - Number of digits of precision after the decimal point
  *
  * @returns Number rounded to the specified number of digits
- *
- * @public
  */
 export const toDigits = (value: number, precision: number) => {
   const factor = 10 ** precision

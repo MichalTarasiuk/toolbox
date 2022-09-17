@@ -1,5 +1,6 @@
 /**
  * Check that the url is image resource.
+ *
  * @param url Uniform Resource Locator
  */
 export const isImageUrl = async (url: string) => {

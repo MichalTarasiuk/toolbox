@@ -24,18 +24,12 @@
  * 	console.log(`${step.name} finished - job is ${Math.round(progress * 100)}% complete`);
  * }
  * ```
- *
- * @public
  */
 export const createAutoPercentage = () => {
   let _count = 0
 
   /**
    * Increment and get the percentage.
-   *
-   * Time complexity: _O(1)_
-   *
-   * Space complexity: _O(1)_
    *
    * @example
    * ```js
@@ -60,10 +54,6 @@ export const createAutoPercentage = () => {
 
   /**
    * Increment and get the number of times the percentage has been incremented.
-   *
-   * Time complexity: _O(1)_
-   *
-   * Space complexity: _O(1)_
    *
    * @example
    * ```js
