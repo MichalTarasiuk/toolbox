@@ -9,7 +9,7 @@ importers:
       '@babel/preset-typescript': 7.18.6
       '@changesets/cli': 2.24.4
       '@types/jest': 29.0.3
-      '@types/node': ^18.7.18
+      '@types/node': 18.7.18
       babel-jest: 29.0.3
       jest: 29.0.3
       node-notifier: 10.0.1
@@ -35,9 +35,9 @@ importers:
 
   packages/core-utils:
     specifiers:
-      core-typescript: 1.0.0
+      core-typescript: 0.0.1
     dependencies:
-      core-typescript: link:../core-typescript
+      core-typescript: 0.0.1
 
 packages:
 
@@ -2294,6 +2294,10 @@ packages:
     dependencies:
       browserslist: 4.21.3
     dev: true
+
+  /core-typescript/0.0.1:
+    resolution: {integrity: sha512-VGx92U+7GleL7uywTSKMIitupl7fQvo7hRdxAhvnZJ/w44PH7kDpvHlixb0rrnLgsgiImATRvWN9I+eGq9k+Zw==}
+    dev: false
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
