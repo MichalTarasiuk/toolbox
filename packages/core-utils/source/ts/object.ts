@@ -23,3 +23,14 @@ export const fromEntries = <Entries extends Array<[PropertyKey, unknown]>>(
   entries: Entries,
 ) =>
   Object.fromEntries(entries) as Record<Entries[number][0], Entries[number][1]>
+
+/**
+ * @param object - Specified object.
+ * @param key - Specified property.
+ *
+ * @returns true if the specified property is in the specified object
+ */
+export const keyIn = <Object extends AnyObject>(
+  object: Object,
+  key: PropertyKey,
+): object is Object & { key: unknown } => key in object
