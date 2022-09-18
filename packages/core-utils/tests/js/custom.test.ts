@@ -2,6 +2,9 @@ import {
   createAutoPercentage,
   not,
   thunkify,
+  min,
+  max,
+  sum,
 } from '../../source/js/custom/custom'
 
 describe('js:custom', () => {
@@ -32,5 +35,18 @@ describe('js:custom', () => {
 
     expect(thunk(1, 2)).toBe(3)
     expect(thunk(3, 4))
+  })
+
+  it('js:custom:reducers', () => {
+    const example = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    // js:custom:min
+    expect(example.reduce(min)).toBe(1)
+
+    // js:custom:max
+    expect(example.reduce(max)).toBe(10)
+
+    // js:custom:sum
+    expect(example.reduce(sum)).toBe(55)
   })
 })
