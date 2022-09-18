@@ -1,2 +1,2 @@
-export * from './navigator'
 export * from './http/http'
+export * from './window/window'
