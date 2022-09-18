@@ -30,3 +30,17 @@ type UppercaseFirst<Word extends string> =
   Word extends `${infer Letter}${infer Letters}`
     ? `${Uppercase<Letter>}${Letters}`
     : Word
+
+type Sign = '-' | '+'
+
+type NumberLike =
+  | { [Symbol.toPrimitive](hint: 'number'): number }
+  | number
+  | bigint
+  | Number
+  | boolean
+  | `${number | bigint}`
+  | `${Sign | ''}${'Infinity'}`
+  | null
+
+type Comparable = string | NumberLike

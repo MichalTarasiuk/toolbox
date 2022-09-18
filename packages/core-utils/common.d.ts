@@ -11,6 +11,8 @@ type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (
   ...args: Args
 ) => ReturnType
 
+type UnknownFunction = (...args: unknown[]) => unknown
+
 type AnyGeneratorFunction = (...args: any[]) => Generator<unknown, any, unknown>
 
 type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
