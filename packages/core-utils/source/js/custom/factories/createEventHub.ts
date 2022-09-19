@@ -1,7 +1,7 @@
 import { keyIn } from '../../../ts/typescript'
-import { isArray, noop } from '../../common/common'
+import { isArray } from '../../common/common'
 
-type EventHub<Key extends string = string> = Record<Key, Array<AnyFunction>>
+type EventHub<Key extends string = string> = Record<Key, Array<UnknownFunction>>
 
 export const createEventHub = () => {
   const eventHub: EventHub = {}
@@ -17,21 +17,16 @@ export const createEventHub = () => {
     }
   }
 
-  const on = <Name extends string>(name: Name, handler: AnyFunction) => {
-    if (hasEvent<Name>(eventHub, name)) {
-      eventHub[name].push(handler)
-
-      return {
-        off: off.bind(undefined, name, handler),
-      }
-    }
+  const on = <Name extends string>(name: Name, handler: UnknownFunction) => {
+    eventHub[name] ??= []
+    eventHub[name]!.push(handler)
 
     return {
-      off: noop,
+      off: off.bind(undefined, name, handler),
     }
   }
 
-  const off = <Name extends string>(name: Name, handler: AnyFunction) => {
+  const off = <Name extends string>(name: Name, handler: UnknownFunction) => {
     if (hasEvent<Name>(eventHub, name)) {
       eventHub[name] = eventHub[name].filter((listener) => listener !== handler)
     }

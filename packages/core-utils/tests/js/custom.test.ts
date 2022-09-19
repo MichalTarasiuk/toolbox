@@ -1,5 +1,6 @@
 import {
   createAutoPercentage,
+  createEventHub,
   not,
   thunkify,
   min,
@@ -8,8 +9,7 @@ import {
 } from '../../source/js/custom/custom'
 
 describe('js:custom', () => {
-  it('js:custom:factories', () => {
-    // js:custom:factories:createAutoPercentage
+  it('js:custom:factories:createAutoPercentage', () => {
     const autoPercentage = createAutoPercentage()
     const steps = [
       { name: 'init', progress: autoPercentage.percentage() },
@@ -24,6 +24,21 @@ describe('js:custom', () => {
     })
 
     expect(progess).toBe(1)
+  })
+
+  it('js:custom:factories:createEventHub', () => {
+    const eventHub = createEventHub()
+    const spy = jest.fn()
+
+    const listener = eventHub.on('message', spy)
+    eventHub.emit('message', 'Hello World!')
+
+    expect(spy).toHaveBeenCalledWith('Hello World!')
+
+    listener.off()
+    eventHub.emit('message', 'Hello World!')
+
+    expect(spy).toHaveBeenCalledTimes(1)
   })
 
   it('js:custom:higherOrder', () => {
