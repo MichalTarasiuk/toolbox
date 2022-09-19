@@ -2,4 +2,5 @@
 
 - createEventEmitter
 - compact
-- namingConventions
+- namingConventions (with props)
+- deepNonNullAble
