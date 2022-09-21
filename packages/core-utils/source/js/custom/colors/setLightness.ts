@@ -1,3 +1,4 @@
+// @TODO: add description and support for another colors models
 export const setLightness = (
   delta: number,
   hsl: `hsl(${number}%, ${number}%, ${number}%)`,

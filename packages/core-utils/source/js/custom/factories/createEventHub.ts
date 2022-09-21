@@ -3,6 +3,7 @@ import { isArray } from '../../common/common'
 
 type EventHub<Key extends string = string> = Record<Key, Array<UnknownFunction>>
 
+// @TODO: add typings and description
 export const createEventHub = () => {
   const eventHub: EventHub = {}
 

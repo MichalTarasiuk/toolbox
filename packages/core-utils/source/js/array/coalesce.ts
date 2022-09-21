@@ -9,5 +9,6 @@ type Coalesce<Args extends Array<unknown>> = Args extends [
     : Arg
   : undefined
 
+// @TODO: add description and typings
 export const coalesce = <Args extends unknown[]>(...args: Args) =>
   args.find((arg) => !nullish(arg)) as Coalesce<Args>

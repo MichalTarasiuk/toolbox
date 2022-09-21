@@ -1,3 +1,4 @@
+// @TODO: add description for each utility and typings
 import { isClient } from '../../../core-utils'
 
 export const supportsTouchEvents = () =>

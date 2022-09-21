@@ -1,5 +1,6 @@
 export * from './nullish'
 export * from './typeof/typeof'
-export * from './isPromitive'
+export * from './isPrimitive'
 
+// @TODO: add description and typings
 export const noop = () => {}

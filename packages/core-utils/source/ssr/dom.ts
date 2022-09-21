@@ -1,3 +1,4 @@
+// @TODO: add description
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
   typeof window.document !== 'undefined' &&

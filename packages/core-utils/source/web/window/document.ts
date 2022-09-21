@@ -1,3 +1,5 @@
+// @TODO: add description
+
 export const isBrowserTabFocused = () => !document.hidden
 
 export const elementIsFocused = (element: Element) =>

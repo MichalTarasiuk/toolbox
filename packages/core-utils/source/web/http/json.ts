@@ -1,3 +1,4 @@
+// @TODO: add description
 export const isValidJSON = (json: string) => {
   try {
     JSON.parse(json)

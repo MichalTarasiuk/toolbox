@@ -1,3 +1,4 @@
+// @TODO: add description
 export const isStorageEnabled = (
   storageType: `${'session' | 'local'}Storage`,
 ) => {
