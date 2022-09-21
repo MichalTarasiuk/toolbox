@@ -1,10 +1,3 @@
-type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
-  ? 1
-  : 2
-  ? true
-  : false
-type NotEqual<X, Y> = true extends Equal<X, Y> ? false : true
-
 // https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
 type IsAny<Type> = 0 extends 1 & Type ? true : false
 type NotAny<Type> = true extends IsAny<Type> ? false : true
