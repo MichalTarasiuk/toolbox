@@ -1,4 +1,4 @@
-# headless-core
+# wren-core
 
 ![Headless core banner](./media/images/headless-core_banner.png)
 
