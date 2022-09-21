@@ -19,7 +19,7 @@ type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
 
 // common:objects
 
-type AnyObject = Record<PropertyKey, unknown>
+type AnyObject<Value = unknown> = Record<PropertyKey, Value>
 
 type AnyArray = Array<unknown>
 

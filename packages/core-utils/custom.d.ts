@@ -11,14 +11,6 @@ type NotAny<Type> = true extends IsAny<Type> ? false : true
 
 type Debug<AnyObject> = { [Key in keyof AnyObject]: AnyObject[Key] }
 
-type Narrow<Type> =
-  | (Type extends infer TValue ? TValue : never)
-  | Extract<
-      Type,
-      number | string | boolean | bigint | symbol | null | undefined | []
-    >
-  | ([Type] extends [[]] ? [] : { [Key in keyof Type]: Narrow<Type[Key]> })
-
 type FalsyValues = 0 | '' | null | undefined | false
 
 type LowercaseFirst<Word extends string> =
