@@ -123,4 +123,13 @@ describe('js:typeof', () => {
     expect(coalesce(null, undefined, '', NaN, 'Waldo')).toBe('')
     expect(coalesce(null, undefined)).toBe(undefined)
   })
+
+  test('js:custom:isPrimitive', () => {
+    expect(isPrimitive(1)).toBeTruthy()
+    expect(isPrimitive('hello world')).toBeTruthy()
+    expect(isPrimitive(false)).toBeTruthy()
+
+    expect(isPrimitive({})).toBeFalsy()
+    expect(isPrimitive([])).toBeFalsy()
+  })
 })

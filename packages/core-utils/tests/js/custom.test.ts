@@ -10,7 +10,7 @@ import {
 } from '../../source/js/custom/custom'
 
 describe('js:custom', () => {
-  it('js:custom:factories:createAutoPercentage', () => {
+  test('js:custom:factories:createAutoPercentage', () => {
     const autoPercentage = createAutoPercentage()
     const steps = [
       { name: 'init', progress: autoPercentage.percentage() },
@@ -27,7 +27,7 @@ describe('js:custom', () => {
     expect(progess).toBe(1)
   })
 
-  it('js:custom:factories:createEventHub', () => {
+  test('js:custom:factories:createEventHub', () => {
     const eventHub = createEventHub()
     const spy = jest.fn()
 
@@ -42,7 +42,7 @@ describe('js:custom', () => {
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
-  it('js:custom:reducers', () => {
+  test('js:custom:reducers', () => {
     const example = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     // js:custom:reducers:min
@@ -55,7 +55,7 @@ describe('js:custom', () => {
     expect(example.reduce(sum)).toBe(55)
   })
 
-  it('js:custom:colors', () => {
+  test('js:custom:colors', () => {
     // js:custom:colors:setLightness
     expect(setLightness(10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 60%)')
     expect(setLightness(-10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 40%)')
