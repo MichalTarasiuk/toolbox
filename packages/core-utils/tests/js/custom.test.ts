@@ -1,11 +1,12 @@
 import {
   createAutoPercentage,
   createEventHub,
-  not,
-  thunkify,
   min,
   max,
   sum,
+  toHSLObject,
+  toRGBObject,
+  setLightness,
 } from '../../source/js/custom/custom'
 
 describe('js:custom', () => {
@@ -41,27 +42,36 @@ describe('js:custom', () => {
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
-  it('js:custom:higherOrder', () => {
-    // js:custom:higherOrder:not
-    expect([0, true, [], {}, ''].filter(not(Boolean))).toEqual([0, ''])
-
-    // js:custom:higherOrder:thunkify
-    const thunk = thunkify((a: number, b: number) => a + b)
-
-    expect(thunk(1, 2)).toBe(3)
-    expect(thunk(3, 4))
-  })
-
   it('js:custom:reducers', () => {
     const example = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    // js:custom:min
+    // js:custom:reducers:min
     expect(example.reduce(min)).toBe(1)
 
-    // js:custom:max
+    // js:custom:reducers:max
     expect(example.reduce(max)).toBe(10)
 
-    // js:custom:sum
+    // js:custom:reducers:sum
     expect(example.reduce(sum)).toBe(55)
+  })
+
+  it('js:custom:colors', () => {
+    // js:custom:colors:setLightness
+    expect(setLightness(10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 60%)')
+    expect(setLightness(-10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 40%)')
+
+    // js:custom:colors:toHSLObject
+    expect(toHSLObject('hsl(50, 10%, 10%)')).toEqual({
+      hue: 50,
+      saturation: 10,
+      lightness: 10,
+    })
+
+    // js:custom:colors:toRGBObject
+    expect(toRGBObject('rgb(255, 12, 0)')).toEqual({
+      red: 255,
+      green: 12,
+      blue: 0,
+    })
   })
 })

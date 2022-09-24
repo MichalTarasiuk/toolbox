@@ -15,13 +15,13 @@
  * @returns `previousValue` or `currentValue`, whichever is lower
  */
 export const min = <
-  Accumulator extends Comparable,
+  Collector extends Comparable,
   CurrentValue extends Comparable,
 >(
-  accumulator: Accumulator,
+  collector: Collector,
   currentValue: CurrentValue,
-): Accumulator | CurrentValue => {
-  return (currentValue as unknown as Accumulator)! < accumulator!
+): Collector | CurrentValue => {
+  return (currentValue as unknown as Collector)! < collector!
     ? currentValue
-    : accumulator
+    : collector
 }
