@@ -1,2 +1,4 @@
 export * from './castArray'
-export * from './coalesce'
+export * from './union'
+export * from './compact'
+export * from './chunk'
