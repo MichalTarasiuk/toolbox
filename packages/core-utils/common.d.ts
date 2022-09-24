@@ -1,5 +1,7 @@
 // common:primitives
 
+type Primitive = string | number | boolean | null | undefined | symbol
+
 /**
  * `null` or `undefined`.
  * */

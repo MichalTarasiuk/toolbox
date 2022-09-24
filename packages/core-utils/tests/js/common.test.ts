@@ -20,10 +20,12 @@ import {
   isWeakSet,
   isDate,
   isError,
+  coalesce,
+  isPrimitive,
 } from '../../source/js/common/common'
 
 describe('js:typeof', () => {
-  it('js:common:typeof:primitives', () => {
+  test('js:common:typeof:primitives', () => {
     // isString
     expect(isString('Hello World')).toBeTruthy()
     expect(isString(100)).toBeFalsy()
@@ -53,7 +55,7 @@ describe('js:typeof', () => {
     expect(isNull(undefined)).toBeFalsy()
   })
 
-  it('js:common:typeof:functions', () => {
+  test('js:common:typeof:functions', () => {
     // isFunction
     expect(isFunction(() => {})).toBeTruthy()
     expect(isFunction({})).toBeFalsy()
@@ -67,7 +69,7 @@ describe('js:typeof', () => {
     expect(isAsyncFunction({})).toBeFalsy()
   })
 
-  it('js:common:typeof:objects', () => {
+  test('js:common:typeof:objects', () => {
     // isObject
     expect(isObject({})).toBeTruthy()
     expect(isObject([])).toBeFalsy()
@@ -109,11 +111,16 @@ describe('js:typeof', () => {
     expect(isError(`something went wrong  ¯\_(ツ)_/¯`)).toBeFalsy()
   })
 
-  it('js:common:nullish', () => {
+  test('js:common:nullish', () => {
     expect(nullish(null)).toBeTruthy()
     expect(nullish(undefined)).toBeTruthy()
 
     expect(nullish('hello world')).toBeFalsy()
     expect(nullish(3029302)).toBeFalsy()
+  })
+
+  test('js:common:coalesce', () => {
+    expect(coalesce(null, undefined, '', NaN, 'Waldo')).toBe('')
+    expect(coalesce(null, undefined)).toBe(undefined)
   })
 })

@@ -10,9 +10,7 @@ type Coalesce<Args extends Array<unknown>> = Args extends [
   : undefined
 
 /**
- *
- * @param args
- * @returns
+ * Returns the first defined, non-null argument.
  */
 export const coalesce = <Args extends unknown[]>(...args: Args) =>
   args.find((arg) => !nullish(arg)) as Coalesce<Args>
