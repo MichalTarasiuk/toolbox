@@ -1,5 +1,5 @@
 // @TODO: add description for each utility and typings
-import { isClient } from '../../../core-utils'
+import { isClient } from '../../../_api'
 
 export const supportsTouchEvents = () =>
   isClient() && window && 'ontouchstart' in window
