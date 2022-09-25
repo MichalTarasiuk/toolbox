@@ -1,5 +1,8 @@
 {
   "files": [],
-  "references": [{ "path": "packages/core-utils" }],
+  "references": [
+    { "path": "packages/wren-utils" },
+    { "path": "packages/wren-typescript" }
+  ],
   "extends": "./tsconfig.base.json"
 }

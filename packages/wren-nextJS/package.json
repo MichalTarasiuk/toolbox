@@ -1,5 +1,5 @@
 {
-  "name": "core-react",
+  "name": "@wren/nextjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,9 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "18.0.21"
+    "deepmerge": "^4.2.2",
+    "next": "^12.3.1"
   }
 }

@@ -1,3 +1,8 @@
+type UppercaseFirst<Word extends string> =
+  Word extends `${infer Letter}${infer Letters}`
+    ? `${Uppercase<Letter>}${Letters}`
+    : Word
+
 /**
  * Converts first alphabetic character in a string to uppercase.
  *
@@ -7,6 +12,11 @@
  */
 export const uppercaseFirst = <Word extends string>(word: Word) =>
   (word.at(0)?.toUpperCase() + word.slice(1)) as UppercaseFirst<Word>
+
+type LowercaseFirst<Word extends string> =
+  Word extends `${infer Letter}${infer Letters}`
+    ? `${Lowercase<Letter>}${Letters}`
+    : Word
 
 /**
  * Converts first alphabetic character in a string to lowercase.

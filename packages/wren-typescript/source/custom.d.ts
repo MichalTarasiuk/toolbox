@@ -6,16 +6,6 @@ type Debug<AnyObject> = { [Key in keyof AnyObject]: AnyObject[Key] }
 
 type FalsyValues = 0 | '' | null | undefined | false
 
-type LowercaseFirst<Word extends string> =
-  Word extends `${infer Letter}${infer Letters}`
-    ? `${Lowercase<Letter>}${Letters}`
-    : Word
-
-type UppercaseFirst<Word extends string> =
-  Word extends `${infer Letter}${infer Letters}`
-    ? `${Uppercase<Letter>}${Letters}`
-    : Word
-
 type Sign = '-' | '+'
 
 type NumberLike =
