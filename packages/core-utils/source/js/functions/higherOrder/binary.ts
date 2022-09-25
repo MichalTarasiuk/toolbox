@@ -1,4 +1,6 @@
-// @TODO: add description
+/**
+ * Creates a function that accepts many arguments, ignoring any additional arguments.
+ */
 export const binary =
   <Fn extends AnyFunction>(fn: Fn) =>
   (...params: Parameters<Fn>) => {

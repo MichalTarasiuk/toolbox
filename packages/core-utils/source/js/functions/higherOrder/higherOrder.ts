@@ -1,3 +1,5 @@
 export * from './not'
 export * from './thunkify'
 export * from './binary'
+export * from './either'
+export * from './when'

@@ -1,4 +1,6 @@
-// @TODO: add description
+/**
+ * Checks if at least one function returns true for a given set of arguments.
+ */
 export const either =
   (
     callback: (...args: unknown[]) => unknown,

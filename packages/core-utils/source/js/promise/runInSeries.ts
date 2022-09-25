@@ -15,6 +15,9 @@ type RunPromisesInSeries<
     >
   : Result
 
+/**
+ * Runs an array of promises in series.
+ */
 const runPromisesInSeries = <AnyAsyncFunctions extends AnyAsyncFunction[]>(
   promises: RunPromisesInSeries<AnyAsyncFunctions>,
 ) => {
@@ -23,5 +26,3 @@ const runPromisesInSeries = <AnyAsyncFunctions extends AnyAsyncFunction[]>(
   //   Promise.resolve(),
   // )
 }
-
-runPromisesInSeries([])
