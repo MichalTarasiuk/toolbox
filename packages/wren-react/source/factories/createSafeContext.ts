@@ -3,7 +3,7 @@ import {
   useContextSelector,
 } from 'use-context-selector'
 
-import { uppercaseFirst } from '../../../core-utils/source/source'
+import { uppercaseFirst } from '../../../wren-utils/source/source'
 import type { Context } from 'react'
 
 type Selector<TContextValue, TSelected> = (
