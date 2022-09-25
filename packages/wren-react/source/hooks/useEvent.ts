@@ -2,7 +2,7 @@
 // https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md
 
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
-import { isClient } from '../../../core-utils/_api'
+import { isClient } from '@wren/utils'
 
 const useLayout = isClient() ? useLayoutEffect : useEffect
 

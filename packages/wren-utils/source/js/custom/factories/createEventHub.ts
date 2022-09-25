@@ -1,5 +1,5 @@
 import { keyIn } from '../../../ts/typescript'
-import { isArray } from '../../common/common'
+import { isSet } from '../../common/common'
 
 type EventHub<Key extends string = string> = Record<Key, Set<UnknownFunction>>
 
@@ -12,7 +12,7 @@ export const createEventHub = () => {
   const hasEvent = <Name extends string>(
     state: EventHub,
     name: string,
-  ): state is EventHub<Name> => keyIn(state, name) && isArray(state[name])
+  ): state is EventHub<Name> => keyIn(state, name) && isSet(state[name])
 
   /**
    * Emit events to invoke all handlers subscribed to them, passing the data to them as an argument

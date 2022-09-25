@@ -7,7 +7,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "core-typescript": "0.0.1"
+  "devDependencies": {
+    "@wren/typescript": "1.0.0"
   }
 }

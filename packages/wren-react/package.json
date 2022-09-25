@@ -8,9 +8,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "@wren/utils": "1.0.0"
   },
   "devDependencies": {
-    "@types/react": "18.0.21"
+    "@types/react": "18.0.21",
+    "@wren/typescript": "1.0.0"
   }
 }

@@ -48,20 +48,24 @@ importers:
   packages/wren-react:
     specifiers:
       '@types/react': 18.0.21
+      '@wren/typescript': 1.0.0
+      '@wren/utils': 1.0.0
       react: 18.2.0
     dependencies:
+      '@wren/utils': link:../wren-utils
       react: 18.2.0
     devDependencies:
       '@types/react': 18.0.21
+      '@wren/typescript': link:../wren-typescript
 
   packages/wren-typescript:
     specifiers: {}
 
   packages/wren-utils:
     specifiers:
-      core-typescript: 0.0.1
-    dependencies:
-      core-typescript: 0.0.1
+      '@wren/typescript': 1.0.0
+    devDependencies:
+      '@wren/typescript': link:../wren-typescript
 
 packages:
 
@@ -2460,10 +2464,6 @@ packages:
     dependencies:
       browserslist: 4.21.4
     dev: true
-
-  /core-typescript/0.0.1:
-    resolution: {integrity: sha512-VGx92U+7GleL7uywTSKMIitupl7fQvo7hRdxAhvnZJ/w44PH7kDpvHlixb0rrnLgsgiImATRvWN9I+eGq9k+Zw==}
-    dev: false
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}

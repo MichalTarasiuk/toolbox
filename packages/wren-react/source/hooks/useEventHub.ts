@@ -1,5 +1,5 @@
 import { useCallback, useRef, useSyncExternalStore } from 'react'
-import { createEventHub } from '../../../wren-utils/_api'
+import { createEventHub } from '@wren/utils'
 import { useEvent } from './hooks'
 
 const eventHub = createEventHub()
