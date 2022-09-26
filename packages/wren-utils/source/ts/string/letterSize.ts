@@ -6,6 +6,7 @@
  * @returns Converted alphabetic characters
  */
 export const lowercase = <Word extends string>(word: Word) =>
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   word.toLowerCase() as Lowercase<Word>
 
 /**
@@ -16,4 +17,5 @@ export const lowercase = <Word extends string>(word: Word) =>
  * @returns Converted alphabetic characters
  */
 export const uppercase = <Word extends string>(word: Word) =>
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   word.toUpperCase() as Uppercase<Word>

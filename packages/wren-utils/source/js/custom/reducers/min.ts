@@ -21,7 +21,8 @@ export const min = <
   collector: Collector,
   currentValue: CurrentValue,
 ): Collector | CurrentValue => {
-  return (currentValue as unknown as Collector)! < collector!
+  // @typescript-eslint/consistent-type-assertions -- safety assertion
+  return (currentValue as unknown as Collector) < collector
     ? currentValue
     : collector
 }

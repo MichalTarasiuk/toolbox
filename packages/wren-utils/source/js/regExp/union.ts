@@ -10,6 +10,6 @@
  *
  * @returns A new regular expression
  */
-export const regExpUnion = (...regExps: RegExp[]) => {
+export const regExpUnion = (...regExps: readonly RegExp[]) => {
   return new RegExp(regExps.map((regExp) => `(${regExp.source})`).join('|'))
 }

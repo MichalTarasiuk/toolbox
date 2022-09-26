@@ -1,11 +1,14 @@
 /**
  * A result type for a `Promise` that resolved.
  */
-export type ResolvedResult<Resolved> = [resolved: Resolved, error: undefined]
+export type ResolvedResult<Resolved> = readonly [
+  resolved: Resolved,
+  error: undefined,
+]
 /**
  * A result type for a `Promise` that rejected.
  */
-export type RejectedResult<AnyError extends Error> = [
+export type RejectedResult<AnyError extends Error> = readonly [
   value: undefined,
   error: AnyError,
 ]
@@ -34,6 +37,7 @@ export const settled = async <Resolved, AnyError extends Error>(
   try {
     return [await promise, undefined]
   } catch (error: unknown) {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
     return [undefined, error as AnyError]
   }
 }

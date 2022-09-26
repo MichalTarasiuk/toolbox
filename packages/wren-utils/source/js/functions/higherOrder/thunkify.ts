@@ -26,7 +26,7 @@ export const thunkify = <Fn extends AnyFunction>(fn: Fn) => {
     if (!wasCalled) {
       wasCalled = true
 
-      result = fn(...parameters) as ReturnType<Fn>
+      result = fn(...parameters)
     }
 
     return result
