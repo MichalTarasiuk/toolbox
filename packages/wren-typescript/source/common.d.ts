@@ -9,27 +9,30 @@ type Nullish = null | undefined
 
 // common:functions
 
-type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (
-  ...args: Args
-) => ReturnType
+type AnyFunction<
+  Args extends readonly any[] = readonly any[],
+  ReturnType = unknown,
+> = (...args: Args) => ReturnType
 
-type UnknownFunction = (...args: unknown[]) => unknown
+type UnknownFunction = (...args: readonly unknown[]) => unknown
 
-type AnyGeneratorFunction = (...args: any[]) => Generator<unknown, any, unknown>
+type AnyGeneratorFunction = (
+  ...args: readonly any[]
+) => Generator<unknown, any, unknown>
 
-type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
+type AnyAsyncFunction = (...args: readonly any[]) => Promise<unknown>
 
 // common:objects
 
 type AnyObject<Value = unknown> = Record<PropertyKey, Value>
 
-type AnyArray = Array<unknown>
+type AnyArray = ReadonlyArray<unknown>
 
 type AnyPromise = Promise<unknown>
 
-type AnyMap = Map<unknown, unknown>
+type AnyMap = ReadonlyMap<unknown, unknown>
 
-type AnySet = Set<unknown>
+type AnySet = ReadonlySet<unknown>
 
 type AnyWeakMap = WeakMap<AnyObject, unknown>
 
