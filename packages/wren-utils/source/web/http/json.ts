@@ -1,4 +1,6 @@
-// @TODO: add description
+/**
+ * Checks if the provided string is a valid JSON.
+ */
 export const isValidJSON = (json: string) => {
   try {
     JSON.parse(json)

@@ -10,7 +10,9 @@ type ParseCookie<Cookie extends string> = {
   > as Tuple[0]]: Any.Is<Tuple[1], undefined> extends 1 ? string : Tuple[1]
 }
 
-// @TODO: add description
+/**
+ * Parses an HTTP Cookie header string, returning an object of all cookie name-value pairs.
+ */
 export const parseCookie = <
   Cookie extends string,
   ParsedCookie extends ParseCookie<Cookie>,

@@ -1,4 +1,6 @@
-// @TODO: add documentation
+/**
+ * Defers invoking a function until the current call stack has cleared.
+ */
 export const defer = <Fn extends AnyFunction>(
   fn: Fn,
   ...params: Parameters<Fn>
