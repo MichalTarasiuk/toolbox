@@ -1,8 +1,10 @@
+import { keyIn } from '@wren/utils'
 import { attributesToProps, domToReact } from 'html-react-parser'
+import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
-import Image from 'next/image'
-import { Null } from './consts'
+import React from 'react'
+
 import {
   hasSizes,
   hasSource,
@@ -11,21 +13,24 @@ import {
   isSameSite,
   isScriptTag,
 } from './assertions'
+import { Null } from './consts'
+
+import type { AnyAttribs } from './types'
 import type {
   DOMNode,
   Element,
   HTMLReactParserOptions,
 } from 'html-react-parser'
-import type { AnyAttribs } from './types'
-import React from 'react'
-import { keyIn } from '@wren/utils'
 
 const values = Object.values
 
 type Resolvers = {
-  [resolver: string]: {
-    canUse: (element: Element) => boolean
-    use: (children: DOMNode[], attribs: AnyAttribs) => JSX.Element
+  readonly [resolver: string]: {
+    readonly canUse: (element: Element) => boolean
+    readonly use: (
+      children: readonly DOMNode[],
+      attribs: AnyAttribs,
+    ) => JSX.Element
   }
 }
 
@@ -34,7 +39,7 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
     'next/link': {
       canUse: (element: Element) =>
         isAnchorTag(element) && isSameSite(element.attribs.href),
-      use: (children: DOMNode[], attribs: AnyAttribs) => (
+      use: (children: readonly DOMNode[], attribs: AnyAttribs) => (
         <Link href={attribs.href}>
           <a {...attributesToProps(attribs)}>{domToReact(children, options)}</a>
         </Link>
@@ -44,8 +49,8 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
       canUse: (element: Element) =>
         isScriptTag(element) && keyIn(element.attribs, 'id'),
       use: (
-        children: DOMNode[],
-        attribs: AnyAttribs & Partial<{ id: string }>,
+        children: readonly DOMNode[],
+        attribs: AnyAttribs & Partial<{ readonly id: string }>,
       ) => (
         <Script id={attribs.id} {...attributesToProps(attribs)}>
           {domToReact(children, options)}
@@ -58,7 +63,11 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
       use: (
         _,
         attribs: AnyAttribs &
-          Partial<{ src: string; width: string; height: string }>,
+          Partial<{
+            readonly src: string
+            readonly width: string
+            readonly height: string
+          }>,
       ) => (hasSource(attribs) ? <Image {...attribs} /> : <Null />),
     },
   }

@@ -1,13 +1,13 @@
 import { keyIn } from '@wren/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
+import React from 'react'
 
-import { getGlobalResolvers } from './globalResolvers'
 import { hasId } from './assertions'
+import { getGlobalResolvers } from './globalResolvers'
 import { elementsGuard, formatId, formatTag } from './helpers'
 
 import type { Resolvers } from './types'
 import type { HTMLReactParserOptions } from 'html-react-parser'
-import React from 'react'
 
 export const reactify = (html: string, customResolvers?: Resolvers) => {
   const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>
@@ -19,7 +19,7 @@ export const reactify = (html: string, customResolvers?: Resolvers) => {
     replace: elementsGuard((element) => {
       const { children, attribs } = element
 
-      const name = hasId(element)
+      const name = hasId(element.attribs)
         ? formatId(element.attribs.id)
         : formatTag(element.tagName)
 

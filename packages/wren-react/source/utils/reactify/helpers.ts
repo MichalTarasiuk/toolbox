@@ -1,10 +1,12 @@
+import { isClient } from '@wren/utils'
+
+import { isElement } from './assertions'
+
 import type {
   HTMLReactParserOptions,
   Element as ElementType,
   DOMNode,
 } from 'html-react-parser'
-import { isClient } from '@wren/utils'
-import { isElement } from './assertions'
 
 export const formatId = (name: string) => `id:${name}` as const
 export const formatTag = (name: string) => `tag:${name}` as const

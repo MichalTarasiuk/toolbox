@@ -1,10 +1,8 @@
+import { uppercaseFirst } from '@wren/utils'
 import {
   createContext as createContextImpl,
   useContextSelector,
 } from 'use-context-selector'
-
-import { uppercaseFirst } from '@wren/utils'
-import type { Context } from 'react'
 
 type Selector<TContextValue, TSelected> = (
   contextValue: TContextValue,
@@ -15,20 +13,22 @@ const defaultContextValue = Symbol()
 const getErrorMessage = (name: string) =>
   `use${name} must be used within a ${name}Provider`
 
-const createContext = <TContextValue>() =>
-  createContextImpl(defaultContextValue) as unknown as Context<TContextValue>
+const createContext = <ContextValue>() =>
+  createContextImpl<ContextValue | typeof defaultContextValue>(
+    defaultContextValue,
+  )
 
 const isInvalidHookCall = (contextValue: unknown) =>
   contextValue === defaultContextValue
 
-export const createSafeContext = <TContextValue>(name: string) => {
-  const safeContext = createContext<TContextValue>()
+export const createSafeContext = <ContextValue>(name: string) => {
+  const safeContext = createContext<ContextValue>()
   const uppercasedName = uppercaseFirst(name)
 
-  const useSafeContext = <TSelected = TContextValue>(
-    selector?: Selector<TContextValue, TSelected>,
+  const useSafeContext = <Selected = ContextValue>(
+    selector?: Selector<ContextValue, Selected>,
   ) => {
-    const identity = (value: TContextValue) => value as unknown as TSelected
+    const identity = (value: ContextValue) => value
     const selected = useContextSelector(safeContext, selector ?? identity)
 
     if (isInvalidHookCall(selected)) {

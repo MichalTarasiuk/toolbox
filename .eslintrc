@@ -22,6 +22,7 @@
       "error",
       { "disallowTypeAnnotations": false }
     ],
+    "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-confusing-non-null-assertion": "error",
     "@typescript-eslint/no-empty-interface": "off",
@@ -59,7 +60,6 @@
     "functional/prefer-readonly-type": "error",
     "import/dynamic-import-chunkname": "error",
     "import/no-anonymous-default-export": "error",
-    "import/no-cycle": "error",
     "import/no-default-export": "error",
     "import/no-duplicates": "error",
     "import/no-unresolved": "off",

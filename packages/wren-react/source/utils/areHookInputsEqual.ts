@@ -26,6 +26,7 @@ export const areHookInputsEqual = (
     return false
   }
 
+  // eslint-disable-next-line functional/no-loop-statement -- early return
   for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
     if (objectIs(nextDeps[i], prevDeps[i])) {
       continue

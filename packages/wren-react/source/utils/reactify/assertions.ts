@@ -1,22 +1,29 @@
 import { isString, keyIn, isSameOrigin } from '@wren/utils'
-import { DOMNode, Element } from 'html-react-parser'
+
+import { getSiteOrigin } from './helpers'
 
 import type { AnyAttribs } from './types'
-import type { Element as ElementType } from 'html-react-parser'
-import { getSiteOrigin } from './helpers'
+import type {
+  DOMNode,
+  Element,
+  Element as ElementType,
+} from 'html-react-parser'
 
 export const isElement = (domNode: DOMNode): domNode is Element =>
   'attribs' in domNode
 
 export const hasId = (
-  element: ElementType,
-): element is ElementType & { attribs: { id: string } } =>
-  'id' in element.attribs
+  attribs: AnyAttribs,
+): attribs is { readonly id: string } => 'id' in attribs && isString(attribs.id)
 
-export const hasSource = (attribs: AnyAttribs): attribs is { src: string } =>
+export const hasSource = (
+  attribs: AnyAttribs,
+): attribs is { readonly src: string } =>
   keyIn(attribs, 'src') && isString(attribs.src)
 
-export const hasSizes = (attribs: AnyAttribs): attribs is { src: string } =>
+export const hasSizes = (
+  attribs: AnyAttribs,
+): attribs is { readonly src: string } =>
   keyIn(attribs, 'width') &&
   keyIn(attribs, 'height') &&
   isString(attribs.width) &&
