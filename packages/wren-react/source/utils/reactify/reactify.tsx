@@ -2,7 +2,8 @@ import { keyIn } from '@wren/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
 
 import { getGlobalResolvers } from './globalResolvers'
-import { elementsGuard, formatId, formatTag, hasId } from './helpers'
+import { hasId } from './assertions'
+import { elementsGuard, formatId, formatTag } from './helpers'
 
 import type { Resolvers } from './types'
 import type { HTMLReactParserOptions } from 'html-react-parser'

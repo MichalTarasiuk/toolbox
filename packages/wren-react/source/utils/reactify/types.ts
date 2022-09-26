@@ -21,6 +21,6 @@ export type ParserConfig = {
   resolvers?: Resolvers
 }
 
-export type Attribs = {
+export type AnyAttribs = {
   [x: string]: string
 }
