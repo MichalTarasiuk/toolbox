@@ -1,20 +1,20 @@
 import { isAsyncFunction, isObject } from '@core/utils'
 import deepmerge from 'deepmerge'
-import {
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  PreviewData,
-} from 'next'
-import { ParsedUrlQuery } from 'querystring'
-
-import { ComposeOptions, PropsMergeStrategy } from './types'
 
 import type {
+  ComposeOptions,
+  PropsMergeStrategy,
   GetProps,
   MergeProps,
   PropsProviders,
   ResolvedPropsProvider,
 } from './types'
+import type {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  PreviewData,
+} from 'next'
+import type { ParsedUrlQuery } from 'querystring'
 
 const shallowMerge = <TObject1, TObject2>(a: TObject1, b: TObject2) =>
   ({ ...a, ...b } as unknown as Overwrite<TObject1, TObject2>)
