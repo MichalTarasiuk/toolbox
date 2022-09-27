@@ -10,17 +10,17 @@ type InferAttributes<TReactHtmlElement> =
     : never
 
 export type Resolvers = Partial<{
-  readonly [key in `tag:${TagName}`]: FunctionComponent<
+  [key in `tag:${TagName}`]: FunctionComponent<
     InferAttributes<ReactHTML[RemovePrefix<key>]>
   >
 }> & {
-  readonly [id: `id:${string}`]: FunctionComponent
+  [id: `id:${string}`]: FunctionComponent
 }
 
 export type ParserConfig = {
-  readonly resolvers?: Resolvers
+  resolvers?: Resolvers
 }
 
 export type AnyAttribs = {
-  readonly [x: string]: string
+  [x: string]: string
 }

@@ -1,8 +1,6 @@
 import { isArray } from '../javascript'
 
-type CastArray<Value> = Value extends ReadonlyArray<unknown>
-  ? Value
-  : readonly [Value]
+type CastArray<Value> = Value extends Array<unknown> ? Value : [Value]
 
 /**
  * Casts the provided value as an array if it's not one.

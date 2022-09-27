@@ -3,8 +3,8 @@
  */
 export const either =
   (
-    callback: (...args: readonly unknown[]) => unknown,
-    fallback: (...args: readonly unknown[]) => unknown,
+    callback: (...args: unknown[]) => unknown,
+    fallback: (...args: unknown[]) => unknown,
   ) =>
-  (...args: readonly unknown[]) =>
+  (...args: unknown[]) =>
     callback(...args) || fallback(...args)

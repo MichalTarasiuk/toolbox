@@ -1,9 +1,9 @@
 type ToRGBObject<RGB> =
   RGB extends `rgb(${infer Red}, ${infer Green}, ${infer Blue})`
     ? {
-        readonly red: Red
-        readonly green: Green
-        readonly blue: Blue
+        red: Red
+        green: Green
+        blue: Blue
       }
     : never
 

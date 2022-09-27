@@ -1,14 +1,11 @@
 /**
  * A result type for a `Promise` that resolved.
  */
-export type ResolvedResult<Resolved> = readonly [
-  resolved: Resolved,
-  error: undefined,
-]
+export type ResolvedResult<Resolved> = [resolved: Resolved, error: undefined]
 /**
  * A result type for a `Promise` that rejected.
  */
-export type RejectedResult<AnyError extends Error> = readonly [
+export type RejectedResult<AnyError extends Error> = [
   value: undefined,
   error: AnyError,
 ]

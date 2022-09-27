@@ -5,7 +5,7 @@
  */
 export const objectKeys = <Object extends AnyObject>(object: Object) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.keys(object) as ReadonlyArray<keyof Object>
+  Object.keys(object) as Array<keyof Object>
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -14,18 +14,14 @@ export const objectKeys = <Object extends AnyObject>(object: Object) =>
  */
 export const entries = <Object extends AnyObject>(object: Object) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.entries(object) as ReadonlyArray<
-    readonly [keyof Object, Object[keyof Object]]
-  >
+  Object.entries(object) as Array<[keyof Object, Object[keyof Object]]>
 
 /**
  * @param entries - An iterable object that contains key-value entries for properties and methods.
  *
  * @returns an object created by key-value entries for properties and methods
  */
-export const fromEntries = <
-  Entries extends ReadonlyArray<readonly [PropertyKey, unknown]>,
->(
+export const fromEntries = <Entries extends Array<[PropertyKey, unknown]>>(
   entries: Entries,
 ) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
@@ -40,4 +36,4 @@ export const fromEntries = <
 export const keyIn = <Object extends AnyObject>(
   object: Object,
   key: PropertyKey,
-): object is Object & { readonly key: unknown } => key in object
+): object is Object & { key: unknown } => key in object

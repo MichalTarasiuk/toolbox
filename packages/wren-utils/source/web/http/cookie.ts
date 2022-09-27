@@ -4,7 +4,7 @@ const equalsSign = '=' as const
 const semicolonSign = '; ' as const
 
 type ParseCookie<Cookie extends string> = {
-  readonly [Tuple in String.Split<
+  [Tuple in String.Split<
     String.Split<Cookie, typeof semicolonSign>[number],
     typeof equalsSign
   > as Tuple[0]]: Any.Is<Tuple[1], undefined> extends 1 ? string : Tuple[1]
@@ -22,7 +22,7 @@ export const parseCookie = <
   cookie
     .split(semicolonSign)
     .map((item) => item.split(equalsSign))
-    .filter((splitedItem): splitedItem is readonly [string, string] =>
+    .filter((splitedItem): splitedItem is [string, string] =>
       Boolean(splitedItem[0] && splitedItem[1]),
     )
     .reduce((collector, [key, value]) => {

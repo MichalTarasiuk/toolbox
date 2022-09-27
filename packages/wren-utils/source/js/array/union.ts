@@ -2,8 +2,8 @@ import type { Function, List } from 'ts-toolbelt'
 
 type Union<
   AnyArrayGeneric extends AnyArray,
-  Result extends AnyArray = readonly [],
-> = AnyArrayGeneric extends readonly [infer First, ...infer Rest]
+  Result extends AnyArray = [],
+> = AnyArrayGeneric extends [infer First, ...infer Rest]
   ? List.Includes<Result, First> extends 1
     ? Union<Rest, Result>
     : Union<Rest, List.Append<Result, First>>

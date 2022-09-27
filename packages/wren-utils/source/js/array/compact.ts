@@ -1,9 +1,9 @@
 import type { Any, Function, List } from 'ts-toolbelt'
 
-type Compact<
-  Arr extends AnyArray,
-  Result extends AnyArray = readonly [],
-> = Arr extends readonly [infer First, ...infer Rest]
+type Compact<Arr extends AnyArray, Result extends AnyArray = []> = Arr extends [
+  infer First,
+  ...infer Rest,
+]
   ? Any.Contains<First, FalsyValues> extends 1
     ? Compact<Rest, Result>
     : Compact<Rest, List.Append<Result, First>>

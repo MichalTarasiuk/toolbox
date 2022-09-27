@@ -25,12 +25,9 @@ import type {
 const values = Object.values
 
 type Resolvers = {
-  readonly [resolver: string]: {
-    readonly canUse: (element: Element) => boolean
-    readonly use: (
-      children: readonly DOMNode[],
-      attribs: AnyAttribs,
-    ) => JSX.Element
+  [resolver: string]: {
+    canUse: (element: Element) => boolean
+    use: (children: DOMNode[], attribs: AnyAttribs) => JSX.Element
   }
 }
 
@@ -39,7 +36,7 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
     'next/link': {
       canUse: (element: Element) =>
         isAnchorTag(element) && isSameSite(element.attribs.href),
-      use: (children: readonly DOMNode[], attribs: AnyAttribs) => (
+      use: (children: DOMNode[], attribs: AnyAttribs) => (
         <Link href={attribs.href}>
           <a {...attributesToProps(attribs)}>{domToReact(children, options)}</a>
         </Link>
@@ -49,8 +46,8 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
       canUse: (element: Element) =>
         isScriptTag(element) && keyIn(element.attribs, 'id'),
       use: (
-        children: readonly DOMNode[],
-        attribs: AnyAttribs & Partial<{ readonly id: string }>,
+        children: DOMNode[],
+        attribs: AnyAttribs & Partial<{ id: string }>,
       ) => (
         <Script id={attribs.id} {...attributesToProps(attribs)}>
           {domToReact(children, options)}
@@ -64,9 +61,9 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
         _,
         attribs: AnyAttribs &
           Partial<{
-            readonly src: string
-            readonly width: string
-            readonly height: string
+            src: string
+            width: string
+            height: string
           }>,
       ) => (hasSource(attribs) ? <Image {...attribs} /> : <Null />),
     },

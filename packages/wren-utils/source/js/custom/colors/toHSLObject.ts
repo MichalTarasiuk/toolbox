@@ -1,9 +1,9 @@
 type ToHSLObject<HSL> =
   HSL extends `hsl(${infer Hue}, ${infer Saturation}%, ${infer Lightness}%)`
     ? {
-        readonly hue: Hue
-        readonly saturation: Saturation
-        readonly lightness: Lightness
+        hue: Hue
+        saturation: Saturation
+        lightness: Lightness
       }
     : never
 

@@ -1,11 +1,7 @@
 import { keyIn } from '../../../ts/typescript'
 import { isSet } from '../../common/common'
 
-type EventHub<Key extends string = string> = Record<
-  Key,
-  // eslint-disable-next-line functional/prefer-readonly-type -- safety assertion
-  Set<UnknownFunction>
->
+type EventHub<Key extends string = string> = Record<Key, Set<UnknownFunction>>
 
 /**
  * Creates a pub/sub (publish–subscribe) event hub with emit, on, and off methods.
@@ -25,10 +21,7 @@ export const createEventHub = () => {
    * @param args - args for handlers
    *
    */
-  const emit = <Name extends string>(
-    name: Name,
-    ...args: readonly unknown[]
-  ) => {
+  const emit = <Name extends string>(name: Name, ...args: unknown[]) => {
     if (hasEvent<Name>(eventHub, name)) {
       eventHub[name].forEach((listener) => listener(...args))
     }

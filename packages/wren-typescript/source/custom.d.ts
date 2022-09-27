@@ -2,7 +2,7 @@
 type IsAny<Type> = 0 extends 1 & Type ? true : false
 type NotAny<Type> = true extends IsAny<Type> ? false : true
 
-type Debug<AnyObject> = { readonly [Key in keyof AnyObject]: AnyObject[Key] }
+type Debug<AnyObject> = { [Key in keyof AnyObject]: AnyObject[Key] }
 
 type FalsyValues = 0 | '' | null | undefined | false
 

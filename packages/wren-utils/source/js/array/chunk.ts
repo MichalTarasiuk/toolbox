@@ -3,11 +3,11 @@ import type { Function, List } from 'ts-toolbelt'
 type Chunk<
   Arr extends AnyArray,
   Size extends number,
-  Item extends AnyArray = readonly [],
-  Items extends ReadonlyArray<AnyArray> = readonly [],
-> = Arr extends readonly [infer First, ...infer Rest]
+  Item extends AnyArray = [],
+  Items extends Array<AnyArray> = [],
+> = Arr extends [infer First, ...infer Rest]
   ? List.Length<Item> extends Size
-    ? Chunk<Rest, Size, readonly [First], List.Append<Items, Item>>
+    ? Chunk<Rest, Size, [First], List.Append<Items, Item>>
     : Chunk<Rest, Size, List.Append<Item, First>, Items>
   : List.Append<Items, Item>
 

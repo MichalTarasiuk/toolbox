@@ -12,18 +12,13 @@ import type {
 export const isElement = (domNode: DOMNode): domNode is Element =>
   'attribs' in domNode
 
-export const hasId = (
-  attribs: AnyAttribs,
-): attribs is { readonly id: string } => 'id' in attribs && isString(attribs.id)
+export const hasId = (attribs: AnyAttribs): attribs is { id: string } =>
+  'id' in attribs && isString(attribs.id)
 
-export const hasSource = (
-  attribs: AnyAttribs,
-): attribs is { readonly src: string } =>
+export const hasSource = (attribs: AnyAttribs): attribs is { src: string } =>
   keyIn(attribs, 'src') && isString(attribs.src)
 
-export const hasSizes = (
-  attribs: AnyAttribs,
-): attribs is { readonly src: string } =>
+export const hasSizes = (attribs: AnyAttribs): attribs is { src: string } =>
   keyIn(attribs, 'width') &&
   keyIn(attribs, 'height') &&
   isString(attribs.width) &&
