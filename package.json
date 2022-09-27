@@ -26,8 +26,8 @@
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
-    "@babel/core": "7.19.1",
-    "@babel/preset-env": "7.19.1",
+    "@babel/core": "7.19.3",
+    "@babel/preset-env": "7.19.3",
     "@babel/preset-typescript": "7.18.6",
     "@changesets/cli": "2.24.4",
     "@types/jest": "29.0.3",
