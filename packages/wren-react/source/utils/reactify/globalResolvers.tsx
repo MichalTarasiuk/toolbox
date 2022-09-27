@@ -22,14 +22,14 @@ import type {
   HTMLReactParserOptions,
 } from 'html-react-parser'
 
-const values = Object.values
-
 type Resolvers = {
   [resolver: string]: {
     canUse: (element: Element) => boolean
     use: (children: DOMNode[], attribs: AnyAttribs) => JSX.Element
   }
 }
+
+const values = Object.values
 
 export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
   const resolvers: Resolvers = {
@@ -45,10 +45,7 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
     'next/script': {
       canUse: (element: Element) =>
         isScriptTag(element) && keyIn(element.attribs, 'id'),
-      use: (
-        children: DOMNode[],
-        attribs: AnyAttribs & Partial<{ id: string }>,
-      ) => (
+      use: (children: DOMNode[], attribs: AnyAttribs) => (
         <Script id={attribs.id} {...attributesToProps(attribs)}>
           {domToReact(children, options)}
         </Script>
@@ -57,15 +54,8 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
     'next/image': {
       canUse: (element: Element) =>
         isImageTag(element) && hasSizes(element.attribs),
-      use: (
-        _,
-        attribs: AnyAttribs &
-          Partial<{
-            src: string
-            width: string
-            height: string
-          }>,
-      ) => (hasSource(attribs) ? <Image {...attribs} /> : <Null />),
+      use: (_, attribs: AnyAttribs) =>
+        hasSource(attribs) ? <Image {...attribs} /> : <Null />,
     },
   }
 

@@ -20,8 +20,8 @@ export const hasSource = (attribs: AnyAttribs): attribs is { src: string } =>
 
 export const hasSizes = (attribs: AnyAttribs): attribs is { src: string } =>
   keyIn(attribs, 'width') &&
-  keyIn(attribs, 'height') &&
   isString(attribs.width) &&
+  keyIn(attribs, 'height') &&
   isString(attribs.height)
 
 export const isAnchorTag = (element: ElementType) =>
