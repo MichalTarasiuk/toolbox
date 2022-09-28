@@ -1,3 +1,2 @@
-export * from './common'
-export * from './document'
+export * from './assertions'
 export * from './storage'

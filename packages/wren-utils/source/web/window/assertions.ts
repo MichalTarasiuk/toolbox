@@ -2,24 +2,6 @@
 import { isClient } from '../../../_api'
 
 /**
- * Checks if touch events are supported.
- */
-export const supportsTouchEvents = () =>
-  isClient() && window && 'ontouchstart' in window
-
-/**
- * Checks if the user color scheme preference is dark.
- */
-export const prefersDarkColorScheme = () =>
-  isClient() && window.matchMedia('(prefers-color-scheme: dark)').matches
-
-/**
- * Checks if the user color scheme preference is light.
- */
-export const prefersLightColorScheme = () =>
-  isClient() && window.matchMedia('(prefers-color-scheme: light)').matches
-
-/**
  * Check that device has IOS operating system.
  * */
 export const isIOS = () =>
