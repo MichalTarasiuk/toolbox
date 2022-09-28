@@ -17,6 +17,6 @@
   "devDependencies": {
     "@types/react": "18.0.21",
     "@wren/typescript": "1.0.0",
-    "react-error-boundary": "^3.1.4"
+    "react-error-boundary": "3.1.4"
   }
 }
