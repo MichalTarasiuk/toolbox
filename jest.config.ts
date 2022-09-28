@@ -1,6 +1,7 @@
-import type { Config } from 'jest'
-import * as path from 'path'
 import { lstatSync, readdirSync } from 'fs'
+import * as path from 'path'
+
+import type { Config } from 'jest'
 
 const basePath = path.resolve(__dirname, 'packages')
 const packages = readdirSync(basePath)
@@ -9,14 +10,15 @@ const packages = readdirSync(basePath)
 
 const projects = packages.map((displayName) => ({
   displayName,
-  testMatch: [`<rootDir>/packages/${displayName}/**/*.test.ts`],
+  testEnvironment: 'jsdom',
+  testMatch: [`<rootDir>/packages/${displayName}/**/*.test.(ts|tsx)`],
 }))
 
-const config: Config = {
+const jestConfig: Config = {
   verbose: true,
   errorOnDeprecated: true,
   clearMocks: true,
   projects,
 }
 
-export default config
+export default jestConfig
