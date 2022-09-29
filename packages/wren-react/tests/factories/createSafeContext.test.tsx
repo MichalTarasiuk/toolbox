@@ -78,7 +78,7 @@ const createTree = (initialContextValue: ContextValue) => {
   }
 }
 
-describe('react:factories:createSafeContext', () => {
+describe.skip('react:factories:createSafeContext', () => {
   it('should render correctly', () => {
     const tree = createTree({ name: 'Michał', age: 19 })
     const { ui } = tree.render()
