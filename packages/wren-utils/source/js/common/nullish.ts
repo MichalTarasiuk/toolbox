@@ -13,4 +13,4 @@
  * @returns `true` if `value` is nullish, `false` if otherwise
  */
 export const nullish = (value: unknown): value is Nullish =>
-  value === null || value === undefined
+	value === null || value === undefined

@@ -11,4 +11,4 @@ export const noop = () => {}
  * Checks if the passed value is primitive or not.
  */
 export const isPrimitive = (value: unknown): value is Primitive =>
-  Object(value) !== value
+	Object(value) !== value

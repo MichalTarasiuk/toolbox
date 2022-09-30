@@ -6,10 +6,10 @@ import type { DependencyList } from 'react'
  */
 
 const is = (x: any, y: any) =>
-  (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
+	(x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
 
 const objectIs: (x: unknown, y: unknown) => boolean =
-  typeof Object.is === 'function' ? Object.is : is
+	typeof Object.is === 'function' ? Object.is : is
 
 // 1:1 how react compare previous dependency list with current dependency list
 
@@ -19,21 +19,21 @@ const objectIs: (x: unknown, y: unknown) => boolean =
 
 // react source code
 export const areHookInputsEqual = (
-  nextDeps: DependencyList,
-  prevDeps: DependencyList | null,
+	nextDeps: DependencyList,
+	prevDeps: DependencyList | null,
 ) => {
-  if (prevDeps === null) {
-    return false
-  }
+	if (prevDeps === null) {
+		return false
+	}
 
-  // eslint-disable-next-line functional/no-loop-statement -- early return
-  for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
-    if (objectIs(nextDeps[i], prevDeps[i])) {
-      continue
-    }
+	// eslint-disable-next-line functional/no-loop-statement -- early return
+	for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
+		if (objectIs(nextDeps[i], prevDeps[i])) {
+			continue
+		}
 
-    return false
-  }
+		return false
+	}
 
-  return true
+	return true
 }

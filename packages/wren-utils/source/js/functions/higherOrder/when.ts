@@ -4,9 +4,9 @@
  * @returns Function expecting a single value, x, that returns the appropriate value based on pred
  */
 export const when =
-  (
-    predicate: (value: unknown) => boolean,
-    whenTrue: (value: unknown) => boolean,
-  ) =>
-  (value: unknown) =>
-    predicate(value) ? whenTrue(value) : value
+	(
+		predicate: (value: unknown) => boolean,
+		whenTrue: (value: unknown) => boolean,
+	) =>
+	(value: unknown) =>
+		predicate(value) ? whenTrue(value) : value

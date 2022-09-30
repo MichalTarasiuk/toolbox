@@ -4,41 +4,41 @@ import { getSiteOrigin } from './helpers'
 
 import type { AnyAttribs } from './types'
 import type {
-  DOMNode,
-  Element,
-  Element as ElementType,
+	DOMNode,
+	Element,
+	Element as ElementType,
 } from 'html-react-parser'
 
 export const isElement = (domNode: DOMNode): domNode is Element =>
-  'attribs' in domNode
+	'attribs' in domNode
 
 export const hasId = (attribs: AnyAttribs): attribs is { id: string } =>
-  'id' in attribs && isString(attribs.id)
+	'id' in attribs && isString(attribs.id)
 
 export const hasSource = (attribs: AnyAttribs): attribs is { src: string } =>
-  keyIn(attribs, 'src') && isString(attribs.src)
+	keyIn(attribs, 'src') && isString(attribs.src)
 
 export const hasSizes = (attribs: AnyAttribs): attribs is { src: string } =>
-  keyIn(attribs, 'width') &&
-  isString(attribs.width) &&
-  keyIn(attribs, 'height') &&
-  isString(attribs.height)
+	keyIn(attribs, 'width') &&
+	isString(attribs.width) &&
+	keyIn(attribs, 'height') &&
+	isString(attribs.height)
 
 export const isAnchorTag = (element: ElementType) =>
-  element.tagName === 'a' && keyIn(element.attribs, 'href')
+	element.tagName === 'a' && keyIn(element.attribs, 'href')
 
 export const isImageTag = (element: ElementType) =>
-  element.tagName === 'img' && keyIn(element.attribs, 'src')
+	element.tagName === 'img' && keyIn(element.attribs, 'src')
 
 export const isScriptTag = (element: ElementType) =>
-  element.tagName === 'script'
+	element.tagName === 'script'
 
 export const isSameSite = (destinationOrigin: string) => {
-  const sourceOrigin = getSiteOrigin()
+	const sourceOrigin = getSiteOrigin()
 
-  if (sourceOrigin) {
-    return isSameOrigin(sourceOrigin, destinationOrigin)
-  }
+	if (sourceOrigin) {
+		return isSameOrigin(sourceOrigin, destinationOrigin)
+	}
 
-  return false
+	return false
 }

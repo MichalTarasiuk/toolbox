@@ -41,5 +41,5 @@ export function sum(a: number, b: number): number
  */
 export function sum(a: bigint, b: bigint): bigint
 export function sum<AnyNumber extends number>(a: AnyNumber, b: AnyNumber) {
-  return (a + b) as AnyNumber
+	return (a + b) as AnyNumber
 }

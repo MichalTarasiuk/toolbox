@@ -9,13 +9,13 @@ type FalsyValues = 0 | '' | null | undefined | false
 type Sign = '-' | '+'
 
 type NumberLike =
-  | { [Symbol.toPrimitive](hint: 'number'): number }
-  | number
-  | bigint
-  | Number
-  | boolean
-  | `${number | bigint}`
-  | `${Sign | ''}${'Infinity'}`
-  | null
+	| { [Symbol.toPrimitive](hint: 'number'): number }
+	| number
+	| bigint
+	| Number
+	| boolean
+	| `${number | bigint}`
+	| `${Sign | ''}${'Infinity'}`
+	| null
 
 type Comparable = string | NumberLike

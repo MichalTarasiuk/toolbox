@@ -1,22 +1,23 @@
 {
-  "name": "@wren/react",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@react-hookz/web": "^15.1.0",
-    "@wren/utils": "1.0.0",
-    "html-react-parser": "^3.0.4",
-    "next": "^12.3.1",
-    "react": "18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "18.0.21",
-    "@wren/typescript": "1.0.0",
-    "react-error-boundary": "3.1.4"
-  }
+	"name": "@wren/react",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@react-hookz/web": "^15.1.0",
+		"@wren/utils": "1.0.0",
+		"html-react-parser": "^3.0.4",
+		"next": "^12.3.1",
+		"react": "18.2.0",
+		"use-context-selector": "1.4.1",
+		"react-error-boundary": "3.1.4"
+	},
+	"devDependencies": {
+		"@types/react": "18.0.21",
+		"@wren/typescript": "1.0.0"
+	}
 }
