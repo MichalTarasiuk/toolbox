@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
+import { noop } from '@wren/utils'
 import React, { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
@@ -6,14 +7,16 @@ import { createSafeContext } from '../../source/factories/createSafeContext'
 
 import type { ReactNode } from 'react'
 
-type ContextValue = { name: string; age: number }
+type ContextValue = {
+	name: string
+	age: number
+}
 
 type RenderProps = { withProvider?: boolean; displayNameSpy?: UnknownFunction }
 type SafeContextProviderProps = RenderProps & {
 	children: ReactNode
-	value: ContextValue
 }
-type DisplayNameProps = Pick<RenderProps, 'displayNameSpy'>
+type DisplayNameProps = Required<Pick<RenderProps, 'displayNameSpy'>>
 
 const createTree = (initialContextValue: ContextValue) => {
 	const [SafeContextProvider, useSafeContext] =
@@ -24,22 +27,29 @@ const createTree = (initialContextValue: ContextValue) => {
 	const DisplayName = (props: DisplayNameProps) => {
 		const name = useSafeContext((value) => value.name)
 
-		props?.displayNameSpy()
+		props.displayNameSpy()
 
-		return <p>name: {name}</p>
+		return <p>{`name: ${name}`}</p>
 	}
 
 	const DisplayAge = () => {
 		const age = useSafeContext((value) => value.age)
 
-		return <p>age: {age}</p>
+		return <p>{`age: ${age}`}</p>
 	}
 
 	const OptionalSafeContextProvider = (props: SafeContextProviderProps) => {
+		const [contextValue, setContextValue] = useState(initialContextValue)
+
+		const simulateYear = () => {
+			setContextValue({ ...contextValue, age: contextValue.age + 1 })
+		}
+
 		if (props.withProvider) {
 			return (
-				<SafeContextProvider value={props.value}>
+				<SafeContextProvider value={contextValue}>
 					{props.children}
+					<button onClick={simulateYear}>simulate year</button>
 				</SafeContextProvider>
 			)
 		}
@@ -47,77 +57,52 @@ const createTree = (initialContextValue: ContextValue) => {
 		return <>{props.children}</>
 	}
 
-	const render = (props?: RenderProps) => {
-		const [contextValue, setContextValue] = useState(initialContextValue)
-
+	const Tree = (props?: RenderProps) => {
 		const { withProvider = true } = props || {}
 
-		const handler = {
-			simulateYear: () =>
-				setContextValue({ ...contextValue, age: contextValue.age + 1 }),
-		}
-
-		return {
-			ui: (
-				<ErrorBoundary FallbackComponent={FallbackComponent}>
-					<OptionalSafeContextProvider
-						value={contextValue}
-						withProvider={withProvider}
-					>
-						<DisplayName />
-						<DisplayAge />
-					</OptionalSafeContextProvider>
-				</ErrorBoundary>
-			),
-			handler,
-		}
+		return (
+			<ErrorBoundary FallbackComponent={FallbackComponent}>
+				<OptionalSafeContextProvider withProvider={withProvider}>
+					<DisplayName displayNameSpy={props?.displayNameSpy || noop} />
+					<DisplayAge />
+				</OptionalSafeContextProvider>
+			</ErrorBoundary>
+		)
 	}
 
-	return {
-		render,
-	}
+	return Tree
 }
 
-describe.skip('react:factories:createSafeContext', () => {
+describe('react:factories:createSafeContext', () => {
 	it('should render correctly', () => {
-		const tree = createTree({ name: 'Michał', age: 19 })
-		const { ui } = tree.render()
+		const Tree = createTree({ name: 'Michał', age: 19 })
 
-		render(ui)
-	})
+		const { getByText } = render(<Tree />)
 
-	it('should trow provider error', () => {
-		const tree = createTree({ name: 'Michał', age: 19 })
-		const { ui } = tree.render({ withProvider: false })
-
-		render(ui)
+		getByText('simulate year')
 	})
 
 	it('should rerender `DisplayAge` component', async () => {
 		const initialContextValue = { name: 'Michał', age: 19 }
+		const Tree = createTree(initialContextValue)
 
-		const tree = createTree(initialContextValue)
-		const { ui, handler } = tree.render()
+		const { findByText, getByText } = render(<Tree />)
 
-		const { findByText } = render(ui)
+		fireEvent.click(getByText('simulate year'))
 
-		handler.simulateYear()
-
-		await findByText(`age: ${initialContextValue.age}`)
+		await findByText(`age: ${initialContextValue.age + 1}`)
 	})
 
-	it('should not rerender `DisplayName` component on update age', async () => {
+	it('should not rerender `DisplayName` component on update age', () => {
 		const initialContextValue = { name: 'Michał', age: 19 }
 		const displayNameSpy = jest.fn()
+		const Tree = createTree(initialContextValue)
 
-		const tree = createTree(initialContextValue)
-		const { ui, handler } = tree.render({ displayNameSpy })
+		const { getByText } = render(<Tree displayNameSpy={displayNameSpy} />)
 
-		const { findByText } = render(ui)
+		fireEvent.click(getByText('simulate year'))
 
-		handler.simulateYear()
-
-		await findByText(`age: ${initialContextValue.age}`)
-		expect(displayNameSpy).toHaveBeenCalledTimes(1)
+		getByText(`age: ${initialContextValue.age + 1}`)
+		expect(displayNameSpy).toHaveBeenCalledTimes(3)
 	})
 })

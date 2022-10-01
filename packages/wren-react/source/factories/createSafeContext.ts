@@ -8,12 +8,14 @@ import type { Context } from 'use-context-selector'
 
 type Selector<ContextValue, Selected> = (contextValue: ContextValue) => Selected
 
-const defaultContextValue = Symbol()
+const defaultContextValue = {}
 
 const getErrorMessage = (name: string) =>
-	`use${name} must be used within a ${name}Provider`
+	`use${uppercaseFirst(name)} must be used within a ${name}Provider`
 
-const isInvalidHookCall = (contextValue: unknown) =>
+const isInvalidHookCall = (
+	contextValue: unknown,
+): contextValue is typeof defaultContextValue =>
 	contextValue === defaultContextValue
 
 const createContext = <ContextValue>() =>
@@ -26,14 +28,17 @@ export const createSafeContext = <ContextValue>(name: string) => {
 	const uppercasedName = uppercaseFirst(name)
 
 	const useSafeContext = <Selected = ContextValue>(
-		selector?: Selector<ContextValue, Selected>,
+		selectorImpl?: Selector<ContextValue, Selected>,
 	) => {
-		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
-		const identity = (value: ContextValue) => value as unknown as Selected
+		const safeSelector = (value: ContextValue) =>
+			// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
+			selectorImpl ? selectorImpl(value) : (value as unknown as Selected)
+		const selector = (value: ContextValue) =>
+			value === defaultContextValue ? defaultContextValue : safeSelector(value)
 		const selected = useContextSelector(
 			// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- developer should't know about default context value
 			safeContext as Context<ContextValue>,
-			selector ?? identity,
+			selector,
 		)
 
 		if (isInvalidHookCall(selected)) {
