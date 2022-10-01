@@ -64,7 +64,7 @@ importers:
     specifiers:
       '@react-hookz/web': ^15.1.0
       '@types/react': 18.0.21
-      '@types/react-reconciler': ^0.28.0
+      '@types/react-reconciler': 0.28.0
       '@wren/typescript': 1.0.0
       '@wren/utils': 1.0.0
       html-react-parser: ^3.0.4
