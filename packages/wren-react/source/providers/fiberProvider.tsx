@@ -1,4 +1,7 @@
-/* eslint-disable functional/no-this-expression -- fill me */
+/* eslint-disable functional/no-this-expression -- access to _reactInternals prop  */
+/* eslint-disable @typescript-eslint/no-unsafe-call -- just ignore */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- just ignore */
+/* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
 import React, { useContext } from 'react'
 
 import { wrapContext } from '../utils/utils'
