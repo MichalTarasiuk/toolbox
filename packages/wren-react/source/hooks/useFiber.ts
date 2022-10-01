@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- just ignore */
 import React, { useId, useMemo } from 'react'
 
 import { useFiber as useFiberImpl } from '../providers/providers'
@@ -17,7 +18,7 @@ type ReactInternal = {
 type State = { memoizedState: unknown; next: State }
 
 const { ReactCurrentOwner } =
-	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty
+	// eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- expose React props
 	(React as unknown as ReactInternal)
 		.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
 
@@ -37,7 +38,10 @@ export const useFiber = () => {
 				let state: State = node.memoizedState
 				// eslint-disable-next-line functional/no-loop-statement -- if match, return
 				while (state) {
-					if (state.memoizedState === id) return true
+					if (state.memoizedState === id) {
+						return true
+					}
+
 					state = state.next
 				}
 			}),
