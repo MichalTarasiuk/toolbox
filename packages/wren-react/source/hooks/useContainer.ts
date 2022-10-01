@@ -8,7 +8,7 @@ import { useFiber } from './useFiber'
 /**
  * Represents a react-reconciler container instance.
  */
-export interface ContainerInstance<ContainerInfo = unknown> {
+export type ContainerInstance<ContainerInfo = unknown> = {
 	containerInfo: ContainerInfo
 }
 
