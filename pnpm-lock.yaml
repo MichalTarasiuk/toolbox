@@ -64,12 +64,14 @@ importers:
     specifiers:
       '@react-hookz/web': ^15.1.0
       '@types/react': 18.0.21
+      '@types/react-reconciler': ^0.28.0
       '@wren/typescript': 1.0.0
       '@wren/utils': 1.0.0
       html-react-parser: ^3.0.4
       next: ^12.3.1
       react: 18.2.0
       react-error-boundary: 3.1.4
+      react-reconciler: ^0.29.0
       use-context-selector: 1.4.1
     dependencies:
       '@react-hookz/web': 15.1.0_biqbaboplfbrettd7655fr4n2y
@@ -78,9 +80,11 @@ importers:
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
+      react-reconciler: 0.29.0_react@18.2.0
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
     devDependencies:
       '@types/react': 18.0.21
+      '@types/react-reconciler': 0.28.0
       '@wren/typescript': link:../wren-typescript
 
   packages/wren-typescript:
@@ -2248,6 +2252,12 @@ packages:
 
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
+    dependencies:
+      '@types/react': 18.0.21
+    dev: true
+
+  /@types/react-reconciler/0.28.0:
+    resolution: {integrity: sha512-5cjk9ottZAj7eaTsqzPUIlrVbh3hBAO2YaEL1rkjHKB3xNAId7oU8GhzvAX+gfmlfoxTwJnBjPxEHyxkEA1Ffg==}
     dependencies:
       '@types/react': 18.0.21
     dev: true
@@ -5495,6 +5505,17 @@ packages:
 
   /react-property/2.0.0:
     resolution: {integrity: sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==}
+    dev: false
+
+  /react-reconciler/0.29.0_react@18.2.0:
+    resolution: {integrity: sha512-wa0fGj7Zht1EYMRhKWwoo1H9GApxYLBuhoAuXN0TlltESAjDssB+Apf0T/DngVqaMyPypDmabL37vw/2aRM98Q==}
+    engines: {node: '>=0.10.0'}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.2.0
+      scheduler: 0.23.0
     dev: false
 
   /react/18.2.0:
