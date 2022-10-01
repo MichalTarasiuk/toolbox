@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
+import { nullish } from '@wren/utils'
 import { useMemo } from 'react'
 
 import { traverseFiber } from '../utils/utils'
@@ -26,7 +27,7 @@ export const useContainer = <ContainerInfo = unknown>():
 			traverseFiber<ContainerInstance<ContainerInfo>>(
 				fiber,
 				true,
-				(node) => node.stateNode?.containerInfo != null,
+				(node) => !nullish(node.stateNode?.containerInfo),
 			),
 		[fiber],
 	)

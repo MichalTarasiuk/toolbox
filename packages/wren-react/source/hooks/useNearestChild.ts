@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
+import { isString } from '@wren/utils'
 import { useRef } from 'react'
 
 import { traverseFiber } from '../utils/utils'
@@ -22,8 +23,7 @@ export const useNearestChild = <Current = unknown>(
 			fiber,
 			false,
 			(node) =>
-				typeof node.type === 'string' &&
-				(type === undefined || node.type === type),
+				isString(node.type) && (type === undefined || node.type === type),
 		)?.stateNode
 	}, [fiber])
 
