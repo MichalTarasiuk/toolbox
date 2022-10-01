@@ -1,10 +1,9 @@
 // Usage:
 // https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md
 
-import { isClient } from '@wren/utils'
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
-const useLayout = isClient() ? useLayoutEffect : useEffect
+import { useLayout } from './useLayout'
 
 export const useEvent = <Fn extends AnyFunction>(fn: Fn) => {
 	const savedFn = useRef(fn)

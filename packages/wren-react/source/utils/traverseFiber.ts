@@ -22,11 +22,11 @@ export type FiberSelector<StateNode = unknown> = (
 /**
  * Traverses up or down a {@link Fiber}, return `true` to stop and select a node.
  */
-export function traverseFiber<StateNode = unknown>(
+export const traverseFiber = <StateNode = unknown>(
 	fiber: Fiber<StateNode> | undefined,
 	ascending: boolean,
 	selector: FiberSelector<StateNode>,
-): Fiber<StateNode> | undefined {
+): Fiber<StateNode> | undefined => {
 	if (!fiber) {
 		return
 	}

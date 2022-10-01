@@ -8,8 +8,8 @@ import { useFiber } from './useFiber'
 /**
  * Represents a react-reconciler container instance.
  */
-export interface ContainerInstance<T = any> {
-	containerInfo: T
+export interface ContainerInstance<ContainerInfo = unknown> {
+	containerInfo: ContainerInfo
 }
 
 /**
@@ -17,11 +17,13 @@ export interface ContainerInstance<T = any> {
  *
  * In react-dom, a container will point to the root DOM element; in react-three-fiber, it will point to the root Zustand store.
  */
-export function useContainer<T = any>(): T | undefined {
+export const useContainer = <ContainerInfo = unknown>():
+	| ContainerInfo
+	| undefined => {
 	const fiber = useFiber()
 	const root = useMemo(
 		() =>
-			traverseFiber<ContainerInstance<T>>(
+			traverseFiber<ContainerInstance<ContainerInfo>>(
 				fiber,
 				true,
 				(node) => node.stateNode?.containerInfo != null,
