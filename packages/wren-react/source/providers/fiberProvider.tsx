@@ -1,11 +1,11 @@
 /* eslint-disable functional/no-this-expression -- fill me */
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { wrapContext } from '../utils/utils'
 
 import type { Fiber } from 'react-reconciler'
 
-const FiberContext = wrapContext(React.createContext<Fiber | null>(null))
+export const FiberContext = wrapContext(React.createContext<Fiber | null>(null))
 
 type Props = {
 	children: React.ReactNode
@@ -24,4 +24,14 @@ export class FiberProvider extends React.Component<Props> {
 			</FiberContext.Provider>
 		)
 	}
+}
+
+export const useFiber = () => {
+	const context = useContext(FiberContext)
+
+	if (!context) {
+		throw new Error('useFiber must be called within a <FiberProvider />')
+	}
+
+	return context
 }
