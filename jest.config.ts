@@ -12,6 +12,7 @@ const projects = packages.map((displayName) => ({
 	displayName,
 	testEnvironment: 'jsdom',
 	testMatch: [`<rootDir>/packages/${displayName}/**/*.test.(ts|tsx)`],
+	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }))
 
 const jestConfig: Config = {

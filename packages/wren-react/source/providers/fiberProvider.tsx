@@ -15,7 +15,7 @@ type Props = {
 }
 
 /**
- * A react-internal {@link Fiber} provider. This component binds React children to the React Fiber tree. Call its-fine hooks within this.
+ * A react-internal Fiber provider. This component binds React children to the React Fiber tree. Call its-fine hooks within this.
  */
 export class FiberProvider extends React.Component<Props> {
 	private _reactInternals: Fiber
