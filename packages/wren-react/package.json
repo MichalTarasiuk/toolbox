@@ -21,6 +21,6 @@
 		"@types/react": "18.0.21",
 		"@types/react-reconciler": "0.28.0",
 		"@wren/typescript": "1.0.0",
-		"react-test-renderer": "^18.2.0"
+		"react-test-renderer": "18.2.0"
 	}
 }
