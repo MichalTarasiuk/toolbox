@@ -1,9 +1,9 @@
 {
-  "files": [],
-  "references": [
-    { "path": "packages/wren-utils" },
-    { "path": "packages/wren-typescript" },
-    { "path": "packages/wren-react" }
-  ],
-  "extends": "./tsconfig.base.json"
+	"files": [],
+	"references": [
+		{ "path": "packages/bulb-utils" },
+		{ "path": "packages/bulb-typescript" },
+		{ "path": "packages/bulb-react" }
+	],
+	"extends": "./tsconfig.base.json"
 }

@@ -1,4 +1,4 @@
-import { uppercaseFirst } from '@wren/utils'
+import { uppercaseFirst } from '@bulb/utils'
 import {
 	createContext as createContextImpl,
 	useContextSelector,

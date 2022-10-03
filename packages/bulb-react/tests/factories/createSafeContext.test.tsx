@@ -1,5 +1,5 @@
+import { noop } from '@bulb/utils'
 import { fireEvent, render } from '@testing-library/react'
-import { noop } from '@wren/utils'
 import React, { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 

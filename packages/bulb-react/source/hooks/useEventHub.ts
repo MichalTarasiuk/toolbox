@@ -1,4 +1,4 @@
-import { createEventHub } from '@wren/utils'
+import { createEventHub } from '@bulb/utils'
 import { useCallback, useRef, useSyncExternalStore } from 'react'
 
 import { useEvent } from './useEvent'

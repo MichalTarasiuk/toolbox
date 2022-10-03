@@ -1,4 +1,4 @@
-import { isString, keyIn, isSameOrigin } from '@wren/utils'
+import { isString, keyIn, isSameOrigin } from '@bulb/utils'
 
 import { getSiteOrigin } from './helpers'
 

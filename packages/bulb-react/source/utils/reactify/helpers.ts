@@ -1,4 +1,4 @@
-import { isClient } from '@wren/utils'
+import { isClient } from '@bulb/utils'
 
 import { isElement } from './assertions'
 

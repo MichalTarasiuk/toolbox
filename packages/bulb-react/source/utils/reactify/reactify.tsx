@@ -1,4 +1,4 @@
-import { keyIn } from '@wren/utils'
+import { keyIn } from '@bulb/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
 import React from 'react'
 

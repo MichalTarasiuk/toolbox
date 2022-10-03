@@ -1,5 +1,5 @@
 {
-  "name": "@wren/utils",
+  "name": "@bulb/utils",
   "version": "1.0.0",
   "description": "",
   "main": "_api.ts",
@@ -8,6 +8,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@wren/typescript": "1.0.0"
+    "@bulb/typescript": "1.0.0"
   }
 }

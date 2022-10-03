@@ -1,4 +1,4 @@
-import { keyIn } from '@wren/utils'
+import { keyIn } from '@bulb/utils'
 import { attributesToProps, domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'

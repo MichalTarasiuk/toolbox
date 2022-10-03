@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
-import { nullish } from '@wren/utils'
+import { nullish } from '@bulb/utils'
 import { useMemo } from 'react'
 
 import { traverseFiber } from '../utils/utils'

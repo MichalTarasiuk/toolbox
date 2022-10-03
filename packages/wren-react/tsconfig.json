@@ -1,4 +1,0 @@
-{
-  "extends": "../../tsconfig.base.json",
-  "files": ["node_modules/@wren/typescript/source/common.d.ts"]
-}

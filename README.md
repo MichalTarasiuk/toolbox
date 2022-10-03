@@ -1,4 +1,4 @@
-# wren
+# bulb
 
 A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.
 
