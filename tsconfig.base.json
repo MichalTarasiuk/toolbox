@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "strict": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",

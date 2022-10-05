@@ -1,9 +1,15 @@
 {
-	"files": [],
-	"references": [
-		{ "path": "packages/bulb-utils" },
-		{ "path": "packages/bulb-typescript" },
-		{ "path": "packages/bulb-react" }
-	],
-	"extends": "./tsconfig.base.json"
+  "files": [],
+  "references": [
+    {
+      "path": "packages/bulb-utils"
+    },
+    {
+      "path": "packages/bulb-typescript"
+    },
+    {
+      "path": "packages/bulb-react"
+    }
+  ],
+  "extends": "./tsconfig.base.json"
 }
