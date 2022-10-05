@@ -15,14 +15,14 @@
  * @returns `previousValue` or `currentValue`, whichever is lower
  */
 export const min = <
-	Collector extends Comparable,
-	CurrentValue extends Comparable,
+  Collector extends Comparable,
+  CurrentValue extends Comparable,
 >(
-	collector: Collector,
-	currentValue: CurrentValue,
+  collector: Collector,
+  currentValue: CurrentValue,
 ): Collector | CurrentValue => {
-	// @typescript-eslint/consistent-type-assertions -- safety assertion
-	return (currentValue as unknown as Collector) < collector
-		? currentValue
-		: collector
+  // @typescript-eslint/consistent-type-assertions -- safety assertion
+  return (currentValue as unknown as Collector) < collector
+    ? currentValue
+    : collector
 }

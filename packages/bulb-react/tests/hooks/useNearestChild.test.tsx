@@ -7,50 +7,50 @@ import { FiberProvider } from '../../source/providers/providers'
 import type { ReactNode } from 'react'
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
-	<FiberProvider>{children}</FiberProvider>
+  <FiberProvider>{children}</FiberProvider>
 )
 
 describe('react:hooks:useNearestChild', () => {
-	it('should return nearest child', () => {
-		const spy = jest.fn()
-		const paragraph = <p>example</p>
-		const Example = () => {
-			const nearestChild = useNearestChild<HTMLParagraphElement>()
+  it('should return nearest child', () => {
+    const spy = jest.fn()
+    const paragraph = <p>example</p>
+    const Example = () => {
+      const nearestChild = useNearestChild<HTMLParagraphElement>()
 
-			useLayout(() => {
-				spy(nearestChild.current?.innerHTML)
-			}, [])
+      useLayout(() => {
+        spy(nearestChild.current?.innerHTML)
+      }, [])
 
-			return paragraph
-		}
+      return paragraph
+    }
 
-		render(
-			<Wrapper>
-				<Example />
-			</Wrapper>,
-		)
+    render(
+      <Wrapper>
+        <Example />
+      </Wrapper>,
+    )
 
-		expect(spy).toHaveBeenCalledWith('example')
-	})
+    expect(spy).toHaveBeenCalledWith('example')
+  })
 
-	it('should return `undefined` when the child was not found', () => {
-		const spy = jest.fn()
-		const Example = () => {
-			const nearestChild = useNearestChild()
+  it('should return `undefined` when the child was not found', () => {
+    const spy = jest.fn()
+    const Example = () => {
+      const nearestChild = useNearestChild()
 
-			useLayout(() => {
-				spy(nearestChild)
-			}, [])
+      useLayout(() => {
+        spy(nearestChild)
+      }, [])
 
-			return null
-		}
+      return null
+    }
 
-		render(
-			<Wrapper>
-				<Example />
-			</Wrapper>,
-		)
+    render(
+      <Wrapper>
+        <Example />
+      </Wrapper>,
+    )
 
-		expect(spy).toHaveBeenLastCalledWith({ current: undefined })
-	})
+    expect(spy).toHaveBeenLastCalledWith({ current: undefined })
+  })
 })

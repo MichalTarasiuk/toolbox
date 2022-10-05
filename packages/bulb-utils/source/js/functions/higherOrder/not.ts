@@ -13,5 +13,5 @@
  * @returns The inverted return value of `fn`
  */
 export const not = <Fn extends AnyFunction<any[], boolean>>(fn: Fn) => {
-	return (...parameters: Parameters<Fn>) => !fn(...parameters)
+  return (...parameters: Parameters<Fn>) => !fn(...parameters)
 }

@@ -10,34 +10,34 @@ import type { Resolvers } from './types'
 import type { HTMLReactParserOptions } from 'html-react-parser'
 
 export const reactify = (html: string, customResolvers?: Resolvers) => {
-	const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>
-		customResolvers && keyIn(customResolvers, name)
-			? customResolvers[name]
-			: null
+  const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>
+    customResolvers && keyIn(customResolvers, name)
+      ? customResolvers[name]
+      : null
 
-	const options: HTMLReactParserOptions = {
-		replace: elementsGuard((element) => {
-			const { children, attribs } = element
+  const options: HTMLReactParserOptions = {
+    replace: elementsGuard((element) => {
+      const { children, attribs } = element
 
-			const name = hasId(element.attribs)
-				? formatId(element.attribs.id)
-				: formatTag(element.tagName)
+      const name = hasId(element.attribs)
+        ? formatId(element.attribs.id)
+        : formatTag(element.tagName)
 
-			const CustomResolver = getCustomResolver(name)
+      const CustomResolver = getCustomResolver(name)
 
-			if (CustomResolver) {
-				return (
-					<CustomResolver {...attributesToProps(attribs)}>
-						{domToReact(children, options)}
-					</CustomResolver>
-				)
-			}
+      if (CustomResolver) {
+        return (
+          <CustomResolver {...attributesToProps(attribs)}>
+            {domToReact(children, options)}
+          </CustomResolver>
+        )
+      }
 
-			const globalResolver = getGlobalResolvers(options).findOne(element)
+      const globalResolver = getGlobalResolvers(options).findOne(element)
 
-			return globalResolver ? globalResolver.use(children, attribs) : element
-		}),
-	}
+      return globalResolver ? globalResolver.use(children, attribs) : element
+    }),
+  }
 
-	return parse(html, options)
+  return parse(html, options)
 }

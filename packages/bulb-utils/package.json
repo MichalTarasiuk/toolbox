@@ -1,13 +1,13 @@
 {
-  "name": "@bulb/utils",
-  "version": "1.0.0",
-  "description": "",
-  "main": "_api.ts",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@bulb/typescript": "1.0.0"
-  }
+	"name": "@bulb/utils",
+	"version": "1.0.0",
+	"description": "",
+	"main": "_api.ts",
+	"scripts": {},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@bulb/typescript": "*"
+	}
 }

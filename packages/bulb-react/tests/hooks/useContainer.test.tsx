@@ -7,13 +7,13 @@ import { FiberProvider } from '../../source/providers/providers'
 import type { ReactNode } from 'react'
 
 const wrapper = ({ children }: { children: ReactNode }) => (
-	<FiberProvider>{children}</FiberProvider>
+  <FiberProvider>{children}</FiberProvider>
 )
 
 describe('react:hooks:useContainer', () => {
-	it('should return container', () => {
-		const { result } = renderHook(() => useContainer(), { wrapper })
+  it('should return container', () => {
+    const { result } = renderHook(() => useContainer(), { wrapper })
 
-		expect(result).toBeDefined()
-	})
+    expect(result).toBeDefined()
+  })
 })

@@ -17,11 +17,15 @@
   "rules": {
     "@typescript-eslint/consistent-type-assertions": [
       "error",
-      { "assertionStyle": "never" }
+      {
+        "assertionStyle": "never"
+      }
     ],
     "@typescript-eslint/consistent-type-imports": [
       "error",
-      { "disallowTypeAnnotations": false }
+      {
+        "disallowTypeAnnotations": false
+      }
     ],
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -30,7 +34,9 @@
     "@typescript-eslint/no-extra-non-null-assertion": "error",
     "@typescript-eslint/no-floating-promises": [
       "error",
-      { "ignoreVoid": true }
+      {
+        "ignoreVoid": true
+      }
     ],
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
@@ -49,12 +55,17 @@
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/restrict-template-expressions": [
       "error",
-      { "allowNullish": true }
+      {
+        "allowNullish": true
+      }
     ],
     "@typescript-eslint/switch-exhaustiveness-check": "error",
     "functional/no-let": [
       "error",
-      { "allowLocalMutation": true, "ignorePattern": "^mutable" }
+      {
+        "allowLocalMutation": true,
+        "ignorePattern": "^mutable"
+      }
     ],
     "functional/no-loop-statement": "error",
     "functional/no-this-expression": "error",
@@ -67,15 +78,25 @@
       "error",
       {
         "newlines-between": "always",
-        "alphabetize": { "order": "asc" },
+        "alphabetize": {
+          "order": "asc"
+        },
         "groups": ["builtin", "external", "parent", "sibling", "index", "type"]
       }
     ],
     "unicorn/prefer-module": "error",
-    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
     "eslint-comments/require-description": [
       "error",
-      { "ignore": ["eslint-enable"] }
+      {
+        "ignore": ["eslint-enable"]
+      }
     ],
     "no-const-assign": "error",
     "no-param-reassign": "error",

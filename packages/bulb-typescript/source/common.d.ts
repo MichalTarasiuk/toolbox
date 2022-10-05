@@ -10,7 +10,7 @@ type Nullish = null | undefined
 // common:functions
 
 type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (
-	...args: Args
+  ...args: Args
 ) => ReturnType
 
 type UnknownFunction = (...args: unknown[]) => unknown

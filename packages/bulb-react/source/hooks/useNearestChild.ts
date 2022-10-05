@@ -13,19 +13,19 @@ import { useLayout } from './useLayout'
  * In react-dom, this would be a DOM element; in react-three-fiber this would be an instance descriptor.
  */
 export const useNearestChild = <Current = unknown>(
-	type?: keyof JSX.IntrinsicElements,
+  type?: keyof JSX.IntrinsicElements,
 ) => {
-	const fiber = useFiber()
-	const childRef = useRef<Current>()
+  const fiber = useFiber()
+  const childRef = useRef<Current>()
 
-	useLayout(() => {
-		childRef.current = traverseFiber<Current>(
-			fiber,
-			false,
-			(node) =>
-				isString(node.type) && (type === undefined || node.type === type),
-		)?.stateNode
-	}, [fiber])
+  useLayout(() => {
+    childRef.current = traverseFiber<Current>(
+      fiber,
+      false,
+      (node) =>
+        isString(node.type) && (type === undefined || node.type === type),
+    )?.stateNode
+  }, [fiber])
 
-	return childRef
+  return childRef
 }

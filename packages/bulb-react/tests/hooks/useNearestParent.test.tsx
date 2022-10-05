@@ -7,31 +7,31 @@ import { FiberProvider } from '../../source/providers/providers'
 import type { ReactNode } from 'react'
 
 describe('react:hooks:useNearestChild', () => {
-	it('should return nearest parent', () => {
-		const wrapper = ({ children }: { children: ReactNode }) => (
-			<FiberProvider>
-				<div>
-					<p>some content</p>
-					{children}
-				</div>
-			</FiberProvider>
-		)
-		const { result } = renderHook(() => useNearestParent(), {
-			wrapper,
-		})
+  it('should return nearest parent', () => {
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <FiberProvider>
+        <div>
+          <p>some content</p>
+          {children}
+        </div>
+      </FiberProvider>
+    )
+    const { result } = renderHook(() => useNearestParent(), {
+      wrapper,
+    })
 
-		expect(result).toBeDefined()
-	})
+    expect(result).toBeDefined()
+  })
 
-	it('should return `undefined` when the parent was not found', () => {
-		const wrapper = ({ children }: { children: ReactNode }) => (
-			<FiberProvider>{children}</FiberProvider>
-		)
+  it('should return `undefined` when the parent was not found', () => {
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <FiberProvider>{children}</FiberProvider>
+    )
 
-		const { result } = renderHook(() => useNearestParent(), {
-			wrapper,
-		})
+    const { result } = renderHook(() => useNearestParent(), {
+      wrapper,
+    })
 
-		expect(result.current).toEqual({ current: undefined })
-	})
+    expect(result.current).toEqual({ current: undefined })
+  })
 })

@@ -26,58 +26,58 @@
  * ```
  */
 export const createAutoPercentage = () => {
-	let _count = 0
+  let _count = 0
 
-	/**
-	 * Increment and get the percentage.
-	 *
-	 * @example
-	 * ```js
-	 * const autoPercentage = createAutoPercentage();
-	 *
-	 * const a = autoPercentage.percentage();
-	 *
-	 * Number(a); // 1
-	 *
-	 * const b = autoPercentage.percentage();
-	 *
-	 * Number(a); // 0.5
-	 * Number(b); // 0.5
-	 * ```
-	 *
-	 * @returns The percentage
-	 */
-	const percentage = () => {
-		_count++
-		return { [Symbol.toPrimitive]: () => 1 / _count }
-	}
+  /**
+   * Increment and get the percentage.
+   *
+   * @example
+   * ```js
+   * const autoPercentage = createAutoPercentage();
+   *
+   * const a = autoPercentage.percentage();
+   *
+   * Number(a); // 1
+   *
+   * const b = autoPercentage.percentage();
+   *
+   * Number(a); // 0.5
+   * Number(b); // 0.5
+   * ```
+   *
+   * @returns The percentage
+   */
+  const percentage = () => {
+    _count++
+    return { [Symbol.toPrimitive]: () => 1 / _count }
+  }
 
-	/**
-	 * Increment and get the number of times the percentage has been incremented.
-	 *
-	 * @example
-	 * ```js
-	 * const autoPercentage = createAutoPercentage();
-	 *
-	 * const a = autoPercentage.count();
-	 *
-	 * Number(a); // 1
-	 *
-	 * const b = autoPercentage.count();
-	 *
-	 * Number(a); // 2
-	 * Number(b); // 2
-	 * ```
-	 *
-	 * @returns The number of times this percentage has been incremented
-	 */
-	const count = () => {
-		_count++
-		return { [Symbol.toPrimitive]: () => _count }
-	}
+  /**
+   * Increment and get the number of times the percentage has been incremented.
+   *
+   * @example
+   * ```js
+   * const autoPercentage = createAutoPercentage();
+   *
+   * const a = autoPercentage.count();
+   *
+   * Number(a); // 1
+   *
+   * const b = autoPercentage.count();
+   *
+   * Number(a); // 2
+   * Number(b); // 2
+   * ```
+   *
+   * @returns The number of times this percentage has been incremented
+   */
+  const count = () => {
+    _count++
+    return { [Symbol.toPrimitive]: () => _count }
+  }
 
-	return {
-		percentage,
-		count,
-	}
+  return {
+    percentage,
+    count,
+  }
 }
