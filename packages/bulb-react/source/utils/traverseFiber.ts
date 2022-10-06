@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- just ignore */
-/* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
 import type ReactReconciler from 'react-reconciler'
 
 /**

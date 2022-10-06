@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- just ignore */
 import React, { useId, useMemo } from 'react'
 
 import { useFiber as useFiberImpl } from '../providers/providers'

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument -- just ignore */
 import { isString } from '@bulb/utils'
 import { useRef } from 'react'
 
