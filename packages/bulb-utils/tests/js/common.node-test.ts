@@ -24,7 +24,7 @@ import {
   isPrimitive,
 } from '../../source/js/common/common'
 
-describe('js:typeof', () => {
+describe('node - js:typeof', () => {
   test('js:common:typeof:primitives', () => {
     // isString
     expect(isString('Hello World')).toBeTruthy()

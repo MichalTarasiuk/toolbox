@@ -182,7 +182,6 @@ export enum Status {
    * 418 I'm a teapot.
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418 | MDN docs}
    */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   ImATeapot,
   /**
    * 422 Unprocessable Entity.

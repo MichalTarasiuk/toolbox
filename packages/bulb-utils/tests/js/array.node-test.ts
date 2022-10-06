@@ -1,6 +1,6 @@
 import { castArray, union, chunk, compact } from '../../source/js/array/array'
 
-describe('js:array', () => {
+describe('node - js:array', () => {
   test('js:array:castArray', () => {
     expect(castArray('hello world')).toEqual(['hello world'])
     expect(castArray(100)).toEqual([100])

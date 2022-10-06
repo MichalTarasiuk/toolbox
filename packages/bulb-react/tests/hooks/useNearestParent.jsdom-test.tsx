@@ -6,7 +6,7 @@ import { FiberProvider } from '../../source/providers/providers'
 
 import type { ReactNode } from 'react'
 
-describe('react:hooks:useNearestChild', () => {
+describe('jsdom - react:hooks:useNearestChild', () => {
   it('should return nearest parent', () => {
     const wrapper = ({ children }: { children: ReactNode }) => (
       <FiberProvider>

@@ -16,7 +16,7 @@ const Markup = (props: MarkupProps) => {
   return <>{reactify(props.html, props.resolvers)}</>
 }
 
-describe('react:utils:reactify', () => {
+describe('jsdom - react:utils:reactify', () => {
   it('should render', () => {
     const { getByText } = render(<Markup html="<p>Hello World</p>" />)
 

@@ -9,7 +9,7 @@ import {
   setLightness,
 } from '../../source/js/custom/custom'
 
-describe('js:custom', () => {
+describe('node - js:custom', () => {
   test('js:custom:factories:createAutoPercentage', () => {
     const autoPercentage = createAutoPercentage()
     const steps = [

@@ -10,7 +10,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
   <FiberProvider>{children}</FiberProvider>
 )
 
-describe('react:hooks:useNearestChild', () => {
+describe('jsdom - react:hooks:useNearestChild', () => {
   it('should return nearest child', () => {
     const spy = jest.fn()
     const paragraph = <p>example</p>

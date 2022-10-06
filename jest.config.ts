@@ -8,12 +8,18 @@ const packages = readdirSync(basePath)
   .filter((name) => lstatSync(path.join(basePath, name)).isDirectory())
   .sort((a, b) => b.length - a.length)
 
-const projects = packages.map((displayName) => ({
-  displayName,
-  testEnvironment: 'jsdom',
-  testMatch: [`<rootDir>/packages/${displayName}/**/*.test.(ts|tsx)`],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-}))
+const testEnvironments = ['jsdom', 'node']
+
+const projects = packages.flatMap((displayName) =>
+  testEnvironments.map((testEnvironment) => ({
+    displayName,
+    testEnvironment,
+    testMatch: [
+      `<rootDir>/packages/${displayName}/**/*.${testEnvironment}-test.(ts|tsx)`,
+    ],
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  })),
+)
 
 const jestConfig: Config = {
   verbose: true,

@@ -4,7 +4,7 @@ import {
   truncate,
 } from '../../source/js/string/string'
 
-describe('js:string', () => {
+describe('node - js:string', () => {
   test('js:string:letterSize', () => {
     // lowercaseFirst
     expect(lowercaseFirst('Hello world')).toBe('hello world')

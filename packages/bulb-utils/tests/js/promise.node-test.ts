@@ -1,7 +1,7 @@
 import { timeout, settled, sleep } from '../../source/js/promise/promise'
 import { expectType } from '../../source/ts/typescript'
 
-describe('js:promise', () => {
+describe('node - js:promise', () => {
   it('js:promise:sleep', async () => {
     const user = { name: 'Michał', age: 19 }
     const [fetchUser] = sleep(1000, user)

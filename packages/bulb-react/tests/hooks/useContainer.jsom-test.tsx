@@ -10,7 +10,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
   <FiberProvider>{children}</FiberProvider>
 )
 
-describe('react:hooks:useContainer', () => {
+describe('jsdom - react:hooks:useContainer', () => {
   it('should return container', () => {
     const { result } = renderHook(() => useContainer(), { wrapper })
 
