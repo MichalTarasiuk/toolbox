@@ -17,6 +17,7 @@
   "rules": {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/consistent-type-assertions": [
       "error",
       {
@@ -55,12 +56,6 @@
       }
     ],
     "@typescript-eslint/prefer-optional-chain": "error",
-    "@typescript-eslint/restrict-template-expressions": [
-      "error",
-      {
-        "allowNullish": true
-      }
-    ],
     "@typescript-eslint/switch-exhaustiveness-check": "error",
     "functional/no-let": [
       "error",

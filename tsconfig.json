@@ -1,5 +1,8 @@
 {
   "files": [],
+  "compilerOptions": {
+    "module": "CommonJS"
+  },
   "references": [
     {
       "path": "packages/bulb-utils"
