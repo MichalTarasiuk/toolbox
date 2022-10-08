@@ -26,8 +26,6 @@ describe('jsdom - react:hooks:useHasCommit', () => {
         const hasCommit = useHasCommit()
 
         useEffect(() => {
-          console.log('kok')
-
           effect(hasCommit())
         }, [])
       },

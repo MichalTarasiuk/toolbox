@@ -1,5 +1,5 @@
 import { createEventHub } from '@bulb/utils'
-import { useCallback, useRef, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import { useEvent } from './useEvent'
 
@@ -8,6 +8,9 @@ const eventHub = createEventHub()
 type EventHub = typeof eventHub
 type Subscriber = ReturnType<EventHub['on']>
 
+/**
+ * Creates a pub/sub (publish–subscribe) event hub with emit, on, and off methods.
+ */
 export const useEventHub = <Name extends string>(
   name: Name,
   handler: UnknownFunction,
@@ -15,19 +18,18 @@ export const useEventHub = <Name extends string>(
   const savedSubscriber = useRef<Subscriber | null>(null)
   const stableHandler = useEvent(handler)
 
-  useSyncExternalStore(
-    (listener) => {
-      const subscriber = eventHub.on<Name>(name, listener)
+  useEffect(() => {
+    const subscriber = eventHub.on<Name>(name, stableHandler)
 
-      savedSubscriber.current = subscriber
+    savedSubscriber.current = subscriber
 
-      return () => subscriber.off()
-    },
-    stableHandler,
-    stableHandler,
+    return () => subscriber.off()
+  })
+
+  const emit = useCallback(
+    (...args: unknown[]) => eventHub.emit(name, ...args),
+    [],
   )
-
-  const emit = useCallback(eventHub.emit.bind(name), [])
 
   return {
     ...savedSubscriber.current,

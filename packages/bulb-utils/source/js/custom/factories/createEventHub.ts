@@ -40,7 +40,7 @@ export const createEventHub = () => {
     eventHub[name]?.add(handler)
 
     return {
-      off: off.bind(undefined, name, handler),
+      off: () => off(name, handler),
     }
   }
 

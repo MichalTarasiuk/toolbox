@@ -1,10 +1,10 @@
-// Usage:
-// https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md
-
 import { useCallback, useRef } from 'react'
 
 import { useLayout } from './useLayout'
 
+/**
+ * Issue: https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md
+ */
 export const useEvent = <Fn extends AnyFunction>(fn: Fn) => {
   const savedFn = useRef(fn)
 
