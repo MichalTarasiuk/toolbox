@@ -1,13 +1,29 @@
-// common:primitives
+// any:primitives
 
 export type Primitive = string | number | boolean | null | undefined | symbol
+
+export type FalsyValues = 0 | '' | null | undefined | false
+
+type Sign = '-' | '+'
+
+export type NumberLike =
+  | { [Symbol.toPrimitive](hint: 'number'): number }
+  | number
+  | bigint
+  | Number
+  | boolean
+  | `${number | bigint}`
+  | `${Sign | ''}${'Infinity'}`
+  | null
+
+export type Comparable = string | NumberLike
 
 /**
  * `null` or `undefined`.
  * */
 export type Nullish = null | undefined
 
-// common:functions
+// any:functions
 
 export type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (
   ...args: Args
@@ -21,7 +37,7 @@ export type AnyGeneratorFunction = (
 
 export type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
 
-// common:objects
+// any:objects
 
 export type AnyObject<Value = unknown> = Record<PropertyKey, Value>
 

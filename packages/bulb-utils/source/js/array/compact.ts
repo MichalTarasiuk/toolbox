@@ -1,11 +1,11 @@
-import type { Any, Custom } from '@bulb/typescript'
+import type { Any } from '@bulb/typescript'
 import type { Any as A, Function, List } from 'ts-toolbelt'
 
 type Compact<
   Arr extends Any.AnyArray,
   Result extends Any.AnyArray = [],
 > = Arr extends [infer First, ...infer Rest]
-  ? A.Contains<First, Custom.FalsyValues> extends 1
+  ? A.Contains<First, Any.FalsyValues> extends 1
     ? Compact<Rest, Result>
     : Compact<Rest, List.Append<Result, First>>
   : Result
