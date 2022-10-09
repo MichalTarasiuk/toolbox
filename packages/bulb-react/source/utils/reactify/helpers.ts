@@ -16,7 +16,13 @@ export const getSiteOrigin = () => {
     return window.location.origin
   }
 
-  return process.env.SITE_ORIGIN
+  const siteOrigin = process.env['SITE_ORIGIN']
+
+  if (!siteOrigin) {
+    throw Error('Cannot find `SITE_ORIGIN` environment variable')
+  }
+
+  return siteOrigin
 }
 
 type ReplaceOption = Exclude<HTMLReactParserOptions['replace'], undefined>

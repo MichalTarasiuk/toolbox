@@ -45,4 +45,6 @@ export const traverseFiber = <StateNode = unknown>(
 
     child = child.sibling
   }
+
+  return undefined
 }

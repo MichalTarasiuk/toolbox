@@ -1,3 +1,5 @@
+import type { Custom } from '@bulb/typescript'
+
 /**
  * Get the lowest value of the 2 parameters.
  * Meant to be used with `Array.prototype.reduce`.
@@ -15,8 +17,8 @@
  * @returns `previousValue` or `currentValue`, whichever is lower
  */
 export const min = <
-  Collector extends Comparable,
-  CurrentValue extends Comparable,
+  Collector extends Custom.Comparable,
+  CurrentValue extends Custom.Comparable,
 >(
   collector: Collector,
   currentValue: CurrentValue,

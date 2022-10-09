@@ -2,7 +2,7 @@ import { keyIn } from '@bulb/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
 import React from 'react'
 
-import { hasId } from './assertions'
+import { hasId, isValidName } from './assertions'
 import { getGlobalResolvers } from './globalResolvers'
 import { elementsGuard, formatId, formatTag } from './helpers'
 
@@ -11,7 +11,7 @@ import type { HTMLReactParserOptions } from 'html-react-parser'
 
 export const reactify = (html: string, customResolvers?: Resolvers) => {
   const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>
-    customResolvers && keyIn(customResolvers, name)
+    customResolvers && keyIn(customResolvers, name) && isValidName(name)
       ? customResolvers[name]
       : null
 

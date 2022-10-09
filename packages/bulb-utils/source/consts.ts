@@ -1,7 +1,7 @@
 export const signs = {
   slash: '/',
   caret: '^',
-  colon: '',
+  colon: ':',
   comma: ',',
   tilde: '~',
   underscore: '_',

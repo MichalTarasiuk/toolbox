@@ -1,3 +1,5 @@
+import type { Any } from '@bulb/typescript'
+
 /**
  * Check if something is `null` or `undefined`.
  *
@@ -12,5 +14,5 @@
  *
  * @returns `true` if `value` is nullish, `false` if otherwise
  */
-export const nullish = (value: unknown): value is Nullish =>
+export const nullish = (value: unknown): value is Any.Nullish =>
   value === null || value === undefined

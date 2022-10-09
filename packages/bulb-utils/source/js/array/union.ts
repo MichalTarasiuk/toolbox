@@ -1,8 +1,9 @@
+import type { Any } from '@bulb/typescript'
 import type { Function, List } from 'ts-toolbelt'
 
 type Union<
-  AnyArrayGeneric extends AnyArray,
-  Result extends AnyArray = [],
+  AnyArrayGeneric extends Any.AnyArray,
+  Result extends Any.AnyArray = [],
 > = AnyArrayGeneric extends [infer First, ...infer Rest]
   ? List.Includes<Result, First> extends 1
     ? Union<Rest, Result>
@@ -12,7 +13,7 @@ type Union<
 /**
  * Removes duplicates from array.
  */
-export const union = <AnyArrayGenericType extends AnyArray>(
+export const union = <AnyArrayGenericType extends Any.AnyArray>(
   array: Function.Narrow<AnyArrayGenericType>,
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
 ) => [...new Set(array)] as Union<AnyArrayGenericType>

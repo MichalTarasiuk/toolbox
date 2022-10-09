@@ -1,4 +1,3 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"files": ["node_modules/@bulb/typescript/source/common.d.ts"]
+  "extends": "../../tsconfig.base.json"
 }

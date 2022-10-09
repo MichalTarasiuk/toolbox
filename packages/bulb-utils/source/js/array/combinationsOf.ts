@@ -1,5 +1,7 @@
 import { isArray } from '../../source'
 
+import type { Any } from '@bulb/typescript'
+
 // @TODO
 // - create isEmpty
 // - add support for array's (keyIn)
@@ -11,16 +13,16 @@ const identifier = Symbol()
 const isCollector = (value: unknown): value is Collector =>
   isArray(value) && identifier in value
 
-const collectImpl = (a: AnyArray, b: AnyArray) =>
+const collectImpl = (a: Any.AnyArray, b: Any.AnyArray) =>
   a.flatMap((aChild) => b.map((bChild) => [aChild, bChild]))
 
 const createCollector = () => {
-  const collector: Array<AnyArray> = []
+  const collector: Array<Any.AnyArray> = []
   const boundCollect = collectImpl.bind(collector)
 
   collector[identifier] = null
 
-  const collect = (anyArray: AnyArray) =>
+  const collect = (anyArray: Any.AnyArray) =>
     collector.concat(boundCollect(anyArray))
 
   return {
@@ -29,7 +31,7 @@ const createCollector = () => {
   }
 }
 
-const cleanIfCollector = (value: AnyArray | Collector) => {
+const cleanIfCollector = (value: Any.AnyArray | Collector) => {
   if (isCollector(value)) {
     delete value.current[identifier]
 
@@ -39,11 +41,11 @@ const cleanIfCollector = (value: AnyArray | Collector) => {
   return value
 }
 
-const findCollector = (anyArrays: Array<Collector | AnyArray>) =>
+const findCollector = (anyArrays: Array<Collector | Any.AnyArray>) =>
   anyArrays.find((anyArray): anyArray is Collector => isCollector(anyArray))
 
 export const combinationsOf = <FirstLoop = true>(
-  ...arrays: Array<AnyArray | (FirstLoop extends true ? never : Collector)>
+  ...arrays: Array<Any.AnyArray | (FirstLoop extends true ? never : Collector)>
 ) => {
   const first = arrays.at(0)
 

@@ -1,3 +1,5 @@
+import type { Any } from '@bulb/typescript'
+
 /**
  * Create a new function that calls the provided `fn` and negates the result.
  *
@@ -12,6 +14,6 @@
  *
  * @returns The inverted return value of `fn`
  */
-export const not = <Fn extends AnyFunction<any[], boolean>>(fn: Fn) => {
+export const not = <Fn extends Any.AnyFunction<any[], boolean>>(fn: Fn) => {
   return (...parameters: Parameters<Fn>) => !fn(...parameters)
 }

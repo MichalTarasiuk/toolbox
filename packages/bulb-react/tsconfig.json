@@ -1,4 +1,6 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"files": ["node_modules/@bulb/typescript/source/common.d.ts"]
+  "compilerOptions": {
+    "jsx": "react"
+  },
+  "extends": "../../tsconfig.base.json"
 }

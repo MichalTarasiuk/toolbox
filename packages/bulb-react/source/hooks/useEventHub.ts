@@ -3,6 +3,8 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { useEvent } from './useEvent'
 
+import type { Any } from '@bulb/typescript'
+
 const eventHub = createEventHub()
 
 type EventHub = typeof eventHub
@@ -13,7 +15,7 @@ type Subscriber = ReturnType<EventHub['on']>
  */
 export const useEventHub = <Name extends string>(
   name: Name,
-  handler: UnknownFunction,
+  handler: Any.UnknownFunction,
 ) => {
   const savedSubscriber = useRef<Subscriber | null>(null)
   const stableHandler = useEvent(handler)

@@ -1,4 +1,4 @@
-import { keyIn } from '@bulb/utils'
+import { keyIn, none } from '@bulb/utils'
 import { attributesToProps, domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -35,9 +35,9 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
   const resolvers: Resolvers = {
     'next/link': {
       canUse: (element: Element) =>
-        isAnchorTag(element) && isSameSite(element.attribs.href),
+        isAnchorTag(element) && isSameSite(element.attribs['href'] ?? none),
       use: (children: DOMNode[], attribs: AnyAttribs) => (
-        <Link href={attribs.href}>
+        <Link href={attribs['href'] ?? none}>
           <a {...attributesToProps(attribs)}>{domToReact(children, options)}</a>
         </Link>
       ),
@@ -46,7 +46,7 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
       canUse: (element: Element) =>
         isScriptTag(element) && keyIn(element.attribs, 'id'),
       use: (children: DOMNode[], attribs: AnyAttribs) => (
-        <Script id={attribs.id} {...attributesToProps(attribs)}>
+        <Script id={attribs['id']} {...attributesToProps(attribs)}>
           {domToReact(children, options)}
         </Script>
       ),

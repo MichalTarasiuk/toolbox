@@ -1,10 +1,11 @@
+import type { Any } from '@bulb/typescript'
 import type { Function, List } from 'ts-toolbelt'
 
 type Chunk<
-  Arr extends AnyArray,
+  Arr extends Any.AnyArray,
   Size extends number,
-  Item extends AnyArray = [],
-  Items extends Array<AnyArray> = [],
+  Item extends Any.AnyArray = [],
+  Items extends Array<Any.AnyArray> = [],
 > = Arr extends [infer First, ...infer Rest]
   ? List.Length<Item> extends Size
     ? Chunk<Rest, Size, [First], List.Append<Items, Item>>
@@ -16,7 +17,7 @@ type Chunk<
  *
  * @param size - Max length of chunk item.
  */
-export const chunk = <Arr extends AnyArray, Size extends number>(
+export const chunk = <Arr extends Any.AnyArray, Size extends number>(
   arr: Function.Narrow<Arr>,
   size: Size,
 ) =>

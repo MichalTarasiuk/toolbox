@@ -1,4 +1,6 @@
-import type { String, Any } from 'ts-toolbelt'
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- safty assertions */
+import type { Any } from '@bulb/typescript'
+import type { String, Any as A } from 'ts-toolbelt'
 
 const equalsSign = '=' as const
 const semicolonSign = '; ' as const
@@ -7,7 +9,7 @@ type ParseCookie<Cookie extends string> = {
   [Tuple in String.Split<
     String.Split<Cookie, typeof semicolonSign>[number],
     typeof equalsSign
-  > as Tuple[0]]: Any.Is<Tuple[1], undefined> extends 1 ? string : Tuple[1]
+  > as Tuple[0]]: A.Is<Tuple[1], undefined> extends 1 ? string : Tuple[1]
 }
 
 /**
@@ -29,5 +31,4 @@ export const parseCookie = <
       collector[decodeURIComponent(key)] = decodeURIComponent(value)
 
       return collector
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- oo
-    }, {} as AnyObject<string>) as ParsedCookie
+    }, {} as Any.AnyObject) as unknown as ParsedCookie

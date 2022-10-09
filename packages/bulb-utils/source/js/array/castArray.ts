@@ -1,6 +1,8 @@
 import { isArray } from '../javascript'
 
-type CastArray<Value> = Value extends Array<unknown> ? Value : [Value]
+import type { Any } from '@bulb/typescript'
+
+type CastArray<Value> = Value extends Any.AnyArray ? Value : [Value]
 
 /**
  * Casts the provided value as an array if it's not one.

@@ -5,6 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { createSafeContext } from '../../source/factories/createSafeContext'
 
+import type { Any } from '@bulb/typescript'
 import type { ReactNode } from 'react'
 
 type ContextValue = {
@@ -12,7 +13,10 @@ type ContextValue = {
   age: number
 }
 
-type RenderProps = { withProvider?: boolean; displayNameSpy?: UnknownFunction }
+type RenderProps = {
+  withProvider?: boolean
+  displayNameSpy?: Any.UnknownFunction
+}
 type SafeContextProviderProps = RenderProps & {
   children: ReactNode
 }

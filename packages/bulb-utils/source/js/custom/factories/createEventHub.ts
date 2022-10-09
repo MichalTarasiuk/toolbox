@@ -1,7 +1,12 @@
 import { keyIn } from '../../../ts/typescript'
 import { isSet } from '../../common/common'
 
-type EventHub<Key extends string = string> = Record<Key, Set<UnknownFunction>>
+import type { Any } from '@bulb/typescript'
+
+type EventHub<Key extends string = string> = Record<
+  Key,
+  Set<Any.UnknownFunction>
+>
 
 /**
  * Creates a pub/sub (publish–subscribe) event hub with emit, on, and off methods.
@@ -35,7 +40,10 @@ export const createEventHub = () => {
    *
    * @returns 'of' method, which stop a specific handler from listening to the event
    */
-  const on = <Name extends string>(name: Name, handler: UnknownFunction) => {
+  const on = <Name extends string>(
+    name: Name,
+    handler: Any.UnknownFunction,
+  ) => {
     eventHub[name] ??= new Set()
     eventHub[name]?.add(handler)
 
@@ -50,7 +58,10 @@ export const createEventHub = () => {
    * @param name - of specificin event
    * @param handler - reference to function that invoke on emit call
    */
-  const off = <Name extends string>(name: Name, handler: UnknownFunction) => {
+  const off = <Name extends string>(
+    name: Name,
+    handler: Any.UnknownFunction,
+  ) => {
     if (hasEvent<Name>(eventHub, name)) {
       eventHub[name].delete(handler)
     }

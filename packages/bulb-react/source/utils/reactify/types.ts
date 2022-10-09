@@ -1,6 +1,6 @@
 import type { DetailedHTMLFactory, FunctionComponent, ReactHTML } from 'react'
 
-type TagName = keyof ReactHTML
+export type TagName = keyof ReactHTML
 
 type RemovePrefix<TKey> = TKey extends `tag:${infer TagName}` ? TagName : never
 

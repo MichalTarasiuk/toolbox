@@ -40,6 +40,8 @@ export const useFiber = () => {
 
           state = state.next
         }
+
+        return false
       }),
     [root, id],
   )

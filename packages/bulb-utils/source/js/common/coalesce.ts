@@ -1,10 +1,12 @@
 import { nullish } from '../javascript'
 
+import type { Any } from '@bulb/typescript'
+
 type Coalesce<Args extends Array<unknown>> = Args extends [
   infer Arg,
   ...infer RestArgs,
 ]
-  ? Arg extends Nullish
+  ? Arg extends Any.Nullish
     ? Coalesce<RestArgs>
     : Arg
   : undefined

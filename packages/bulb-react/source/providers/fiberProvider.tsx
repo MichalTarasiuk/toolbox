@@ -15,11 +15,11 @@ type Props = {
  * A react-internal Fiber provider. This component binds React children to the React Fiber tree. Call its-fine hooks within this.
  */
 export class FiberProvider extends React.Component<Props> {
-  private _reactInternals: Fiber
+  private _reactInternals: Fiber | undefined
 
-  render() {
+  override render() {
     return (
-      <FiberContext.Provider value={this._reactInternals}>
+      <FiberContext.Provider value={this._reactInternals ?? null}>
         {this.props.children}
       </FiberContext.Provider>
     )

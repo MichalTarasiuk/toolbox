@@ -1,3 +1,5 @@
+import type { Any } from '@bulb/typescript'
+
 /**
  * Create a new function that calls the provided `fn` with the given arguments.
  * After the first call the return value will be cached and returned again, meaning you technically only need to pass the arguments the first time.
@@ -18,7 +20,7 @@
  *
  * @returns A function that returns whatever the first call of `fn` returns for the given arguments
  */
-export const thunkify = <Fn extends AnyFunction>(fn: Fn) => {
+export const thunkify = <Fn extends Any.AnyFunction>(fn: Fn) => {
   let wasCalled = false
   let result: ReturnType<Fn>
 
