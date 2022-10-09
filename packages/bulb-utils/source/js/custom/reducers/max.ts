@@ -1,4 +1,6 @@
-import type { Custom } from '@bulb/typescript'
+// FIXME
+
+import type { Any } from '@bulb/typescript'
 
 /**
  * Get the largest value of the 2 parameters.
@@ -17,8 +19,8 @@ import type { Custom } from '@bulb/typescript'
  * @returns `previousValue` or `currentValue`, whichever is larger
  */
 export const max = <
-  Collector extends Custom.Comparable,
-  CurrentValue extends Custom.Comparable,
+  Collector extends Any.Comparable,
+  CurrentValue extends Any.Comparable,
 >(
   collector: Collector,
   currentValue: CurrentValue,

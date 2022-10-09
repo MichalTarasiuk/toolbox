@@ -1,3 +1,3 @@
 export * from './expect'
-export * from './string/string'
+export * from './string'
 export * from './object'

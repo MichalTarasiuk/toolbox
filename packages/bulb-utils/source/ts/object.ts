@@ -1,4 +1,4 @@
-import type { Any } from '@bulb/typescript'
+import type { Any, Object as ObjectType } from '@bulb/typescript'
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -7,7 +7,7 @@ import type { Any } from '@bulb/typescript'
  */
 export const objectKeys = <Object extends Any.AnyObject>(object: Object) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.keys(object) as Array<keyof Object>
+  Object.keys(object) as ObjectType.Keys<Object>
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -16,18 +16,18 @@ export const objectKeys = <Object extends Any.AnyObject>(object: Object) =>
  */
 export const entries = <Object extends Any.AnyObject>(object: Object) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.entries(object) as Array<[keyof Object, Object[keyof Object]]>
+  Object.entries(object) as ObjectType.Entries<Object>
 
 /**
  * @param entries - An iterable object that contains key-value entries for properties and methods.
  *
  * @returns an object created by key-value entries for properties and methods
  */
-export const fromEntries = <Entries extends Array<[PropertyKey, unknown]>>(
-  entries: Entries,
+export const fromEntries = <Entry extends Array<[PropertyKey, unknown]>>(
+  entry: Entry,
 ) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.fromEntries(entries) as Record<Entries[number][0], Entries[number][1]>
+  Object.fromEntries(entry) as ObjectType.FromEntries<Entry>
 
 /**
  * @param object - Specified object.

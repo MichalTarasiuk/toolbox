@@ -1,12 +1,13 @@
-import type { Function } from 'ts-toolbelt'
+// FIXME
+import type { Any } from '@bulb/typescript'
 
 type RunPromisesInSeries<
-  AnyAsyncFunctions extends AnyAsyncFunction[],
+  AnyAsyncFunctions extends Any.AnyAsyncFunction[],
   Param = never,
   Result extends unknown[] = [],
 > = AnyAsyncFunctions extends [
-  infer First extends AnyAsyncFunction,
-  ...infer Rest extends AnyAsyncFunction[],
+  infer First extends Any.AnyAsyncFunction,
+  ...infer Rest extends Any.AnyAsyncFunction[],
 ]
   ? RunPromisesInSeries<
       Rest,
@@ -18,11 +19,12 @@ type RunPromisesInSeries<
 /**
  * Runs an array of promises in series.
  */
-const runPromisesInSeries = <AnyAsyncFunctions extends AnyAsyncFunction[]>(
+export const runPromisesInSeries = <
+  AnyAsyncFunctions extends Any.AnyAsyncFunction[],
+>(
   promises: RunPromisesInSeries<AnyAsyncFunctions>,
-) => {
-  // promises.reduce(
-  //   (anyPromises, next) => anyPromises.then(next),
-  //   Promise.resolve(),
-  // )
-}
+) =>
+  promises.reduce(
+    (anyPromises, next) => anyPromises.then(next),
+    Promise.resolve(),
+  )
