@@ -24,7 +24,7 @@ export const useEventHub = <Name extends string>(
     savedSubscriber.current = subscriber
 
     return () => subscriber.off()
-  })
+  }, [])
 
   const emit = useCallback(
     (...args: unknown[]) => eventHub.emit(name, ...args),

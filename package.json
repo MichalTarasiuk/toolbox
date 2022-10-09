@@ -23,6 +23,7 @@
   },
   "scripts": {
     "test": "jest --config",
+    "single-test": "ts-node scripts/runSingleTest.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",
@@ -61,6 +62,7 @@
     "ts-jest": "29.0.3",
     "ts-node": "10.9.1",
     "ts-toolbelt": "9.6.0",
-    "typescript": "4.8.3"
+    "typescript": "4.8.3",
+    "zx": "^7.1.1"
   }
 }
