@@ -36,5 +36,5 @@ export type UnionToTuple<
   ? Result
   : UnionToTuple<
       Exclude<Union, LastUnion<Union>>,
-      [...Result, LastUnion<Union>]
+      [LastUnion<Union>, ...Result]
     >
