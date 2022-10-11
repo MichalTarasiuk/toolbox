@@ -5,11 +5,17 @@ import { useServerCache } from './serverContext'
 import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 
 export type ContextUnion = GetServerSidePropsContext | GetStaticPropsContext
-export type PropsProvider<Context extends ContextUnion = ContextUnion> = ((
+export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((
   context: Context,
 ) => unknown) & { name: string }
 
-export const createServerHook = <Name extends string>(
+type CreateServerHook = typeof createServerHook
+export type ServerHook = ReturnType<CreateServerHook>
+
+export const createServerHook = <
+  Name extends string,
+  PropsProvider extends PropsProviderType,
+>(
   name: Name,
   propsProvider: PropsProvider,
 ) => {
@@ -17,7 +23,8 @@ export const createServerHook = <Name extends string>(
     const serverCache = useServerCache()
 
     if (keyIn<typeof serverCache, Name>(serverCache, name)) {
-      return serverCache[name]
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- cache[name] has props provider result
+      return serverCache[name] as ReturnType<PropsProvider>
     }
 
     throw Error(

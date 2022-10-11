@@ -1,16 +1,17 @@
 import { fromEntries } from '@bulb/utils'
 
-import type { ContextUnion, PropsProvider } from './createServerHookImpl'
+import type { ContextUnion, ServerHook } from './createServerHookImpl'
 
 export const composePropsProviders = async <Context extends ContextUnion>(
-  propsProviders: Array<PropsProvider<Context>>,
+  serverHooks: ServerHook[],
   context: Context,
 ) => {
   const entries = await Promise.all(
-    propsProviders.map((propsProvider): [string, unknown] => [
-      propsProvider.name,
-      propsProvider(context),
-    ]),
+    serverHooks.map((serverHook): [string, unknown] => {
+      const propsProvider = serverHook.propsProvider
+
+      return [propsProvider.name, propsProvider(context)]
+    }),
   )
 
   return fromEntries(entries)
