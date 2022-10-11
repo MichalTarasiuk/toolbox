@@ -1,4 +1,5 @@
 import { fromEntries } from '@bulb/utils'
+import { v4 } from 'uuid'
 
 import type { ContextUnion, ServerHook } from './createServerHookImpl'
 
@@ -10,7 +11,7 @@ export const composePropsProviders = async <Context extends ContextUnion>(
     serverHooks.map((serverHook): [string, unknown] => {
       const propsProvider = serverHook.propsProvider
 
-      return [propsProvider.name, propsProvider(context)]
+      return [`${v4()}:${propsProvider.name}`, propsProvider(context)]
     }),
   )
 

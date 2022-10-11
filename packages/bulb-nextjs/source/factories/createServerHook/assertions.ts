@@ -1,4 +1,4 @@
-import { keyIn } from '@bulb/utils'
+import { isString, keyIn } from '@bulb/utils'
 
 import type { ContextUnion } from './createServerHookImpl'
 import type { GetServerSidePropsContext } from 'next'
@@ -9,3 +9,8 @@ export const isServerSideContext = (
   context: ContextUnion,
 ): context is GetServerSidePropsContext =>
   requiredKeys.every((requiredKey) => keyIn(context, requiredKey))
+
+export const isServerCacheKey = (
+  propertyKey: PropertyKey,
+): propertyKey is string =>
+  isString(propertyKey) && /[\w-]+:/g.test(propertyKey)

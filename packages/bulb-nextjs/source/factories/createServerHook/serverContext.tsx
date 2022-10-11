@@ -1,4 +1,7 @@
+import { objectKeys } from '@bulb/utils'
 import React, { createContext, useContext } from 'react'
+
+import { isServerCacheKey } from './assertions'
 
 import type { Any } from '@bulb/typescript'
 import type { ReactNode } from 'react'
@@ -13,10 +16,17 @@ const serverCacheContext = createContext<
   Any.AnyObject | typeof initialContextValue
 >(initialContextValue)
 
+const canCache = (value: Any.AnyObject) =>
+  objectKeys(value).every(isServerCacheKey)
+
 export const ServerCacheProvider = ({
   serverCache,
   children,
 }: ServerCacheProviderProps) => {
+  if (canCache(serverCache)) {
+    throw Error(`serverCache prop is not a valid cache ¯\_(ツ)_/¯`)
+  }
+
   return (
     <serverCacheContext.Provider value={serverCache}>
       {children}

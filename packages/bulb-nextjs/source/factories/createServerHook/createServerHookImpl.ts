@@ -1,5 +1,7 @@
-import { keyIn } from '@bulb/utils'
+import { isString, keyIn, objectKeys } from '@bulb/utils'
+import { useMemo } from 'react'
 
+import { readServerCacheKey } from './helpers'
 import { useServerCache } from './serverContext'
 
 import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next'
@@ -12,17 +14,24 @@ export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((
 type CreateServerHook = typeof createServerHook
 export type ServerHook = ReturnType<CreateServerHook>
 
-export const createServerHook = <
-  Name extends string,
-  PropsProvider extends PropsProviderType,
->(
-  name: Name,
+export const createServerHook = <PropsProvider extends PropsProviderType>(
+  name: string,
   propsProvider: PropsProvider,
 ) => {
   const useServerHook = () => {
     const serverCache = useServerCache()
 
-    if (keyIn<typeof serverCache, Name>(serverCache, name)) {
+    const serverCacheKey = useMemo(() => {
+      const serverCacheKeys = objectKeys(serverCache)
+      const selectedServerCacheKey = serverCacheKeys.find(
+        (serverCacheKey: unknown): serverCacheKey is string =>
+          readServerCacheKey(serverCacheKey) === name,
+      )
+
+      return selectedServerCacheKey
+    }, [])
+
+    if (isString(serverCacheKey) && keyIn(serverCache, serverCacheKey)) {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- cache[name] has props provider result
       return serverCache[name] as ReturnType<PropsProvider>
     }
