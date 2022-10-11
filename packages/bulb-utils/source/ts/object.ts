@@ -5,9 +5,17 @@ import type { Any, Object as ObjectType } from '@bulb/typescript'
  *
  * @returns the names of the enumerable string properties and methods of an object
  */
-export const objectKeys = <Object extends Any.AnyObject>(object: Object) =>
+export const objectKeys = <
+  Object extends Any.AnyObject,
+  Type extends 'strict' | undefined = undefined,
+>(
+  object: Object,
+  _?: Type,
+) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.keys(object) as ObjectType.Keys<Object>
+  Object.keys(object) as Type extends undefined
+    ? Array<keyof Object>
+    : ObjectType.Keys<Object>
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -35,7 +43,7 @@ export const fromEntries = <Entry extends Array<[PropertyKey, unknown]>>(
  *
  * @returns true if the specified property is in the specified object
  */
-export const keyIn = <Object extends Any.AnyObject>(
+export const keyIn = <Object extends Any.AnyObject, Key extends PropertyKey>(
   object: Object,
-  key: PropertyKey,
-): object is Object & { key: unknown } => key in object
+  key: Key,
+): object is Object & Record<Key, unknown> => key in object
