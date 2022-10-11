@@ -4,6 +4,24 @@ export type Primitive = string | number | boolean | null | undefined | symbol
 
 export type FalsyValues = 0 | '' | null | undefined | false
 
+export type TruthyValues = Exclude<
+  | Comparable
+  | AnyFunction
+  | UnknownFunction
+  | AnyGeneratorFunction
+  | AnyAsyncFunction
+  | AnyObject
+  | AnyArray
+  | AnyPromise
+  | AnyMap
+  | AnySet
+  | AnyWeakMap
+  | AnyWeakSet
+  | true
+  | string,
+  0 | ''
+>
+
 type Sign = '-' | '+'
 
 export type NumberLike =
