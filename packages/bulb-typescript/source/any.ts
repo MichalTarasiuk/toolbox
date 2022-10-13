@@ -55,9 +55,14 @@ export type AnyGeneratorFunction = (
 
 export type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
 
+export type Noop = () => void
+
 // any:objects
 
-export type AnyObject<Value = unknown> = Record<PropertyKey, Value>
+export type AnyObject<
+  Value = unknown,
+  Key extends PropertyKey = PropertyKey,
+> = Record<Key, Value>
 
 export type AnyArray = Array<unknown>
 

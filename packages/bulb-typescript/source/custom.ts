@@ -41,3 +41,10 @@ export type UnionToTuple<
 
 export type Or<Union> = Array.Some<UnionToTuple<Union>, true>
 export type And<Union> = Array.Every<UnionToTuple<Union>, true>
+
+export type ValueOf<Value extends Any.AnyArray | Any.AnyObject> =
+  Value extends Any.AnyArray
+    ? Value[number]
+    : Value extends Any.AnyObject
+    ? Value[keyof Value]
+    : never
