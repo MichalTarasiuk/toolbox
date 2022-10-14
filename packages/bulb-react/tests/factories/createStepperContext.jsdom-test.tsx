@@ -82,4 +82,40 @@ describe('react:factories:createStepperContext', () => {
 
     getByText('name: email')
   })
+
+  it('should move back', () => {
+    const { StepperProvider, useStepper } = createStepperContext({
+      0: { name: 'email', canGo: () => true },
+      1: { name: 'password', canGo: () => true },
+    })
+    const Component = () => {
+      const stepper = useStepper()
+
+      const clickHandler = () => {
+        const token = stepper.step.canGo()
+
+        if (token) {
+          stepper.go(token)
+        }
+      }
+
+      return (
+        <div>
+          <p>name: {stepper.step.name}</p>
+          <button onClick={stepper.back}>previous step</button>
+          <button onClick={clickHandler}>next step</button>
+        </div>
+      )
+    }
+
+    const { getByText } = render(<Component />, { wrapper: StepperProvider })
+
+    fireEvent.click(getByText('next step'))
+
+    getByText('name: password')
+
+    fireEvent.click(getByText('previous step'))
+
+    getByText('name: email')
+  })
 })

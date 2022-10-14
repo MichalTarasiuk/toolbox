@@ -18,7 +18,7 @@ type TokenifiedStep = Custom.ValueOf<ReturnType<Tokenify>>
 
 type StepperContextValue = {
   readonly step: TokenifiedStep
-  back: (token?: symbol) => void
+  back: () => void
   go: (token: symbol) => void
 }
 
@@ -47,34 +47,39 @@ export const createStepperContext = (steps: Steps) => {
 
     const currentStep = tokenifiedSteps[index]
 
-    const back = useCallback((token?: symbol) => {
-      if (index === range.start) {
+    const back = useCallback(() => {
+      const previousStep = index - 1
+
+      if (previousStep < range.start) {
         throw Error('stepper context: there is no step back')
       }
 
-      const cacheToken = token ?? permission.get(index)
-      const savedToken = tokens[index - 1]
+      const cacheToken = permission.get(previousStep)
+      const savedToken = tokens[previousStep]
 
       if (cacheToken === savedToken) {
-        setIndex(index - 1)
+        setIndex(previousStep)
       }
-    }, [])
+    }, [index])
 
-    const go = useCallback((token: symbol) => {
-      if (index === range.end) {
-        throw Error('stepper context: there is no step to go')
-      }
+    const go = useCallback(
+      (token: symbol) => {
+        const nextIndex = index + 1
 
-      const nextIndex = index + 1
+        if (nextIndex > range.end) {
+          throw Error('stepper context: there is no step to go')
+        }
 
-      if (isValidToken(token, index)) {
-        permission.set(index, token)
+        if (isValidToken(token, index)) {
+          permission.set(index, token)
 
-        setIndex(nextIndex)
-      }
+          setIndex(nextIndex)
+        }
 
-      return { isCompleted: nextIndex === range.end }
-    }, [])
+        return { isCompleted: nextIndex === range.end }
+      },
+      [index],
+    )
 
     const value = useMemo(
       () => ({
