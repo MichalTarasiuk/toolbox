@@ -23,11 +23,11 @@ export const tokenify = (steps: Steps, tokens: Tokens) =>
   )
 
 export const checkSteps = (steps: Steps) => {
-  const stepKeys = objectKeys(steps)
+  const keys = objectKeys(steps).map(Number)
 
   const range = {
-    start: stepKeys.reduce(min),
-    end: stepKeys.reduce(max),
+    start: keys.reduce(min),
+    end: keys.reduce(max),
   }
 
   const requiredKeys = Array.from(
@@ -35,7 +35,7 @@ export const checkSteps = (steps: Steps) => {
     (_, index) => index + range.start,
   )
   const canWork = requiredKeys.every((requiredKey) =>
-    stepKeys.includes(requiredKey),
+    keys.includes(requiredKey),
   )
 
   return {
