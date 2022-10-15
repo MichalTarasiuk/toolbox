@@ -23,7 +23,7 @@
   },
   "scripts": {
     "test": "jest --config",
-    "single-test": "ts-node scripts/runSingleTest.ts",
+    "single-test": "jest --config --testNamePattern 'react:factories:createAtoms'",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",

@@ -6,7 +6,7 @@ import { createAtoms } from '../../_api'
 describe('react:factories:createAtoms', () => {
   it('should emit update atom', () => {
     const { atom, useAtom } = createAtoms()
-    const userAtom = atom(null)
+    const userAtom = atom<{ name: string; age: number } | null>(null)
 
     const Component = () => {
       const [user, setUser] = useAtom(userAtom)
@@ -31,7 +31,7 @@ describe('react:factories:createAtoms', () => {
 
   it('should rerender component on update atom', () => {
     const { atom, useAtom } = createAtoms()
-    const userAtom = atom(null)
+    const userAtom = atom<{ name: string; age: number } | null>(null)
 
     const Child = () => {
       const [_, setUser] = useAtom(userAtom)
@@ -58,5 +58,33 @@ describe('react:factories:createAtoms', () => {
     fireEvent.click(getByText('fetch user'))
 
     getByText('user is fetched')
+  })
+
+  it.skip('should invoke atom when coworked is updated', () => {
+    const { atom, useAtom } = createAtoms()
+
+    const firstnameAtom = atom<string | null>(null)
+    const userAtom = atom((get) => ({ firstname: get(firstnameAtom) }))
+
+    const FirstnameSetter = () => {
+      const [_, setFirstname] = useAtom(firstnameAtom)
+
+      return (
+        <button onClick={() => setFirstname('Michał')}>set firstname</button>
+      )
+    }
+    const Component = () => {
+      const [user] = useAtom(userAtom)
+
+      if (user.firstname) {
+        return <p>status: success</p>
+      }
+
+      return <FirstnameSetter />
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('set firstname'))
   })
 })
