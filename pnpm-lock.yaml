@@ -100,6 +100,7 @@ importers:
       '@react-hookz/web': ^16.0.0
       '@types/react': 18.0.21
       '@types/react-reconciler': 0.28.0
+      '@types/uuid': 8.3.4
       html-react-parser: ^3.0.4
       next: ^12.3.1
       react: 18.2.0
@@ -107,6 +108,7 @@ importers:
       react-reconciler: ^0.29.0
       react-test-renderer: 18.2.0
       use-context-selector: 1.4.1
+      uuid: ^9.0.0
     dependencies:
       '@bulb/utils': link:../bulb-utils
       '@react-hookz/web': 16.0.0_biqbaboplfbrettd7655fr4n2y
@@ -116,10 +118,12 @@ importers:
       react-error-boundary: 3.1.4_react@18.2.0
       react-reconciler: 0.29.0_react@18.2.0
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
+      uuid: 9.0.0
     devDependencies:
       '@bulb/typescript': link:../bulb-typescript
       '@types/react': 18.0.21
       '@types/react-reconciler': 0.28.0
+      '@types/uuid': 8.3.4
       react-test-renderer: 18.2.0_react@18.2.0
 
   packages/bulb-typescript:

@@ -1,4 +1,4 @@
-import { regExpUnion, cloneRegExp } from '../../source/js/regExp/regExp'
+import { regExpUnion } from '../../source/js/regExp/regExp'
 
 describe('node - js:regExp', () => {
   test('js:regExp:regExpUnion', () => {
@@ -6,11 +6,5 @@ describe('node - js:regExp', () => {
     expect(regExpUnion(/hello/g, /(world | Michał)/).source).toBe(
       '(hello)|((world | Michał))',
     )
-  })
-
-  test('js:regExp:cloneRegExp', () => {
-    const regExp = /Hello World/g
-
-    expect(cloneRegExp(regExp)).not.toBe(regExp)
   })
 })

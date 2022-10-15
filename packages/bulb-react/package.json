@@ -15,12 +15,14 @@
     "react": "18.2.0",
     "react-error-boundary": "3.1.4",
     "react-reconciler": "^0.29.0",
-    "use-context-selector": "1.4.1"
+    "use-context-selector": "1.4.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "18.0.21",
     "@types/react-reconciler": "0.28.0",
     "@bulb/typescript": "*",
-    "react-test-renderer": "18.2.0"
+    "react-test-renderer": "18.2.0",
+    "@types/uuid": "8.3.4"
   }
 }
