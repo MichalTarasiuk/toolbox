@@ -8,8 +8,8 @@ importers:
       '@babel/preset-env': 7.19.4
       '@babel/preset-react': 7.18.6
       '@babel/preset-typescript': 7.18.6
-      '@bulb/utils': '*'
       '@changesets/cli': 2.25.0
+      '@flame/utils': '*'
       '@testing-library/react': 13.4.0
       '@testing-library/react-hooks': 8.0.1
       '@types/jest': 29.1.2
@@ -43,8 +43,8 @@ importers:
       '@babel/preset-env': 7.19.4_@babel+core@7.19.3
       '@babel/preset-react': 7.18.6_@babel+core@7.19.3
       '@babel/preset-typescript': 7.18.6_@babel+core@7.19.3
-      '@bulb/utils': link:packages/bulb-utils
       '@changesets/cli': 2.25.0
+      '@flame/utils': link:packages/flame-utils
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react-hooks': 8.0.1_biqbaboplfbrettd7655fr4n2y
       '@types/jest': 29.1.2
@@ -74,9 +74,9 @@ importers:
       typescript: 4.8.3
       zx: 7.1.1
 
-  packages/bulb-nextjs:
+  packages/flame-nextJS:
     specifiers:
-      '@bulb/typescript': '*'
+      '@flame/typescript': '*'
       '@types/next': 9.0.0
       '@types/react': 18.0.21
       '@types/uuid': 8.3.4
@@ -88,15 +88,15 @@ importers:
       react: 18.2.0
       uuid: 9.0.0
     devDependencies:
-      '@bulb/typescript': link:../bulb-typescript
+      '@flame/typescript': link:../flame-typescript
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.21
       '@types/uuid': 8.3.4
 
-  packages/bulb-react:
+  packages/flame-react:
     specifiers:
-      '@bulb/typescript': '*'
-      '@bulb/utils': '*'
+      '@flame/typescript': '*'
+      '@flame/utils': '*'
       '@react-hookz/web': ^16.0.0
       '@types/react': 18.0.21
       '@types/react-reconciler': 0.28.0
@@ -110,7 +110,7 @@ importers:
       use-context-selector: 1.4.1
       uuid: ^9.0.0
     dependencies:
-      '@bulb/utils': link:../bulb-utils
+      '@flame/utils': link:../flame-utils
       '@react-hookz/web': 16.0.0_biqbaboplfbrettd7655fr4n2y
       html-react-parser: 3.0.4_react@18.2.0
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
@@ -120,20 +120,20 @@ importers:
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
       uuid: 9.0.0
     devDependencies:
-      '@bulb/typescript': link:../bulb-typescript
+      '@flame/typescript': link:../flame-typescript
       '@types/react': 18.0.21
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       react-test-renderer: 18.2.0_react@18.2.0
 
-  packages/bulb-typescript:
+  packages/flame-typescript:
     specifiers: {}
 
-  packages/bulb-utils:
+  packages/flame-utils:
     specifiers:
-      '@bulb/typescript': '*'
+      '@flame/typescript': '*'
     devDependencies:
-      '@bulb/typescript': link:../bulb-typescript
+      '@flame/typescript': link:../flame-typescript
 
 packages:
 

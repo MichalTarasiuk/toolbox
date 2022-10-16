@@ -1,4 +1,4 @@
-import { timeout } from '@bulb/utils'
+import { timeout } from '@flame/utils'
 import { $, question } from 'zx'
 
 const query = 'Can you pass name of test?'

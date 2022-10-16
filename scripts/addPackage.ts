@@ -1,4 +1,4 @@
-import { isString, signs, timeout } from '@bulb/utils'
+import { isString, signs, timeout } from '@flame/utils'
 import prompt from 'prompt'
 
 import packageJSON from '../package.json'

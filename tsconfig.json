@@ -5,13 +5,13 @@
   },
   "references": [
     {
-      "path": "packages/bulb-utils"
+      "path": "packages/flame-utils"
     },
     {
-      "path": "packages/bulb-typescript"
+      "path": "packages/flame-typescript"
     },
     {
-      "path": "packages/bulb-react"
+      "path": "packages/flame-react"
     }
   ],
   "extends": "./tsconfig.base.json"

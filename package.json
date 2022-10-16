@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "bulb",
+  "name": "flame",
   "version": "1.0.0",
   "description": "set of reusable helpers",
-  "bugs": "https://github.com/MichalTarasiuk/bulb/issues",
+  "bugs": "https://github.com/MichalTarasiuk/flame/issues",
   "keywords": [
     "react",
     "helpers",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalTarasiuk/bulb"
+    "url": "https://github.com/MichalTarasiuk/flame"
   },
   "scripts": {
     "test": "jest --config",
@@ -34,7 +34,7 @@
     "@babel/preset-env": "7.19.4",
     "@babel/preset-react": "7.18.6",
     "@babel/preset-typescript": "7.18.6",
-    "@bulb/utils": "*",
+    "@flame/utils": "*",
     "@changesets/cli": "2.25.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",

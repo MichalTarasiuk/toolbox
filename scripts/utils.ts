@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-import { isArray, isObject, isString, keyIn } from '@bulb/utils'
+import { isArray, isObject, isString, keyIn } from '@flame/utils'
 import createFile from 'create-file'
 import makeDir from 'make-dir'
 
