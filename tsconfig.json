@@ -5,13 +5,13 @@
   },
   "references": [
     {
-      "path": "packages/flame-utils"
+      "path": "packages/brainless-utils"
     },
     {
-      "path": "packages/flame-typescript"
+      "path": "packages/brainless-typescript"
     },
     {
-      "path": "packages/flame-react"
+      "path": "packages/brainless-react"
     }
   ],
   "extends": "./tsconfig.base.json"
