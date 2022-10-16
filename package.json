@@ -3,7 +3,7 @@
   "name": "@brainless/core",
   "version": "1.0.0",
   "description": "set of reusable helpers",
-  "bugs": "https://github.com/MichalTarasiuk/brainless/issues",
+  "bugs": "https://github.com/MichalTarasiuk/brainless-core/issues",
   "keywords": [
     "react",
     "helpers",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalTarasiuk/brainless"
+    "url": "https://github.com/MichalTarasiuk/brainless-core"
   },
   "scripts": {
     "test": "jest --config",
