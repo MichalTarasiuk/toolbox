@@ -14,7 +14,7 @@ type CustomSet<State> = (
 type LazyInitialization<State> = (get: Get) => State
 type Initialization<State> = State | LazyInitialization<State>
 
-type Atom<State> = {
+type Atom<State = unknown> = {
   read: (token: symbol) => {
     readonly state: State
     readonly coworkers: string[]
@@ -63,7 +63,7 @@ export const createAtoms = () => {
         throw Error('You do not have permission to read this atom')
       }
 
-      const get = <SubState>(atom: Atom<SubState>) => {
+      const get = <AtomState>(atom: Atom<AtomState>) => {
         const { id, state } = atom.read(secretToken)
 
         coworkers.add(id)
@@ -132,11 +132,9 @@ export const createAtoms = () => {
 
     const setState = useCallback(
       (nextInitialization?: Initialization<State>) => {
-        const { id, set } = atom.read(secretToken)
+        const { set } = atom.read(secretToken)
 
         set(nextInitialization)
-
-        eventHub.emit(id)
       },
       [],
     )
