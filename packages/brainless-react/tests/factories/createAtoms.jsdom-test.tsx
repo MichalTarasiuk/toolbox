@@ -60,7 +60,7 @@ describe('react:factories:createAtoms', () => {
     getByText('user is fetched')
   })
 
-  it.skip('should invoke atom when coworked is updated', () => {
+  it('should invoke atom when coworked is updated', () => {
     const { atom, useAtom } = createAtoms()
 
     const firstnameAtom = atom<string | null>(null)
@@ -86,5 +86,7 @@ describe('react:factories:createAtoms', () => {
     const { getByText } = render(<Component />)
 
     fireEvent.click(getByText('set firstname'))
+
+    getByText('status: success')
   })
 })

@@ -1,4 +1,5 @@
 import { createEventHub, isFunction } from '@brainless/utils'
+import equal from 'deep-equal'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
@@ -19,6 +20,9 @@ type Atom<State> = {
 export const createAtoms = () => {
   const eventHub = createEventHub()
   const secretToken = Symbol()
+
+  const canUpdateState = <State>(state: State, nextState: State) =>
+    equal(state, nextState)
 
   const canResolve = <State>(
     initialization: Initialization<State>,
@@ -49,6 +53,7 @@ export const createAtoms = () => {
     const coworkers = new Set<string>()
 
     let initialization = initialInitialization
+    let state: State | null = null
 
     const read = (token: symbol) => {
       if (token !== secretToken) {
@@ -61,9 +66,13 @@ export const createAtoms = () => {
 
       return {
         get state() {
-          const innerState = initialize(initialization, coworkers)
+          const nextState = initialize(initialization, coworkers)
 
-          return innerState
+          if (state === null || !canUpdateState(state, nextState)) {
+            state = nextState
+          }
+
+          return state
         },
         get coworkers() {
           return [...coworkers.values()]
