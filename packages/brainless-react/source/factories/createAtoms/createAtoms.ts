@@ -3,9 +3,15 @@ import equal from 'deep-equal'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
-type LazyInitialization<State> = (
-  get: <SubState>(atom: Atom<SubState>) => SubState,
-) => State
+import type { Any } from '@brainless/typescript'
+
+type Get = <State>(atom: Atom<State>) => State
+type CustomSet<State> = (
+  get: (atom: Atom<State>) => State,
+  set: (nextInitialization: Initialization<State>) => void,
+) => void
+
+type LazyInitialization<State> = (get: Get) => State
 type Initialization<State> = State | LazyInitialization<State>
 
 type Atom<State> = {
@@ -13,7 +19,7 @@ type Atom<State> = {
     readonly state: State
     readonly coworkers: string[]
     id: string
-    set: (nextInitialization: Initialization<State>) => void
+    set: (nextInitialization?: Initialization<State>) => void
   }
 }
 
@@ -30,25 +36,22 @@ export const createAtoms = () => {
 
   const initialize = <State>(
     initialization: Initialization<State>,
-    coworkers: Set<string>,
+    get: Get,
+    lifecycle: { before: Any.Noop },
   ) => {
-    coworkers.clear()
+    lifecycle.before()
 
     if (canResolve(initialization)) {
-      initialization
-      return initialization((atom) => {
-        const { id, state } = atom.read(secretToken)
-
-        coworkers.add(id)
-
-        return state
-      })
+      return initialization(get)
     }
 
     return initialization
   }
 
-  const atom = <State>(initialInitialization: Initialization<State>) => {
+  const atom = <State>(
+    initialInitialization: Initialization<State>,
+    customSet?: CustomSet<State>,
+  ) => {
     const id = v4()
     const coworkers = new Set<string>()
 
@@ -60,13 +63,35 @@ export const createAtoms = () => {
         throw Error('You do not have permission to read this atom')
       }
 
-      const set = (nextInitialization: Initialization<State>) => {
+      const get = <SubState>(atom: Atom<SubState>) => {
+        const { id, state } = atom.read(secretToken)
+
+        coworkers.add(id)
+
+        return state
+      }
+
+      const setImpl = (nextInitialization: Initialization<State>) => {
         initialization = nextInitialization
+      }
+
+      const set = (nextInitialization?: Initialization<State>) => {
+        if (customSet) {
+          customSet(get, setImpl)
+
+          return
+        }
+
+        if (nextInitialization) {
+          setImpl(nextInitialization)
+        }
       }
 
       return {
         get state() {
-          const nextState = initialize(initialization, coworkers)
+          const nextState = initialize(initialization, get, {
+            before: () => coworkers.clear(),
+          })
 
           if (state === null || !canUpdateState(state, nextState)) {
             state = nextState
@@ -106,7 +131,7 @@ export const createAtoms = () => {
     )
 
     const setState = useCallback(
-      (nextInitialization: Initialization<State>) => {
+      (nextInitialization?: Initialization<State>) => {
         const { id, set } = atom.read(secretToken)
 
         set(nextInitialization)

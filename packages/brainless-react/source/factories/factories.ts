@@ -1,3 +1,3 @@
 export * from './createSafeContext'
 export * from './createStepperContext/createStepperContext'
-export * from './createAtoms'
+export * from './createAtoms/createAtoms'

@@ -89,4 +89,34 @@ describe('react:factories:createAtoms', () => {
 
     getByText('status: success')
   })
+
+  it('should work with custom set', () => {
+    const { atom, useAtom } = createAtoms()
+
+    const firstnameAtom = atom<string | null>(null, (_, set) => {
+      set('Michał')
+    })
+    const userAtom = atom((get) => ({ firstname: get(firstnameAtom) }))
+
+    const FirstnameSetter = () => {
+      const [_, setFirstname] = useAtom(firstnameAtom)
+
+      return <button onClick={() => setFirstname()}>set firstname</button>
+    }
+    const Component = () => {
+      const [user] = useAtom(userAtom)
+
+      if (user.firstname) {
+        return <p>status: success</p>
+      }
+
+      return <FirstnameSetter />
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('set firstname'))
+
+    getByText('status: success')
+  })
 })
