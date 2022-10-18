@@ -6,6 +6,8 @@ export type NotAny<Type> = true extends IsAny<Type> ? false : true
 
 export type Debug<AnyObject> = { [Key in keyof AnyObject]: AnyObject[Key] }
 
+export type MaybePromise<Value> = Promise<Value> | Value
+
 export type Overwrite<A extends Any.AnyObject, B extends Any.AnyObject> = {
   [key in keyof (A & B)]: key extends keyof B
     ? B[key]
