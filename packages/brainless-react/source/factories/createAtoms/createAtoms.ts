@@ -73,6 +73,8 @@ export const createAtoms = () => {
 
       const setImpl = (nextInitialization: Initialization<State>) => {
         initialization = nextInitialization
+
+        eventHub.emit(id)
       }
 
       const set = (nextInitialization?: Initialization<State>) => {
