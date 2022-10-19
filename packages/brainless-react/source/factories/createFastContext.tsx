@@ -8,8 +8,8 @@ import React, {
 
 import { createSafeContext } from './createSafeContext'
 
-import type { Any } from '@brainless/typescript'
-import type { ReactNode } from 'react'
+import type { Any, Custom } from '@brainless/typescript'
+import type { ReactNode, SetStateAction } from 'react'
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {
   store: Store
@@ -18,10 +18,12 @@ type FastContextProviderProps<Store extends Any.AnyObject> = {
 
 type CreateFastContext<Store extends Any.AnyObject> = {
   store: Store
-  setStore: (nextStore: Store) => void
+  setStore: (setStateAction: SetStateAction<Store>) => void
   subscribe: (onStoreChange: Any.UnknownFunction) => Any.Noop
 }
-type Selector<Store extends Any.AnyObject> = (store: Store) => unknown
+type Selector<Store extends Any.AnyObject, Selected> = (
+  store: Store,
+) => Selected
 
 const eventHub = createEventHub()
 
@@ -45,8 +47,8 @@ export const createFastContext = <Store extends Any.AnyObject>(
       }
     }, [])
 
-    const setStore = useCallback((store: Store) => {
-      setStoreImpl(store)
+    const setStore = useCallback((setStateAction: SetStateAction<Store>) => {
+      setStoreImpl(setStateAction)
 
       eventHub.emit(name)
     }, [])
@@ -63,11 +65,20 @@ export const createFastContext = <Store extends Any.AnyObject>(
     )
   }
 
-  const useFastContext = (selector?: Selector<Store>) => {
+  const useFastContext = <
+    Selected,
+    SafeSelected = Custom.Equals<Selected, unknown> extends 1
+      ? Store
+      : Selected,
+  >(
+    selector?: Selector<Store, Selected>,
+  ) => {
     const { store, setStore, subscribe } = useFastContextImpl()
 
-    const selectedStore = useSyncExternalStore(subscribe, () =>
-      selector ? selector(store) : store,
+    const selectedStore = useSyncExternalStore(
+      subscribe,
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safe assertion (fix later, if can)
+      () => (selector ? selector(store) : store) as SafeSelected,
     )
 
     return [selectedStore, setStore] as const
