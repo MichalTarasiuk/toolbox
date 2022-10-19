@@ -23,11 +23,11 @@ const createContext = <ContextValue>() =>
     defaultContextValue,
   )
 
-export const createSafeContext = <ContextValue>(name: string) => {
-  const safeContext = createContext<ContextValue>()
+export const createSelectorContext = <ContextValue>(name: string) => {
+  const selectorContext = createContext<ContextValue>()
   const uppercasedName = uppercaseFirst(name)
 
-  const useSafeContext = <Selected = ContextValue>(
+  const useSelectorContext = <Selected = ContextValue>(
     selectorImpl?: Selector<ContextValue, Selected>,
   ) => {
     const safeSelector = (value: ContextValue) =>
@@ -37,7 +37,7 @@ export const createSafeContext = <ContextValue>(name: string) => {
       value === defaultContextValue ? defaultContextValue : safeSelector(value)
     const selected = useContextSelector(
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- developer should't know about default context value
-      safeContext as Context<ContextValue>,
+      selectorContext as Context<ContextValue>,
       selector,
     )
 
@@ -50,7 +50,7 @@ export const createSafeContext = <ContextValue>(name: string) => {
     return selected
   }
 
-  safeContext.displayName = `${uppercasedName}Context`
+  selectorContext.displayName = `${uppercasedName}Context`
 
-  return [safeContext.Provider, useSafeContext] as const
+  return [selectorContext.Provider, useSelectorContext] as const
 }

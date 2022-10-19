@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import React, { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
-import { createSafeContext } from '../../_api'
+import { createSelectorContext } from '../../_api'
 
 import type { Any } from '@brainless/typescript'
 import type { ReactNode } from 'react'
@@ -17,19 +17,19 @@ type RenderProps = {
   withProvider?: boolean
   displayNameSpy?: Any.UnknownFunction
 }
-type SafeContextProviderProps = RenderProps & {
+type SelectorContextProviderProps = RenderProps & {
   children: ReactNode
 }
 type DisplayNameProps = Required<Pick<RenderProps, 'displayNameSpy'>>
 
 const createTree = (initialContextValue: ContextValue) => {
-  const [SafeContextProvider, useSafeContext] =
-    createSafeContext<ContextValue>('tree')
+  const [SelectorContextProvider, useSelectorContext] =
+    createSelectorContext<ContextValue>('tree')
 
   const FallbackComponent = () => <p>ERROR: something went wrong ¯\_(ツ)_/¯</p>
 
   const DisplayName = (props: DisplayNameProps) => {
-    const name = useSafeContext((value) => value.name)
+    const name = useSelectorContext((value) => value.name)
 
     props.displayNameSpy()
 
@@ -37,12 +37,14 @@ const createTree = (initialContextValue: ContextValue) => {
   }
 
   const DisplayAge = () => {
-    const age = useSafeContext((value) => value.age)
+    const age = useSelectorContext((value) => value.age)
 
     return <p>{`age: ${age}`}</p>
   }
 
-  const OptionalSafeContextProvider = (props: SafeContextProviderProps) => {
+  const OptionalSelectorContextProvider = (
+    props: SelectorContextProviderProps,
+  ) => {
     const [contextValue, setContextValue] = useState(initialContextValue)
 
     const simulateYear = () => {
@@ -51,10 +53,10 @@ const createTree = (initialContextValue: ContextValue) => {
 
     if (props.withProvider) {
       return (
-        <SafeContextProvider value={contextValue}>
+        <SelectorContextProvider value={contextValue}>
           {props.children}
           <button onClick={simulateYear}>simulate year</button>
-        </SafeContextProvider>
+        </SelectorContextProvider>
       )
     }
 
@@ -66,10 +68,10 @@ const createTree = (initialContextValue: ContextValue) => {
 
     return (
       <ErrorBoundary FallbackComponent={FallbackComponent}>
-        <OptionalSafeContextProvider withProvider={withProvider}>
+        <OptionalSelectorContextProvider withProvider={withProvider}>
           <DisplayName displayNameSpy={props?.displayNameSpy || noop} />
           <DisplayAge />
-        </OptionalSafeContextProvider>
+        </OptionalSelectorContextProvider>
       </ErrorBoundary>
     )
   }
@@ -77,7 +79,7 @@ const createTree = (initialContextValue: ContextValue) => {
   return Tree
 }
 
-describe('react:factories:createSafeContext', () => {
+describe('react:factories:createSelectorContext', () => {
   it('should render correctly', () => {
     const Tree = createTree({ name: 'Michał', age: 19 })
 
