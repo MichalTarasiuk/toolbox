@@ -1,6 +1,6 @@
 import { timeout, settled, sleep, expectType } from '../../_api'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 describe('node - js:promise', () => {
   it('js:promise:sleep', async () => {

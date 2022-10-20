@@ -1,4 +1,4 @@
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Creates a function that accepts many arguments, ignoring any additional arguments.

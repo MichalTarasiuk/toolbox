@@ -1,4 +1,4 @@
-import { isString } from '@brainless/utils'
+import { isString } from '@jupiter/utils'
 import { useRef } from 'react'
 
 import { traverseFiber } from '../utils/utils'

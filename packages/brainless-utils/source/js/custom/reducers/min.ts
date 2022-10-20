@@ -1,6 +1,6 @@
 // FIXME
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Get the lowest value of the 2 parameters.

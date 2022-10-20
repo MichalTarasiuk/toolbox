@@ -1,11 +1,11 @@
-import { noop } from '@brainless/utils'
+import { noop } from '@jupiter/utils'
 import { fireEvent, render } from '@testing-library/react'
 import React, { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { createSelectorContext } from '../../_api'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type ContextValue = {

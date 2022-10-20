@@ -1,4 +1,4 @@
-import type { Custom } from '@brainless/typescript'
+import type { Custom } from '@jupiter/typescript'
 
 /**
  * Assert the parameter is of a specific type.

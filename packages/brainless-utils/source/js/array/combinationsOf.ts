@@ -2,7 +2,7 @@
 
 import { isArray } from '../../source'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 // @TODO
 // - create isEmpty

@@ -1,4 +1,4 @@
-import { nullish } from '@brainless/utils'
+import { nullish } from '@jupiter/utils'
 import { useMemo } from 'react'
 
 import { traverseFiber } from '../utils/utils'

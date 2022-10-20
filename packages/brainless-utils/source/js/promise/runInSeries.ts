@@ -1,5 +1,5 @@
 // FIXME
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 type RunPromisesInSeries<
   AnyAsyncFunctions extends Any.AnyAsyncFunction[],

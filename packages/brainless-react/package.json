@@ -1,5 +1,5 @@
 {
-  "name": "@brainless/react",
+  "name": "@jupiter/react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@brainless/utils": "*",
+    "@jupiter/utils": "*",
     "@react-hookz/web": "^16.0.0",
     "deep-equal": "^2.0.5",
     "html-react-parser": "^3.0.4",
@@ -20,7 +20,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@brainless/typescript": "*",
+    "@jupiter/typescript": "*",
     "@types/deep-equal": "1.0.1",
     "@types/react": "18.0.21",
     "@types/react-reconciler": "0.28.0",

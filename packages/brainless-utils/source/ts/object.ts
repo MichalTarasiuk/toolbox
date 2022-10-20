@@ -1,4 +1,4 @@
-import type { Any, Object as ObjectType } from '@brainless/typescript'
+import type { Any, Object as ObjectType } from '@jupiter/typescript'
 
 /**
  * @param object - Object that contains the properties and methods.

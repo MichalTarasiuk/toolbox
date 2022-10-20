@@ -1,6 +1,6 @@
-import { keyIn } from '@brainless/utils'
+import { keyIn } from '@jupiter/utils'
 
-import type { Custom, Any } from '@brainless/typescript'
+import type { Custom, Any } from '@jupiter/typescript'
 import type {
   GetStaticPropsContext,
   GetServerSidePropsContext,

@@ -2,7 +2,7 @@ export * from './nullish'
 export * from './typeof/typeof'
 export * from './coalesce'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * This method returns undefined.

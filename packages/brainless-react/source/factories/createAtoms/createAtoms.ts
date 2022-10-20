@@ -1,9 +1,9 @@
-import { createEventHub, isFunction } from '@brainless/utils'
+import { createEventHub, isFunction } from '@jupiter/utils'
 import equal from 'deep-equal'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 type Get = <State>(atom: Atom<State>) => State
 type CustomSet<State> = (

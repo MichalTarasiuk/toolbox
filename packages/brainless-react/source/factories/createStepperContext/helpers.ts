@@ -5,7 +5,7 @@ import {
   max,
   min,
   objectKeys,
-} from '@brainless/utils'
+} from '@jupiter/utils'
 
 import type { Steps, Tokens } from './types'
 

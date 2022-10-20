@@ -1,4 +1,4 @@
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Create a new function that calls the provided `fn` and negates the result.

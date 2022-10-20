@@ -1,9 +1,9 @@
-import { createEventHub } from '@brainless/utils'
+import { createEventHub } from '@jupiter/utils'
 import { useCallback, useEffect, useRef } from 'react'
 
 import { useEvent } from './useEvent'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 const eventHub = createEventHub()
 

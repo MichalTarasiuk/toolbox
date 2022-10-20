@@ -1,4 +1,4 @@
-import { createEventHub } from '@brainless/utils'
+import { createEventHub } from '@jupiter/utils'
 import React, {
   useCallback,
   useMemo,
@@ -8,7 +8,7 @@ import React, {
 
 import { createSafeContext } from './createSafeContext'
 
-import type { Any, Custom } from '@brainless/typescript'
+import type { Any, Custom } from '@jupiter/typescript'
 import type { ReactNode, SetStateAction } from 'react'
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {

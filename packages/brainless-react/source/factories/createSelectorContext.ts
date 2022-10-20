@@ -1,4 +1,4 @@
-import { uppercaseFirst } from '@brainless/utils'
+import { uppercaseFirst } from '@jupiter/utils'
 import {
   createContext as createContextImpl,
   useContextSelector,

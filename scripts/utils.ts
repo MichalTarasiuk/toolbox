@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-import { isArray, isObject, isString, keyIn } from '@brainless/utils'
+import { isArray, isObject, isString, keyIn } from '@jupiter/utils'
 import createFile from 'create-file'
 import makeDir from 'make-dir'
 

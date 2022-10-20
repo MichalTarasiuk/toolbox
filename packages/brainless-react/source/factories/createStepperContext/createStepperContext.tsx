@@ -1,4 +1,4 @@
-import { isUndefined } from '@brainless/utils'
+import { isUndefined } from '@jupiter/utils'
 import React, {
   createContext,
   useCallback,
@@ -10,7 +10,7 @@ import React, {
 import { checkSteps, generateTokens, tokenify } from './helpers'
 
 import type { Steps } from './types'
-import type { Custom } from '@brainless/typescript'
+import type { Custom } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type Tokenify = typeof tokenify

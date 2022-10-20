@@ -1,4 +1,4 @@
-import { isString, keyIn, isSameOrigin } from '@brainless/utils'
+import { isString, keyIn, isSameOrigin } from '@jupiter/utils'
 
 import { getSiteOrigin } from './helpers'
 

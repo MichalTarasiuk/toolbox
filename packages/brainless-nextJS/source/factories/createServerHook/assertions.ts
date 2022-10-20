@@ -1,4 +1,4 @@
-import { isString, keyIn } from '@brainless/utils'
+import { isString, keyIn } from '@jupiter/utils'
 
 import type { ContextUnion } from './createServerHookImpl'
 import type { GetServerSidePropsContext } from 'next'

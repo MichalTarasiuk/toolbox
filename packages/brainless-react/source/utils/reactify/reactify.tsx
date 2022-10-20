@@ -1,4 +1,4 @@
-import { keyIn } from '@brainless/utils'
+import { keyIn } from '@jupiter/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
 import React from 'react'
 

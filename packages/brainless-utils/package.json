@@ -1,5 +1,5 @@
 {
-  "name": "@brainless/utils",
+  "name": "@jupiter/utils",
   "version": "1.0.0",
   "description": "",
   "main": "_api.ts",
@@ -8,6 +8,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@brainless/typescript": "*"
+    "@jupiter/typescript": "*"
   }
 }

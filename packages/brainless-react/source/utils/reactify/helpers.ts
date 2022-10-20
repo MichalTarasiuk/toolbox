@@ -1,4 +1,4 @@
-import { isClient } from '@brainless/utils'
+import { isClient } from '@jupiter/utils'
 
 import { isElement } from './assertions'
 

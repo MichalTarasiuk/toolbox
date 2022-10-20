@@ -5,13 +5,16 @@
   },
   "references": [
     {
-      "path": "packages/brainless-utils"
+      "path": "packages/jupiter-utils"
     },
     {
-      "path": "packages/brainless-typescript"
+      "path": "packages/jupiter-typescript"
     },
     {
-      "path": "packages/brainless-react"
+      "path": "packages/jupiter-react"
+    },
+    {
+      "path": "packages/jupiter-nextJS"
     }
   ],
   "extends": "./tsconfig.base.json"

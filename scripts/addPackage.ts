@@ -1,4 +1,4 @@
-import { isString, signs, timeout } from '@brainless/utils'
+import { isString, signs, timeout } from '@jupiter/utils'
 import prompt from 'prompt'
 
 import packageJSON from '../package.json'

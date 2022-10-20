@@ -1,6 +1,6 @@
 import { isArray } from '../javascript'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 type CastArray<Value> = Value extends Any.AnyArray ? Value : [Value]
 

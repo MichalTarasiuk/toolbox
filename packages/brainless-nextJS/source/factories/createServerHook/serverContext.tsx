@@ -1,9 +1,9 @@
-import { objectKeys } from '@brainless/utils'
+import { objectKeys } from '@jupiter/utils'
 import React, { createContext, useContext } from 'react'
 
 import { isServerCacheKey } from './assertions'
 
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type ServerCacheProviderProps = {

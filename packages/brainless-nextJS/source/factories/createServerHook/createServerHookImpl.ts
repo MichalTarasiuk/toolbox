@@ -1,4 +1,4 @@
-import { isString, keyIn, objectKeys } from '@brainless/utils'
+import { isString, keyIn, objectKeys } from '@jupiter/utils'
 import { useMemo } from 'react'
 
 import { readServerCacheKey } from './helpers'

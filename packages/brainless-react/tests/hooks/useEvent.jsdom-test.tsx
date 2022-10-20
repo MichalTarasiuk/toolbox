@@ -1,4 +1,4 @@
-import { noop } from '@brainless/utils'
+import { noop } from '@jupiter/utils'
 import { renderHook } from '@testing-library/react'
 
 import { useEvent } from '../../_api'

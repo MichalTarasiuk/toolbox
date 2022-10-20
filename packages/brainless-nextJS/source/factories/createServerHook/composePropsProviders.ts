@@ -1,4 +1,4 @@
-import { fromEntries } from '@brainless/utils'
+import { fromEntries } from '@jupiter/utils'
 import { v4 } from 'uuid'
 
 import type { ContextUnion, ServerHook } from './createServerHookImpl'

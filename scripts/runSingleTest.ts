@@ -1,4 +1,4 @@
-import { timeout } from '@brainless/utils'
+import { timeout } from '@jupiter/utils'
 import { $, question } from 'zx'
 
 const query = 'Can you pass name of test?'

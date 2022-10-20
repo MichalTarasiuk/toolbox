@@ -1,4 +1,4 @@
-import { keyIn, none } from '@brainless/utils'
+import { keyIn, none } from '@jupiter/utils'
 import { attributesToProps, domToReact } from 'html-react-parser'
 import Image from 'next/image'
 import Link from 'next/link'

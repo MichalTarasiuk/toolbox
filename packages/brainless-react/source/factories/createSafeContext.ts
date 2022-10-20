@@ -1,4 +1,4 @@
-import { uppercaseFirst } from '@brainless/utils'
+import { uppercaseFirst } from '@jupiter/utils'
 import { createContext, useContext } from 'react'
 
 export const createSafeContext = <ContextValue>(name: string) => {

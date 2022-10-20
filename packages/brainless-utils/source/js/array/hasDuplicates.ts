@@ -1,4 +1,4 @@
-import type { Any } from '@brainless/typescript'
+import type { Any } from '@jupiter/typescript'
 
 export const hasDuplicates = (array: Any.AnyArray) =>
   [...new Set(array)].length !== array.length
