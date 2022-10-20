@@ -1,7 +1,7 @@
 import { keyIn } from '../../../ts/typescript'
 import { isSet } from '../../common/common'
 
-import type { Any } from '../../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 type EventHub<Key extends string = string> = Record<
   Key,

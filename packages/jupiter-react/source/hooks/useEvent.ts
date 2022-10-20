@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react'
 
 import { useLayout } from './useLayout'
 
-import type { Any } from '../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Issue: https://github.com/reactjs/rfcs/blob/useevent/text/0000-useevent.md

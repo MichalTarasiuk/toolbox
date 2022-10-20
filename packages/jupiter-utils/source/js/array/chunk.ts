@@ -1,4 +1,4 @@
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 import type { Function, List } from 'ts-toolbelt'
 
 type Chunk<

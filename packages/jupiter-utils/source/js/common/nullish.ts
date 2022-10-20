@@ -1,4 +1,4 @@
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Check if something is `null` or `undefined`.

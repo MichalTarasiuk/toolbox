@@ -1,6 +1,6 @@
 import { nullish } from '../javascript'
 
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 type Coalesce<Args extends Array<unknown>> = Args extends [
   infer Arg,

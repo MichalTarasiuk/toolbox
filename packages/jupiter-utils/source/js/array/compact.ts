@@ -1,4 +1,4 @@
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 import type { Any as A, Function, List } from 'ts-toolbelt'
 
 type Compact<

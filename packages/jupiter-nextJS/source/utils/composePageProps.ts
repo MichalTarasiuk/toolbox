@@ -1,6 +1,6 @@
 import { keyIn } from '@jupiter/utils'
 
-import type { Custom, Any } from '../../../jupiter-typescript/_api'
+import type { Custom, Any } from '@jupiter/typescript'
 import type {
   GetStaticPropsContext,
   GetServerSidePropsContext,

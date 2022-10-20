@@ -1,6 +1,6 @@
 // FIXME
 
-import type { Any } from '../../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Get the lowest value of the 2 parameters.

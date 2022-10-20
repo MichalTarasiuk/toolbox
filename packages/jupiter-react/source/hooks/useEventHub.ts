@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { useEvent } from './useEvent'
 
-import type { Any } from '../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 const eventHub = createEventHub()
 

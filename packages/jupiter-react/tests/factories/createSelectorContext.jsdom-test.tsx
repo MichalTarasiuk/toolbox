@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { createSelectorContext } from '../../_api'
 
-import type { Any } from '../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type ContextValue = {

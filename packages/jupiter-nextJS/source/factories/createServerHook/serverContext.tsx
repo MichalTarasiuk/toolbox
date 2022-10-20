@@ -3,7 +3,7 @@ import React, { createContext, useContext } from 'react'
 
 import { isServerCacheKey } from './assertions'
 
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type ServerCacheProviderProps = {

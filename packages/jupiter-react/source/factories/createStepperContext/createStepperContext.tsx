@@ -10,7 +10,7 @@ import React, {
 import { checkSteps, generateTokens, tokenify } from './helpers'
 
 import type { Steps } from './types'
-import type { Custom } from '../../../../jupiter-typescript/_api'
+import type { Custom } from '@jupiter/typescript'
 import type { ReactNode } from 'react'
 
 type Tokenify = typeof tokenify

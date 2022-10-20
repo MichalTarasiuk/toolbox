@@ -1,7 +1,4 @@
-import type {
-  Any,
-  Object as ObjectType,
-} from '../../../jupiter-typescript/_api'
+import type { Any, Object as ObjectType } from '@jupiter/typescript'
 
 /**
  * @param object - Object that contains the properties and methods.

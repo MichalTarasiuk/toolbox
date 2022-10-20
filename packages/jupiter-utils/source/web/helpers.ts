@@ -1,4 +1,4 @@
-import type { Any } from '../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Defers invoking a function until the current call stack has cleared.

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- safty assertions */
-import type { Any } from '../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 import type { String, Any as A } from 'ts-toolbelt'
 
 const equalsSign = '=' as const

@@ -8,7 +8,7 @@ import React, {
 
 import { createSafeContext } from './createSafeContext'
 
-import type { Any, Custom } from '../../../jupiter-typescript/_api'
+import type { Any, Custom } from '@jupiter/typescript'
 import type { ReactNode, SetStateAction } from 'react'
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {
@@ -18,7 +18,7 @@ type FastContextProviderProps<Store extends Any.AnyObject> = {
 
 type CreateFastContext<Store extends Any.AnyObject> = {
   store: Store
-  setStore: (setStateAction: SetStateAction<Store>) => void
+  setStore: (nextStore: SetStateAction<Store>) => void
   subscribe: (onStoreChange: Any.UnknownFunction) => Any.Noop
 }
 type Selector<Store extends Any.AnyObject, Selected> = (

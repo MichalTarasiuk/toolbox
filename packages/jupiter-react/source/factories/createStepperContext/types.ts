@@ -1,5 +1,5 @@
-import type { Any } from '../../../../jupiter-typescript/_api'
 import type { generateTokens } from './helpers'
+import type { Any } from '@jupiter/typescript'
 
 export type Steps = Any.AnyObject<
   { name: string; canGo: (...params: unknown[]) => boolean },

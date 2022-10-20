@@ -1,4 +1,4 @@
-import type { Custom } from '../../../jupiter-typescript/_api'
+import type { Custom } from '@jupiter/typescript'
 
 /**
  * Assert the parameter is of a specific type.

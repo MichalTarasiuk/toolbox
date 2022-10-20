@@ -1,6 +1,6 @@
 import { inferType } from './inferType'
 
-import type { Any } from '../../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 // typeof:primitives
 

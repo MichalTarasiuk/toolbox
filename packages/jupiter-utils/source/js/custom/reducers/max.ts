@@ -1,6 +1,6 @@
 // FIXME
 
-import type { Any } from '../../../../../jupiter-typescript/_api'
+import type { Any } from '@jupiter/typescript'
 
 /**
  * Get the largest value of the 2 parameters.
