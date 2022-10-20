@@ -1,6 +1,5 @@
 # jupiter
 
-
 A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.
 
 Written in TypeScript with strong typesafety in mind.

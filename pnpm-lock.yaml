@@ -45,7 +45,7 @@ importers:
       '@babel/preset-react': 7.18.6_@babel+core@7.19.3
       '@babel/preset-typescript': 7.18.6_@babel+core@7.19.3
       '@changesets/cli': 2.25.0
-      '@jupiter/utils': link:packages/brainless-utils
+      '@jupiter/utils': link:packages/jupiter-utils
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react-hooks': 8.0.1_biqbaboplfbrettd7655fr4n2y
       '@types/jest': 29.2.0
@@ -76,9 +76,9 @@ importers:
       typescript: 4.8.3
       zx: 7.1.1
 
-  packages/brainless-nextJS:
+  packages/jupiter-nextJS:
     specifiers:
-      '@jupiter/typescript': '*'
+      '@jupiter/utils': '*'
       '@types/next': 9.0.0
       '@types/react': 18.0.21
       '@types/uuid': 8.3.4
@@ -90,12 +90,12 @@ importers:
       react: 18.2.0
       uuid: 9.0.0
     devDependencies:
-      '@jupiter/typescript': link:../brainless-typescript
+      '@jupiter/utils': link:../jupiter-utils
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.21
       '@types/uuid': 8.3.4
 
-  packages/brainless-react:
+  packages/jupiter-react:
     specifiers:
       '@jupiter/typescript': '*'
       '@jupiter/utils': '*'
@@ -114,7 +114,7 @@ importers:
       use-context-selector: 1.4.1
       uuid: ^9.0.0
     dependencies:
-      '@jupiter/utils': link:../brainless-utils
+      '@jupiter/utils': link:../jupiter-utils
       '@react-hookz/web': 16.0.0_biqbaboplfbrettd7655fr4n2y
       deep-equal: 2.0.5
       html-react-parser: 3.0.4_react@18.2.0
@@ -125,21 +125,21 @@ importers:
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
       uuid: 9.0.0
     devDependencies:
-      '@jupiter/typescript': link:../brainless-typescript
+      '@jupiter/typescript': link:../jupiter-typescript
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.21
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       react-test-renderer: 18.2.0_react@18.2.0
 
-  packages/brainless-typescript:
+  packages/jupiter-typescript:
     specifiers: {}
 
-  packages/brainless-utils:
+  packages/jupiter-utils:
     specifiers:
       '@jupiter/typescript': '*'
     devDependencies:
-      '@jupiter/typescript': link:../brainless-typescript
+      '@jupiter/typescript': link:../jupiter-typescript
 
 packages:
 
