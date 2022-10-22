@@ -2,14 +2,14 @@ import { createEventHub } from '@jupiter/utils'
 import React, {
   useCallback,
   useMemo,
-  useState,
+  useRef,
   useSyncExternalStore,
 } from 'react'
 
 import { createSafeContext } from './createSafeContext'
 
 import type { Any, Custom } from '@jupiter/typescript'
-import type { ReactNode, SetStateAction } from 'react'
+import type { ReactNode } from 'react'
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {
   store: Store
@@ -17,8 +17,8 @@ type FastContextProviderProps<Store extends Any.AnyObject> = {
 }
 
 type CreateFastContext<Store extends Any.AnyObject> = {
-  store: Store
-  setStore: (nextStore: SetStateAction<Store>) => void
+  get: () => Store
+  setStore: (nextStore: Partial<Store>) => void
   subscribe: (onStoreChange: Any.UnknownFunction) => Any.Noop
 }
 type Selector<Store extends Any.AnyObject, Selected> = (
@@ -37,7 +37,9 @@ export const createFastContext = <Store extends Any.AnyObject>(
     children,
     store: initialStore,
   }: FastContextProviderProps<Store>) => {
-    const [store, setStoreImpl] = useState(initialStore)
+    const store = useRef(initialStore)
+
+    const get = useCallback(() => store.current, [])
 
     const subscribe = useCallback((onStoreChange: Any.UnknownFunction) => {
       const subscriber = eventHub.on(name, onStoreChange)
@@ -47,15 +49,15 @@ export const createFastContext = <Store extends Any.AnyObject>(
       }
     }, [])
 
-    const setStore = useCallback((setStateAction: SetStateAction<Store>) => {
-      setStoreImpl(setStateAction)
+    const setStore = useCallback((nextStore: Partial<Store>) => {
+      store.current = { ...store.current, ...nextStore }
 
       eventHub.emit(name)
     }, [])
 
     const value = useMemo(
-      () => ({ store, setStore, subscribe }),
-      [store, setStore, subscribe],
+      () => ({ get, setStore, subscribe }),
+      [get, setStore, subscribe],
     )
 
     return (
@@ -73,12 +75,12 @@ export const createFastContext = <Store extends Any.AnyObject>(
   >(
     selector?: Selector<Store, Selected>,
   ) => {
-    const { store, setStore, subscribe } = useFastContextImpl()
+    const { get, setStore, subscribe } = useFastContextImpl()
 
     const selectedStore = useSyncExternalStore(
       subscribe,
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safe assertion (fix later, if can)
-      () => (selector ? selector(store) : store) as SafeSelected,
+      () => (selector ? selector(get()) : get()) as SafeSelected,
     )
 
     return [selectedStore, setStore] as const
