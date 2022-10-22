@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Script from 'next/script'
 import React from 'react'
 
+import { Null } from '../utils'
+
 import {
   hasSizes,
   hasSource,
@@ -13,7 +15,6 @@ import {
   isSameSite,
   isScriptTag,
 } from './assertions'
-import { Null } from './consts'
 
 import type { AnyAttribs } from './types'
 import type {
