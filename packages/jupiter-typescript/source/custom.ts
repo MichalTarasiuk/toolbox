@@ -50,3 +50,11 @@ export type ValueOf<Value extends Any.AnyArray | Any.AnyObject> =
     : Value extends Any.AnyObject
     ? Value[keyof Value]
     : never
+
+export type Narrow<Type> =
+  | (Type extends infer TValue ? TValue : never)
+  | Extract<
+      Type,
+      number | string | boolean | bigint | symbol | null | undefined | []
+    >
+  | ([Type] extends [[]] ? [] : { [Key in keyof Type]: Narrow<Type[Key]> })

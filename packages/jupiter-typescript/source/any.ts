@@ -59,6 +59,8 @@ export type Noop = () => void
 
 // any:objects
 
+export type EmptyObject = {}
+
 export type AnyObject<
   Value = unknown,
   Key extends PropertyKey = PropertyKey,

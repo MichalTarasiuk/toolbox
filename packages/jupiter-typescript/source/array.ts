@@ -19,6 +19,25 @@ export type Map<
     ]
   : []
 
+export type Filter<
+  Array extends Any.AnyArray,
+  Fn,
+  Output extends Any.AnyArray = [],
+> = Array extends [infer First, ...infer Rest]
+  ? First extends Fn
+    ? Filter<Rest, Fn, [...Output, First]>
+    : Filter<Rest, Fn, Output>
+  : Output
+
+export type Reduce<
+  Array extends unknown[],
+  Collector extends Any.AnyObject = Any.EmptyObject,
+> = Array extends [infer First, ...infer Rest]
+  ? First extends Any.AnyObject
+    ? Reduce<Rest, Custom.Overwrite<Collector, First>>
+    : never
+  : Collector
+
 export type Some<Array extends Any.AnyArray, Value> = Array extends [
   infer First,
   ...infer Rest,

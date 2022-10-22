@@ -1,4 +1,5 @@
 export const signs = {
+  dot: '.',
   slash: '/',
   caret: '^',
   colon: ':',
@@ -31,3 +32,5 @@ export const signs = {
 
 export const none = ''
 export const space = ' '
+
+export const emptyObject = {}
