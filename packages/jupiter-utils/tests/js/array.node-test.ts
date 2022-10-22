@@ -1,4 +1,11 @@
-import { castArray, union, chunk, compact } from '../../_api'
+import {
+  castArray,
+  union,
+  chunk,
+  compact,
+  asyncFlatMap,
+  sleep,
+} from '../../_api'
 
 describe('node - js:array', () => {
   test('js:array:castArray', () => {
@@ -22,5 +29,16 @@ describe('node - js:array', () => {
   test('js:array:compact', () => {
     expect(compact([1, false, []])).toEqual([1, []])
     expect(compact([1, true, []])).toEqual([1, true, []])
+  })
+
+  test('js:array:asyncFlatMap', async () => {
+    const initialArray = [1, 2]
+
+    const asyncArray = await asyncFlatMap(
+      initialArray,
+      async (digit) => await sleep(0, [digit])[0],
+    )
+
+    expect(asyncArray).toEqual(initialArray)
   })
 })
