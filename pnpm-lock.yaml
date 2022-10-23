@@ -9,8 +9,8 @@ importers:
       '@babel/preset-react': 7.18.6
       '@babel/preset-typescript': 7.18.6
       '@changesets/cli': 2.25.0
-      '@commitlint/cli': ^17.1.2
-      '@commitlint/config-conventional': ^17.1.0
+      '@commitlint/cli': 17.1.2
+      '@commitlint/config-conventional': 17.1.0
       '@jupiter/utils': '*'
       '@testing-library/react': 13.4.0
       '@testing-library/react-hooks': 8.0.1
@@ -94,13 +94,13 @@ importers:
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
+      '@jupiter/react': link:../jupiter-react
+      '@jupiter/utils': link:../jupiter-utils
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       uuid: 9.0.0
     devDependencies:
-      '@jupiter/react': link:../jupiter-react
       '@jupiter/typescript': link:../jupiter-typescript
-      '@jupiter/utils': link:../jupiter-utils
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.21
       '@types/uuid': 8.3.4
