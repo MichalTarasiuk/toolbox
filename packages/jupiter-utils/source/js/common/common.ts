@@ -1,6 +1,7 @@
 export * from './nullish'
 export * from './typeof/typeof'
 export * from './coalesce'
+export * from './debounce'
 
 import type { Any } from '@jupiter/typescript'
 
