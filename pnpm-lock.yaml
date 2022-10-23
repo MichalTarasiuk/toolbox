@@ -80,6 +80,7 @@ importers:
 
   packages/jupiter-nextJS:
     specifiers:
+      '@jupiter/react': '*'
       '@jupiter/typescript': '*'
       '@jupiter/utils': '*'
       '@types/next': 9.0.0
@@ -93,6 +94,7 @@ importers:
       react: 18.2.0
       uuid: 9.0.0
     devDependencies:
+      '@jupiter/react': link:../jupiter-react
       '@jupiter/typescript': link:../jupiter-typescript
       '@jupiter/utils': link:../jupiter-utils
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
