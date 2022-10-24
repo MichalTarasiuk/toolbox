@@ -5,7 +5,8 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { contextify } from '../../_api'
 
-const useSettings = () => useState({ dakrMode: false })
+const useSettings = (initialValue: boolean) =>
+  useState({ dakrMode: initialValue })
 
 describe('jsdom - react:utils:contextify', () => {
   it('should render', () => {
@@ -19,7 +20,7 @@ describe('jsdom - react:utils:contextify', () => {
     }
     const { getByText } = render(
       <ErrorBoundary fallback={<p>fallback</p>}>
-        <ContextProvider>
+        <ContextProvider settings={{ 0: false }}>
           <Component />
         </ContextProvider>
       </ErrorBoundary>,
@@ -73,7 +74,7 @@ describe('jsdom - react:utils:contextify', () => {
     }
 
     const Component = () => (
-      <ContextProvider>
+      <ContextProvider settings={[false]}>
         <ChildA />
         <ChildB />
       </ContextProvider>
