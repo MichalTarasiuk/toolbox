@@ -7,6 +7,7 @@ export * from './areHookInputsEqual'
 export * from './reactify/reactify'
 export * from './wrapContext'
 export * from './traverseFiber'
+export * from './contextify'
 
 export const Null = () => <></>
 
