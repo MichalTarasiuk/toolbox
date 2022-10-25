@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import mockConsole from 'jest-mock-console'
-import React, { memo, useRef } from 'react'
+import React, { memo, useCallback, useRef } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { createFastContext } from '../../_api'
@@ -162,5 +162,75 @@ describe('react:factories:createFastContext', () => {
     fireEvent.click(getByText('increase age'))
 
     getByText('counter: 0')
+  })
+
+  it('should work with lazy state update', () => {
+    const [UserProvider, useUser] = createFastContext<{
+      name: string
+      age: number
+    }>('user')
+
+    const Wrapper = ({ children }: { children: ReactNode }) => (
+      <UserProvider store={{ name: 'Michał', age: 19 }}>
+        {children}
+      </UserProvider>
+    )
+    const Component = () => {
+      const [user, setUser] = useUser()
+
+      const increaseAge = useCallback(() => {
+        setUser((user) => ({ ...user, age: user.age + 1 }))
+      }, [setUser])
+
+      return (
+        <div>
+          <p>age: {user.age}</p>
+          <button onClick={increaseAge}>increase age</button>
+        </div>
+      )
+    }
+
+    const { getByText } = render(<Component />, { wrapper: Wrapper })
+
+    fireEvent.click(getByText('increase age'))
+    fireEvent.click(getByText('increase age'))
+    fireEvent.click(getByText('increase age'))
+
+    getByText('age: 22')
+  })
+
+  it('should not work without lazy state update', () => {
+    const [UserProvider, useUser] = createFastContext<{
+      name: string
+      age: number
+    }>('user')
+
+    const Wrapper = ({ children }: { children: ReactNode }) => (
+      <UserProvider store={{ name: 'Michał', age: 19 }}>
+        {children}
+      </UserProvider>
+    )
+    const Component = () => {
+      const [user, setUser] = useUser()
+
+      const increaseAge = useCallback(() => {
+        setUser({ ...user, age: user.age })
+      }, [setUser])
+
+      return (
+        <div>
+          <p>age: {user.age}</p>
+          <button onClick={increaseAge}>increase age</button>
+        </div>
+      )
+    }
+
+    const { getByText } = render(<Component />, { wrapper: Wrapper })
+
+    fireEvent.click(getByText('increase age'))
+    fireEvent.click(getByText('increase age'))
+    fireEvent.click(getByText('increase age'))
+
+    getByText('age: 19')
   })
 })

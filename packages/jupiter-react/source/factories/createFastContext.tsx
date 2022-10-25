@@ -1,4 +1,4 @@
-import { createEventHub } from '@jupiter/utils'
+import { createEventHub, isObject } from '@jupiter/utils'
 import React, {
   useCallback,
   useMemo,
@@ -18,7 +18,9 @@ type FastContextProviderProps<Store extends Any.AnyObject> = {
 
 type CreateFastContext<Store extends Any.AnyObject> = {
   get: () => Store
-  setStore: (nextStore: Partial<Store>) => void
+  setStore: (
+    nextStore: Partial<Store> | ((store: Store) => Partial<Store>),
+  ) => void
   subscribe: (onStoreChange: Any.UnknownFunction) => Any.Noop
 }
 type Selector<Store extends Any.AnyObject, Selected> = (
@@ -49,11 +51,17 @@ export const createFastContext = <Store extends Any.AnyObject>(
       }
     }, [])
 
-    const setStore = useCallback((nextStore: Partial<Store>) => {
-      store.current = { ...store.current, ...nextStore }
+    const setStore = useCallback(
+      (nextStore: Partial<Store> | ((store: Store) => Partial<Store>)) => {
+        store.current = {
+          ...store.current,
+          ...(isObject(nextStore) ? nextStore : nextStore(store.current)),
+        }
 
-      eventHub.emit(name)
-    }, [])
+        eventHub.emit(name)
+      },
+      [],
+    )
 
     const value = useMemo(
       () => ({ get, setStore, subscribe }),
