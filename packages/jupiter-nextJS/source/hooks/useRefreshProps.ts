@@ -1,3 +1,5 @@
+// @TODO: add support for search params
+
 import { useEvent } from '@jupiter/react'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
@@ -46,7 +48,7 @@ export const useRefreshProps = () => {
 
   const refreshProps = useCallback(() => {
     void router.replace(router.asPath, undefined)
-  }, [])
+  }, [router])
 
   return [isRefreshing, refreshProps] as const
 }
