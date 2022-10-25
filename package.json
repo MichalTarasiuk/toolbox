@@ -10,7 +10,9 @@
     "utils",
     "monorepo",
     "typescript",
-    "next.js"
+    "next.js",
+    "srr",
+    "best practices"
   ],
   "license": "MIT",
   "author": {
