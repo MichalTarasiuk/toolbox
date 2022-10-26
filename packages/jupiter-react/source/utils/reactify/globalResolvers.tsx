@@ -1,6 +1,6 @@
 import { keyIn, none } from '@jupiter/utils'
 import { attributesToProps, domToReact } from 'html-react-parser'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import Link from 'next/link'
 import Script from 'next/script'
 import React from 'react'
