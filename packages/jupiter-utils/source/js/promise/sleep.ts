@@ -6,7 +6,9 @@
  */
 export const sleep = <Resolved>(timeout: number, resolved: Resolved) => {
   let timer: NodeJS.Timeout | undefined
-  let resolveImpl: ((value: Resolved | PromiseLike<Resolved>) => void) | null
+  let resolveImpl:
+    | ((value: Resolved | PromiseLike<Resolved>) => void)
+    | undefined
 
   const promise: Promise<Resolved> = new Promise((resolve) => {
     timer = setTimeout(resolve, timeout, resolved)
@@ -15,6 +17,8 @@ export const sleep = <Resolved>(timeout: number, resolved: Resolved) => {
   const resolve = () => {
     if (resolveImpl) {
       resolveImpl(resolved)
+
+      resolveImpl = undefined
     }
   }
 
