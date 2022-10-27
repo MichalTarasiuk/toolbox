@@ -88,7 +88,7 @@ importers:
       '@jupiter/typescript': '*'
       '@jupiter/utils': '*'
       '@types/next': 9.0.0
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
       '@types/uuid': 8.3.4
       next: 13.0.0
       react: 18.2.0
@@ -102,7 +102,7 @@ importers:
     devDependencies:
       '@jupiter/typescript': link:../jupiter-typescript
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
       '@types/uuid': 8.3.4
 
   packages/jupiter-react:
@@ -111,7 +111,7 @@ importers:
       '@jupiter/utils': '*'
       '@react-hookz/web': ^16.0.0
       '@types/deep-equal': 1.0.1
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       deep-equal: ^2.0.5
@@ -137,7 +137,7 @@ importers:
     devDependencies:
       '@jupiter/typescript': link:../jupiter-typescript
       '@types/deep-equal': 1.0.1
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       react-test-renderer: 18.2.0_react@18.2.0
@@ -2530,17 +2530,17 @@ packages:
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
     dev: true
 
   /@types/react-reconciler/0.28.0:
     resolution: {integrity: sha512-5cjk9ottZAj7eaTsqzPUIlrVbh3hBAO2YaEL1rkjHKB3xNAId7oU8GhzvAX+gfmlfoxTwJnBjPxEHyxkEA1Ffg==}
     dependencies:
-      '@types/react': 18.0.23
+      '@types/react': 18.0.24
     dev: true
 
-  /@types/react/18.0.23:
-    resolution: {integrity: sha512-R1wTULtCiJkudAN2DJGoYYySbGtOdzZyUWAACYinKdiQC8auxso4kLDUhQ7AJ2kh3F6A6z4v69U6tNY39hihVQ==}
+  /@types/react/18.0.24:
+    resolution: {integrity: sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
