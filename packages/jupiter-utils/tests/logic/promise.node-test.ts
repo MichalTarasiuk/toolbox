@@ -2,8 +2,8 @@ import { timeout, settled, sleep, expectType } from '../../_api'
 
 import type { Any } from '@jupiter/typescript'
 
-describe('node - js:promise', () => {
-  it('js:promise:sleep', async () => {
+describe('node - logic:promise', () => {
+  it('logic:promise:sleep', async () => {
     const user = { name: 'Michał', age: 19 }
     const [fetchUser] = sleep(1000, user)
 
@@ -12,7 +12,7 @@ describe('node - js:promise', () => {
     expect(fetchedUser).toEqual(user)
   })
 
-  it('js:promise:timeout', async () => {
+  it('logic:promise:timeout', async () => {
     const user = { name: 'Michał', age: 19 }
     const timeoutMs = 1000
     const [fetchUserPromise] = sleep(timeoutMs, user)
@@ -27,7 +27,7 @@ describe('node - js:promise', () => {
     expect(fetchedUser).toEqual(user)
   })
 
-  it('js:promise:settled', async () => {
+  it('logic:promise:settled', async () => {
     const user = { name: 'Michał', age: 19 }
     const [fetchUserPromise] = sleep(1000, user)
 

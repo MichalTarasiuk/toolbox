@@ -1,4 +1,4 @@
-import { nullish } from '../javascript'
+import { nullish } from '../../source'
 
 import type { Any } from '@jupiter/typescript'
 

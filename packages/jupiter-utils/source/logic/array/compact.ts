@@ -1,5 +1,5 @@
-import type { Any } from '@jupiter/typescript'
-import type { Any as A, Function, List } from 'ts-toolbelt'
+import type { Any, Custom } from '@jupiter/typescript'
+import type { Any as A, List } from 'ts-toolbelt'
 
 type Compact<
   Arr extends Any.AnyArray,
@@ -13,8 +13,6 @@ type Compact<
 /**
  * Removes falsy values from an array.
  */
-export const compact = <Arr extends Any.AnyArray>(
-  array: Function.Narrow<Arr>,
-) =>
+export const compact = <Arr extends Any.AnyArray>(array: Custom.Narrow<Arr>) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   array.filter(Boolean) as Compact<Arr>

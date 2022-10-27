@@ -1,5 +1,5 @@
-import type { Any } from '@jupiter/typescript'
-import type { Function, List } from 'ts-toolbelt'
+import type { Any, Custom, Array } from '@jupiter/typescript'
+import type { List } from 'ts-toolbelt'
 
 type Union<
   AnyArrayGeneric extends Any.AnyArray,
@@ -7,13 +7,13 @@ type Union<
 > = AnyArrayGeneric extends [infer First, ...infer Rest]
   ? List.Includes<Result, First> extends 1
     ? Union<Rest, Result>
-    : Union<Rest, List.Append<Result, First>>
+    : Union<Rest, Array.Push<Result, First>>
   : Result
 
 /**
  * Removes duplicates from array.
  */
 export const union = <AnyArrayGenericType extends Any.AnyArray>(
-  array: Function.Narrow<AnyArrayGenericType>,
+  array: Custom.Narrow<AnyArrayGenericType>,
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
 ) => [...new Set(array)] as Union<AnyArrayGenericType>

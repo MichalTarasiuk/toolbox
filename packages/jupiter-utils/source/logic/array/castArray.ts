@@ -1,4 +1,4 @@
-import { isArray } from '../javascript'
+import { isArray } from '../../source'
 
 import type { Any } from '@jupiter/typescript'
 

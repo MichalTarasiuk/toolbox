@@ -24,8 +24,8 @@ import {
   isPrimitive,
 } from '../../_api'
 
-describe('node - js:typeof', () => {
-  test('js:common:typeof:primitives', () => {
+describe('node - logic:typeof', () => {
+  test('logic:common:typeof:primitives', () => {
     // isString
     expect(isString('Hello World')).toBeTruthy()
     expect(isString(100)).toBeFalsy()
@@ -55,7 +55,7 @@ describe('node - js:typeof', () => {
     expect(isNull(undefined)).toBeFalsy()
   })
 
-  test('js:common:typeof:functions', () => {
+  test('logic:common:typeof:functions', () => {
     // isFunction
     expect(isFunction(() => {})).toBeTruthy()
     expect(isFunction({})).toBeFalsy()
@@ -69,7 +69,7 @@ describe('node - js:typeof', () => {
     expect(isAsyncFunction({})).toBeFalsy()
   })
 
-  test('js:common:typeof:objects', () => {
+  test('logic:common:typeof:objects', () => {
     // isObject
     expect(isObject({})).toBeTruthy()
     expect(isObject([])).toBeFalsy()
@@ -111,7 +111,7 @@ describe('node - js:typeof', () => {
     expect(isError(`something went wrong  ¯\_(ツ)_/¯`)).toBeFalsy()
   })
 
-  test('js:common:nullish', () => {
+  test('logic:common:nullish', () => {
     expect(nullish(null)).toBeTruthy()
     expect(nullish(undefined)).toBeTruthy()
 
@@ -119,12 +119,12 @@ describe('node - js:typeof', () => {
     expect(nullish(3029302)).toBeFalsy()
   })
 
-  test('js:common:coalesce', () => {
+  test('logic:common:coalesce', () => {
     expect(coalesce(null, undefined, '', NaN, 'Waldo')).toBe('')
     expect(coalesce(null, undefined)).toBe(undefined)
   })
 
-  test('js:custom:isPrimitive', () => {
+  test('logic:custom:isPrimitive', () => {
     expect(isPrimitive(1)).toBeTruthy()
     expect(isPrimitive('hello world')).toBeTruthy()
     expect(isPrimitive(false)).toBeTruthy()

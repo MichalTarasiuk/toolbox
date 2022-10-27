@@ -1,5 +1,4 @@
-import type { Any } from '@jupiter/typescript'
-import type { Function, List } from 'ts-toolbelt'
+import type { Any, Array as ArrayType, Custom } from '@jupiter/typescript'
 
 type Chunk<
   Arr extends Any.AnyArray,
@@ -7,10 +6,10 @@ type Chunk<
   Item extends Any.AnyArray = [],
   Items extends Array<Any.AnyArray> = [],
 > = Arr extends [infer First, ...infer Rest]
-  ? List.Length<Item> extends Size
-    ? Chunk<Rest, Size, [First], List.Append<Items, Item>>
-    : Chunk<Rest, Size, List.Append<Item, First>, Items>
-  : List.Append<Items, Item>
+  ? ArrayType.Length<Item> extends Size
+    ? Chunk<Rest, Size, [First], ArrayType.Push<Items, Item>>
+    : Chunk<Rest, Size, ArrayType.Push<Item, First>, Items>
+  : ArrayType.Push<Items, Item>
 
 /**
  * Chunks an array into smaller arrays of a specified size.
@@ -18,7 +17,7 @@ type Chunk<
  * @param size - Max length of chunk item.
  */
 export const chunk = <Arr extends Any.AnyArray, Size extends number>(
-  arr: Function.Narrow<Arr>,
+  arr: Custom.Narrow<Arr>,
   size: Size,
 ) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion

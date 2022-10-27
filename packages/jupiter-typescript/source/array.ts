@@ -57,3 +57,19 @@ export type Every<Array extends Any.AnyArray, Value> = Array extends [
       : Every<Rest, Value>
     : false
   : false
+
+export type Push<Array extends Any.AnyArray, Value extends Array[number]> = [
+  ...Array,
+  Value,
+]
+
+export type Length<Array extends Any.AnyArray> = Array['length']
+
+export type Includes<
+  Array extends Any.AnyArray,
+  SearchElement,
+> = Array extends [infer First, ...infer Rest extends Any.AnyArray]
+  ? Custom.Equals<First, SearchElement> extends true
+    ? true
+    : Includes<Rest, SearchElement>
+  : false
