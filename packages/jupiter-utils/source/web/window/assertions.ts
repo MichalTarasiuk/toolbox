@@ -7,7 +7,7 @@ import { isClient } from '../../../_api'
 export const isIOS = () =>
   isClient()
     ? // @TODO type MSStream prop
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
     : false
 

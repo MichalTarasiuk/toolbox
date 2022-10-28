@@ -31,7 +31,7 @@ export const createSelectorContext = <ContextValue>(name: string) => {
     selectorImpl?: Selector<ContextValue, Selected>,
   ) => {
     const safeSelector = (value: ContextValue) =>
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
       selectorImpl ? selectorImpl(value) : (value as unknown as Selected)
     const selector = (value: ContextValue) =>
       value === defaultContextValue ? defaultContextValue : safeSelector(value)

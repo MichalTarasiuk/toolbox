@@ -34,7 +34,7 @@ export const settled = async <Resolved, AnyError extends Error>(
   try {
     return [await promise, undefined]
   } catch (error: unknown) {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
     return [undefined, error as AnyError]
   }
 }
