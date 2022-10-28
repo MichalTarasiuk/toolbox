@@ -25,7 +25,7 @@ export const max = <
   collector: Collector,
   currentValue: CurrentValue,
 ): Collector | CurrentValue => {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safty assertion
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   return (currentValue as unknown as Collector) > collector
     ? currentValue
     : collector

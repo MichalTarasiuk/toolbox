@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions -- safty assertions */
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- safety assertions */
 import type { Any } from '@jupiter/typescript'
 import type { String, Any as A } from 'ts-toolbelt'
 
