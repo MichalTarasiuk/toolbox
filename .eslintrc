@@ -13,7 +13,7 @@
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "ignorePatterns": ["*.config.js", "*.config.ts"],
+  "ignorePatterns": ["*.config.js", "*.config.ts", "examples/**/*"],
   "rules": {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
