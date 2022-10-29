@@ -1,4 +1,13 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- typescript can't infer return type of unknwon function */
+import { isObject, isSymbol, keyIn } from '@jupiter/utils'
 import { useRef } from 'react'
+
+import type { MutableRefObject } from 'react'
+
+const canWork = <Current>(
+  ref: MutableRefObject<Current>,
+): ref is { current: Exclude<Current, symbol> } =>
+  isObject(ref) && keyIn(ref, 'current') && !isSymbol(ref.current)
 
 export const useLazyRef = <LazyInitialize extends () => unknown>(
   lazyInitialize: LazyInitialize,
@@ -9,9 +18,12 @@ export const useLazyRef = <LazyInitialize extends () => unknown>(
   )
 
   if (ref.current === canInitialize) {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
     ref.current = lazyInitialize() as ReturnType<LazyInitialize>
   }
 
-  return ref
+  if (canWork(ref)) {
+    return ref
+  }
+
+  throw Error('something went wrong')
 }
