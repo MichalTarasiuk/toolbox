@@ -24,13 +24,15 @@
     "url": "https://github.com/MichalTarasiuk/jupiter-core"
   },
   "scripts": {
-    "test": "jest --config",
-    "test:watch": "jest --config --watch",
-    "single-test": "jest --config --testNamePattern 'react:factories:createAtoms'",
     "lint": "eslint . --ext .ts",
     "find-deadcode": "ts-prune -p tsconfig.base.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "typecheck": "tsc --build --clean",
     "prepare": "husky install",
+    "clean": "pnpm --filter \"./packages/**\" --parallel --no-bail run clean",
+    "test:jest": "jest --config",
+    "test:jest:watch": "jest --config --watch",
+    "test:jest:single-test": "jest --config --testNamePattern 'react:factories:createAtoms'",
     "add-package": "ts-node scripts/addPackage.ts"
   },
   "devDependencies": {

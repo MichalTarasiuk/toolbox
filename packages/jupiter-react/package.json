@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "_api.ts",
-  "scripts": {},
+  "scripts": {
+    "clean": "rm -rf ./build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
