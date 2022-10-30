@@ -31,7 +31,7 @@ importers:
       jest: 29.2.2
       jest-environment-jsdom: 29.2.2
       jest-mock-console: 2.0.0
-      jsdom: 20.0.1
+      jsdom: 20.0.2
       make-dir: 3.1.0
       node-notifier: 10.0.1
       prettier: 2.7.1
@@ -70,7 +70,7 @@ importers:
       jest: 29.2.2_5rzznns6ikmssbb7kkyig4mopq
       jest-environment-jsdom: 29.2.2
       jest-mock-console: 2.0.0_jest@29.2.2
-      jsdom: 20.0.1
+      jsdom: 20.0.2
       make-dir: 3.1.0
       node-notifier: 10.0.1
       prettier: 2.7.1
@@ -5020,7 +5020,7 @@ packages:
       '@types/node': 18.11.7
       jest-mock: 29.2.2
       jest-util: 29.2.1
-      jsdom: 20.0.1
+      jsdom: 20.0.2
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -5347,8 +5347,8 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jsdom/20.0.1:
-    resolution: {integrity: sha512-pksjj7Rqoa+wdpkKcLzQRHhJCEE42qQhl/xLMUKHgoSejaKOdaXEAnqs6uDNwMl/fciHTzKeR8Wm8cw7N+g98A==}
+  /jsdom/20.0.2:
+    resolution: {integrity: sha512-AHWa+QO/cgRg4N+DsmHg1Y7xnz+8KU3EflM0LVDTdmrYOc1WWTSkOjtpUveQH+1Bqd5rtcVnb/DuxV/UjDO4rA==}
     engines: {node: '>=14'}
     peerDependencies:
       canvas: ^2.5.0
