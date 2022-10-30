@@ -1,6 +1,9 @@
 # jupiter core 🪐
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.
