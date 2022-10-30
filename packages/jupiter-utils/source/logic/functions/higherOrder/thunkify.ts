@@ -1,5 +1,3 @@
-// FIXME
-
 import type { Any } from '@jupiter/typescript'
 
 /**
@@ -30,7 +28,8 @@ export const thunkify = <Fn extends Any.AnyFunction>(fn: Fn) => {
     if (!wasCalled) {
       wasCalled = true
 
-      result = fn(...parameters)
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- typescript can't infer return type
+      result = fn(...parameters) as ReturnType<Fn>
     }
 
     return result
