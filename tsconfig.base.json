@@ -4,7 +4,6 @@
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "target": "ESNext",
     "module": "ESNext",
-    "jsx": "react",
     "moduleResolution": "node",
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
