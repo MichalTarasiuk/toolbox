@@ -1,4 +1,4 @@
-// FIXME
+// TODO: add typescript support
 import type { Any } from '@jupiter/typescript'
 
 type RunPromisesInSeries<

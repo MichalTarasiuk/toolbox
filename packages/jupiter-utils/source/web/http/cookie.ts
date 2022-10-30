@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- safety assertions */
-import type { Any } from '@jupiter/typescript'
-import type { String, Any as A } from 'ts-toolbelt'
+import type { Any, Custom, String } from '@jupiter/typescript'
 
 const equalsSign = '=' as const
 const semicolonSign = '; ' as const
@@ -9,7 +8,9 @@ type ParseCookie<Cookie extends string> = {
   [Tuple in String.Split<
     String.Split<Cookie, typeof semicolonSign>[number],
     typeof equalsSign
-  > as Tuple[0]]: A.Is<Tuple[1], undefined> extends 1 ? string : Tuple[1]
+  > as Tuple[0]]: Custom.Equals<Tuple[1], undefined> extends 1
+    ? string
+    : Tuple[1]
 }
 
 /**
