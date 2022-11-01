@@ -8,8 +8,8 @@ const isSafeLazyInitialization = <State extends string>(
 ): lazyInitialization is LazyInitialization<State> =>
   isFunction(lazyInitialization)
 
-export const createAtomWithStorage = (atomInitialize: AtomInitialize) => ({
-  atomWithStorage: <State extends string>(key: string, state: State) => {
+export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
+  return <State extends string>(key: string, state: State) => {
     const atom = atomInitialize(
       () => {
         if (isClient()) {
@@ -40,5 +40,5 @@ export const createAtomWithStorage = (atomInitialize: AtomInitialize) => ({
     )
 
     return atom
-  },
-})
+  }
+}
