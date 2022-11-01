@@ -152,10 +152,10 @@ export const createAtoms = () => {
     )
 
     const setState = useCallback(
-      (resolvableState?: State | ((state: State) => State)) => {
+      (resolvableState?: ResolvableState<State | undefined>) => {
         const { state, set } = atom.read(secretToken)
 
-        set(resolvableState && resolveState(resolvableState, state))
+        set(resolveState(resolvableState, state))
       },
       [],
     )
