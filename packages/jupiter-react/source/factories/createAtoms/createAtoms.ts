@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
 import { createEventHub, isFunction } from '@jupiter/utils'
 import equal from 'deep-equal'
 import { useCallback, useSyncExternalStore } from 'react'
@@ -16,6 +17,8 @@ export type LazyInitialization<State> = ((get: Get) => State) & {
   get?: (state: State) => void
 }
 type Initialization<State> = State | LazyInitialization<State>
+
+type ResolvableState<State> = State | ((state: State) => State)
 
 type Atom<State = unknown> = {
   read: (token: symbol) => {
@@ -53,6 +56,17 @@ export const createAtoms = () => {
     }
 
     return initialization
+  }
+
+  const resolveState = <State>(
+    resolvableState: ResolvableState<State>,
+    state: State,
+  ) => {
+    if (isFunction(resolvableState)) {
+      return resolvableState(state) as State
+    }
+
+    return resolvableState as State
   }
 
   const atom = <State>(
@@ -138,10 +152,10 @@ export const createAtoms = () => {
     )
 
     const setState = useCallback(
-      (nextInitialization?: Initialization<State>) => {
-        const { set } = atom.read(secretToken)
+      (resolvableState?: State | ((state: State) => State)) => {
+        const { state, set } = atom.read(secretToken)
 
-        set(nextInitialization)
+        set(resolvableState && resolveState(resolvableState, state))
       },
       [],
     )
