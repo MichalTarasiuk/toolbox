@@ -1,7 +1,9 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
+import 'mock-local-storage'
 import { createAtoms } from '../../_api'
+import { createAtomWithStorage } from '../../source/factories/createAtoms/helpers/extensions/extensions'
 
 describe('react:factories:createAtoms', () => {
   it('should emit update atom', () => {
@@ -118,5 +120,38 @@ describe('react:factories:createAtoms', () => {
     fireEvent.click(getByText('set firstname'))
 
     getByText('status: success')
+  })
+
+  it('should save counter in localstorage', () => {
+    const { atom, useAtom } = createAtoms()
+    const atomWithStorage = createAtomWithStorage(atom)
+    const counterAtom = atomWithStorage('counter', '1')
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom)
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button
+            onClick={() => {
+              const parsedCounter = Number(counter)
+              const nextCounter = parsedCounter + 1
+
+              setCounter(nextCounter.toString())
+            }}
+          >
+            increase
+          </button>
+        </div>
+      )
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('increase'))
+
+    getByText('counter: 2')
+    expect(window.localStorage.getItem('counter')).toBe('2')
   })
 })

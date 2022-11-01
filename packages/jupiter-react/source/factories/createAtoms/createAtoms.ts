@@ -9,16 +9,19 @@ type Get = <State>(atom: Atom<State>) => State
 type CustomSet<State> = (
   get: (atom: Atom<State>) => State,
   set: (nextInitialization: Initialization<State>) => void,
+  nextInitialization?: Initialization<State>,
 ) => void
 
-type LazyInitialization<State> = (get: Get) => State
+export type LazyInitialization<State> = ((get: Get) => State) & {
+  get?: (state: State) => void
+}
 type Initialization<State> = State | LazyInitialization<State>
 
 type Atom<State = unknown> = {
   read: (token: symbol) => {
+    id: string
     readonly state: State
     readonly coworkers: string[]
-    id: string
     set: (nextInitialization?: Initialization<State>) => void
   }
 }
@@ -42,7 +45,11 @@ export const createAtoms = () => {
     lifecycle.before()
 
     if (canResolve(initialization)) {
-      return initialization(get)
+      const state = initialization(get)
+
+      initialization.get?.(state)
+
+      return state
     }
 
     return initialization
@@ -71,22 +78,20 @@ export const createAtoms = () => {
         return state
       }
 
-      const setImpl = (nextInitialization: Initialization<State>) => {
+      const setImpl = (nextInitialization?: Initialization<State>) => {
+        if (!nextInitialization) {
+          return
+        }
+
         initialization = nextInitialization
 
         eventHub.emit(id)
       }
 
       const set = (nextInitialization?: Initialization<State>) => {
-        if (customSet) {
-          customSet(get, setImpl)
-
-          return
-        }
-
-        if (nextInitialization) {
-          setImpl(nextInitialization)
-        }
+        customSet
+          ? customSet(get, setImpl, nextInitialization)
+          : setImpl(nextInitialization)
       }
 
       return {
