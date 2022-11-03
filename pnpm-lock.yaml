@@ -111,7 +111,7 @@ importers:
     specifiers:
       '@jupiter/typescript': '*'
       '@jupiter/utils': '*'
-      '@react-hookz/web': ^16.0.0
+      '@react-hookz/web': ^17.0.0
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.24
       '@types/react-reconciler': 0.28.0
@@ -127,7 +127,7 @@ importers:
       uuid: ^9.0.0
     dependencies:
       '@jupiter/utils': link:../jupiter-utils
-      '@react-hookz/web': 16.0.0_biqbaboplfbrettd7655fr4n2y
+      '@react-hookz/web': 17.0.0_biqbaboplfbrettd7655fr4n2y
       deep-equal: 2.0.5
       html-react-parser: 3.0.4_react@18.2.0
       next: 13.0.0_biqbaboplfbrettd7655fr4n2y
@@ -2375,8 +2375,8 @@ packages:
     resolution: {integrity: sha512-lGZR5l3YRjzeIOHtJhiq96vQKrsq+9lsCyv+0fROMQeSNWtLLzX3R+psHNi6nsoP3XEhspiZ92nsiPmdNo8ztQ==}
     dev: false
 
-  /@react-hookz/web/16.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-vImvPPfXtj3XtPi0fpoQvcRC3IKcnwgoE/+qbT8gmijEwjxHZ1P15ilCbdCB4Qv1AycE7A4EpIQYLKmS/QItIw==}
+  /@react-hookz/web/17.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-YB1exY9xXUyrUTxiHfSak2myC7/iYvmfPBotXvaSmIlV7bmdDW16Yl0GeEm8Ub4T1Uc02obSpKZK+2IiYMlUCg==}
     peerDependencies:
       js-cookie: ^3.0.1
       react: ^16.8 || ^17 || ^18
