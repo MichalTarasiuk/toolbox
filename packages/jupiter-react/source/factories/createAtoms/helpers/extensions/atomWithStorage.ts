@@ -1,14 +1,13 @@
 import { isClient, isFunction, isString } from '@jupiter/utils'
 
-import type { LazyInitialization } from '../../createAtoms'
-import type { AtomInitialize } from './types'
+import type { LazyInitialization, AtomsFactory } from '../../createAtoms'
 
 const isSafeLazyInitialization = <State extends string>(
   lazyInitialization: unknown,
 ): lazyInitialization is LazyInitialization<State> =>
   isFunction(lazyInitialization)
 
-export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
+export const createAtomWithStorage = (atomInitialize: AtomsFactory['atom']) => {
   return <State extends string>(key: string, state: State) => {
     const atom = atomInitialize(
       () => {

@@ -3,7 +3,6 @@ import React from 'react'
 
 import 'mock-local-storage'
 import { createAtoms } from '../../_api'
-import { createAtomWithStorage } from '../../source/factories/createAtoms/helpers/extensions/extensions'
 
 describe('react:factories:createAtoms', () => {
   it('should emit update atom', () => {
@@ -123,8 +122,7 @@ describe('react:factories:createAtoms', () => {
   })
 
   it('should save counter in localstorage', () => {
-    const { atom, useAtom } = createAtoms()
-    const atomWithStorage = createAtomWithStorage(atom)
+    const { atomWithStorage, useAtom } = createAtoms()
     const counterAtom = atomWithStorage('counter', '1')
 
     const Component = () => {

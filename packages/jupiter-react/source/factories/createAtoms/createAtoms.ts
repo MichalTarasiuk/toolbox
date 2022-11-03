@@ -4,6 +4,8 @@ import equal from 'deep-equal'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
+import { createAtomWithStorage } from './helpers/helpers'
+
 import type { Any } from '@jupiter/typescript'
 
 type Get = <State>(atom: Atom<State>) => State
@@ -17,7 +19,6 @@ export type LazyInitialization<State> = ((get: Get) => State) & {
   get?: (state: State) => void
 }
 type Initialization<State> = State | LazyInitialization<State>
-
 type ResolvableState<State> = State | ((state: State) => State)
 
 type Atom<State = unknown> = {
@@ -28,6 +29,8 @@ type Atom<State = unknown> = {
     set: (nextInitialization?: Initialization<State>) => void
   }
 }
+
+export type AtomsFactory = ReturnType<typeof createAtoms>
 
 export const createAtoms = () => {
   const eventHub = createEventHub()
@@ -58,15 +61,19 @@ export const createAtoms = () => {
     return initialization
   }
 
+  const isResolveable = <State>(
+    resolvableState: ResolvableState<State>,
+  ): resolvableState is (state: State) => State => isFunction(resolvableState)
+
   const resolveState = <State>(
     resolvableState: ResolvableState<State>,
     state: State,
   ) => {
-    if (isFunction(resolvableState)) {
-      return resolvableState(state) as State
+    if (isResolveable(resolvableState)) {
+      return resolvableState(state)
     }
 
-    return resolvableState as State
+    return resolvableState
   }
 
   const atom = <State>(
@@ -163,5 +170,7 @@ export const createAtoms = () => {
     return [state, setState] as const
   }
 
-  return { useAtom, atom }
+  const atomWithStorage = createAtomWithStorage(atom)
+
+  return { atom, atomWithStorage, useAtom }
 }
