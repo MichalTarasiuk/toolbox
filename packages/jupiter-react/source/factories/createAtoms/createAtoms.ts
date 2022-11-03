@@ -1,80 +1,20 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import { createEventHub, isFunction } from '@jupiter/utils'
-import equal from 'deep-equal'
+import { createEventHub } from '@jupiter/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
-import { createAtomWithStorage } from './helpers/helpers'
+import {
+  canUpdateState,
+  createAtomWithStorage,
+  initialize,
+  resolveState,
+} from './helpers/helpers'
 
-import type { Any } from '@jupiter/typescript'
-
-type Get = <State>(atom: Atom<State>) => State
-type CustomSet<State> = (
-  get: (atom: Atom<State>) => State,
-  set: (nextInitialization: Initialization<State>) => void,
-  nextInitialization?: Initialization<State>,
-) => void
-
-export type LazyInitialization<State> = ((get: Get) => State) & {
-  get?: (state: State) => void
-}
-type Initialization<State> = State | LazyInitialization<State>
-type ResolvableState<State> = State | ((state: State) => State)
-
-type Atom<State = unknown> = {
-  read: (token: symbol) => {
-    id: string
-    readonly state: State
-    readonly coworkers: string[]
-    set: (nextInitialization?: Initialization<State>) => void
-  }
-}
-
-export type AtomsFactory = ReturnType<typeof createAtoms>
+import type { Atom, CustomSet, Initialization, ResolvableState } from './types'
 
 export const createAtoms = () => {
   const eventHub = createEventHub()
   const secretToken = Symbol()
-
-  const canUpdateState = <State>(state: State, nextState: State) =>
-    equal(state, nextState)
-
-  const canResolve = <State>(
-    initialization: Initialization<State>,
-  ): initialization is LazyInitialization<State> => isFunction(initialization)
-
-  const initialize = <State>(
-    initialization: Initialization<State>,
-    get: Get,
-    lifecycle: { before: Any.Noop },
-  ) => {
-    lifecycle.before()
-
-    if (canResolve(initialization)) {
-      const state = initialization(get)
-
-      initialization.get?.(state)
-
-      return state
-    }
-
-    return initialization
-  }
-
-  const isResolveable = <State>(
-    resolvableState: ResolvableState<State>,
-  ): resolvableState is (state: State) => State => isFunction(resolvableState)
-
-  const resolveState = <State>(
-    resolvableState: ResolvableState<State>,
-    state: State,
-  ) => {
-    if (isResolveable(resolvableState)) {
-      return resolvableState(state)
-    }
-
-    return resolvableState
-  }
 
   const atom = <State>(
     initialInitialization: Initialization<State>,
