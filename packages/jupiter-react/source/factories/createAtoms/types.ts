@@ -1,5 +1,3 @@
-import type { createAtoms } from './createAtoms'
-
 export type Get = <State>(atom: Atom<State>) => State
 export type CustomSet<State> = (
   get: (atom: Atom<State>) => State,
@@ -13,6 +11,11 @@ export type LazyInitialization<State> = ((get: Get) => State) & {
 export type Initialization<State> = State | LazyInitialization<State>
 export type ResolvableState<State> = State | ((state: State) => State)
 
+export type AtomInitialize = <State>(
+  initialInitialization: Initialization<State>,
+  customSet?: CustomSet<State>,
+) => Atom<State>
+
 export type Atom<State = unknown> = {
   read: (token: symbol) => {
     id: string
@@ -21,5 +24,3 @@ export type Atom<State = unknown> = {
     set: (nextInitialization?: Initialization<State>) => void
   }
 }
-
-export type AtomsFactory = ReturnType<typeof createAtoms>
