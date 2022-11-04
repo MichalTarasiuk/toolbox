@@ -133,10 +133,12 @@ describe('react:factories:createAtoms', () => {
           <p>counter: {counter}</p>
           <button
             onClick={() => {
-              const parsedCounter = Number(counter)
-              const nextCounter = parsedCounter + 1
+              setCounter((counter) => {
+                const parsedCounter = Number(counter)
+                const nextCounter = parsedCounter + 1
 
-              setCounter(nextCounter.toString())
+                return nextCounter.toString()
+              })
             }}
           >
             increase

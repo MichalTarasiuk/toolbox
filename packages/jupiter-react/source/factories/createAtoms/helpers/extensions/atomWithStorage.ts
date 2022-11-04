@@ -1,11 +1,6 @@
-import { isClient, isFunction, isString } from '@jupiter/utils'
+import { isClient, isString } from '@jupiter/utils'
 
-import type { LazyInitialization, AtomInitialize } from '../../types'
-
-const isSafeLazyInitialization = <State extends string>(
-  lazyInitialization: unknown,
-): lazyInitialization is LazyInitialization<State> =>
-  isFunction(lazyInitialization)
+import type { AtomInitialize, LazyInitialization } from '../../types'
 
 export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
   return <State extends string>(key: string, state: State) => {
@@ -24,14 +19,14 @@ export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
           return
         }
 
-        const lazyInitialization = isString(nextInitialization)
+        const lazyInitialization: LazyInitialization<string> = isString(
+          nextInitialization,
+        )
           ? () => nextInitialization
           : nextInitialization
 
-        if (isSafeLazyInitialization<State>(lazyInitialization)) {
-          lazyInitialization.get = (state: State) => {
-            localStorage.setItem(key, state)
-          }
+        lazyInitialization.get = (state: string) => {
+          localStorage.setItem(key, state)
         }
 
         set(lazyInitialization)
