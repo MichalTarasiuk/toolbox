@@ -81,6 +81,13 @@ export const createAtoms = () => {
   }
 
   const useAtom = <State>(atom: Atom<State>) => {
+    const atomValue = useAtomValue(atom)
+    const uodateAtom = useUpdateAtom(atom)
+
+    return [atomValue, uodateAtom] as const
+  }
+
+  const useAtomValue = <State>(atom: Atom<State>) => {
     const state = useSyncExternalStore<State>(
       (onStoreChange) => {
         const { id, coworkers } = atom.read(secretToken)
@@ -98,16 +105,7 @@ export const createAtoms = () => {
       () => atom.read(secretToken).state,
     )
 
-    const setState = useCallback(
-      (resolvableState?: ResolvableState<State | undefined>) => {
-        const { state, set } = atom.read(secretToken)
-
-        set(resolveState(resolvableState, state))
-      },
-      [],
-    )
-
-    return [state, setState] as const
+    return state
   }
 
   const useUpdateAtom = <State>(atom: Atom<State>) => {
@@ -125,5 +123,5 @@ export const createAtoms = () => {
 
   const atomWithStorage = createAtomWithStorage(atom)
 
-  return { atom, atomWithStorage, useAtom, useUpdateAtom }
+  return { atom, atomWithStorage, useAtom, useAtomValue, useUpdateAtom }
 }

@@ -157,14 +157,14 @@ describe('react:factories:createAtoms', () => {
   })
 
   it('should not rerender component which update atom', () => {
-    const { atom, useAtom, useUpdateAtom } = createAtoms()
+    const { atom, useAtomValue, useUpdateAtom } = createAtoms()
     const counterAtom = atom(0)
 
     const displayerSpy = jest.fn()
     const updaterSpy = jest.fn()
 
     const Displayer = () => {
-      const [counter] = useAtom(counterAtom)
+      const counter = useAtomValue(counterAtom)
 
       displayerSpy()
 
