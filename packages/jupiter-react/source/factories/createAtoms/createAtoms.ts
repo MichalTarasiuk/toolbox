@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import { createEventHub } from '@jupiter/utils'
+import { createEventHub, isUndefined } from '@jupiter/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
@@ -40,7 +40,7 @@ export const createAtoms = () => {
       }
 
       const setImpl = (nextInitialization?: Initialization<State>) => {
-        if (!nextInitialization) {
+        if (isUndefined(nextInitialization)) {
           return
         }
 
@@ -110,7 +110,20 @@ export const createAtoms = () => {
     return [state, setState] as const
   }
 
+  const useUpdateAtom = <State>(atom: Atom<State>) => {
+    const setState = useCallback(
+      (resolvableState?: ResolvableState<State | undefined>) => {
+        const { state, set } = atom.read(secretToken)
+
+        set(resolveState(resolvableState, state))
+      },
+      [],
+    )
+
+    return setState
+  }
+
   const atomWithStorage = createAtomWithStorage(atom)
 
-  return { atom, atomWithStorage, useAtom }
+  return { atom, atomWithStorage, useAtom, useUpdateAtom }
 }

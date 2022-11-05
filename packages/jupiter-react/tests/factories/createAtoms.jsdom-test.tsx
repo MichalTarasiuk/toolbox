@@ -1,3 +1,4 @@
+import { isUndefined } from '@jupiter/utils'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
@@ -153,5 +154,51 @@ describe('react:factories:createAtoms', () => {
 
     getByText('counter: 2')
     expect(window.localStorage.getItem('counter')).toBe('2')
+  })
+
+  it('should not rerender component which update atom', () => {
+    const { atom, useAtom, useUpdateAtom } = createAtoms()
+    const counterAtom = atom(0)
+
+    const displayerSpy = jest.fn()
+    const updaterSpy = jest.fn()
+
+    const Displayer = () => {
+      const [counter] = useAtom(counterAtom)
+
+      displayerSpy()
+
+      return <p>counter: {counter}</p>
+    }
+    const Updater = () => {
+      const updateAtom = useUpdateAtom(counterAtom)
+
+      updaterSpy()
+
+      const increase = () => {
+        updateAtom((counter) => (isUndefined(counter) ? 0 : counter + 1))
+      }
+
+      return <button onClick={increase}>increase</button>
+    }
+
+    const Component = () => {
+      return (
+        <>
+          <Displayer />
+          <Updater />
+        </>
+      )
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('increase'))
+    fireEvent.click(getByText('increase'))
+
+    getByText('counter: 2')
+
+    expect(displayerSpy).toHaveBeenCalledTimes(3)
+    expect(updaterSpy).toHaveBeenCalledTimes(1)
   })
 })
