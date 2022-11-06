@@ -51,7 +51,7 @@
     "@typescript-eslint/parser": "5.42.0",
     "babel-jest": "29.2.2",
     "create-file": "1.0.1",
-    "eslint": "8.26.0",
+    "eslint": "8.27.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-functional": "4.4.1",
