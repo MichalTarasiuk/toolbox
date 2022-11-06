@@ -26,7 +26,7 @@
   "scripts": {
     "test": "jest --config",
     "test:watch": "jest --config --watch",
-    "single-test": "jest --config --testNamePattern 'jsdom - react:hooks:useSuspense'",
+    "single-test": "jest --config --testNamePattern 'react:factories:createAtoms'",
     "lint": "eslint . --ext .ts",
     "find-deadcode": "ts-prune -p tsconfig.base.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
