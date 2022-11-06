@@ -4,7 +4,7 @@ import { useLazyRef } from '../../_api'
 
 describe('jsdom - react:hooks:useLazyRef', () => {
   it('should return resolved `lazyInitialize`', () => {
-    const resolved = Symbol()
+    const resolved = 'Hello World'
     const lazyInitialize = () => resolved
 
     const {
@@ -15,7 +15,7 @@ describe('jsdom - react:hooks:useLazyRef', () => {
   })
 
   it('should be mutable', () => {
-    const resolved = Symbol()
+    const resolved = 'Hello World'
     const lazyInitialize = () => resolved
 
     const {
@@ -24,7 +24,7 @@ describe('jsdom - react:hooks:useLazyRef', () => {
 
     expect(hook.current).toBe(resolved)
 
-    const nextValue = Symbol()
+    const nextValue = 'Hello Michał'
     hook.current = nextValue
 
     expect(hook.current).toBe(nextValue)
