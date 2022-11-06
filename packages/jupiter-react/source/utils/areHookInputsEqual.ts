@@ -8,7 +8,7 @@ import type { DependencyList } from 'react'
 const is = (x: any, y: any) =>
   (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
 
-const objectIs: (x: unknown, y: unknown) => boolean =
+export const objectIs: (x: unknown, y: unknown) => boolean =
   typeof Object.is === 'function' ? Object.is : is
 
 // 1:1 how react compare previous dependency list with current dependency list
