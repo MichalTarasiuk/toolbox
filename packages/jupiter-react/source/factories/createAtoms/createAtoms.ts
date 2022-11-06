@@ -3,9 +3,10 @@ import { createEventHub, isUndefined } from '@jupiter/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
+import * as extenstions from './helpers/extensions/extensions'
 import {
   canUpdateState,
-  createAtomWithStorage,
+  collectExtensions,
   initialize,
   resolveState,
 } from './helpers/helpers'
@@ -121,7 +122,11 @@ export const createAtoms = () => {
     return setState
   }
 
-  const atomWithStorage = createAtomWithStorage(atom)
-
-  return { atom, atomWithStorage, useAtom, useAtomValue, useUpdateAtom }
+  return {
+    atom,
+    useAtom,
+    useAtomValue,
+    useUpdateAtom,
+    ...collectExtensions(extenstions, atom),
+  }
 }
