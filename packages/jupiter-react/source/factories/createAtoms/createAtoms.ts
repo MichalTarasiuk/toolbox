@@ -1,52 +1,21 @@
-import { createEventHub, isFunction } from '@jupiter/utils'
-import equal from 'deep-equal'
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
+import { createEventHub, isUndefined } from '@jupiter/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 import { v4 } from 'uuid'
 
-import type { Any } from '@jupiter/typescript'
+import * as extenstions from './helpers/extensions/extensions'
+import {
+  canUpdateState,
+  collectExtensions,
+  initialize,
+  resolveState,
+} from './helpers/helpers'
 
-type Get = <State>(atom: Atom<State>) => State
-type CustomSet<State> = (
-  get: (atom: Atom<State>) => State,
-  set: (nextInitialization: Initialization<State>) => void,
-) => void
-
-type LazyInitialization<State> = (get: Get) => State
-type Initialization<State> = State | LazyInitialization<State>
-
-type Atom<State = unknown> = {
-  read: (token: symbol) => {
-    readonly state: State
-    readonly coworkers: string[]
-    id: string
-    set: (nextInitialization?: Initialization<State>) => void
-  }
-}
+import type { Atom, CustomSet, Initialization, ResolvableState } from './types'
 
 export const createAtoms = () => {
   const eventHub = createEventHub()
   const secretToken = Symbol()
-
-  const canUpdateState = <State>(state: State, nextState: State) =>
-    equal(state, nextState)
-
-  const canResolve = <State>(
-    initialization: Initialization<State>,
-  ): initialization is LazyInitialization<State> => isFunction(initialization)
-
-  const initialize = <State>(
-    initialization: Initialization<State>,
-    get: Get,
-    lifecycle: { before: Any.Noop },
-  ) => {
-    lifecycle.before()
-
-    if (canResolve(initialization)) {
-      return initialization(get)
-    }
-
-    return initialization
-  }
 
   const atom = <State>(
     initialInitialization: Initialization<State>,
@@ -71,22 +40,20 @@ export const createAtoms = () => {
         return state
       }
 
-      const setImpl = (nextInitialization: Initialization<State>) => {
+      const setImpl = (nextInitialization?: Initialization<State>) => {
+        if (isUndefined(nextInitialization)) {
+          return
+        }
+
         initialization = nextInitialization
 
         eventHub.emit(id)
       }
 
       const set = (nextInitialization?: Initialization<State>) => {
-        if (customSet) {
-          customSet(get, setImpl)
-
-          return
-        }
-
-        if (nextInitialization) {
-          setImpl(nextInitialization)
-        }
+        customSet
+          ? customSet(get, setImpl, nextInitialization)
+          : setImpl(nextInitialization)
       }
 
       return {
@@ -115,6 +82,13 @@ export const createAtoms = () => {
   }
 
   const useAtom = <State>(atom: Atom<State>) => {
+    const atomValue = useAtomValue(atom)
+    const uodateAtom = useUpdateAtom(atom)
+
+    return [atomValue, uodateAtom] as const
+  }
+
+  const useAtomValue = <State>(atom: Atom<State>) => {
     const state = useSyncExternalStore<State>(
       (onStoreChange) => {
         const { id, coworkers } = atom.read(secretToken)
@@ -132,17 +106,27 @@ export const createAtoms = () => {
       () => atom.read(secretToken).state,
     )
 
-    const setState = useCallback(
-      (nextInitialization?: Initialization<State>) => {
-        const { set } = atom.read(secretToken)
+    return state
+  }
 
-        set(nextInitialization)
+  const useUpdateAtom = <State>(atom: Atom<State>) => {
+    const setState = useCallback(
+      (resolvableState?: ResolvableState<State | undefined>) => {
+        const { state, set } = atom.read(secretToken)
+
+        set(resolveState(resolvableState, state))
       },
       [],
     )
 
-    return [state, setState] as const
+    return setState
   }
 
-  return { useAtom, atom }
+  return {
+    atom,
+    useAtom,
+    useAtomValue,
+    useUpdateAtom,
+    ...collectExtensions(extenstions, atom),
+  }
 }

@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "next": "13.0.0",
+    "next": "13.0.2",
     "react": "18.2.0",
     "uuid": "^9.0.0",
     "@jupiter/react": "*",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "@jupiter/typescript": "*",
     "@types/next": "9.0.0",
-    "@types/react": "18.0.24",
+    "@types/react": "18.0.25",
     "@types/uuid": "8.3.4"
   }
 }

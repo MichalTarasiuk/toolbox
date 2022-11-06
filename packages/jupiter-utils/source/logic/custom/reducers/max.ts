@@ -1,5 +1,3 @@
-// FIXME
-
 import type { Any } from '@jupiter/typescript'
 
 /**

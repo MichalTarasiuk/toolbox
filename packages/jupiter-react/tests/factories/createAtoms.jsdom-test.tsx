@@ -1,6 +1,8 @@
+import { isUndefined } from '@jupiter/utils'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
+import 'mock-local-storage'
 import { createAtoms } from '../../_api'
 
 describe('react:factories:createAtoms', () => {
@@ -118,5 +120,85 @@ describe('react:factories:createAtoms', () => {
     fireEvent.click(getByText('set firstname'))
 
     getByText('status: success')
+  })
+
+  it('should save counter in localstorage', () => {
+    const { atomWithStorage, useAtom } = createAtoms()
+    const counterAtom = atomWithStorage('counter', '1')
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom)
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button
+            onClick={() => {
+              setCounter((counter) => {
+                const parsedCounter = Number(counter)
+                const nextCounter = parsedCounter + 1
+
+                return nextCounter.toString()
+              })
+            }}
+          >
+            increase
+          </button>
+        </div>
+      )
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('increase'))
+
+    getByText('counter: 2')
+    expect(window.localStorage.getItem('counter')).toBe('2')
+  })
+
+  it('should not rerender component which update atom', () => {
+    const { atom, useAtomValue, useUpdateAtom } = createAtoms()
+    const counterAtom = atom(0)
+
+    const displayerSpy = jest.fn()
+    const updaterSpy = jest.fn()
+
+    const Displayer = () => {
+      const counter = useAtomValue(counterAtom)
+
+      displayerSpy()
+
+      return <p>counter: {counter}</p>
+    }
+    const Updater = () => {
+      const updateAtom = useUpdateAtom(counterAtom)
+
+      updaterSpy()
+
+      const increase = () => {
+        updateAtom((counter) => (isUndefined(counter) ? 0 : counter + 1))
+      }
+
+      return <button onClick={increase}>increase</button>
+    }
+
+    const Component = () => {
+      return (
+        <>
+          <Displayer />
+          <Updater />
+        </>
+      )
+    }
+
+    const { getByText } = render(<Component />)
+
+    fireEvent.click(getByText('increase'))
+    fireEvent.click(getByText('increase'))
+
+    getByText('counter: 2')
+
+    expect(displayerSpy).toHaveBeenCalledTimes(3)
+    expect(updaterSpy).toHaveBeenCalledTimes(1)
   })
 })

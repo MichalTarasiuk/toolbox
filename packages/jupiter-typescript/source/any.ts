@@ -34,7 +34,7 @@ export type NumberLike =
   | `${Sign | ''}${'Infinity'}`
   | null
 
-export type Comparable = string | NumberLike
+export type Comparable = string | Exclude<NumberLike, null>
 
 /**
  * `null` or `undefined`.
