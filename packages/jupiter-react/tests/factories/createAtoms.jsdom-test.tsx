@@ -5,7 +5,7 @@ import React from 'react'
 import 'mock-local-storage'
 import { createAtoms } from '../../_api'
 
-describe('react:factories:createAtoms', () => {
+describe('jsdom - react:factories:createAtoms', () => {
   it('should emit update atom', () => {
     const { atom, useAtom } = createAtoms()
     const userAtom = atom<{ name: string; age: number } | null>(null)

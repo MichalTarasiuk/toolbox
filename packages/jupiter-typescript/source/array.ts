@@ -31,10 +31,17 @@ export type Filter<
 
 export type Reduce<
   Array extends unknown[],
+  Strategy extends 'deep' | 'shallow',
   Collector extends Any.AnyObject = Any.EmptyObject,
 > = Array extends [infer First, ...infer Rest]
   ? First extends Any.AnyObject
-    ? Reduce<Rest, Custom.Overwrite<Collector, First>>
+    ? Reduce<
+        Rest,
+        Strategy,
+        Strategy extends 'shallow'
+          ? Custom.Overwrite<Collector, First>
+          : Collector & First
+      >
     : never
   : Collector
 

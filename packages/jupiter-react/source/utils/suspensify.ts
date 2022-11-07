@@ -19,7 +19,6 @@ export const suspensify = <Resolved>(promise: Promise<Resolved>) => {
 
   const read = () => {
     if (status === 'pending') {
-      console.log('throw')
       throw suspender
     }
 

@@ -5,7 +5,7 @@ import { useCustomCompareMemo } from '../../_api'
 type User = typeof mockUser
 const mockUser = { name: 'John' }
 
-describe('useCustomCompareMemo', () => {
+describe('jsdom - useCustomCompareMemo', () => {
   it(`should't invoke factory function on each rerender`, () => {
     type Props = { user: User }
     const { result, rerender } = renderHook(
