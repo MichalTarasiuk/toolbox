@@ -1,9 +1,10 @@
-// @TODO: add support for search params
-
 import { useEvent } from '@jupiter/react'
+import { none } from '@jupiter/utils'
 import { useRouter } from 'next/router'
+import querystring from 'query-string'
 import { useCallback, useEffect, useState } from 'react'
 
+import type { Any } from '@jupiter/typescript'
 import type { NextRouter } from 'next/router'
 import type { UrlObject } from 'url'
 
@@ -27,7 +28,10 @@ export const useRefreshProps = () => {
       nextUrl: string,
       transitionOptions: InferTransitionOptions<typeof router>,
     ) => {
-      if (getUrl() === nextUrl && !transitionOptions.shallow) {
+      if (
+        getUrl().replace(/\?(.)+/, none) === nextUrl.replace(/\?(.)+/, none) &&
+        !transitionOptions.shallow
+      ) {
         setIsRefreshing(true)
       }
     }
@@ -44,11 +48,16 @@ export const useRefreshProps = () => {
       router.events.off('routeChangeError', routeChangeFinishHandler)
       router.events.off('routeChangeComplete', routeChangeFinishHandler)
     }
-  }, [])
+  }, [getUrl])
 
-  const refreshProps = useCallback(() => {
-    void router.replace(router.asPath, undefined)
-  }, [router])
+  const refreshProps = useCallback(
+    (searchParams: Any.AnyObject<string, string>) => {
+      const url = `${router.asPath}?${querystring.stringify(searchParams)}`
+
+      void router.replace(url, undefined)
+    },
+    [router],
+  )
 
   return [isRefreshing, refreshProps] as const
 }
