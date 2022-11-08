@@ -1,4 +1,4 @@
-import { isString, signs, timeout } from '@jupiter/utils'
+import { isString, signs, timeout } from '@wren/utils'
 import prompt from 'prompt'
 
 import packageJSON from '../package.json'

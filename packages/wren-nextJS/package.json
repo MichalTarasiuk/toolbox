@@ -1,0 +1,25 @@
+{
+  "name": "@wren/nextjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_api.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wren/react": "*",
+    "@wren/utils": "*",
+    "deepmerge": "^4.2.2",
+    "next": "13.0.2",
+    "query-string": "^7.1.1",
+    "react": "18.2.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@wren/typescript": "*",
+    "@types/next": "9.0.0",
+    "@types/react": "18.0.25",
+    "@types/uuid": "8.3.4"
+  }
+}

@@ -31,6 +31,6 @@
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "jupiter-core",
+  "projectName": "wren",
   "projectOwner": "MichalTarasiuk"
 }
