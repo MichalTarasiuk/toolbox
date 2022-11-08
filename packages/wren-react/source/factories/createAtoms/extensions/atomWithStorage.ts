@@ -1,6 +1,6 @@
 import { isClient, isString } from '@wren/utils'
 
-import type { AtomInitialize, LazyInitialization } from '../../types'
+import type { AtomInitialize, LazyInitialization } from '../types'
 
 export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
   return <State extends string>(key: string, state: State) => {

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
 import { createEventHub, isUndefined } from '@wren/utils'
 import { useCallback, useSyncExternalStore } from 'react'
-import { v4 } from 'uuid'
 
-import * as extenstions from './helpers/extensions/extensions'
+import * as extenstions from './extensions/extensions'
 import {
-  canUpdateState,
   collectExtensions,
+  createState,
+  createWorker,
   initialize,
   resolveState,
 } from './helpers/helpers'
@@ -21,11 +21,10 @@ export const createAtoms = () => {
     initialInitialization: Initialization<State>,
     customSet?: CustomSet<State>,
   ) => {
-    const id = v4()
-    const coworkers = new Set<string>()
+    const state = createState<State>()
+    const worker = createWorker()
 
     let initialization = initialInitialization
-    let state: State | null = null
 
     const read = (token: symbol) => {
       if (token !== secretToken) {
@@ -35,7 +34,7 @@ export const createAtoms = () => {
       const get = <AtomState>(atom: Atom<AtomState>) => {
         const { id, state } = atom.read(secretToken)
 
-        coworkers.add(id)
+        worker.addCoworker(id)
 
         return state
       }
@@ -47,7 +46,7 @@ export const createAtoms = () => {
 
         initialization = nextInitialization
 
-        eventHub.emit(id)
+        eventHub.emit(worker.id)
       }
 
       const set = (nextInitialization?: Initialization<State>) => {
@@ -59,20 +58,14 @@ export const createAtoms = () => {
       return {
         get state() {
           const nextState = initialize(initialization, get, {
-            before: () => coworkers.clear(),
+            before: () => worker.stop(),
           })
+          const updatedState = state.update(nextState)
 
-          if (state === null || !canUpdateState(state, nextState)) {
-            state = nextState
-          }
-
-          return state
+          return updatedState
         },
-        get coworkers() {
-          return [...coworkers.values()]
-        },
-        id,
         set,
+        ...worker.read(),
       }
     }
 

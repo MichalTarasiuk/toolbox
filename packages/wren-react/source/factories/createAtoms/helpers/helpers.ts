@@ -1,8 +1,8 @@
-import { isFunction, objectKeys } from '@wren/utils'
+import { isFunction } from '@wren/utils'
 import equal from 'deep-equal'
+import { v4 } from 'uuid'
 
 import type {
-  AtomInitialize,
   Get,
   Initialization,
   LazyInitialization,
@@ -10,42 +10,62 @@ import type {
 } from '../types'
 import type { Any } from '@wren/typescript'
 
-type FormatExtensionKey<ExtensionKey> =
-  ExtensionKey extends `create${infer First}${infer Rest}`
-    ? `${Lowercase<First>}${Rest}`
-    : never
+export { collectExtensions } from './collectExtensions'
 
-type CollectExtensions = {
-  -readonly [ExtenstionKey in keyof Extenstions as FormatExtensionKey<ExtenstionKey>]: ReturnType<
-    Extenstions[ExtenstionKey]
-  >
+export const createState = <State>() => {
+  const initialState = Symbol()
+  let state: State | typeof initialState = initialState
+
+  const canUpdate = <State>(state: State, nextState: State) =>
+    !equal(state, nextState)
+
+  const update = (nextState: State) => {
+    if (state === initialState || canUpdate(state, nextState)) {
+      state = nextState
+    }
+
+    return state
+  }
+
+  return {
+    update,
+  }
 }
 
-type Extenstions = typeof import('./extensions/extensions')
+const isResolveableState = <State>(
+  resolvableState: ResolvableState<State>,
+): resolvableState is (state: State) => State => isFunction(resolvableState)
 
-const formatExtensionKey = <ExtensionKey extends `create${string}`>(
-  extensionKey: ExtensionKey,
-) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- narrow
-  extensionKey.replace(
-    /create(\w)(\w+)/g,
-    (_: unknown, a: string, b: string) => a.toLowerCase() + b,
-  ) as FormatExtensionKey<ExtensionKey>
+export const resolveState = <State>(
+  resolvableState: ResolvableState<State>,
+  state: State,
+) => {
+  if (isResolveableState(resolvableState)) {
+    return resolvableState(state)
+  }
 
-export const collectExtensions = (
-  extenstions: Extenstions,
-  atom: AtomInitialize,
-) =>
-  objectKeys(extenstions).reduce((collector, extenstionKey) => {
-    collector[formatExtensionKey(extenstionKey)] =
-      extenstions[extenstionKey](atom)
+  return resolvableState
+}
 
-    return collector
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- define type of collector
-  }, {} as CollectExtensions)
+export const createWorker = () => {
+  const id = v4()
+  const coworkers = new Set<string>()
 
-export const canUpdateState = <State>(state: State, nextState: State) =>
-  equal(state, nextState)
+  const addCoworker = (coworkerId: string) => {
+    coworkers.add(coworkerId)
+  }
+
+  const stop = () => coworkers.clear()
+
+  const read = () => ({ id, coworkers: [...coworkers.values()] })
+
+  return {
+    read,
+    addCoworker,
+    stop,
+    id,
+  }
+}
 
 const canResolvInitialization = <State>(
   initialization: Initialization<State>,
@@ -67,19 +87,4 @@ export const initialize = <State>(
   }
 
   return initialization
-}
-
-const isResolveableState = <State>(
-  resolvableState: ResolvableState<State>,
-): resolvableState is (state: State) => State => isFunction(resolvableState)
-
-export const resolveState = <State>(
-  resolvableState: ResolvableState<State>,
-  state: State,
-) => {
-  if (isResolveableState(resolvableState)) {
-    return resolvableState(state)
-  }
-
-  return resolvableState
 }
