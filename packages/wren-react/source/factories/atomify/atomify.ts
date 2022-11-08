@@ -13,7 +13,7 @@ import {
 
 import type { Atom, CustomSet, Initialization, ResolvableState } from './types'
 
-export const createAtoms = () => {
+export const atomify = () => {
   const eventHub = createEventHub()
   const secretToken = Symbol()
 
@@ -39,7 +39,7 @@ export const createAtoms = () => {
         return state
       }
 
-      const setImpl = (nextInitialization?: Initialization<State>) => {
+      const set = (nextInitialization?: Initialization<State>) => {
         if (isUndefined(nextInitialization)) {
           return
         }
@@ -49,10 +49,12 @@ export const createAtoms = () => {
         eventHub.emit(worker.id)
       }
 
-      const set = (nextInitialization?: Initialization<State>) => {
+      const setInitialization = (
+        nextInitialization?: Initialization<State>,
+      ) => {
         customSet
-          ? customSet(get, setImpl, nextInitialization)
-          : setImpl(nextInitialization)
+          ? customSet(get, set, nextInitialization)
+          : set(nextInitialization)
       }
 
       return {
@@ -64,7 +66,7 @@ export const createAtoms = () => {
 
           return updatedState
         },
-        set,
+        setInitialization,
         ...worker.read(),
       }
     }
@@ -105,9 +107,9 @@ export const createAtoms = () => {
   const useUpdateAtom = <State>(atom: Atom<State>) => {
     const setState = useCallback(
       (resolvableState?: ResolvableState<State | undefined>) => {
-        const { state, set } = atom.read(secretToken)
+        const { state, setInitialization } = atom.read(secretToken)
 
-        set(resolveState(resolvableState, state))
+        setInitialization(resolveState(resolvableState, state))
       },
       [],
     )

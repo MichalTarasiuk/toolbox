@@ -3,11 +3,11 @@ import { isUndefined } from '@wren/utils'
 import React from 'react'
 
 import 'mock-local-storage'
-import { createAtoms } from '../../_api'
+import { atomify } from '../../_api'
 
 describe('jsdom - react:factories:createAtoms', () => {
   it('should emit update atom', () => {
-    const { atom, useAtom } = createAtoms()
+    const { atom, useAtom } = atomify()
     const userAtom = atom<{ name: string; age: number } | null>(null)
 
     const Component = () => {
@@ -32,7 +32,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   })
 
   it('should rerender component on update atom', () => {
-    const { atom, useAtom } = createAtoms()
+    const { atom, useAtom } = atomify()
     const userAtom = atom<{ name: string; age: number } | null>(null)
 
     const Child = () => {
@@ -63,7 +63,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   })
 
   it('should invoke atom when coworked is updated', () => {
-    const { atom, useAtom } = createAtoms()
+    const { atom, useAtom } = atomify()
 
     const firstnameAtom = atom<string | null>(null)
     const userAtom = atom((get) => ({ firstname: get(firstnameAtom) }))
@@ -93,7 +93,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   })
 
   it('should work with custom set', () => {
-    const { atom, useAtom } = createAtoms()
+    const { atom, useAtom } = atomify()
 
     const firstnameAtom = atom<string | null>(null, (_, set) => {
       set('Michał')
@@ -123,7 +123,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   })
 
   it('should save counter in localstorage', () => {
-    const { atomWithStorage, useAtom } = createAtoms()
+    const { atomWithStorage, useAtom } = atomify()
     const counterAtom = atomWithStorage('counter', '1')
 
     const Component = () => {
@@ -157,7 +157,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   })
 
   it('should not rerender component which update atom', () => {
-    const { atom, useAtomValue, useUpdateAtom } = createAtoms()
+    const { atom, useAtomValue, useUpdateAtom } = atomify()
     const counterAtom = atom(0)
 
     const displayerSpy = jest.fn()
