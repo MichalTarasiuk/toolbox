@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import { sleep } from '@wren/utils'
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 
 import { suspensify } from '../../_api'
 

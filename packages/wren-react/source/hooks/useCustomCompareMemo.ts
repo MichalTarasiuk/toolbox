@@ -30,5 +30,6 @@ export const useCustomCompareMemo = <
     dependencies.current = deps
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- frostbite when `comparator` function return false
   return useMemo(factory, dependencies.current)
 }

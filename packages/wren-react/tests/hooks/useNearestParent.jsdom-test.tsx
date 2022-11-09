@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react-hooks'
-import React from 'react'
 
 import { useNearestParent, FiberProvider } from '../../_api'
 

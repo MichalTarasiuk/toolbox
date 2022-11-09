@@ -29,7 +29,7 @@ export const createServerHook = <PropsProvider extends PropsProviderType>(
       )
 
       return selectedServerCacheKey
-    }, [])
+    }, [serverCache])
 
     if (isString(serverCacheKey) && keyIn(serverCache, serverCacheKey)) {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- cache[name] has props provider result

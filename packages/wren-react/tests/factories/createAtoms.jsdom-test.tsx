@@ -1,6 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
 import { isUndefined } from '@wren/utils'
-import React from 'react'
 
 import 'mock-local-storage'
 import { atomify } from '../../_api'

@@ -1,5 +1,4 @@
 import { defer } from '@wren/utils'
-import React from 'react'
 
 import type { Any } from '@wren/typescript'
 

@@ -1,6 +1,6 @@
 import { usePrevious } from '@react-hookz/web'
 import { sleep } from '@wren/utils'
-import React, { Suspense, useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 
 import { suspensify } from '../source'
 

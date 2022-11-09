@@ -26,7 +26,7 @@
   "scripts": {
     "test": "jest --config",
     "test:watch": "jest --config --watch",
-    "single-test": "jest --config --testNamePattern 'node - nextJS:utils:composePageProps'",
+    "single-test": "jest --config --testNamePattern 'jsdom - useCustomCompareMemo'",
     "lint": "eslint . --ext .ts",
     "find-deadcode": "ts-prune -p tsconfig.base.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -41,7 +41,6 @@
     "@changesets/cli": "2.25.2",
     "@commitlint/cli": "17.2.0",
     "@commitlint/config-conventional": "17.2.0",
-    "@wren/utils": "*",
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",
     "@types/jest": "29.2.2",
@@ -49,6 +48,7 @@
     "@types/prompt": "1.1.4",
     "@typescript-eslint/eslint-plugin": "5.42.1",
     "@typescript-eslint/parser": "5.42.1",
+    "@wren/utils": "*",
     "babel-jest": "29.3.1",
     "create-file": "1.0.1",
     "eslint": "8.27.0",
@@ -73,5 +73,8 @@
     "ts-toolbelt": "9.6.0",
     "typescript": "4.8.4",
     "zx": "7.1.1"
+  },
+  "dependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

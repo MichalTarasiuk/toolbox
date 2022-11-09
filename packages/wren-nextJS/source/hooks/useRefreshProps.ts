@@ -48,7 +48,7 @@ export const useRefreshProps = () => {
       router.events.off('routeChangeError', routeChangeFinishHandler)
       router.events.off('routeChangeComplete', routeChangeFinishHandler)
     }
-  }, [getUrl])
+  }, [getUrl, router.events])
 
   const refreshProps = useCallback(
     (searchParams: Any.AnyObject<string, string>) => {
