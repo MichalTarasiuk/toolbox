@@ -9,7 +9,7 @@
   "license": "ISC",
   "dependencies": {
     "@wren/utils": "*",
-    "@react-hookz/web": "^17.0.0",
+    "@react-hookz/web": "^18.0.0",
     "deep-equal": "^2.0.5",
     "html-react-parser": "^3.0.4",
     "next": "^13.0.0",
