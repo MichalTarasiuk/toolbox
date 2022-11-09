@@ -16,12 +16,21 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "lukk12",
+      "name": "lukk12",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114113651?v=4",
+      "profile": "https://github.com/lukk12",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "projectName": "jupiter-core",
+  "projectName": "wren",
   "projectOwner": "MichalTarasiuk"
 }

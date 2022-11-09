@@ -1,0 +1,15 @@
+{
+  "name": "@wren/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_api.ts",
+  "scripts": {
+    "clean": "rm -rf ./build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wren/typescript": "*"
+  }
+}

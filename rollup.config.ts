@@ -1,5 +1,5 @@
 import typescriptPlugin from '@rollup/plugin-typescript'
-import { isObject, keyIn } from '@jupiter/utils'
+import { isObject, keyIn } from '@wren/utils'
 import { loadJsonFileSync } from 'load-json-file'
 
 import tsconfig from './tsconfig.json'
