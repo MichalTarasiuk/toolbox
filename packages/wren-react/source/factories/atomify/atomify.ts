@@ -111,7 +111,7 @@ export const atomify = () => {
 
         setInitialization(resolveState(resolvableState, state))
       },
-      [],
+      [atom],
     )
 
     return setState

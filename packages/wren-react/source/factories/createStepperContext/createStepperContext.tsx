@@ -1,5 +1,5 @@
 import { isUndefined } from '@wren/utils'
-import React, {
+import {
   createContext,
   useCallback,
   useContext,
@@ -93,7 +93,7 @@ export const createStepperContext = (steps: Steps) => {
         back,
         go,
       }),
-      [currentStep],
+      [back, currentStep, go],
     )
 
     return (

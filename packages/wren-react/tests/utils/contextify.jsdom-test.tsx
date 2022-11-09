@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import mockConsole from 'jest-mock-console'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { contextify } from '../../_api'

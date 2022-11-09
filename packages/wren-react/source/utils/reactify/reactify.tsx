@@ -1,6 +1,5 @@
 import { keyIn } from '@wren/utils'
 import parse, { attributesToProps, domToReact } from 'html-react-parser'
-import React from 'react'
 
 import { hasId, isValidName } from './assertions'
 import { getGlobalResolvers } from './globalResolvers'

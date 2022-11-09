@@ -1,10 +1,5 @@
 import { createEventHub, isObject } from '@wren/utils'
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useSyncExternalStore,
-} from 'react'
+import { useCallback, useMemo, useRef, useSyncExternalStore } from 'react'
 
 import { createSafeContext } from './createSafeContext'
 

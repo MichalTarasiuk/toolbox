@@ -1,5 +1,4 @@
 import { none } from '@wren/utils'
-import React from 'react'
 
 import { createSafeContext } from '../source'
 

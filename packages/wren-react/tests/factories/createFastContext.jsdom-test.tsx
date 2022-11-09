@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import mockConsole from 'jest-mock-console'
-import React, { memo, useCallback, useRef } from 'react'
+import { memo, useCallback, useRef } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { createFastContext } from '../../_api'
@@ -215,7 +215,7 @@ describe('jsdom - react:factories:createFastContext', () => {
 
       const increaseAge = useCallback(() => {
         setUser({ ...user, age: user.age })
-      }, [setUser])
+      }, [setUser, user])
 
       return (
         <div>

@@ -27,7 +27,7 @@ describe('jsdom - react:hooks:useHasCommit', () => {
 
         useEffect(() => {
           effect(hasCommit())
-        }, [])
+        }, [effect, hasCommit])
       },
       { initialProps: { effect: spy } },
     )

@@ -1,5 +1,5 @@
 import { objectKeys } from '@wren/utils'
-import React, { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
 
 import { isServerCacheKey } from './assertions'
 

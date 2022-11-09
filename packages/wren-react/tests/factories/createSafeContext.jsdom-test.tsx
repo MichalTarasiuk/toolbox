@@ -1,13 +1,12 @@
 import { render } from '@testing-library/react'
 import mockConsole from 'jest-mock-console'
-import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { createSafeContext } from '../../_api'
 
 import type { ReactNode } from 'react'
 
-describe('react:factories:createSafeContext', () => {
+describe('jsdom - react:factories:createSafeContext', () => {
   it('should render', () => {
     const [UserProvider, useUser] = createSafeContext<{ name: string }>('user')
 
