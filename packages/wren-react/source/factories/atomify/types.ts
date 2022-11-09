@@ -16,11 +16,16 @@ export type AtomInitialize = <State>(
   customSet?: CustomSet<State>,
 ) => Atom<State>
 
+export type ReadAtom<AnyAtom> = AnyAtom extends {
+  read: (token: symbol) => { readonly state: infer State }
+}
+  ? State
+  : never
 export type Atom<State = unknown> = {
   read: (token: symbol) => {
     id: string
     readonly state: State
     readonly coworkers: string[]
-    set: (nextInitialization?: Initialization<State>) => void
+    setInitialization: (nextInitialization?: Initialization<State>) => void
   }
 }

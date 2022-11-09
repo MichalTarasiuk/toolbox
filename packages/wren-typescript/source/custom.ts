@@ -58,3 +58,7 @@ export type Narrow<Type> =
       number | string | boolean | bigint | symbol | null | undefined | []
     >
   | ([Type] extends [[]] ? [] : { [Key in keyof Type]: Narrow<Type[Key]> })
+
+export type TypeOf<Target, Value> = Exclude<Value, Target> extends never
+  ? true
+  : false
