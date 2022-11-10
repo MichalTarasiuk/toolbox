@@ -62,3 +62,8 @@ export type Narrow<Type> =
 export type TypeOf<Target, Value> = Exclude<Value, Target> extends never
   ? true
   : false
+
+declare const UNDEFINED_VOID_ONLY: unique symbol
+// Destructors are only allowed to return void.
+export type Destructor = () => void | { [UNDEFINED_VOID_ONLY]: never }
+export type VoidOrUndefinedOnly = void | { [UNDEFINED_VOID_ONLY]: never }

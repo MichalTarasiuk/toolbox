@@ -14,6 +14,14 @@ export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((
 type CreateServerHook = typeof createServerHook
 export type ServerHook = ReturnType<CreateServerHook>
 
+/**
+ * `createServerHook` returns hook lets you write React hooks for data queries in NextJS by lifting static props into React Context.
+ *
+ * @param name - unqiue key which define cache value
+ * @param propsProvider - provide value to cache having access to server side
+ *
+ * @returns cached value base on name
+ */
 export const createServerHook = <PropsProvider extends PropsProviderType>(
   name: string,
   propsProvider: PropsProvider,
