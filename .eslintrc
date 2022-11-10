@@ -11,7 +11,8 @@
     "prettier",
     "plugin:import/errors",
     "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-hooks/recommended"
   ],
   "ignorePatterns": ["*.config.js", "*.config.ts", "examples/**/*"],
   "rules": {

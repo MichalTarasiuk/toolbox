@@ -5,16 +5,16 @@
   },
   "references": [
     {
-      "path": "packages/jupiter-utils"
+      "path": "packages/wren-utils"
     },
     {
-      "path": "packages/jupiter-typescript"
+      "path": "packages/wren-typescript"
     },
     {
-      "path": "packages/jupiter-react"
+      "path": "packages/wren-react"
     },
     {
-      "path": "packages/jupiter-nextJS"
+      "path": "packages/wren-nextJS"
     }
   ],
   "extends": "./tsconfig.base.json"

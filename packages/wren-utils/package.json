@@ -1,0 +1,13 @@
+{
+  "name": "@wren/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_api.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wren/typescript": "*"
+  }
+}
