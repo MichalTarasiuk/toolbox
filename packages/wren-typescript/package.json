@@ -2,6 +2,7 @@
   "name": "@wren/typescript",
   "version": "1.0.0",
   "description": "",
+  "build": false,
   "main": "_api.ts",
   "scripts": {
     "clean": "rm -rf ./build"

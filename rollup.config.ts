@@ -1,12 +1,22 @@
-import typescriptPlugin from '@rollup/plugin-typescript'
 import stripPlugin from '@rollup/plugin-strip'
+import typescriptPlugin from '@rollup/plugin-typescript'
+import commonJsPlugin from '@rollup/plugin-commonjs'
+import { nodeResolve as nodeResolvePlugin } from '@rollup/plugin-node-resolve'
 import { isObject, keyIn } from '@wren/utils'
 
-import type { RollupOptions } from 'rollup'
+type Reference = { path: string }
 
-type RollupOptionsList = Array<RollupOptions>
+const outputFile = '_api.ts'
+const outputDirectory = 'build'
 
-const shouldSkip = ['packages/jupiter-typescript']
+const canBundlePacakge = async (reference: Reference) => {
+  const packageJSON = await import(`./${reference.path}/package.json`)
+
+  return (
+    isObject(packageJSON) &&
+    (keyIn(packageJSON, 'build') ? packageJSON.build : true)
+  )
+}
 
 const readCompilerOptions = (tsconfig: unknown) => {
   if (
@@ -22,32 +32,37 @@ const readCompilerOptions = (tsconfig: unknown) => {
 
 const rollup = async () => {
   const tsconfig = await import('./tsconfig.json')
+  const references: Reference[] = []
 
-  const rollupOptionsList: RollupOptionsList = await Promise.all(
-    tsconfig.references
-      .filter((reference) => !shouldSkip.includes(reference.path))
-      .map(async (reference) => {
-        const tsconfig = await import(`./${reference.path}/tsconfig.json`)
-        const compilerOptions = readCompilerOptions(tsconfig)
+  for await (const reference of tsconfig.references) {
+    if (await canBundlePacakge(reference)) {
+      references.push(reference)
+    }
+  }
 
-        return {
-          input: `${reference.path}/_api.ts`,
-          output: {
-            dir: `${reference.path}/build`,
-            format: 'cjs',
-          },
-          plugins: [
-            typescriptPlugin({
-              tsconfig: './tsconfig.base.json',
-              compilerOptions,
-            }),
-            stripPlugin(),
-          ],
-        }
-      }),
+  return Promise.all(
+    references.map(async (reference: Reference) => {
+      const tsconfig = await import(`./${reference.path}/tsconfig.json`)
+      const compilerOptions = readCompilerOptions(tsconfig)
+
+      return {
+        input: `${reference.path}/${outputFile}`,
+        output: {
+          dir: `${reference.path}/${outputDirectory}`,
+          format: 'cjs',
+        },
+        plugins: [
+          typescriptPlugin({
+            tsconfig: './tsconfig.base.json',
+            compilerOptions,
+          }),
+          stripPlugin(),
+          commonJsPlugin(),
+          nodeResolvePlugin(),
+        ],
+      }
+    }),
   )
-
-  return rollupOptionsList
 }
 
 export default rollup
