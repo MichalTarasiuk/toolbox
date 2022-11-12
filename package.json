@@ -34,7 +34,7 @@
     "test:jest:watch": "jest --config --watch",
     "test:jest:single-test": "jest --config --testNamePattern 'react:factories:createAtoms'",
     "add-package": "ts-node scripts/addPackage.ts",
-    "build": "rollup --config rollup.config.js"
+    "build": "pnpm run clean && rollup --config rollup.config.js"
   },
   "devDependencies": {
     "@babel/core": "7.20.2",

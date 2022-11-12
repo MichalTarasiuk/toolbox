@@ -11,7 +11,7 @@
   "license": "ISC",
   "exports": {
     "import": "./build/_api.mjs",
-    "default": "./build/_api.mjs",
+    "default": "./_api.ts",
     "require": "./build/_api.cjs",
     "browser": "./build/_api.umd.js"
   },

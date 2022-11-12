@@ -49,7 +49,7 @@ const hasValidEntryFileName = <Key extends FormatMapperValues>(
   packageJSON: unknown,
   key: Key,
 ): packageJSON is { exports: Record<Key, string> } => {
-  const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exportss')
+  const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exports')
   const hasValidKey =
     hasExportsProp &&
     isObject(packageJSON['exports']) &&
@@ -66,7 +66,7 @@ const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
     return packageJSON.exports[key].replace(/\.\/build\//, none)
   }
 
-  throw Error('something went wrong')
+  throw Error(`can't infer entryFileNames prop`)
 }
 
 const rollup = async () => {
