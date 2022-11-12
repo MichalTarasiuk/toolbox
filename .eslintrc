@@ -67,7 +67,6 @@
     ],
     "functional/no-loop-statement": "error",
     "functional/no-this-expression": "error",
-    "import/dynamic-import-chunkname": "error",
     "import/no-anonymous-default-export": "error",
     "import/no-default-export": "error",
     "import/no-duplicates": "error",
