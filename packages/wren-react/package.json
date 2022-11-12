@@ -9,6 +9,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "exports": {
+    "import": "./build/_api.mjs",
+    "default": "./build/_api.mjs",
+    "require": "./build/_api.cjs",
+    "browser": "./build/_api.umd.js"
+  },
   "dependencies": {
     "deep-equal": "^2.0.5",
     "html-react-parser": "^3.0.4",
