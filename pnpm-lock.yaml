@@ -123,7 +123,7 @@ importers:
 
   packages/wren-react:
     specifiers:
-      '@react-hookz/web': ^18.0.0
+      '@react-hookz/web': ^19.0.0
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.25
       '@types/react-reconciler': 0.28.0
@@ -146,7 +146,7 @@ importers:
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
       uuid: 9.0.0
     devDependencies:
-      '@react-hookz/web': 18.0.0_biqbaboplfbrettd7655fr4n2y
+      '@react-hookz/web': 19.1.0_biqbaboplfbrettd7655fr4n2y
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.25
       '@types/react-reconciler': 0.28.0
@@ -2403,8 +2403,8 @@ packages:
     resolution: {integrity: sha512-lGZR5l3YRjzeIOHtJhiq96vQKrsq+9lsCyv+0fROMQeSNWtLLzX3R+psHNi6nsoP3XEhspiZ92nsiPmdNo8ztQ==}
     dev: true
 
-  /@react-hookz/web/18.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-72L9a+Ap5c3YFQUxdWZ4RzBXcniTSzEPdHKZQE9QmEddMHf+V9VyXDGaqnoXtGX/5Jcqad2vzGIfRVnzdDi/4g==}
+  /@react-hookz/web/19.1.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-BVIJ+UVpyM56zWlWEl2oTcQYzW6yXPtI158+JzUO1CqY5QqpCeiM1cteTKF1QyCV5rsGvGuI75CVytubnKuCzA==}
     peerDependencies:
       js-cookie: ^3.0.1
       react: ^16.8 || ^17 || ^18
