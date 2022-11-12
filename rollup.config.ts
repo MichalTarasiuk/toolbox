@@ -49,7 +49,7 @@ const hasValidEntryFileName = <Key extends FormatMapperValues>(
   packageJSON: unknown,
   key: Key,
 ): packageJSON is { exports: Record<Key, string> } => {
-  const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exportss')
+  const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exports')
   const hasValidKey =
     hasExportsProp &&
     isObject(packageJSON['exports']) &&
@@ -66,7 +66,7 @@ const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
     return packageJSON.exports[key].replace(/\.\/build\//, none)
   }
 
-  throw Error('something went wrong')
+  throw Error(`can't infer entryFileNames prop`)
 }
 
 const rollup = async () => {
@@ -82,11 +82,14 @@ const rollup = async () => {
   return Promise.all(
     formats.flatMap((format) =>
       references.map(async (reference: Reference) => {
-        const packageJSON = await import(`./${reference.path}/package.json`)
-        const entryFileNames = readEntryFileNames(packageJSON, format)
-
-        const tsconfig = await import(`./${reference.path}/tsconfig.json`)
-        const compilerOptions = readCompilerOptions(tsconfig)
+        const [entryFileNames, compilerOptions] = await Promise.all([
+          import(`./${reference.path}/package.json`).then((packageJSON) =>
+            readEntryFileNames(packageJSON, format),
+          ),
+          import(`./${reference.path}/tsconfig.json`).then((tsconfig) =>
+            readCompilerOptions(tsconfig),
+          ),
+        ])
 
         const rollupOptions: RollupOptions = {
           input: `${reference.path}/${outputFile}`,
