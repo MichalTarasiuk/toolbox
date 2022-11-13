@@ -79,39 +79,41 @@ const rollup = async () => {
     }
   }
 
+  const referenceEntries = references.flatMap((reference) =>
+    formats.map((format) => [reference, format] as const),
+  )
+
   return Promise.all(
-    formats.flatMap((format) =>
-      references.map(async (reference: Reference) => {
-        const [entryFileNames, compilerOptions] = await Promise.all([
-          import(`./${reference.path}/package.json`).then((packageJSON) =>
-            readEntryFileNames(packageJSON, format),
-          ),
-          import(`./${reference.path}/tsconfig.json`).then((tsconfig) =>
-            readCompilerOptions(tsconfig),
-          ),
-        ])
+    referenceEntries.map(async ([reference, format]) => {
+      const [entryFileNames, compilerOptions] = await Promise.all([
+        import(`./${reference.path}/package.json`).then((packageJSON) =>
+          readEntryFileNames(packageJSON, format),
+        ),
+        import(`./${reference.path}/tsconfig.json`).then((tsconfig) =>
+          readCompilerOptions(tsconfig),
+        ),
+      ])
 
-        const rollupOptions: RollupOptions = {
-          input: `${reference.path}/${outputFile}`,
-          output: {
-            dir: `${reference.path}/${outputDirectory}`,
-            format,
-            entryFileNames,
-          },
-          plugins: [
-            typescriptPlugin({
-              tsconfig: './tsconfig.base.json',
-              compilerOptions,
-            }),
-            stripPlugin(),
-            commonJsPlugin(),
-            nodeResolvePlugin(),
-          ],
-        }
+      const rollupOptions: RollupOptions = {
+        input: `${reference.path}/${outputFile}`,
+        output: {
+          dir: `${reference.path}/${outputDirectory}`,
+          format,
+          entryFileNames,
+        },
+        plugins: [
+          typescriptPlugin({
+            tsconfig: './tsconfig.base.json',
+            compilerOptions,
+          }),
+          stripPlugin(),
+          commonJsPlugin(),
+          nodeResolvePlugin(),
+        ],
+      }
 
-        return rollupOptions
-      }),
-    ),
+      return rollupOptions
+    }),
   )
 }
 
