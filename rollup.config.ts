@@ -2,8 +2,9 @@ import commonJsPlugin from '@rollup/plugin-commonjs'
 import { nodeResolve as nodeResolvePlugin } from '@rollup/plugin-node-resolve'
 import stripPlugin from '@rollup/plugin-strip'
 import typescriptPlugin from '@rollup/plugin-typescript'
-import { isObject, isString, keyIn, none } from '@wren/utils'
+import { isObject, isString, keyIn, none, objectKeys } from '@wren/utils'
 
+import type { Any } from '@wren/typescript'
 import type { RollupOptions } from 'rollup'
 
 type Reference = { path: string }
@@ -74,8 +75,24 @@ const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
     return basename(path)
   }
 
-  throw Error(`can't infer entryFileNames prop`)
+  return none
 }
+
+const hasdDependencies = (
+  packageJSON: unknown,
+): packageJSON is { dependencies: Any.AnyObject<string, string> } => {
+  const hasDependenciesProp =
+    isObject(packageJSON) && keyIn(packageJSON, 'dependencies')
+
+  return (
+    hasDependenciesProp &&
+    isObject(packageJSON.dependencies) &&
+    objectKeys(packageJSON.dependencies).every(isString)
+  )
+}
+
+const readDependencies = (packageJSON: unknown) =>
+  hasdDependencies(packageJSON) ? objectKeys(packageJSON.dependencies) : []
 
 const rollup = async () => {
   const tsconfig = await import('./tsconfig.json')
@@ -93,14 +110,16 @@ const rollup = async () => {
 
   return Promise.all(
     referenceEntries.map(async ([reference, format]) => {
-      const [entryFileNames, compilerOptions] = await Promise.all([
-        import(`./${reference.path}/package.json`).then((packageJSON) =>
-          readEntryFileNames(packageJSON, format),
-        ),
-        import(`./${reference.path}/tsconfig.json`).then((tsconfig) =>
-          readCompilerOptions(tsconfig),
-        ),
-      ])
+      const [{ entryFileNames, resolveOnly }, compilerOptions] =
+        await Promise.all([
+          import(`./${reference.path}/package.json`).then((packageJSON) => ({
+            resolveOnly: readDependencies(packageJSON),
+            entryFileNames: readEntryFileNames(packageJSON, format),
+          })),
+          import(`./${reference.path}/tsconfig.json`).then((tsconfig) =>
+            readCompilerOptions(tsconfig),
+          ),
+        ])
 
       const rollupOptions: RollupOptions = {
         input: `${reference.path}/${outputFile}`,
@@ -116,7 +135,9 @@ const rollup = async () => {
           }),
           stripPlugin(),
           commonJsPlugin(),
-          nodeResolvePlugin(),
+          nodeResolvePlugin({
+            resolveOnly,
+          }),
         ],
       }
 

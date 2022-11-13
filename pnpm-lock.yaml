@@ -22,6 +22,7 @@ importers:
       '@types/prompt': 1.1.4
       '@typescript-eslint/eslint-plugin': 5.42.1
       '@typescript-eslint/parser': 5.42.1
+      '@wren/typescript': '*'
       '@wren/utils': '*'
       babel-jest: 29.3.1
       create-file: 1.0.1
@@ -67,6 +68,7 @@ importers:
       '@types/prompt': 1.1.4
       '@typescript-eslint/eslint-plugin': 5.42.1_2udltptbznfmezdozpdoa2aemq
       '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
+      '@wren/typescript': link:packages/wren-typescript
       '@wren/utils': link:packages/wren-utils
       babel-jest: 29.3.1_@babel+core@7.20.2
       create-file: 1.0.1

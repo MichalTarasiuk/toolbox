@@ -56,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "5.42.1",
     "@typescript-eslint/parser": "5.42.1",
     "@wren/utils": "*",
+    "@wren/typescript": "*",
     "babel-jest": "29.3.1",
     "create-file": "1.0.1",
     "eslint": "8.27.0",
