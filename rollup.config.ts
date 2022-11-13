@@ -15,7 +15,7 @@ type FormatMapper = typeof formatMapper
 type FormatMapperKeys = keyof FormatMapper
 type FormatMapperValues = FormatMapper[FormatMapperKeys]
 
-const outputFile = '_api.ts'
+const inputFile = '_api.ts'
 const outputDirectory = 'build'
 
 const formats = ['cjs', 'es'] as const
@@ -78,7 +78,7 @@ const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
   return none
 }
 
-const hasdDependencies = (
+const hasDependencies = (
   packageJSON: unknown,
 ): packageJSON is { dependencies: Any.AnyObject<string, string> } => {
   const hasDependenciesProp =
@@ -92,7 +92,7 @@ const hasdDependencies = (
 }
 
 const readDependencies = (packageJSON: unknown) =>
-  hasdDependencies(packageJSON) ? objectKeys(packageJSON.dependencies) : []
+  hasDependencies(packageJSON) ? objectKeys(packageJSON.dependencies) : []
 
 const rollup = async () => {
   const tsconfig = await import('./tsconfig.json')
@@ -122,7 +122,7 @@ const rollup = async () => {
         ])
 
       const rollupOptions: RollupOptions = {
-        input: `${reference.path}/${outputFile}`,
+        input: `${reference.path}/${inputFile}`,
         output: {
           dir: `${reference.path}/${outputDirectory}`,
           format,
