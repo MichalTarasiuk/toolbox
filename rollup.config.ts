@@ -24,6 +24,12 @@ const formatMapper = {
   umd: 'browser',
 } as const
 
+const basename = (path: string) => {
+  const regExpMatchArray = path.match(/[^\\/]+?(\.\w+$)/)
+
+  return regExpMatchArray ? regExpMatchArray[0] : none
+}
+
 const canBundlePacakge = async (reference: Reference) => {
   const packageJSON = await import(`./${reference.path}/package.json`)
 
@@ -63,7 +69,9 @@ const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
   const key = formatMapper[format]
 
   if (hasValidEntryFileName(packageJSON, key)) {
-    return packageJSON.exports[key].replace(/\.\/build\//, none)
+    const path = packageJSON.exports[key]
+
+    return basename(path)
   }
 
   throw Error(`can't infer entryFileNames prop`)
