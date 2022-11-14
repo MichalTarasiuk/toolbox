@@ -1,4 +1,4 @@
-import { createRange } from '../../../source'
+import { createRange } from '../../custom/custom'
 
 /**
  * A {@link Range} of 1xx HTTP response status codes.
