@@ -20,12 +20,11 @@ import {
   isWeakSet,
   isDate,
   isError,
-  coalesce,
   isPrimitive,
 } from '../../_api'
 
-describe('node - logic:typeof', () => {
-  test('logic:common:typeof:primitives', () => {
+describe('node - logic:assertions', () => {
+  test('logic:assertions:primitives', () => {
     // isString
     expect(isString('Hello World')).toBeTruthy()
     expect(isString(100)).toBeFalsy()
@@ -53,9 +52,17 @@ describe('node - logic:typeof', () => {
     // isNull
     expect(isNull(null)).toBeTruthy()
     expect(isNull(undefined)).toBeFalsy()
+
+    // isPrimitive
+    expect(isPrimitive(1)).toBeTruthy()
+    expect(isPrimitive('hello world')).toBeTruthy()
+    expect(isPrimitive(false)).toBeTruthy()
+
+    expect(isPrimitive({})).toBeFalsy()
+    expect(isPrimitive([])).toBeFalsy()
   })
 
-  test('logic:common:typeof:functions', () => {
+  test('logic:assertions:functions', () => {
     // isFunction
     expect(isFunction(() => {})).toBeTruthy()
     expect(isFunction({})).toBeFalsy()
@@ -69,7 +76,7 @@ describe('node - logic:typeof', () => {
     expect(isAsyncFunction({})).toBeFalsy()
   })
 
-  test('logic:common:typeof:objects', () => {
+  test('logic:assertions:objects', () => {
     // isObject
     expect(isObject({})).toBeTruthy()
     expect(isObject([])).toBeFalsy()
@@ -111,25 +118,11 @@ describe('node - logic:typeof', () => {
     expect(isError(`something went wrong  ¯\_(ツ)_/¯`)).toBeFalsy()
   })
 
-  test('logic:common:nullish', () => {
+  test('logic:assertions:nullish', () => {
     expect(nullish(null)).toBeTruthy()
     expect(nullish(undefined)).toBeTruthy()
 
     expect(nullish('hello world')).toBeFalsy()
     expect(nullish(3029302)).toBeFalsy()
-  })
-
-  test('logic:common:coalesce', () => {
-    expect(coalesce(null, undefined, '', NaN, 'Waldo')).toBe('')
-    expect(coalesce(null, undefined)).toBe(undefined)
-  })
-
-  test('logic:custom:isPrimitive', () => {
-    expect(isPrimitive(1)).toBeTruthy()
-    expect(isPrimitive('hello world')).toBeTruthy()
-    expect(isPrimitive(false)).toBeTruthy()
-
-    expect(isPrimitive({})).toBeFalsy()
-    expect(isPrimitive([])).toBeFalsy()
   })
 })

@@ -1,7 +1,7 @@
-import { lowercaseFirst, uppercaseFirst, truncate } from '../../_api'
+import { lowercaseFirst, uppercaseFirst, truncate } from '../../../_api'
 
-describe('node - logic:string', () => {
-  test('logic:string:letterSize', () => {
+describe('node - logic:types:string', () => {
+  test('logic:types:string:letterSize', () => {
     // lowercaseFirst
     expect(lowercaseFirst('Hello world')).toBe('hello world')
 
@@ -9,7 +9,7 @@ describe('node - logic:string', () => {
     expect(uppercaseFirst('hello world')).toBe('Hello world')
   })
 
-  test('logic:string:truncate', () => {
+  test('logic:types:string:truncate', () => {
     expect(truncate('hello, world', 5, '...')).toBe('hello...')
     expect(truncate('hello, world', 0, '...')).toBe('...')
   })

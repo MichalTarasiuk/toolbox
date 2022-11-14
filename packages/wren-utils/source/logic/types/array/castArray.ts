@@ -1,4 +1,4 @@
-import { isArray } from '../../source'
+import { isArray } from '../../../source'
 
 import type { Any } from '@wren/typescript'
 

@@ -1,5 +1,5 @@
 // @TODO: add description for each utility and typings
-import { isClient } from '../../../_api'
+import { isClient } from '../../../../_api'
 
 /**
  * Check that device has IOS operating system.

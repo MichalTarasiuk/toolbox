@@ -5,20 +5,20 @@ import {
   compact,
   asyncFlatMap,
   sleep,
-} from '../../_api'
+} from '../../../_api'
 
-describe('node - logic:array', () => {
-  test('logic:array:castArray', () => {
+describe('node - logic:types:array', () => {
+  test('logic:types:array:castArray', () => {
     expect(castArray('hello world')).toEqual(['hello world'])
     expect(castArray(100)).toEqual([100])
   })
 
-  test('logic:array:union', () => {
+  test('logic:types:array:union', () => {
     expect(union([1, 2, 3, 4, 4])).toEqual([1, 2, 3, 4])
     expect(union([3, 2, 1])).toEqual([3, 2, 1])
   })
 
-  test('logic:array:chunk', () => {
+  test('logic:types:array:chunk', () => {
     expect(chunk([1, 2, 3, 4], 2)).toEqual([
       [1, 2],
       [3, 4],
@@ -26,12 +26,12 @@ describe('node - logic:array', () => {
     expect(chunk([1, 2, 3, 4], 3)).toEqual([[1, 2, 3], [4]])
   })
 
-  test('logic:array:compact', () => {
+  test('logic:types:array:compact', () => {
     expect(compact([1, false, []])).toEqual([1, []])
     expect(compact([1, true, []])).toEqual([1, true, []])
   })
 
-  test('logic:array:asyncFlatMap', async () => {
+  test('logic:types:array:asyncFlatMap', async () => {
     const initialArray = [1, 2]
 
     const asyncArray = await asyncFlatMap(

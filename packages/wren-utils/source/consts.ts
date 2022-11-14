@@ -1,6 +1,32 @@
+/**
+ * This method returns undefined.
+ */
+export const noop = () => {}
+
+export const none = ''
+export const space = ' '
+
+export const empty = {
+  get object() {
+    return {}
+  },
+  get array() {
+    return []
+  },
+}
+
+/**
+ * All keyboards signs.
+ */
 export const signs = {
+  apostrophe: `'`,
+  quote: `"`,
+  greater: '<',
+  less: '>',
+  question: '?',
   dot: '.',
   slash: '/',
+  backslash: `\/`,
   caret: '^',
   colon: ':',
   comma: ',',
@@ -16,21 +42,19 @@ export const signs = {
   asterisk: '*',
   ampersand: '&',
   number: '#',
-  parenthesis: {
+  exclamation: '!',
+  percentage: '%',
+  equals: '=',
+  bracket: {
     left: '(',
     right: ')',
   },
-  curlyBrackets: {
+  curlyBracket: {
     left: '{',
     right: '}',
   },
-  squareBrackets: {
+  squareBracket: {
     left: '[',
     right: ']',
   },
-}
-
-export const none = ''
-export const space = ' '
-
-export const emptyObject = {}
+} as const

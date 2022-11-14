@@ -1,9 +1,9 @@
-import { timeout, settled, sleep, expectType } from '../../_api'
+import { timeout, settled, sleep, expectType } from '../../../_api'
 
 import type { Any } from '@wren/typescript'
 
-describe('node - logic:promise', () => {
-  it('logic:promise:sleep', async () => {
+describe('node - logic:types:promise', () => {
+  it('logic:types:promise:sleep', async () => {
     const user = { name: 'Michał', age: 19 }
     const [fetchUser] = sleep(1000, user)
 
@@ -12,7 +12,7 @@ describe('node - logic:promise', () => {
     expect(fetchedUser).toEqual(user)
   })
 
-  it('logic:promise:timeout', async () => {
+  it('logic:types:promise:timeout', async () => {
     const user = { name: 'Michał', age: 19 }
     const timeoutMs = 1000
     const [fetchUserPromise] = sleep(timeoutMs, user)
@@ -27,7 +27,7 @@ describe('node - logic:promise', () => {
     expect(fetchedUser).toEqual(user)
   })
 
-  it('logic:promise:settled', async () => {
+  it('logic:types:promise:settled', async () => {
     const user = { name: 'Michał', age: 19 }
     const [fetchUserPromise] = sleep(1000, user)
 

@@ -1,6 +1,6 @@
 // import { entries, fromEntries } from '@wren/utils'
 
-import { keyIn } from '../../source'
+import { keyIn } from '../../../source'
 
 import type { Any } from '@wren/typescript'
 

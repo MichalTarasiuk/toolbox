@@ -7,7 +7,7 @@ import {
   toHSLObject,
   toRGBObject,
   setLightness,
-} from '../../_api'
+} from '../../../_api'
 
 describe('node - logic:custom', () => {
   test('logic:custom:factories:createAutoPercentage', () => {
