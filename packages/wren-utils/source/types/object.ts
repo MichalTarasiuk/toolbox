@@ -1,4 +1,4 @@
-import type { Any, Object as ObjectType } from '@wren/typescript'
+import type { Any, Custom, Object as ObjectType } from '@wren/typescript'
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -22,7 +22,9 @@ export const objectKeys = <
  *
  * @returns an array of key/values of the enumerable properties of an object
  */
-export const entries = <Object extends Any.AnyObject>(object: Object) =>
+export const entries = <Object extends Any.AnyObject>(
+  object: Custom.Narrow<Object>,
+) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   Object.entries(object) as ObjectType.Entries<Object>
 
@@ -31,11 +33,11 @@ export const entries = <Object extends Any.AnyObject>(object: Object) =>
  *
  * @returns an object created by key-value entries for properties and methods
  */
-export const fromEntries = <Entry extends Array<[PropertyKey, unknown]>>(
-  entry: Entry,
+export const fromEntries = <Entries extends Array<[PropertyKey, unknown]>>(
+  entries: Custom.Narrow<Entries>,
 ) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  Object.fromEntries(entry) as ObjectType.FromEntries<Entry>
+  Object.fromEntries(entries) as ObjectType.FromEntries<Entries>
 
 /**
  * @param object - Specified object.
