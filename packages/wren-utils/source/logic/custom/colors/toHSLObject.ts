@@ -1,9 +1,11 @@
+import type { Number as NumberType } from '@wren/typescript'
+
 type ToHSLObject<HSL> =
   HSL extends `hsl(${infer Hue}, ${infer Saturation}%, ${infer Lightness}%)`
     ? {
-        hue: Hue
-        saturation: Saturation
-        lightness: Lightness
+        hue: NumberType.ToNumber<Hue>
+        saturation: NumberType.ToNumber<Saturation>
+        lightness: NumberType.ToNumber<Lightness>
       }
     : never
 

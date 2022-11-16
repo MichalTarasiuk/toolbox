@@ -1,9 +1,11 @@
+import type { Number as NumberType } from '@wren/typescript'
+
 type ToRGBObject<RGB> =
   RGB extends `rgb(${infer Red}, ${infer Green}, ${infer Blue})`
     ? {
-        red: Red
-        green: Green
-        blue: Blue
+        red: NumberType.ToNumber<Red>
+        green: NumberType.ToNumber<Green>
+        blue: NumberType.ToNumber<Blue>
       }
     : never
 

@@ -1,5 +1,5 @@
 import {
-  castArray,
+  toArray,
   union,
   chunk,
   compact,
@@ -9,8 +9,8 @@ import {
 
 describe('node - logic:types:array', () => {
   test('logic:types:array:castArray', () => {
-    expect(castArray('hello world')).toEqual(['hello world'])
-    expect(castArray(100)).toEqual([100])
+    expect(toArray('hello world')).toEqual(['hello world'])
+    expect(toArray(100)).toEqual([100])
   })
 
   test('logic:types:array:union', () => {
