@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import { createEventHub, isUndefined } from '@wren/utils'
+import { createEventHub } from '@wren/utils'
 import { useCallback, useSyncExternalStore } from 'react'
 
 import * as extenstions from './extensions/extensions'
@@ -39,11 +39,7 @@ export const atomify = () => {
         return state
       }
 
-      const set = (nextInitialization?: Initialization<State>) => {
-        if (isUndefined(nextInitialization)) {
-          return
-        }
-
+      const set = (nextInitialization: Initialization<State>) => {
         initialization = nextInitialization
 
         eventHub.emit(worker.id)
@@ -52,9 +48,12 @@ export const atomify = () => {
       const setInitialization = (
         nextInitialization?: Initialization<State>,
       ) => {
-        customSet
-          ? customSet(get, set, nextInitialization)
-          : set(nextInitialization)
+        if (customSet) {
+          customSet(get, set, nextInitialization)
+          return
+        }
+
+        nextInitialization && set(nextInitialization)
       }
 
       return {

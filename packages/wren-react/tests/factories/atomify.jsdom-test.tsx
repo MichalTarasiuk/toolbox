@@ -4,7 +4,7 @@ import { isUndefined } from '@wren/utils'
 import 'mock-local-storage'
 import { atomify } from '../../_api'
 
-describe('jsdom - react:factories:createAtoms', () => {
+describe('jsdom - react:factories:atomify', () => {
   it('should emit update atom', () => {
     const { atom, useAtom } = atomify()
     const userAtom = atom<{ name: string; age: number } | null>(null)
