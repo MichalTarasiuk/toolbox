@@ -1,13 +1,14 @@
 import {
   createAutoPercentage,
   createEventHub,
-  min,
+  expectType,
   max,
+  min,
+  setLightness,
   sum,
   toHSLObject,
   toRGBObject,
-  setLightness,
-} from '../../../_api'
+} from '../../_api'
 
 describe('node - logic:custom', () => {
   test('logic:custom:factories:createAutoPercentage', () => {
@@ -42,6 +43,35 @@ describe('node - logic:custom', () => {
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
+  test('logic:custom:colors', () => {
+    const colorHSL = 'hsl(10, 10%, 10%)'
+    const colorRGB = 'rgb(10, 10, 10)'
+
+    // setLightness
+    const newColor = setLightness(10, colorHSL)
+
+    expect(newColor).toBe('hsl(10, 10%, 20%)')
+    expectType<'hsl(10, 10%, 20%)'>(newColor)
+
+    // toHSLObject
+    const hslObject = toHSLObject(colorHSL)
+
+    expect(hslObject).toEqual({
+      hue: 10,
+      saturation: 10,
+      lightness: 10,
+    })
+
+    // toRGBObject
+    const rgbObject = toRGBObject(colorRGB)
+
+    expect(rgbObject).toEqual({
+      red: 10,
+      green: 10,
+      blue: 10,
+    })
+  })
+
   test('logic:custom:reducers', () => {
     const example = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -53,25 +83,5 @@ describe('node - logic:custom', () => {
 
     // logic:custom:reducers:sum
     expect(example.reduce(sum)).toBe(55)
-  })
-
-  test('logic:custom:colors', () => {
-    // logic:custom:colors:setLightness
-    expect(setLightness(10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 60%)')
-    expect(setLightness(-10, 'hsl(330, 50%, 50%)')).toBe('hsl(330, 50%, 40%)')
-
-    // logic:custom:colors:toHSLObject
-    expect(toHSLObject('hsl(50, 10%, 10%)')).toEqual({
-      hue: 50,
-      saturation: 10,
-      lightness: 10,
-    })
-
-    // logic:custom:colors:toRGBObject
-    expect(toRGBObject('rgb(255, 12, 0)')).toEqual({
-      red: 255,
-      green: 12,
-      blue: 0,
-    })
   })
 })
