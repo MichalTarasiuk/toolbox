@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- assertions for tests */
 import {
   nullish,
   isString,
@@ -21,6 +22,9 @@ import {
   isDate,
   isError,
   isPrimitive,
+  isTruthy,
+  expectType,
+  expectNever,
 } from '../../_api'
 
 describe('node - logic:assertions', () => {
@@ -124,5 +128,21 @@ describe('node - logic:assertions', () => {
 
     expect(nullish('hello world')).toBeFalsy()
     expect(nullish(3029302)).toBeFalsy()
+  })
+
+  test('logic:assertions:isTruthy', () => {
+    const example = 'hello world' as 'hello world' | null
+
+    expect(isTruthy(example)).toBeTruthy()
+
+    // ts check
+    if (isTruthy(example)) {
+      expectType<'hello world'>(example)
+      return
+    }
+
+    if (isTruthy(example)) {
+      expectNever(example)
+    }
   })
 })

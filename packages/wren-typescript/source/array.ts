@@ -80,3 +80,14 @@ export type Includes<
     ? true
     : Includes<Rest, SearchElement>
   : false
+
+export type From<
+  Length extends number,
+  Result extends never[] = [],
+> = Length extends Result['length'] ? Result : From<Length, [...Result, never]>
+
+export type IsTuple<Value> = [Value] extends [never]
+  ? false
+  : Value extends readonly [unknown?]
+  ? true
+  : false

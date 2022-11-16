@@ -8,7 +8,7 @@ import {
 } from '../../../_api'
 
 describe('node - logic:types:array', () => {
-  test('logic:types:array:castArray', () => {
+  test('logic:types:array:toArray', () => {
     expect(toArray('hello world')).toEqual(['hello world'])
     expect(toArray(100)).toEqual([100])
   })
