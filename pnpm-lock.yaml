@@ -128,6 +128,7 @@ importers:
       '@react-hookz/web': ^19.0.0
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.25
+      '@types/react-is': ^17.0.3
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       '@wren/typescript': '*'
@@ -137,6 +138,7 @@ importers:
       next: ^13.0.0
       react: 18.2.0
       react-error-boundary: 3.1.4
+      react-is: ^18.2.0
       react-reconciler: ^0.29.0
       react-test-renderer: 18.2.0
       use-context-selector: 1.4.1
@@ -151,6 +153,7 @@ importers:
       '@react-hookz/web': 19.1.0_biqbaboplfbrettd7655fr4n2y
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.25
+      '@types/react-is': 17.0.3
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 8.3.4
       '@wren/typescript': link:../wren-typescript
@@ -158,6 +161,7 @@ importers:
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
+      react-is: 18.2.0
       react-test-renderer: 18.2.0_react@18.2.0
 
   packages/wren-typescript:
@@ -2758,6 +2762,12 @@ packages:
 
   /@types/react-dom/18.0.8:
     resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
+    dependencies:
+      '@types/react': 18.0.25
+    dev: true
+
+  /@types/react-is/17.0.3:
+    resolution: {integrity: sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==}
     dependencies:
       '@types/react': 18.0.25
     dev: true

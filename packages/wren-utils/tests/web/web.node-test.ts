@@ -34,16 +34,16 @@ describe('node - logic:web', () => {
 
     // statusRange
     expect(informational.has(Status.Continue)).toBeTruthy()
-    expect(informational.has(Status.Ok)).toBeFalsy()
+    expect(informational.has(Status.Created)).toBeFalsy()
 
     expect(success.has(Status.Ok)).toBeTruthy()
-    expect(success.has(Status.MultipleChoices)).toBeFalsy()
+    expect(success.has(Status.MovedPermanently)).toBeFalsy()
 
     expect(redirects.has(Status.MultipleChoices)).toBeTruthy()
-    expect(redirects.has(Status.BadRequest)).toBeFalsy()
+    expect(redirects.has(Status.Unauthorized)).toBeFalsy()
 
     expect(clientErrors.has(Status.BadRequest)).toBeTruthy()
-    expect(clientErrors.has(Status.InternalServerError)).toBeFalsy()
+    expect(clientErrors.has(Status.NotImplemented)).toBeFalsy()
 
     expect(serverErrors.has(Status.InternalServerError)).toBeTruthy()
     expect(serverErrors.has(Status.Continue)).toBeFalsy()

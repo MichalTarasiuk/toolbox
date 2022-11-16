@@ -1,4 +1,5 @@
 import { isClient } from '@wren/utils'
+import reactIs from 'react-is'
 
 import { isElement } from './assertions'
 
@@ -27,14 +28,16 @@ export const getSiteOrigin = () => {
 
 type ReplaceOption = Exclude<HTMLReactParserOptions['replace'], undefined>
 
-export const elementsGuard =
-  (callback: (element: ElementType) => ReturnType<ReplaceOption>) =>
-  (domNode: DOMNode) => {
-    if (isElement(domNode)) {
-      const replacedDOMNode = callback(domNode)
+export const elementsGuard = (
+  fn: (element: ElementType) => ReturnType<ReplaceOption>,
+) => {
+  return (domNode: DOMNode) => {
+    if (isElement(domNode) && reactIs.isValidElementType(domNode.tagName)) {
+      const replacedDOMNode = fn(domNode)
 
       return replacedDOMNode
     }
 
     return domNode
   }
+}

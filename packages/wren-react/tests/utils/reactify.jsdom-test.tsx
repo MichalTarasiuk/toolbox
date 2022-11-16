@@ -40,6 +40,8 @@ describe('jsdom - react:utils:reactify', () => {
       />,
     )
 
+    console.log('aaa')
+
     getByText('home')
   })
 
