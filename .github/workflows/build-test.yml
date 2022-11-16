@@ -25,4 +25,4 @@ jobs:
           pnpm lint
       - name: Test
         run: |
-          pnpm test
+          pnpm jest:test
