@@ -1,6 +1,7 @@
 import {
   createAutoPercentage,
   createEventHub,
+  createRange,
   expectType,
   max,
   min,
@@ -41,6 +42,45 @@ describe('node - logic:custom', () => {
     eventHub.emit('message', 'Hello World!')
 
     expect(spy).toHaveBeenCalledTimes(1)
+  })
+
+  test('logic:custom:factories:createRange', () => {
+    const rangeFrom0To10 = createRange(0, 10)
+    const rangeFrom3To6 = createRange(3, 6)
+    const rangeFrom0To2 = createRange(0, 2)
+
+    // invalid initialization
+    expect(() => {
+      const upper = 10
+
+      createRange(upper + 1, upper)
+    }).toThrowError()
+
+    // invalid token
+    expect(() => {
+      const token = Symbol()
+
+      rangeFrom0To10.read(token)
+    }).toThrowError()
+
+    // has
+    expect(rangeFrom0To10.has(4)).toBeTruthy()
+    expect(rangeFrom0To10.has(11)).toBeFalsy()
+
+    // intersects
+    expect(rangeFrom0To10.intersects(rangeFrom3To6)).toBeTruthy()
+    expect(rangeFrom0To2.intersects(rangeFrom3To6)).toBeFalsy()
+
+    // equals
+    expect(rangeFrom0To10.equals(rangeFrom0To10))
+
+    // isSuperrange
+    expect(rangeFrom0To10.isSuperrange(rangeFrom3To6)).toBeTruthy()
+    expect(rangeFrom3To6.isSuperrange(rangeFrom0To10)).toBeFalsy()
+
+    // isSubrange
+    expect(rangeFrom3To6.isSubrange(rangeFrom0To10)).toBeTruthy()
+    expect(rangeFrom0To10.isSubrange(rangeFrom3To6)).toBeFalsy()
   })
 
   test('logic:custom:colors', () => {

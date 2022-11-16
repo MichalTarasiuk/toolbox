@@ -1,6 +1,8 @@
 const secretToken = Symbol()
 
-type RangeObject = { read: (token: symbol) => { lower: number; upper: number } }
+type RangeObject = {
+  read: (token: symbol) => { lower: number; upper: number }
+}
 
 export const createRange = (lower: number, upper: number) => {
   if (lower > upper) {
