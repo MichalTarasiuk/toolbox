@@ -10,7 +10,7 @@
  * @param separator - A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned
  * @param fn - A function that accepts up to three arguments. The map method calls the callbackfn function one time for each element in the array.
  *
- * @returnsMapped string
+ * @returns Mapped string
  */
 export const splitMapJoin = (
   str: string,
