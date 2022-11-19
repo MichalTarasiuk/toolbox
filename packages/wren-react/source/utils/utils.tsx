@@ -12,3 +12,5 @@ export * from './suspensify'
 export const Null = () => <></>
 
 export const blockBatching = (fn: Any.UnknownFunction) => defer(fn)
+
+export const isReact18 = () => (process.env['REACTJS_VERSION'] || '18') === '18'

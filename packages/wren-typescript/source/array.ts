@@ -91,3 +91,5 @@ export type IsTuple<Value> = [Value] extends [never]
   : Value extends readonly [unknown?]
   ? true
   : false
+
+export type OptionalReadonly<Value> = Array<Value> | ReadonlyArray<Value>

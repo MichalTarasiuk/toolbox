@@ -27,6 +27,7 @@
     "@types/next": "9.0.0",
     "@types/react": "18.0.25",
     "@types/uuid": "8.3.4",
+    "@tanstack/react-query": "4.16.1",
     "@wren/react": "*",
     "@wren/utils": "*"
   },

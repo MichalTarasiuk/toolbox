@@ -68,6 +68,8 @@ export type AnyObject<
 
 export type AnyArray = Array<unknown>
 
+export type AnyReadonlyArray = ReadonlyArray<unknown>
+
 export type AnyPromise = Promise<unknown>
 
 export type AnyMap = Map<unknown, unknown>

@@ -1,2 +1,5 @@
 export * from './mapKeys'
 export * from './renameKeys'
+export * from './matches'
+export * from './every'
+export * from './keysIn'
