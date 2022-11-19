@@ -1,5 +1,6 @@
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query'
 import { createSafeContext } from '@wren/react'
+import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import { findDehydratedState } from './helpers'
@@ -22,10 +23,16 @@ const ServerCacheProvider = ({
   queryClient,
   pageProps,
 }: ServerCacheProviderProps) => {
-  const dehydratedState = useMemo(
-    () => findDehydratedState(pageProps),
-    [pageProps],
-  )
+  const router = useRouter()
+
+  const cache = useMemo(() => new Map(), [])
+  const dehydratedState = useMemo(() => {
+    const dehydratedStateToCache = findDehydratedState(pageProps)
+
+    cache.set(router.asPath, dehydratedStateToCache)
+
+    return dehydratedStateToCache
+  }, [cache, pageProps, router.asPath])
 
   return (
     <QueryClientProvider client={queryClient}>

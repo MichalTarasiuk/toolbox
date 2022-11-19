@@ -2,7 +2,6 @@ import {
   every,
   isArray,
   isObject,
-  matches,
   keysIn,
   isString,
   isNumber,
@@ -86,7 +85,7 @@ export const isDehydratedState = (
 ): maybeDehydratedState is DehydratedState => {
   if (
     isObject(maybeDehydratedState) &&
-    matches(maybeDehydratedState, ['mutations', 'queries'])
+    keysIn(maybeDehydratedState, ['mutations', 'queries'])
   ) {
     return every(maybeDehydratedState, {
       mutations: (value) => isArray(value) && value.every(isDehydratedMutate),

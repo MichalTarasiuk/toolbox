@@ -1,4 +1,4 @@
-import { keyIn, none, signs } from '../../../source'
+import { keyIn, signs } from '../../../source'
 
 import type { Any, Custom, Array } from '@wren/typescript'
 
@@ -15,7 +15,12 @@ export const keysIn = <Keys extends Array.OptionalReadonly<PropertyKey>>(
   keys: Keys extends Any.AnyReadonlyArray ? Keys : Custom.Narrow<Keys>,
 ): anyObject is KeysIn<Keys> =>
   keys.every((key) => {
-    const formatedKey = key.toString().replace(signs.question, none)
+    const stringifyKey = key.toString()
+    const isOptional = stringifyKey.startsWith(signs.question)
 
-    return keyIn(anyObject, formatedKey)
+    if (isOptional) {
+      return true
+    }
+
+    return keyIn(anyObject, stringifyKey)
   })
