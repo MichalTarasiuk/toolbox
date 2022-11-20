@@ -5,7 +5,8 @@
   "main": "_api.ts",
   "scripts": {
     "clean": "rm -rf ./build",
-    "ts:find-deadcode": "ts-prune -p tsconfig.json"
+    "ts:find-deadcode": "ts-prune -p tsconfig.json",
+    "ts:check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
