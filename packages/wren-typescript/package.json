@@ -5,7 +5,8 @@
   "build": false,
   "main": "_api.ts",
   "scripts": {
-    "clean": "rm -rf ./build"
+    "clean": "rm -rf ./build",
+    "ts:find-deadcode": "ts-prune -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
