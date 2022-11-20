@@ -24,15 +24,14 @@
     "url": "https://github.com/MichalTarasiuk/wren"
   },
   "scripts": {
-    "a": "npx lint-staged",
-    "prepare": "husky install",
-    "add-package": "ts-node scripts/addPackage.ts",
+    "utils:prepare": "husky install",
+    "utils:add-package": "ts-node scripts/addPackage.ts",
     "build:clean": "pnpm --filter \"./packages/**\" --parallel --no-bail run clean",
     "build:run": "pnpm run build:clean && rollup --config rollup.config.js",
     "style:lint": "eslint . --ext .ts,.tsx",
     "style:format": "prettier --write \"**/*.{ts,tsx}\"",
     "ts:find-deadcode": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:find-deadcode",
-    "ts:check": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:check tsc",
+    "ts:check": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:check",
     "test:jest": "jest --config",
     "test:jest:watch": "jest --config --watch",
     "test:jest:single-test": "jest --config --testNamePattern 'react:factories:createAtoms'"
@@ -88,7 +87,8 @@
   "lint-staged": {
     "*.{ts, tsx}": [
       "pnpm run style:format",
-      "pnpm run style:lint"
+      "pnpm run style:lint",
+      "pnpm run ts:check"
     ]
   }
 }
