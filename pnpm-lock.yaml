@@ -37,7 +37,7 @@ importers:
       jest: 29.3.1
       jest-environment-jsdom: 29.3.1
       jest-mock-console: 2.0.0
-      jsdom: 20.0.2
+      jsdom: 20.0.3
       lint-staged: ^13.0.3
       make-dir: 3.1.0
       mock-local-storage: ^1.1.23
@@ -84,7 +84,7 @@ importers:
       jest: 29.3.1_cqodrwulihbtptxglkfodftc34
       jest-environment-jsdom: 29.3.1
       jest-mock-console: 2.0.0_jest@29.3.1
-      jsdom: 20.0.2
+      jsdom: 20.0.3
       lint-staged: 13.0.3
       make-dir: 3.1.0
       mock-local-storage: 1.1.23
@@ -5402,7 +5402,7 @@ packages:
       '@types/node': 18.11.9
       jest-mock: 29.3.1
       jest-util: 29.3.1
-      jsdom: 20.0.2
+      jsdom: 20.0.3
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -5731,8 +5731,8 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jsdom/20.0.2:
-    resolution: {integrity: sha512-AHWa+QO/cgRg4N+DsmHg1Y7xnz+8KU3EflM0LVDTdmrYOc1WWTSkOjtpUveQH+1Bqd5rtcVnb/DuxV/UjDO4rA==}
+  /jsdom/20.0.3:
+    resolution: {integrity: sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ==}
     engines: {node: '>=14'}
     peerDependencies:
       canvas: ^2.5.0
@@ -5759,7 +5759,7 @@ packages:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 4.1.2
-      w3c-xmlserializer: 3.0.0
+      w3c-xmlserializer: 4.0.0
       webidl-conversions: 7.0.0
       whatwg-encoding: 2.0.0
       whatwg-mimetype: 3.0.0
@@ -7846,9 +7846,9 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /w3c-xmlserializer/3.0.0:
-    resolution: {integrity: sha512-3WFqGEgSXIyGhOmAFtlicJNMjEps8b1MG31NCA0/vOF9+nKMUW1ckhi9cnNHmf88Rzw5V+dwIwsm2C7X8k9aQg==}
-    engines: {node: '>=12'}
+  /w3c-xmlserializer/4.0.0:
+    resolution: {integrity: sha512-d+BFHzbiCx6zGfz0HyQ6Rg69w9k19nviJspaj4yNscGjrHu94sVP+aRm75yEbCh+r2/yR+7q6hux9LVtbuTGBw==}
+    engines: {node: '>=14'}
     dependencies:
       xml-name-validator: 4.0.0
     dev: true
