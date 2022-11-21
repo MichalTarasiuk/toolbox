@@ -1,7 +1,3 @@
-export * from './case'
-export * from './default'
-export * from './fallback'
 export * from './if'
-export * from './ifAsync'
 export * from './switch'
 export * from './shorthands'
