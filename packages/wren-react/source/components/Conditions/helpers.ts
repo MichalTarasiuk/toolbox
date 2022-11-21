@@ -4,7 +4,7 @@ import * as ReactIs from 'react-is'
 import type { Any } from '@wren/typescript'
 import type { ReactElement, ReactNode } from 'react'
 
-type Resolvable<Resolved> = (() => Resolved) | Resolved
+export type Resolvable<Resolved> = (() => Resolved) | Resolved
 
 const isResolvable = <Resolved>(
   value: unknown,
