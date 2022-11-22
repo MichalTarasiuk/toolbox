@@ -34,7 +34,7 @@
     "ts:check": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:check",
     "test:jest": "jest --config",
     "test:jest:watch": "jest --config --watch",
-    "test:jest:single-test": "jest --config --testNamePattern 'react:factories:createAtoms'"
+    "test:jest:single-test": "jest --config --testNamePattern 'jsdom - react:components:Conditions'"
   },
   "devDependencies": {
     "@babel/core": "7.20.2",

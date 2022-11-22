@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import { useState } from 'react'
 
-import { When, Unless, If, Then, Else, Switch, Case } from '../../_api'
+import { When, Unless, If, Then, Else, Switch, Case, Default } from '../../_api'
 
 describe('jsdom - react:components:Conditions', () => {
   test('react:components:Conditions:When', () => {
@@ -86,32 +86,41 @@ describe('jsdom - react:components:Conditions', () => {
 
   test('react:components:Conditions:Switch', () => {
     const Component = () => {
-      const [condition, setCondition] = useState(false)
+      const [condition, setCondition] = useState<boolean | null>(false)
 
       const toggle = () => setCondition(!condition)
+
+      const reset = () => setCondition(null)
 
       return (
         <>
           <Switch>
-            <Case condition={false}>
+            <Case condition={condition} shouldBreak>
               <p>1</p>
             </Case>
-            <Case condition={true} shouldBreak>
+            <Case condition={!condition}>
               <p>2</p>
             </Case>
-            <Case condition={true}>
-              <p>3</p>
-            </Case>
+            <Default>
+              <p>fallback</p>
+            </Default>
           </Switch>
           <button onClick={toggle}>toggle</button>
+          <button onClick={reset}>reset</button>
         </>
       )
     }
 
     const { getByText } = render(<Component />)
 
-    expect(() => getByText('1')).toThrowError()
     getByText('2')
-    expect(() => getByText('3')).toThrowError()
+
+    fireEvent.click(getByText('toggle'))
+
+    getByText('1')
+
+    fireEvent.click(getByText('reset'))
+
+    getByText('fallback')
   })
 })
