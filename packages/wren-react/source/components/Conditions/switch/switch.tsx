@@ -16,9 +16,7 @@ export const Switch = ({ children }: SwitchProps) => {
   const selectedChildrens: Childrens = []
 
   const pushToSelected = (reactElement: ReactElement) => {
-    if (isDefault(reactElement)) {
-      reach.stop()
-    }
+    reach.current = isDefault(reactElement)
 
     selectedChildrens.push(reactElement)
   }
@@ -34,8 +32,6 @@ export const Switch = ({ children }: SwitchProps) => {
       if (canPush && Child.props['shouldBreak']) {
         break
       }
-
-      reach.current = isDefault(Child)
     }
   }
 

@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import { isNull } from '@wren/utils'
 import { useState } from 'react'
 
 import { When, Unless, If, Then, Else, Switch, Case, Default } from '../../_api'
@@ -95,15 +96,18 @@ describe('jsdom - react:components:Conditions', () => {
       return (
         <>
           <Switch>
-            <Case condition={condition} shouldBreak>
+            <Case condition={isNull(condition) ? false : condition}>
               <p>1</p>
             </Case>
-            <Case condition={!condition}>
+            <Case condition={isNull(condition) ? false : !condition}>
               <p>2</p>
             </Case>
             <Default>
               <p>fallback</p>
             </Default>
+            <Case condition={false}>
+              <p>3</p>
+            </Case>
           </Switch>
           <button onClick={toggle}>toggle</button>
           <button onClick={reset}>reset</button>
@@ -122,5 +126,6 @@ describe('jsdom - react:components:Conditions', () => {
     fireEvent.click(getByText('reset'))
 
     getByText('fallback')
+    getByText('3')
   })
 })
