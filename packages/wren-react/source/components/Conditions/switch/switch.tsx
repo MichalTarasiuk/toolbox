@@ -1,5 +1,5 @@
 /* eslint-disable functional/no-loop-statement -- break */
-import React from 'react'
+import React, { cloneElement } from 'react'
 
 import { isReactElement } from '../helpers'
 
@@ -15,10 +15,17 @@ export const Switch = ({ children }: SwitchProps) => {
   const childrens = React.Children.toArray(children)
   const selectedChildrens: Childrens = []
 
-  const pushToSelected = (reactElement: ReactElement) => {
+  const pushToSelected = (reactElement: ReactElement, force: boolean) => {
+    const props = reactElement.props
+
     reach.current = isDefault(reactElement)
 
-    selectedChildrens.push(reactElement)
+    selectedChildrens.push(
+      cloneElement(reactElement, {
+        ...props,
+        condition: force || props.condition,
+      }),
+    )
   }
 
   for (const Child of childrens) {
@@ -26,7 +33,7 @@ export const Switch = ({ children }: SwitchProps) => {
       const canPush = isTruthy(Child) || reach.done
 
       if (canPush) {
-        pushToSelected(Child)
+        pushToSelected(Child, reach.done)
       }
 
       if (canPush && Child.props['shouldBreak']) {
