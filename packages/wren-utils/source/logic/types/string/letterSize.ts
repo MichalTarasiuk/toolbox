@@ -1,7 +1,6 @@
-type UppercaseFirst<Word extends string> =
-  Word extends `${infer Letter}${infer Letters}`
-    ? `${Uppercase<Letter>}${Letters}`
-    : Word
+type UppercaseFirst<Word extends string> = Word extends `${infer Letter}${infer Letters}`
+  ? `${Uppercase<Letter>}${Letters}`
+  : Word;
 
 /**
  * Converts first alphabetic character in a string to uppercase.
@@ -12,12 +11,11 @@ type UppercaseFirst<Word extends string> =
  */
 export const uppercaseFirst = <Word extends string>(word: Word) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  (word.at(0)?.toUpperCase() + word.slice(1)) as UppercaseFirst<Word>
+  (word.at(0)?.toUpperCase() + word.slice(1)) as UppercaseFirst<Word>;
 
-type LowercaseFirst<Word extends string> =
-  Word extends `${infer Letter}${infer Letters}`
-    ? `${Lowercase<Letter>}${Letters}`
-    : Word
+type LowercaseFirst<Word extends string> = Word extends `${infer Letter}${infer Letters}`
+  ? `${Lowercase<Letter>}${Letters}`
+  : Word;
 
 /**
  * Converts first alphabetic character in a string to lowercase.
@@ -28,4 +26,4 @@ type LowercaseFirst<Word extends string> =
  */
 export const lowercaseFirst = <Word extends string>(word: Word) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  (word.at(0)?.toLowerCase() + word.slice(1)) as LowercaseFirst<Word>
+  (word.at(0)?.toLowerCase() + word.slice(1)) as LowercaseFirst<Word>;

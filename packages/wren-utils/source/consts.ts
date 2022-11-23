@@ -1,19 +1,19 @@
 /**
  * This method returns undefined.
  */
-export const noop = () => {}
+export const noop = () => {};
 
-export const none = ''
-export const space = ' '
+export const none = '';
+export const space = ' ';
 
 export const empty = {
   get object() {
-    return {}
+    return {};
   },
   get array() {
-    return []
+    return [];
   },
-}
+};
 
 /**
  * All keyboards signs.
@@ -57,4 +57,4 @@ export const signs = {
     left: '[',
     right: ']',
   },
-} as const
+} as const;

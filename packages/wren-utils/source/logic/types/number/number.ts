@@ -1,1 +1,1 @@
-export * from './toDigits'
+export * from './toDigits';

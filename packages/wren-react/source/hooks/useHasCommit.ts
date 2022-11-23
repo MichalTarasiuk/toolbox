@@ -1,6 +1,6 @@
-import { useCallback, useRef } from 'react'
+import {useCallback, useRef} from 'react';
 
-import { useLayout } from './hooks'
+import {useLayout} from './hooks';
 
 /**
  * Returned function yields `true` only in case component is commited (useLayoutEffect call).
@@ -8,16 +8,16 @@ import { useLayout } from './hooks'
  * @returns function that yields current mount state
  */
 export const useHasCommit = () => {
-  const hasCommit = useRef(false)
-  const get = useCallback(() => hasCommit.current, [])
+  const hasCommit = useRef(false);
+  const get = useCallback(() => hasCommit.current, []);
 
   useLayout(() => {
-    hasCommit.current = true
+    hasCommit.current = true;
 
     return () => {
-      hasCommit.current = false
-    }
-  }, [])
+      hasCommit.current = false;
+    };
+  }, []);
 
-  return get
-}
+  return get;
+};

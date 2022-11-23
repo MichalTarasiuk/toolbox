@@ -1,4 +1,4 @@
-import type { Context } from 'react'
+import type {Context} from 'react';
 
 /**
  * In development, React will warn about using contexts between renderers.
@@ -10,18 +10,18 @@ export const wrapContext = <Value>(context: Context<Value>) => {
     return Object.defineProperties(context, {
       _currentRenderer: {
         get() {
-          return null
+          return null;
         },
         set() {},
       },
       _currentRenderer2: {
         get() {
-          return null
+          return null;
         },
         set() {},
       },
-    })
+    });
   } catch {
-    return context
+    return context;
   }
-}
+};

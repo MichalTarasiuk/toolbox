@@ -1,1 +1,1 @@
-export * from './composePageProps'
+export * from './composePageProps';

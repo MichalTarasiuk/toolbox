@@ -1,12 +1,12 @@
-import type { Any, Custom } from '@wren/typescript'
+import type {Any, Custom} from '@wren/typescript';
 
 export const asyncFlatMap = async <Array extends Any.AnyArray, Result>(
   array: Custom.Narrow<Array>,
   asyncFn: (value: Array[number]) => Promise<Result>,
-) => flatten(await Promise.all(array.map(asyncFn)))
+) => flatten(await Promise.all(array.map(asyncFn)));
 
 const flatten = (array: Any.AnyArray) => {
-  const initial: Any.AnyArray = []
+  const initial: Any.AnyArray = [];
 
-  return initial.concat(...array)
-}
+  return initial.concat(...array);
+};

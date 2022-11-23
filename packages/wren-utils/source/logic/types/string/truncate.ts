@@ -17,11 +17,11 @@ export const truncate = <Text extends string>(
   maxLength: number,
   suffix = '',
 ): Text | `${string}${typeof suffix}` => {
-  const canTruncate = text.length > maxLength
+  const canTruncate = text.length > maxLength;
 
   if (canTruncate) {
-    return text.slice(0, maxLength) + suffix
+    return text.slice(0, maxLength) + suffix;
   }
 
-  return text
-}
+  return text;
+};

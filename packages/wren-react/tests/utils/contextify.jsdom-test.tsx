@@ -1,89 +1,88 @@
-import { fireEvent, render } from '@testing-library/react'
-import mockConsole from 'jest-mock-console'
-import { useState } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
+import {fireEvent, render} from '@testing-library/react';
+import mockConsole from 'jest-mock-console';
+import {useState} from 'react';
+import {ErrorBoundary} from 'react-error-boundary';
 
-import { contextify } from '../../_api'
+import {contextify} from '../../_api';
 
-const useSettings = (initialValue: boolean) =>
-  useState({ dakrMode: initialValue })
+const useSettings = (initialValue: boolean) => useState({dakrMode: initialValue});
 
 describe('jsdom - react:utils:contextify', () => {
   it('should render', () => {
-    const restoreConsole = mockConsole()
-    const [ContextProvider, useContext] = contextify(useSettings)
+    const restoreConsole = mockConsole();
+    const [ContextProvider, useContext] = contextify(useSettings);
 
     const Component = () => {
-      useContext()
+      useContext();
 
-      return <p>rendered correctly</p>
-    }
-    const { getByText } = render(
+      return <p>rendered correctly</p>;
+    };
+    const {getByText} = render(
       <ErrorBoundary fallback={<p>fallback</p>}>
-        <ContextProvider settings={{ 0: false }}>
+        <ContextProvider settings={{0: false}}>
           <Component />
         </ContextProvider>
       </ErrorBoundary>,
-    )
+    );
 
-    expect(console.error).not.toHaveBeenCalled()
-    getByText('rendered correctly')
+    expect(console.error).not.toHaveBeenCalled();
+    getByText('rendered correctly');
 
-    restoreConsole()
-  })
+    restoreConsole();
+  });
 
   it('should not render', () => {
-    const restoreConsole = mockConsole()
-    const [_, useContext] = contextify(useSettings)
+    const restoreConsole = mockConsole();
+    const [_, useContext] = contextify(useSettings);
 
     const Component = () => {
-      const [context] = useContext()
+      const [context] = useContext();
 
-      return <p>{context.dakrMode ? 'dark' : 'light'}</p>
-    }
-    const { getByText } = render(
+      return <p>{context.dakrMode ? 'dark' : 'light'}</p>;
+    };
+    const {getByText} = render(
       <ErrorBoundary fallback={<p>fallback</p>}>
         <Component />
       </ErrorBoundary>,
-    )
+    );
 
-    expect(console.error).toHaveBeenCalled()
-    getByText('fallback')
+    expect(console.error).toHaveBeenCalled();
+    getByText('fallback');
 
-    restoreConsole()
-  })
+    restoreConsole();
+  });
 
   it('should create global hook', () => {
-    const [ContextProvider, useContext] = contextify(useSettings)
+    const [ContextProvider, useContext] = contextify(useSettings);
 
     const ChildA = () => {
-      const [context] = useContext()
+      const [context] = useContext();
 
-      return <p>{context.dakrMode ? 'dark' : 'light'}</p>
-    }
+      return <p>{context.dakrMode ? 'dark' : 'light'}</p>;
+    };
     const ChildB = () => {
-      const [, setContext] = useContext()
+      const [, setContext] = useContext();
 
       const toggle = () =>
-        setContext((settings) => ({
+        setContext(settings => ({
           ...settings,
           dakrMode: !settings.dakrMode,
-        }))
+        }));
 
-      return <button onClick={toggle}>toggle</button>
-    }
+      return <button onClick={toggle}>toggle</button>;
+    };
 
     const Component = () => (
       <ContextProvider settings={[false]}>
         <ChildA />
         <ChildB />
       </ContextProvider>
-    )
+    );
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('dark')
-  })
-})
+    getByText('dark');
+  });
+});

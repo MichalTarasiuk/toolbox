@@ -26,7 +26,7 @@
  * ```
  */
 export const createAutoPercentage = () => {
-  let _count = 0
+  let _count = 0;
 
   /**
    * Increment and get the percentage.
@@ -48,9 +48,9 @@ export const createAutoPercentage = () => {
    * @returns The percentage
    */
   const percentage = () => {
-    _count++
-    return { [Symbol.toPrimitive]: () => 1 / _count }
-  }
+    _count++;
+    return {[Symbol.toPrimitive]: () => 1 / _count};
+  };
 
   /**
    * Increment and get the number of times the percentage has been incremented.
@@ -72,12 +72,12 @@ export const createAutoPercentage = () => {
    * @returns The number of times this percentage has been incremented
    */
   const count = () => {
-    _count++
-    return { [Symbol.toPrimitive]: () => _count }
-  }
+    _count++;
+    return {[Symbol.toPrimitive]: () => _count};
+  };
 
   return {
     percentage,
     count,
-  }
-}
+  };
+};

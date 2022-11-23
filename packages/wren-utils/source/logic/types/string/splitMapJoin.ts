@@ -12,10 +12,6 @@
  *
  * @returns Mapped string
  */
-export const splitMapJoin = (
-  str: string,
-  separator: string,
-  fn: (substring: string) => string,
-) => {
-  return str.split(separator).map(fn).join(separator)
-}
+export const splitMapJoin = (str: string, separator: string, fn: (substring: string) => string) => {
+  return str.split(separator).map(fn).join(separator);
+};

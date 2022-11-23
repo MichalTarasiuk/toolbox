@@ -1,4 +1,4 @@
-import type { Any } from '@wren/typescript'
+import type {Any} from '@wren/typescript';
 
 /**
  * Get the lowest value of the 2 parameters.
@@ -16,15 +16,10 @@ import type { Any } from '@wren/typescript'
  *
  * @returns `previousValue` or `currentValue`, whichever is lower
  */
-export const min = <
-  Collector extends Any.Comparable,
-  CurrentValue extends Any.Comparable,
->(
+export const min = <Collector extends Any.Comparable, CurrentValue extends Any.Comparable>(
   collector: Collector,
   currentValue: CurrentValue,
 ): Collector | CurrentValue => {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  return (currentValue as unknown as Collector) < collector
-    ? currentValue
-    : collector
-}
+  return (currentValue as unknown as Collector) < collector ? currentValue : collector;
+};

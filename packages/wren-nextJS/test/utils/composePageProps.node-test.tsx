@@ -1,71 +1,63 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- mocks */
-import { isObject, keyIn } from '@wren/utils'
+import {isObject, keyIn} from '@wren/utils';
 
-import { composePageProps } from '../../_api'
+import {composePageProps} from '../../_api';
 
-import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next'
+import type {GetServerSidePropsContext, GetStaticPropsContext} from 'next';
 
-const getServerSidePropsContext = {} as GetServerSidePropsContext
-const getStaticPropsContext = {} as GetStaticPropsContext
+const getServerSidePropsContext = {} as GetServerSidePropsContext;
+const getStaticPropsContext = {} as GetStaticPropsContext;
 
 describe('node - nextJS:utils:composePageProps', () => {
   test('server.parallel.shallow', async () => {
     const getServerSideProps = composePageProps(
       'server.parallel.shallow',
-      [
-        () => ({ props: { a: 0, c: { a: 1 } } }),
-        () => ({ props: { a: 0, c: { b: 2 } } }),
-      ],
-      (_, { c: { b } }) => ({
+      [() => ({props: {a: 0, c: {a: 1}}}), () => ({props: {a: 0, c: {b: 2}}})],
+      (_, {c: {b}}) => ({
         props: {
           result: b,
         },
       }),
-    )
+    );
 
-    const getServerSidePropsResult = await getServerSideProps(
-      getServerSidePropsContext,
-    )
+    const getServerSidePropsResult = await getServerSideProps(getServerSidePropsContext);
 
     if (
       keyIn(getServerSidePropsResult, 'props') &&
       isObject(getServerSidePropsResult.props) &&
       keyIn(getServerSidePropsResult.props, 'result')
     ) {
-      expect(getServerSidePropsResult.props.result).toBe(2)
+      expect(getServerSidePropsResult.props.result).toBe(2);
 
-      return
+      return;
     }
 
-    throw Error("`getServerSidePropsResult` doesn't have `result` prop")
-  })
+    throw Error("`getServerSidePropsResult` doesn't have `result` prop");
+  });
 
   test('static.parallel.deep', async () => {
     const getStaticProps = composePageProps(
       'static.parallel.deep',
-      [
-        () => ({ props: { a: 0, c: { a: 1 } } }),
-        () => ({ props: { a: 0, c: { b: 2 } } }),
-      ],
-      (_, { c: { a, b } }) => ({
+      [() => ({props: {a: 0, c: {a: 1}}}), () => ({props: {a: 0, c: {b: 2}}})],
+      (_, {c: {a, b}}) => ({
         props: {
           result: a + b,
         },
       }),
-    )
+    );
 
-    const getStaticPropsResult = await getStaticProps(getStaticPropsContext)
+    const getStaticPropsResult = await getStaticProps(getStaticPropsContext);
 
     if (
       keyIn(getStaticPropsResult, 'props') &&
       isObject(getStaticPropsResult.props) &&
       keyIn(getStaticPropsResult.props, 'result')
     ) {
-      expect(getStaticPropsResult.props.result).toBe(3)
+      expect(getStaticPropsResult.props.result).toBe(3);
 
-      return
+      return;
     }
 
-    throw Error("`getStaticPropsResult` doesn't have `result` prop")
-  })
-})
+    throw Error("`getStaticPropsResult` doesn't have `result` prop");
+  });
+});

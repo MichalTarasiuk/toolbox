@@ -1,7 +1,7 @@
-import { fromEntries } from '@wren/utils'
-import { v4 } from 'uuid'
+import {fromEntries} from '@wren/utils';
+import {v4} from 'uuid';
 
-import type { ContextUnion, ServerHook } from './createServerHookImpl'
+import type {ContextUnion, ServerHook} from './createServerHookImpl';
 
 export const composePropsProviders = async <Context extends ContextUnion>(
   serverHooks: ServerHook[],
@@ -9,11 +9,11 @@ export const composePropsProviders = async <Context extends ContextUnion>(
 ) => {
   const entries = await Promise.all(
     serverHooks.map((serverHook): [string, unknown] => {
-      const propsProvider = serverHook.propsProvider
+      const propsProvider = serverHook.propsProvider;
 
-      return [`${v4()}:${propsProvider.name}`, propsProvider(context)]
+      return [`${v4()}:${propsProvider.name}`, propsProvider(context)];
     }),
-  )
+  );
 
-  return fromEntries(entries)
-}
+  return fromEntries(entries);
+};

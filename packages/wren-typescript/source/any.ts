@@ -1,8 +1,8 @@
 // any:primitives
 
-export type Primitive = string | number | boolean | null | undefined | symbol
+export type Primitive = string | number | boolean | null | undefined | symbol;
 
-export type FalsyValues = 0 | '' | null | undefined | false
+export type FalsyValues = 0 | '' | null | undefined | false;
 
 export type TruthyValues = Exclude<
   | Comparable
@@ -20,60 +20,53 @@ export type TruthyValues = Exclude<
   | true
   | string,
   0 | ''
->
+>;
 
-type Sign = '-' | '+'
+type Sign = '-' | '+';
 
 export type NumberLike =
-  | { [Symbol.toPrimitive](hint: 'number'): number }
+  | {[Symbol.toPrimitive](hint: 'number'): number}
   | number
   | bigint
   | Number
   | boolean
   | `${number | bigint}`
   | `${Sign | ''}${'Infinity'}`
-  | null
+  | null;
 
-export type Comparable = string | Exclude<NumberLike, null>
+export type Comparable = string | Exclude<NumberLike, null>;
 
 /**
  * `null` or `undefined`.
  * */
-export type Nullish = null | undefined
+export type Nullish = null | undefined;
 
 // any:functions
 
-export type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (
-  ...args: Args
-) => ReturnType
+export type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (...args: Args) => ReturnType;
 
-export type UnknownFunction = (...args: unknown[]) => unknown
+export type UnknownFunction = (...args: unknown[]) => unknown;
 
-export type AnyGeneratorFunction = (
-  ...args: any[]
-) => Generator<unknown, any, unknown>
+export type AnyGeneratorFunction = (...args: any[]) => Generator<unknown, any, unknown>;
 
-export type AnyAsyncFunction = (...args: any[]) => Promise<unknown>
+export type AnyAsyncFunction = (...args: any[]) => Promise<unknown>;
 
-export type Noop = () => void
+export type Noop = () => void;
 
 // any:objects
 
-export type EmptyObject = {}
+export type EmptyObject = {};
 
-export type AnyObject<
-  Value = unknown,
-  Key extends PropertyKey = PropertyKey,
-> = Record<Key, Value>
+export type AnyObject<Value = unknown, Key extends PropertyKey = PropertyKey> = Record<Key, Value>;
 
-export type AnyArray = Array<unknown>
+export type AnyArray = Array<unknown>;
 
-export type AnyPromise = Promise<unknown>
+export type AnyPromise = Promise<unknown>;
 
-export type AnyMap = Map<unknown, unknown>
+export type AnyMap = Map<unknown, unknown>;
 
-export type AnySet = Set<unknown>
+export type AnySet = Set<unknown>;
 
-export type AnyWeakMap = WeakMap<AnyObject, unknown>
+export type AnyWeakMap = WeakMap<AnyObject, unknown>;
 
-export type AnyWeakSet = WeakSet<AnyObject>
+export type AnyWeakSet = WeakSet<AnyObject>;

@@ -1,54 +1,52 @@
-import { render } from '@testing-library/react'
+import {render} from '@testing-library/react';
 
-import { useLayout, useNearestChild, FiberProvider } from '../../_api'
+import {useLayout, useNearestChild, FiberProvider} from '../../_api';
 
-import type { ReactNode } from 'react'
+import type {ReactNode} from 'react';
 
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <FiberProvider>{children}</FiberProvider>
-)
+const Wrapper = ({children}: {children: ReactNode}) => <FiberProvider>{children}</FiberProvider>;
 
 describe('jsdom - react:hooks:useNearestChild', () => {
   it('should return nearest child', () => {
-    const spy = jest.fn()
-    const paragraph = <p>example</p>
+    const spy = jest.fn();
+    const paragraph = <p>example</p>;
     const Example = () => {
-      const nearestChild = useNearestChild<HTMLParagraphElement>()
+      const nearestChild = useNearestChild<HTMLParagraphElement>();
 
       useLayout(() => {
-        spy(nearestChild.current?.innerHTML)
-      }, [])
+        spy(nearestChild.current?.innerHTML);
+      }, []);
 
-      return paragraph
-    }
+      return paragraph;
+    };
 
     render(
       <Wrapper>
         <Example />
       </Wrapper>,
-    )
+    );
 
-    expect(spy).toHaveBeenCalledWith('example')
-  })
+    expect(spy).toHaveBeenCalledWith('example');
+  });
 
   it('should return `undefined` when the child was not found', () => {
-    const spy = jest.fn()
+    const spy = jest.fn();
     const Example = () => {
-      const nearestChild = useNearestChild()
+      const nearestChild = useNearestChild();
 
       useLayout(() => {
-        spy(nearestChild)
-      }, [])
+        spy(nearestChild);
+      }, []);
 
-      return null
-    }
+      return null;
+    };
 
     render(
       <Wrapper>
         <Example />
       </Wrapper>,
-    )
+    );
 
-    expect(spy).toHaveBeenLastCalledWith({ current: undefined })
-  })
-})
+    expect(spy).toHaveBeenLastCalledWith({current: undefined});
+  });
+});

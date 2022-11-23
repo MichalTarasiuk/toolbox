@@ -1,15 +1,15 @@
-import { fireEvent, render } from '@testing-library/react'
-import { isNull } from '@wren/utils'
-import { useState } from 'react'
+import {fireEvent, render} from '@testing-library/react';
+import {isNull} from '@wren/utils';
+import {useState} from 'react';
 
-import { When, Unless, If, Then, Else, Switch, Case, Default } from '../../_api'
+import {When, Unless, If, Then, Else, Switch, Case, Default} from '../../_api';
 
 describe('jsdom - react:components:Conditions', () => {
   test('react:components:Conditions:When', () => {
     const Component = () => {
-      const [condition, setCondition] = useState(false)
+      const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition)
+      const toggle = () => setCondition(!condition);
 
       return (
         <>
@@ -18,23 +18,23 @@ describe('jsdom - react:components:Conditions', () => {
           </When>
           <button onClick={toggle}>toggle</button>
         </>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    expect(() => getByText('Hello World')).toThrowError()
+    expect(() => getByText('Hello World')).toThrowError();
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('Hello World')
-  })
+    getByText('Hello World');
+  });
 
   test('react:components:Conditions:Unless', () => {
     const Component = () => {
-      const [condition, setCondition] = useState(false)
+      const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition)
+      const toggle = () => setCondition(!condition);
 
       return (
         <>
@@ -43,23 +43,23 @@ describe('jsdom - react:components:Conditions', () => {
           </Unless>
           <button onClick={toggle}>toggle</button>
         </>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    getByText('Hello World')
+    getByText('Hello World');
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    expect(() => getByText('Hello World')).toThrowError()
-  })
+    expect(() => getByText('Hello World')).toThrowError();
+  });
 
   test('react:components:Conditions:If', () => {
     const Component = () => {
-      const [condition, setCondition] = useState(false)
+      const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition)
+      const toggle = () => setCondition(!condition);
 
       return (
         <>
@@ -73,25 +73,25 @@ describe('jsdom - react:components:Conditions', () => {
           </If>
           <button onClick={toggle}>toggle</button>
         </>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    getByText('Falsy')
+    getByText('Falsy');
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('Truthy')
-  })
+    getByText('Truthy');
+  });
 
   test('react:components:Conditions:Switch', () => {
     const Component = () => {
-      const [condition, setCondition] = useState<boolean | null>(false)
+      const [condition, setCondition] = useState<boolean | null>(false);
 
-      const toggle = () => setCondition(!condition)
+      const toggle = () => setCondition(!condition);
 
-      const reset = () => setCondition(null)
+      const reset = () => setCondition(null);
 
       return (
         <>
@@ -112,20 +112,20 @@ describe('jsdom - react:components:Conditions', () => {
           <button onClick={toggle}>toggle</button>
           <button onClick={reset}>reset</button>
         </>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    getByText('2')
+    getByText('2');
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('1')
+    getByText('1');
 
-    fireEvent.click(getByText('reset'))
+    fireEvent.click(getByText('reset'));
 
-    getByText('fallback')
-    getByText('3')
-  })
-})
+    getByText('fallback');
+    getByText('3');
+  });
+});

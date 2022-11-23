@@ -1,1 +1,1 @@
-export * from './useRefreshProps'
+export * from './useRefreshProps';

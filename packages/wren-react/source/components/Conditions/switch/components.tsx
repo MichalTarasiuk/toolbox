@@ -1,10 +1,10 @@
-import { resolve } from '../helpers'
+import {resolve} from '../helpers';
 
-import type { CaseProps, DefaultProps } from './types'
+import type {CaseProps, DefaultProps} from './types';
 
-export const Case = ({ children, condition }: CaseProps) => {
-  const resolvedCondition = Boolean(resolve(condition))
+export const Case = ({children, condition}: CaseProps) => {
+  const resolvedCondition = Boolean(resolve(condition));
 
-  return <>{resolvedCondition && children}</>
-}
-export const Default = ({ children }: DefaultProps) => <>{children}</>
+  return <>{resolvedCondition && children}</>;
+};
+export const Default = ({children}: DefaultProps) => <>{children}</>;

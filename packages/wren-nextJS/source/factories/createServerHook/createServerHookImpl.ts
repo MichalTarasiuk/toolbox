@@ -1,18 +1,18 @@
-import { isString, keyIn, objectKeys } from '@wren/utils'
-import { useMemo } from 'react'
+import {isString, keyIn, objectKeys} from '@wren/utils';
+import {useMemo} from 'react';
 
-import { readServerCacheKey } from './helpers'
-import { useServerCache } from './serverContext'
+import {readServerCacheKey} from './helpers';
+import {useServerCache} from './serverContext';
 
-import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next'
+import type {GetServerSidePropsContext, GetStaticPropsContext} from 'next';
 
-export type ContextUnion = GetServerSidePropsContext | GetStaticPropsContext
-export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((
-  context: Context,
-) => unknown) & { name: string }
+export type ContextUnion = GetServerSidePropsContext | GetStaticPropsContext;
+export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((context: Context) => unknown) & {
+  name: string;
+};
 
-type CreateServerHook = typeof createServerHook
-export type ServerHook = ReturnType<CreateServerHook>
+type CreateServerHook = typeof createServerHook;
+export type ServerHook = ReturnType<CreateServerHook>;
 
 /**
  * `createServerHook` returns hook lets you write React hooks for data queries in NextJS by lifting static props into React Context.
@@ -27,31 +27,28 @@ export const createServerHook = <PropsProvider extends PropsProviderType>(
   propsProvider: PropsProvider,
 ) => {
   const useServerHook = () => {
-    const serverCache = useServerCache()
+    const serverCache = useServerCache();
 
     const serverCacheKey = useMemo(() => {
-      const serverCacheKeys = objectKeys(serverCache)
+      const serverCacheKeys = objectKeys(serverCache);
       const selectedServerCacheKey = serverCacheKeys.find(
-        (serverCacheKey: unknown): serverCacheKey is string =>
-          readServerCacheKey(serverCacheKey) === name,
-      )
+        (serverCacheKey: unknown): serverCacheKey is string => readServerCacheKey(serverCacheKey) === name,
+      );
 
-      return selectedServerCacheKey
-    }, [serverCache])
+      return selectedServerCacheKey;
+    }, [serverCache]);
 
     if (isString(serverCacheKey) && keyIn(serverCache, serverCacheKey)) {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- cache[name] has props provider result
-      return serverCache[name] as ReturnType<PropsProvider>
+      return serverCache[name] as ReturnType<PropsProvider>;
     }
 
-    throw Error(
-      `Did not find a data hook named "${name}". Ensure it was provided to composePropsProviders.`,
-    )
-  }
+    throw Error(`Did not find a data hook named "${name}". Ensure it was provided to composePropsProviders.`);
+  };
 
-  propsProvider.name = name
+  propsProvider.name = name;
 
   return Object.assign(useServerHook, {
     propsProvider,
-  })
-}
+  });
+};

@@ -1,1 +1,1 @@
-export * from './atomWithStorage'
+export * from './atomWithStorage';

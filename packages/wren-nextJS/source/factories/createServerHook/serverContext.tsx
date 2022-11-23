@@ -1,47 +1,35 @@
-import { objectKeys } from '@wren/utils'
-import { createContext, useContext } from 'react'
+import {objectKeys} from '@wren/utils';
+import {createContext, useContext} from 'react';
 
-import { isServerCacheKey } from './assertions'
+import {isServerCacheKey} from './assertions';
 
-import type { Any } from '@wren/typescript'
-import type { ReactNode } from 'react'
+import type {Any} from '@wren/typescript';
+import type {ReactNode} from 'react';
 
 type ServerCacheProviderProps = {
-  children: ReactNode
-  serverCache: Any.AnyObject
-}
+  children: ReactNode;
+  serverCache: Any.AnyObject;
+};
 
-const initialContextValue = Symbol()
-const serverCacheContext = createContext<
-  Any.AnyObject | typeof initialContextValue
->(initialContextValue)
+const initialContextValue = Symbol();
+const serverCacheContext = createContext<Any.AnyObject | typeof initialContextValue>(initialContextValue);
 
-const canCache = (value: Any.AnyObject) =>
-  objectKeys(value).every(isServerCacheKey)
+const canCache = (value: Any.AnyObject) => objectKeys(value).every(isServerCacheKey);
 
-export const ServerCacheProvider = ({
-  serverCache,
-  children,
-}: ServerCacheProviderProps) => {
+export const ServerCacheProvider = ({serverCache, children}: ServerCacheProviderProps) => {
   if (canCache(serverCache)) {
-    throw Error(`serverCache prop is not a valid cache ¯\_(ツ)_/¯`)
+    throw Error(`serverCache prop is not a valid cache ¯\_(ツ)_/¯`);
   }
 
-  return (
-    <serverCacheContext.Provider value={serverCache}>
-      {children}
-    </serverCacheContext.Provider>
-  )
-}
+  return <serverCacheContext.Provider value={serverCache}>{children}</serverCacheContext.Provider>;
+};
 
 export const useServerCache = () => {
-  const context = useContext(serverCacheContext)
+  const context = useContext(serverCacheContext);
 
   if (context === initialContextValue) {
-    throw Error(
-      'useServerCache must be called within a <ServerCacheProvider />',
-    )
+    throw Error('useServerCache must be called within a <ServerCacheProvider />');
   }
 
-  return context
-}
+  return context;
+};

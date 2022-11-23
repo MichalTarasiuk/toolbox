@@ -1,4 +1,4 @@
-import { createRange } from '../../custom/custom'
+import {createRange} from '../../custom/custom';
 
 /**
  * A {@link Range} of 1xx HTTP response status codes.
@@ -11,7 +11,7 @@ import { createRange } from '../../custom/custom'
  * }
  * ```
  */
-export const informational = createRange(100, 200)
+export const informational = createRange(100, 200);
 /**
  * A {@link Range} of 2xx HTTP response status codes.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses | MDN docs}
@@ -23,7 +23,7 @@ export const informational = createRange(100, 200)
  * }
  * ```
  */
-export const success = createRange(200, 300)
+export const success = createRange(200, 300);
 /**
  * A {@link Range} of 3xx HTTP response status codes.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages | MDN docs}
@@ -35,7 +35,7 @@ export const success = createRange(200, 300)
  * }
  * ```
  */
-export const redirects = createRange(300, 400)
+export const redirects = createRange(300, 400);
 /**
  * A {@link Range} of 4xx HTTP response status codes.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses | MDN docs}
@@ -47,7 +47,7 @@ export const redirects = createRange(300, 400)
  * }
  * ```
  */
-export const clientErrors = createRange(400, 500)
+export const clientErrors = createRange(400, 500);
 /**
  * A {@link Range} of 5xx HTTP response status codes.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses | MDN docs}
@@ -59,4 +59,4 @@ export const clientErrors = createRange(400, 500)
  * }
  * ```
  */
-export const serverErrors = createRange(500, 600)
+export const serverErrors = createRange(500, 600);

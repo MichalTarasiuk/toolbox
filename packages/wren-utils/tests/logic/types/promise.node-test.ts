@@ -1,46 +1,46 @@
-import { timeout, settled, sleep, expectType } from '../../../_api'
+import {timeout, settled, sleep, expectType} from '../../../_api';
 
-import type { Any } from '@wren/typescript'
+import type {Any} from '@wren/typescript';
 
 describe('node - logic:types:promise', () => {
   it('logic:types:promise:sleep', async () => {
-    const user = { name: 'Michał', age: 19 }
-    const [fetchUser] = sleep(1000, user)
+    const user = {name: 'Michał', age: 19};
+    const [fetchUser] = sleep(1000, user);
 
-    const fetchedUser = await fetchUser
+    const fetchedUser = await fetchUser;
 
-    expect(fetchedUser).toEqual(user)
-  })
+    expect(fetchedUser).toEqual(user);
+  });
 
   it('logic:types:promise:timeout', async () => {
-    const user = { name: 'Michał', age: 19 }
-    const timeoutMs = 1000
-    const [fetchUserPromise] = sleep(timeoutMs, user)
+    const user = {name: 'Michał', age: 19};
+    const timeoutMs = 1000;
+    const [fetchUserPromise] = sleep(timeoutMs, user);
 
     try {
-      await timeout(fetchUserPromise, timeoutMs - 1)
+      await timeout(fetchUserPromise, timeoutMs - 1);
     } catch (error) {
-      expect(error).toEqual(new Error('timed out'))
+      expect(error).toEqual(new Error('timed out'));
     }
 
-    const fetchedUser = await timeout(fetchUserPromise, timeoutMs + 1)
-    expect(fetchedUser).toEqual(user)
-  })
+    const fetchedUser = await timeout(fetchUserPromise, timeoutMs + 1);
+    expect(fetchedUser).toEqual(user);
+  });
 
   it('logic:types:promise:settled', async () => {
-    const user = { name: 'Michał', age: 19 }
-    const [fetchUserPromise] = sleep(1000, user)
+    const user = {name: 'Michał', age: 19};
+    const [fetchUserPromise] = sleep(1000, user);
 
-    const [fetchedUser, error] = await settled(fetchUserPromise)
+    const [fetchedUser, error] = await settled(fetchUserPromise);
 
     if (error) {
-      expectType<undefined>(fetchedUser)
+      expectType<undefined>(fetchedUser);
 
-      return
+      return;
     }
 
-    expectType<Any.AnyObject>(fetchedUser)
+    expectType<Any.AnyObject>(fetchedUser);
 
-    expect(fetchedUser).toBe(user)
-  })
-})
+    expect(fetchedUser).toBe(user);
+  });
+});

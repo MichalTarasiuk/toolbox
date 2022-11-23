@@ -1,3 +1,3 @@
-export * from './setLightness'
-export * from './toRGBObject'
-export * from './toHSLObject'
+export * from './setLightness';
+export * from './toRGBObject';
+export * from './toHSLObject';

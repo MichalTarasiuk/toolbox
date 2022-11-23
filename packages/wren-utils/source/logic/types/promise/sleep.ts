@@ -5,22 +5,20 @@
  * @returns Reference to timer and promise
  */
 export const sleep = <Resolved>(timeout: number, resolved: Resolved) => {
-  let timer: NodeJS.Timeout | undefined
-  let resolveImpl:
-    | ((value: Resolved | PromiseLike<Resolved>) => void)
-    | undefined
+  let timer: NodeJS.Timeout | undefined;
+  let resolveImpl: ((value: Resolved | PromiseLike<Resolved>) => void) | undefined;
 
-  const promise: Promise<Resolved> = new Promise((resolve) => {
-    timer = setTimeout(resolve, timeout, resolved)
-  })
+  const promise: Promise<Resolved> = new Promise(resolve => {
+    timer = setTimeout(resolve, timeout, resolved);
+  });
 
   const resolve = () => {
     if (resolveImpl) {
-      resolveImpl(resolved)
+      resolveImpl(resolved);
 
-      resolveImpl = undefined
+      resolveImpl = undefined;
     }
-  }
+  };
 
-  return [promise, timer, resolve] as const
-}
+  return [promise, timer, resolve] as const;
+};

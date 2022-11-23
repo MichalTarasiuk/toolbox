@@ -1,11 +1,11 @@
-import { isClient, isServer } from '../../_api'
+import {isClient, isServer} from '../../_api';
 
 describe('jsdom - logic:web', () => {
   test('logic:web:canUseDOM', () => {
     // isServer
-    expect(isServer()).toBeFalsy()
+    expect(isServer()).toBeFalsy();
 
     // isClient
-    expect(isClient()).toBeTruthy()
-  })
-})
+    expect(isClient()).toBeTruthy();
+  });
+});

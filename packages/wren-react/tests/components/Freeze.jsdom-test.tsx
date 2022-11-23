@@ -1,7 +1,7 @@
-import { fireEvent, render } from '@testing-library/react'
-import { useState } from 'react'
+import {fireEvent, render} from '@testing-library/react';
+import {useState} from 'react';
 
-import { Freeze } from '../../_api'
+import {Freeze} from '../../_api';
 
 describe('jsdom - react:components:Freeze', () => {
   it('should show loading when `freeze` is truthy', () => {
@@ -10,13 +10,13 @@ describe('jsdom - react:components:Freeze', () => {
         <Freeze freeze fallback={<p>loading</p>}>
           <p>content</p>
         </Freeze>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    getByText('loading')
-  })
+    getByText('loading');
+  });
 
   it('should show content when `freeze` is falsy', () => {
     const Component = () => {
@@ -24,19 +24,19 @@ describe('jsdom - react:components:Freeze', () => {
         <Freeze freeze={false} fallback={<p>loading</p>}>
           <p>content</p>
         </Freeze>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    getByText('content')
-  })
+    getByText('content');
+  });
 
   it('should show loading when `freeze` is changing to truthy', () => {
     const Component = () => {
-      const [freeze, setFreeze] = useState(false)
+      const [freeze, setFreeze] = useState(false);
 
-      const toggle = () => setFreeze(!freeze)
+      const toggle = () => setFreeze(!freeze);
 
       return (
         <div>
@@ -45,17 +45,17 @@ describe('jsdom - react:components:Freeze', () => {
           </Freeze>
           <button onClick={toggle}>toggle</button>
         </div>
-      )
-    }
+      );
+    };
 
-    const { getByText } = render(<Component />)
+    const {getByText} = render(<Component />);
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('loading')
+    getByText('loading');
 
-    fireEvent.click(getByText('toggle'))
+    fireEvent.click(getByText('toggle'));
 
-    getByText('content')
-  })
-})
+    getByText('content');
+  });
+});

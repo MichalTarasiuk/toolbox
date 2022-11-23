@@ -7,15 +7,13 @@
  * @returns Type of operand.
  */
 export const inferType = (operand: unknown, exact: boolean = false): string => {
-  const type = typeof operand
+  const type = typeof operand;
 
   if (type !== 'object' && !exact) {
-    return type
+    return type;
   }
 
-  const exactType = Object.prototype.toString
-    .call(operand)
-    .replace(/^\[object (\S+)\]$/, '$1')
+  const exactType = Object.prototype.toString.call(operand).replace(/^\[object (\S+)\]$/, '$1');
 
-  return exactType.toLowerCase()
-}
+  return exactType.toLowerCase();
+};

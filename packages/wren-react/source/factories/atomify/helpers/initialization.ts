@@ -1,26 +1,22 @@
-import { isFunction } from '@wren/utils'
+import {isFunction} from '@wren/utils';
 
-import type { Get, Initialization, LazyInitialization } from '../types'
-import type { Any } from '@wren/typescript'
+import type {Get, Initialization, LazyInitialization} from '../types';
+import type {Any} from '@wren/typescript';
 
 const canResolvInitialization = <State>(
   initialization: Initialization<State>,
-): initialization is LazyInitialization<State> => isFunction(initialization)
+): initialization is LazyInitialization<State> => isFunction(initialization);
 
-export const initialize = <State>(
-  initialization: Initialization<State>,
-  get: Get,
-  lifecycle: { before: Any.Noop },
-) => {
-  lifecycle.before()
+export const initialize = <State>(initialization: Initialization<State>, get: Get, lifecycle: {before: Any.Noop}) => {
+  lifecycle.before();
 
   if (canResolvInitialization(initialization)) {
-    const state = initialization(get)
+    const state = initialization(get);
 
-    initialization.get?.(state)
+    initialization.get?.(state);
 
-    return state
+    return state;
   }
 
-  return initialization
-}
+  return initialization;
+};

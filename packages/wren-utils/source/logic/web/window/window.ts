@@ -1,2 +1,2 @@
-export * from './assertions'
-export * from './storage'
+export * from './assertions';
+export * from './storage';

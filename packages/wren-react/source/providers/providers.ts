@@ -1,1 +1,1 @@
-export * from './fiberProvider'
+export * from './fiberProvider';

@@ -1,4 +1,4 @@
-import type { Any } from '@wren/typescript'
+import type {Any} from '@wren/typescript';
 /**
  * Check if something is `null` or `undefined`.
  *
@@ -13,5 +13,4 @@ import type { Any } from '@wren/typescript'
  *
  * @returns `true` if `value` is nullish, `false` if otherwise
  */
-export const nullish = (value: unknown): value is Any.Nullish =>
-  value === null || value === undefined
+export const nullish = (value: unknown): value is Any.Nullish => value === null || value === undefined;

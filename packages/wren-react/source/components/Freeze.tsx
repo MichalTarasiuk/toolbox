@@ -1,55 +1,55 @@
-import { usePrevious } from '@react-hookz/web'
-import { sleep } from '@wren/utils'
-import { Suspense, useMemo } from 'react'
+import {usePrevious} from '@react-hookz/web';
+import {sleep} from '@wren/utils';
+import {Suspense, useMemo} from 'react';
 
-import { suspensify } from '../source'
+import {suspensify} from '../source';
 
-import type { ReactNode } from 'react'
+import type {ReactNode} from 'react';
 
 type FreezeProps = {
-  freeze: boolean
-  fallback: ReactNode
-  children: ReactNode
-}
+  freeze: boolean;
+  fallback: ReactNode;
+  children: ReactNode;
+};
 
-type SuspenderProps = Omit<FreezeProps, 'fallback'>
+type SuspenderProps = Omit<FreezeProps, 'fallback'>;
 
 const createSuspenderState = () => {
-  const [promise, timer, resolve] = sleep(Infinity, null)
+  const [promise, timer, resolve] = sleep(Infinity, null);
 
   const stop = () => {
-    resolve()
-    clearTimeout(timer)
-  }
+    resolve();
+    clearTimeout(timer);
+  };
 
   return {
     stop,
     ...suspensify(promise),
-  }
-}
+  };
+};
 
-const Suspender = ({ freeze, children }: SuspenderProps) => {
-  const suspenderState = useMemo(() => createSuspenderState(), [])
+const Suspender = ({freeze, children}: SuspenderProps) => {
+  const suspenderState = useMemo(() => createSuspenderState(), []);
 
-  const previousFreeze = usePrevious(freeze)
-  const canStartWork = freeze && !previousFreeze
-  const canStopWork = !freeze && previousFreeze
+  const previousFreeze = usePrevious(freeze);
+  const canStartWork = freeze && !previousFreeze;
+  const canStopWork = !freeze && previousFreeze;
 
   if (canStartWork) {
-    suspenderState.read()
+    suspenderState.read();
   }
 
   if (canStopWork) {
-    suspenderState.stop()
+    suspenderState.stop();
   }
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export const Freeze = ({ freeze, children, fallback }: FreezeProps) => {
+export const Freeze = ({freeze, children, fallback}: FreezeProps) => {
   return (
     <Suspense fallback={fallback}>
       <Suspender freeze={freeze}>{children}</Suspender>
     </Suspense>
-  )
-}
+  );
+};

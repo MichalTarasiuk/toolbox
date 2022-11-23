@@ -1,2 +1,2 @@
-export * from './mapKeys'
-export * from './renameKeys'
+export * from './mapKeys';
+export * from './renameKeys';

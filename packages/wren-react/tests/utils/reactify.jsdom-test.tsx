@@ -1,66 +1,62 @@
-import { render } from '@testing-library/react'
-import { expectType, signs, none, keyIn } from '@wren/utils'
+import {render} from '@testing-library/react';
+import {expectType, signs, none, keyIn} from '@wren/utils';
 
-import { reactify } from '../../_api'
+import {reactify} from '../../_api';
 
-type Reactify = typeof reactify
-type ReactifyProps = Parameters<Reactify>
+type Reactify = typeof reactify;
+type ReactifyProps = Parameters<Reactify>;
 
 type MarkupProps = {
-  html: ReactifyProps[0]
-  resolvers?: ReactifyProps[1]
-}
+  html: ReactifyProps[0];
+  resolvers?: ReactifyProps[1];
+};
 
 const Markup = (props: MarkupProps) => {
-  return <>{reactify(props.html, props.resolvers)}</>
-}
+  return <>{reactify(props.html, props.resolvers)}</>;
+};
 
 describe('jsdom - react:utils:reactify', () => {
   it('should render', () => {
-    const { getByText } = render(<Markup html="<p>Hello World</p>" />)
+    const {getByText} = render(<Markup html="<p>Hello World</p>" />);
 
-    getByText('Hello World')
-  })
+    getByText('Hello World');
+  });
 
   it('should replace every `a` tag to `p`', () => {
-    const { getByText } = render(
+    const {getByText} = render(
       <Markup
         html="<a href='/home'>Home Page</a>"
         resolvers={{
-          'tag:a': (props) => {
-            expectType(props.href)
+          'tag:a': props => {
+            expectType(props.href);
 
-            return props.href ? (
-              <p>{props.href.replace(signs.slash, none)}</p>
-            ) : (
-              <a {...props} />
-            )
+            return props.href ? <p>{props.href.replace(signs.slash, none)}</p> : <a {...props} />;
           },
         }}
       />,
-    )
+    );
 
-    getByText('home')
-  })
+    getByText('home');
+  });
 
   it('should replace every element with `replace-me` id', () => {
-    const selector = 'replace-me'
+    const selector = 'replace-me';
 
-    const { getByText } = render(
+    const {getByText} = render(
       <Markup
         html={`<p id='${selector}'>Hello World</p>`}
         resolvers={{
-          [`id:${selector}` as const]: (props) => {
+          [`id:${selector}` as const]: props => {
             if (keyIn(props, 'id')) {
-              return <p>{'replaced :)'}</p>
+              return <p>{'replaced :)'}</p>;
             }
 
-            return null
+            return null;
           },
         }}
       />,
-    )
+    );
 
-    getByText('replaced :)')
-  })
-})
+    getByText('replaced :)');
+  });
+});
