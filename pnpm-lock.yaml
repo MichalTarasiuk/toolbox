@@ -64,8 +64,8 @@ importers:
       '@rollup/plugin-typescript': 9.0.2_gxoaovnvpo6lnrm23rwbc2cac4
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react-hooks': 8.0.1_biqbaboplfbrettd7655fr4n2y
-      '@tool/typescript': link:packages/wren-typescript
-      '@tool/utils': link:packages/wren-utils
+      '@tool/typescript': link:packages/tool-typescript
+      '@tool/utils': link:packages/tool-utils
       '@types/jest': 29.2.3
       '@types/node': 18.11.9
       '@types/prompt': 1.1.4
@@ -98,7 +98,7 @@ importers:
       typescript: 4.8.4
       zx: 7.1.1
 
-  packages/wren-nextJS:
+  packages/tool-nextJS:
     specifiers:
       '@tool/react': '*'
       '@tool/typescript': '*'
@@ -116,16 +116,16 @@ importers:
       query-string: 7.1.1
       uuid: 9.0.0
     devDependencies:
-      '@tool/react': link:../wren-react
-      '@tool/typescript': link:../wren-typescript
-      '@tool/utils': link:../wren-utils
+      '@tool/react': link:../tool-react
+      '@tool/typescript': link:../tool-typescript
+      '@tool/utils': link:../tool-utils
       '@types/next': 9.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.25
       '@types/uuid': 8.3.4
       next: 13.0.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
 
-  packages/wren-react:
+  packages/tool-react:
     specifiers:
       '@react-hookz/web': ^19.0.0
       '@tool/typescript': '*'
@@ -153,8 +153,8 @@ importers:
       uuid: 9.0.0
     devDependencies:
       '@react-hookz/web': 19.2.0_biqbaboplfbrettd7655fr4n2y
-      '@tool/typescript': link:../wren-typescript
-      '@tool/utils': link:../wren-utils
+      '@tool/typescript': link:../tool-typescript
+      '@tool/utils': link:../tool-utils
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.25
       '@types/react-is': 17.0.3
@@ -166,14 +166,14 @@ importers:
       react-is: 18.2.0
       react-test-renderer: 18.2.0_react@18.2.0
 
-  packages/wren-typescript:
+  packages/tool-typescript:
     specifiers: {}
 
-  packages/wren-utils:
+  packages/tool-utils:
     specifiers:
       '@tool/typescript': '*'
     devDependencies:
-      '@tool/typescript': link:../wren-typescript
+      '@tool/typescript': link:../tool-typescript
 
 packages:
 
