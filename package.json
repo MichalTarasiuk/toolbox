@@ -75,7 +75,7 @@
     "make-dir": "3.1.0",
     "mock-local-storage": "^1.1.23",
     "node-notifier": "10.0.1",
-    "prettier": "2.7.1",
+    "prettier": "2.8.0",
     "rollup": "^3.2.3",
     "ts-jest": "29.0.3",
     "ts-node": "10.9.1",
