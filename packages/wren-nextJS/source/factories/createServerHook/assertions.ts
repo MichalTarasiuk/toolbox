@@ -1,4 +1,4 @@
-import {isString, keyIn} from '@wren/utils';
+import {isString, keyIn} from '@tool/utils';
 
 import type {ContextUnion} from './createServerHookImpl';
 import type {GetServerSidePropsContext} from 'next';

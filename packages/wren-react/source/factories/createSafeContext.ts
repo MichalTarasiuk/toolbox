@@ -1,4 +1,4 @@
-import {uppercaseFirst} from '@wren/utils';
+import {uppercaseFirst} from '@tool/utils';
 import {createContext, useContext} from 'react';
 
 export const createSafeContext = <ContextValue>(name: string) => {

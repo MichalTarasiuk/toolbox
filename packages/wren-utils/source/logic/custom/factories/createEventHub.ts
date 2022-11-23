@@ -1,6 +1,6 @@
 import {keyIn, isSet} from '../../../source';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 type EventHub<Key extends string = string> = Record<Key, Set<Any.UnknownFunction>>;
 

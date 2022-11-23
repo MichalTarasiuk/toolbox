@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- safety assertions */
-import type {Any, Custom, String} from '@wren/typescript';
+import type {Any, Custom, String} from '@tool/typescript';
 
 const equalsSign = '=' as const;
 const semicolonSign = '; ' as const;

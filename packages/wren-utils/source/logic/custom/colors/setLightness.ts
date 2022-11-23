@@ -1,4 +1,4 @@
-// @TODO: add to wren typescript
+// @TODO: add to @tool/typescript
 import type {Number as NumberType} from 'ts-toolbelt';
 
 type SetLightness<

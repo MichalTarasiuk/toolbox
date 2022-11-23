@@ -1,5 +1,5 @@
 {
-  "name": "@wren/nextjs",
+  "name": "@tool/nextjs",
   "version": "1.0.0",
   "description": "",
   "main": "_api.ts",
@@ -25,17 +25,17 @@
   "devDependencies": {
     "next": "13.0.4",
     "react": "18.2.0",
-    "@wren/typescript": "*",
+    "@tool/typescript": "*",
     "@types/next": "9.0.0",
     "@types/react": "18.0.25",
     "@types/uuid": "8.3.4",
-    "@wren/react": "*",
-    "@wren/utils": "*"
+    "@tool/react": "*",
+    "@tool/utils": "*"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "next": "^12.0.0 || ^13.0.0",
-    "@wren/utils": "*",
-    "@wren/react": "*"
+    "@tool/utils": "*",
+    "@tool/react": "*"
   }
 }

@@ -1,6 +1,6 @@
 import {isArray} from '../../../source';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 type ToArray<Value> = Value extends Any.AnyArray ? Value : [Value];
 

@@ -1,10 +1,10 @@
-import {useEvent} from '@wren/react';
-import {none} from '@wren/utils';
+import {useEvent} from '@tool/react';
+import {none} from '@tool/utils';
 import {useRouter} from 'next/router';
 import querystring from 'query-string';
 import {useCallback, useEffect, useState} from 'react';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {NextRouter} from 'next/router';
 import type {UrlObject} from 'url';
 

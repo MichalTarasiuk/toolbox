@@ -1,4 +1,4 @@
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 /**
  * Get the lowest value of the 2 parameters.

@@ -1,9 +1,9 @@
-import {createEventHub} from '@wren/utils';
+import {createEventHub} from '@tool/utils';
 import {useCallback, useEffect, useRef} from 'react';
 
 import {useEvent} from './useEvent';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 const eventHub = createEventHub();
 

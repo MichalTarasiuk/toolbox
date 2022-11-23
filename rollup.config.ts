@@ -2,9 +2,9 @@ import commonJsPlugin from '@rollup/plugin-commonjs';
 import {nodeResolve as nodeResolvePlugin} from '@rollup/plugin-node-resolve';
 import stripPlugin from '@rollup/plugin-strip';
 import typescriptPlugin from '@rollup/plugin-typescript';
-import {isObject, isString, keyIn, none, objectKeys} from '@wren/utils';
+import {isObject, isString, keyIn, none, objectKeys} from '@tool/utils';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {RollupOptions} from 'rollup';
 
 type Reference = {path: string};

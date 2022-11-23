@@ -1,7 +1,7 @@
-import {isFunction} from '@wren/utils';
+import {isFunction} from '@tool/utils';
 
 import type {Get, Initialization, LazyInitialization} from '../types';
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 const canResolvInitialization = <State>(
   initialization: Initialization<State>,

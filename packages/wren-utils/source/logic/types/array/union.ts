@@ -1,4 +1,4 @@
-import type {Any, Custom, Array} from '@wren/typescript';
+import type {Any, Custom, Array} from '@tool/typescript';
 import type {List} from 'ts-toolbelt';
 
 type Union<AnyArrayGeneric extends Any.AnyArray, Result extends Any.AnyArray = []> = AnyArrayGeneric extends [

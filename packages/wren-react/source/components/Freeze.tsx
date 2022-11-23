@@ -1,5 +1,5 @@
 import {usePrevious} from '@react-hookz/web';
-import {sleep} from '@wren/utils';
+import {sleep} from '@tool/utils';
 import {Suspense, useMemo} from 'react';
 
 import {suspensify} from '../source';

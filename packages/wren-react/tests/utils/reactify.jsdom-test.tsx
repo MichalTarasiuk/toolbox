@@ -1,5 +1,5 @@
 import {render} from '@testing-library/react';
-import {expectType, signs, none, keyIn} from '@wren/utils';
+import {expectType, signs, none, keyIn} from '@tool/utils';
 
 import {reactify} from '../../_api';
 

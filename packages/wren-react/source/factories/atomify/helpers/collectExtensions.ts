@@ -1,4 +1,4 @@
-import {objectKeys} from '@wren/utils';
+import {objectKeys} from '@tool/utils';
 
 import type {AtomInitialize} from '../types';
 

@@ -1,7 +1,7 @@
-import {isFunction} from '@wren/utils';
+import {isFunction} from '@tool/utils';
 import * as ReactIs from 'react-is';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {ReactElement, ReactNode} from 'react';
 
 export type Resolvable<Resolved> = (() => Resolved) | Resolved;

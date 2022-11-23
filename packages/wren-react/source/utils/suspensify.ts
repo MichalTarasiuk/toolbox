@@ -1,4 +1,4 @@
-import {isError} from '@wren/utils';
+import {isError} from '@tool/utils';
 
 type Status = 'pending' | 'rejected' | 'fulfilled';
 

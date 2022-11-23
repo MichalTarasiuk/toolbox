@@ -1,5 +1,5 @@
 {
-  "name": "@wren/utils",
+  "name": "@tool/utils",
   "version": "1.0.0",
   "description": "",
   "main": "_api.ts",
@@ -18,6 +18,6 @@
     "browser": "./build/_api.umd.js"
   },
   "devDependencies": {
-    "@wren/typescript": "*"
+    "@tool/typescript": "*"
   }
 }

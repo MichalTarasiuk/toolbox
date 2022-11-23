@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react';
-import {noop} from '@wren/utils';
+import {noop} from '@tool/utils';
 
 import {useEvent} from '../../_api';
 

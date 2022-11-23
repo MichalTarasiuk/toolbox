@@ -1,9 +1,9 @@
-import {objectKeys} from '@wren/utils';
+import {objectKeys} from '@tool/utils';
 import {createContext, useContext} from 'react';
 
 import {isServerCacheKey} from './assertions';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {ReactNode} from 'react';
 
 type ServerCacheProviderProps = {

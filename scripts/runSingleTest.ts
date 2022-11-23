@@ -1,4 +1,4 @@
-import {timeout} from '@wren/utils';
+import {timeout} from '@tool/utils';
 import {$, question} from 'zx';
 
 const query = 'Can you pass name of test?';

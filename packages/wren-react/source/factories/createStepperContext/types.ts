@@ -1,5 +1,5 @@
 import type {generateTokens} from './helpers';
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 export type Steps = Any.AnyObject<{name: string; canGo: (...params: unknown[]) => boolean}, number>;
 

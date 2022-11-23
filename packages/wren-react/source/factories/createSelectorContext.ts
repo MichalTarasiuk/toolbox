@@ -1,4 +1,4 @@
-import {uppercaseFirst} from '@wren/utils';
+import {uppercaseFirst} from '@tool/utils';
 import {createContext as createContextImpl, useContextSelector} from 'use-context-selector';
 
 import type {Context} from 'use-context-selector';

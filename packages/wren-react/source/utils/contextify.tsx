@@ -1,8 +1,8 @@
-import {none} from '@wren/utils';
+import {none} from '@tool/utils';
 
 import {createSafeContext} from '../source';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {ReactNode} from 'react';
 
 type InferSettings<Params extends Any.AnyArray> = {

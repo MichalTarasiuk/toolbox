@@ -1,6 +1,6 @@
-import {defer} from '@wren/utils';
+import {defer} from '@tool/utils';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 export * from './areHookInputsEqual';
 export * from './reactify/reactify';

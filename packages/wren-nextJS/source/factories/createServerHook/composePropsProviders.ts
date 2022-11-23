@@ -1,4 +1,4 @@
-import {fromEntries} from '@wren/utils';
+import {fromEntries} from '@tool/utils';
 import {v4} from 'uuid';
 
 import type {ContextUnion, ServerHook} from './createServerHookImpl';

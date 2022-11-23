@@ -1,6 +1,6 @@
 import {join} from 'path';
 
-import {isArray, isObject, isString, keyIn} from '@wren/utils';
+import {isArray, isObject, isString, keyIn} from '@tool/utils';
 import createFile from 'create-file';
 import makeDir from 'make-dir';
 

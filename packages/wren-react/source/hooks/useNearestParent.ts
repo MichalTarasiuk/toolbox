@@ -1,4 +1,4 @@
-import {isString} from '@wren/utils';
+import {isString} from '@tool/utils';
 import {useRef} from 'react';
 
 import {traverseFiber} from '../utils/utils';

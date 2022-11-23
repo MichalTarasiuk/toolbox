@@ -1,4 +1,4 @@
-import {isFunction} from '@wren/utils';
+import {isFunction} from '@tool/utils';
 import equal from 'deep-equal';
 
 import type {ResolvableState} from '../types';

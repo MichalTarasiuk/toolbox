@@ -1,6 +1,6 @@
 import {inferType} from './inferType';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 // typeof:primitives
 

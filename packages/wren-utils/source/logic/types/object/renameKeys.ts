@@ -1,8 +1,8 @@
-// import { entries, fromEntries } from '@wren/utils'
+// import { entries, fromEntries } from '@tool/utils'
 
 import {keyIn} from '../../../source';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 export const renameKeys = <AnyObject extends Any.AnyObject>(anyObject: AnyObject, keysMapper: Any.AnyObject) =>
   Object.fromEntries(

@@ -1,9 +1,9 @@
-import {createEventHub, isObject} from '@wren/utils';
+import {createEventHub, isObject} from '@tool/utils';
 import {useCallback, useMemo, useRef, useSyncExternalStore} from 'react';
 
 import {createSafeContext} from './createSafeContext';
 
-import type {Any, Custom} from '@wren/typescript';
+import type {Any, Custom} from '@tool/typescript';
 import type {ReactNode} from 'react';
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {

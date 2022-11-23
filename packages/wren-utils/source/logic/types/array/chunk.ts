@@ -1,4 +1,4 @@
-import type {Any, Array as ArrayType, Custom} from '@wren/typescript';
+import type {Any, Array as ArrayType, Custom} from '@tool/typescript';
 
 type Chunk<
   Arr extends Any.AnyArray,

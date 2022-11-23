@@ -1,4 +1,4 @@
-import {keyIn} from '@wren/utils';
+import {keyIn} from '@tool/utils';
 
 import {resolve} from '../helpers';
 

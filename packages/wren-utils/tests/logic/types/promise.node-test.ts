@@ -1,6 +1,6 @@
 import {timeout, settled, sleep, expectType} from '../../../_api';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 
 describe('node - logic:types:promise', () => {
   it('logic:types:promise:sleep', async () => {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- typescript can't infer return type of unknwon function */
-import {isObject, keyIn} from '@wren/utils';
+import {isObject, keyIn} from '@tool/utils';
 import {useRef} from 'react';
 
 import {objectIs} from '../../_api';

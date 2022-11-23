@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "wren",
+  "name": "toolbox",
   "version": "1.0.0",
   "description": "set of reusable helpers",
-  "bugs": "https://github.com/MichalTarasiuk/wren/issues",
+  "bugs": "https://github.com/MichalTarasiuk/toolbox/issues",
   "keywords": [
     "react",
     "helpers",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalTarasiuk/wren"
+    "url": "https://github.com/MichalTarasiuk/toolbox"
   },
   "scripts": {
     "utils:prepare": "husky install",
@@ -55,8 +55,8 @@
     "@types/prompt": "1.1.4",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
-    "@wren/typescript": "*",
-    "@wren/utils": "*",
+    "@tool/typescript": "*",
+    "@tool/utils": "*",
     "babel-jest": "29.3.1",
     "create-file": "1.0.1",
     "eslint": "8.28.0",

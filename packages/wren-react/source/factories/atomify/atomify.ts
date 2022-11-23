@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import {createEventHub, isUndefined} from '@wren/utils';
+import {createEventHub, isUndefined} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';

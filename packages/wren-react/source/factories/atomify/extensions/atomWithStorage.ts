@@ -1,4 +1,4 @@
-import {isClient, isString} from '@wren/utils';
+import {isClient, isString} from '@tool/utils';
 
 import type {AtomInitialize, LazyInitialization} from '../types';
 

@@ -1,4 +1,4 @@
-import type {Any, Custom, Object as ObjectType} from '@wren/typescript';
+import type {Any, Custom, Object as ObjectType} from '@tool/typescript';
 
 /**
  * @param object - Object that contains the properties and methods.

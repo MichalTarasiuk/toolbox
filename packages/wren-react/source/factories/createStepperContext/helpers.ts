@@ -1,4 +1,4 @@
-import {entries, fromEntries, keyIn, max, min, objectKeys} from '@wren/utils';
+import {entries, fromEntries, keyIn, max, min, objectKeys} from '@tool/utils';
 
 import type {Steps, Tokens} from './types';
 

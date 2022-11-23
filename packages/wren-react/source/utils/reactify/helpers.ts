@@ -1,4 +1,4 @@
-import {isClient} from '@wren/utils';
+import {isClient} from '@tool/utils';
 import reactIs from 'react-is';
 
 import {isElement} from './assertions';

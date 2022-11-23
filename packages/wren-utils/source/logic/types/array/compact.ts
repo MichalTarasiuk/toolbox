@@ -1,4 +1,4 @@
-import type {Any, Custom} from '@wren/typescript';
+import type {Any, Custom} from '@tool/typescript';
 import type {Any as A, List} from 'ts-toolbelt';
 
 type Compact<Arr extends Any.AnyArray, Result extends Any.AnyArray = []> = Arr extends [infer First, ...infer Rest]

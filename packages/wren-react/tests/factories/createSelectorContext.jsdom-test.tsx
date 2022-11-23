@@ -1,11 +1,11 @@
 import {fireEvent, render} from '@testing-library/react';
-import {noop} from '@wren/utils';
+import {noop} from '@tool/utils';
 import {useState} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
 
 import {createSelectorContext} from '../../_api';
 
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 import type {ReactNode} from 'react';
 
 type ContextValue = {

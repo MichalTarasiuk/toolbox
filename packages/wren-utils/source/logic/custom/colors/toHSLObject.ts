@@ -1,4 +1,4 @@
-import type {Number as NumberType} from '@wren/typescript';
+import type {Number as NumberType} from '@tool/typescript';
 
 type ToHSLObject<HSL> = HSL extends `hsl(${infer Hue}, ${infer Saturation}%, ${infer Lightness}%)`
   ? {

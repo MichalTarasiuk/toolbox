@@ -1,4 +1,4 @@
-import type {Any} from '@wren/typescript';
+import type {Any} from '@tool/typescript';
 /**
  * Check if something is `null` or `undefined`.
  *

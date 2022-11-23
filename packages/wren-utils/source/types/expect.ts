@@ -1,4 +1,4 @@
-import type {Custom} from '@wren/typescript';
+import type {Custom} from '@tool/typescript';
 
 /**
  * Assert the parameter is of a specific type.

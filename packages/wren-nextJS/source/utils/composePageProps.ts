@@ -1,7 +1,7 @@
-import {isObject, keyIn, signs, asyncFlatMap} from '@wren/utils';
+import {isObject, keyIn, signs, asyncFlatMap} from '@tool/utils';
 import deepmerge from 'deepmerge';
 
-import type {Custom, Any, Array} from '@wren/typescript';
+import type {Custom, Any, Array} from '@tool/typescript';
 import type {
   GetStaticPropsContext,
   GetServerSidePropsContext,

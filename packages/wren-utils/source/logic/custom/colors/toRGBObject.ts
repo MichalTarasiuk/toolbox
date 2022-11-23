@@ -1,4 +1,4 @@
-import type {Number as NumberType} from '@wren/typescript';
+import type {Number as NumberType} from '@tool/typescript';
 
 type ToRGBObject<RGB> = RGB extends `rgb(${infer Red}, ${infer Green}, ${infer Blue})`
   ? {

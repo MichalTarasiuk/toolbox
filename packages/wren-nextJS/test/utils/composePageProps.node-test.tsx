@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- mocks */
-import {isObject, keyIn} from '@wren/utils';
+import {isObject, keyIn} from '@tool/utils';
 
 import {composePageProps} from '../../_api';
 

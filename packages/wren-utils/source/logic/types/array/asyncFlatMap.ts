@@ -1,4 +1,4 @@
-import type {Any, Custom} from '@wren/typescript';
+import type {Any, Custom} from '@tool/typescript';
 
 export const asyncFlatMap = async <Array extends Any.AnyArray, Result>(
   array: Custom.Narrow<Array>,

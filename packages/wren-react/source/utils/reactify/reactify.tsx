@@ -1,4 +1,4 @@
-import {keyIn} from '@wren/utils';
+import {keyIn} from '@tool/utils';
 import parse, {attributesToProps, domToReact} from 'html-react-parser';
 
 import {hasId, isValidName} from './assertions';
