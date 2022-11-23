@@ -1,4 +1,4 @@
-import {resolve} from '../helpers';
+import {resolve} from '@tool/utils';
 
 import type {CaseProps, DefaultProps} from './types';
 

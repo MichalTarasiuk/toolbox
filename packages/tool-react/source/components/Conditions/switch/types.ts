@@ -1,4 +1,4 @@
-import type {Resolvable} from '../helpers';
+import type {Resolvable} from '@tool/utils';
 import type {ReactNode} from 'react';
 import type React from 'react';
 

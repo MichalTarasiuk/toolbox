@@ -1,8 +1,6 @@
 /* eslint-disable functional/no-loop-statement -- break */
 import React, {cloneElement} from 'react';
 
-import {isReactElement} from '../helpers';
-
 import {isCase, isDefault, isTruthy} from './assertions';
 import {useReach} from './hooks';
 
@@ -29,7 +27,7 @@ export const Switch = ({children}: SwitchProps) => {
   };
 
   for (const Child of childrens) {
-    if (isReactElement(Child) && (isCase(Child) || isDefault(Child))) {
+    if (React.isValidElement(Child) && (isCase(Child) || isDefault(Child))) {
       const canPush = isTruthy(Child) || reach.done;
 
       if (canPush) {

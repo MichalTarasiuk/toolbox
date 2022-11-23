@@ -1,6 +1,6 @@
-import {resolve} from './helpers';
+import {resolve} from '@tool/utils';
 
-import type {Resolvable} from './helpers';
+import type {Resolvable} from '@tool/utils';
 import type {ReactNode} from 'react';
 
 type Props = {

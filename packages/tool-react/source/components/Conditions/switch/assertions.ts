@@ -1,6 +1,4 @@
-import {keyIn} from '@tool/utils';
-
-import {resolve} from '../helpers';
+import {keyIn, resolve} from '@tool/utils';
 
 import {Case, Default} from './components';
 

@@ -9,10 +9,11 @@ import {
   objectKeys,
   fromEntries,
   entries,
+  booleanToString,
 } from '../_api';
 
-describe('node - logic:types', () => {
-  test('logic:types:expect', () => {
+describe('node - types', () => {
+  test('types:expect', () => {
     const digit = 1;
     const word = 'Hello World';
     const anything: any = 3;
@@ -37,7 +38,7 @@ describe('node - logic:types', () => {
     expectNever(nothing);
   });
 
-  test('logic:types:string', () => {
+  test('types:string', () => {
     const word = 'Hello World' as const;
 
     // lowercase
@@ -47,7 +48,7 @@ describe('node - logic:types', () => {
     expectType<Uppercase<typeof word>>(uppercase(word));
   });
 
-  test('logic:types:objects', () => {
+  test('types:objects', () => {
     const example = {
       1: 'A',
       3: 'C',
@@ -67,5 +68,14 @@ describe('node - logic:types', () => {
 
     // entries
     expectType<[[1, 'A']]>(entries({1: 'A'}));
+  });
+
+  test('types:boolean', () => {
+    // booleanToString
+    const truthyString = booleanToString(true);
+    const falsyString = booleanToString(false);
+
+    expectType<'true'>(truthyString);
+    expectType<'false'>(falsyString);
   });
 });

@@ -1,8 +1,6 @@
-import {isFunction} from '@tool/utils';
-import * as ReactIs from 'react-is';
+import {isFunction} from '../../../source';
 
 import type {Any} from '@tool/typescript';
-import type {ReactElement, ReactNode} from 'react';
 
 export type Resolvable<Resolved> = (() => Resolved) | Resolved;
 
@@ -16,5 +14,3 @@ export const resolve = <Resolved>(resolvable: Resolvable<Resolved>) => {
 
   return resolvable;
 };
-
-export const isReactElement = (reactNode: ReactNode): reactNode is ReactElement => ReactIs.isElement(reactNode);
