@@ -1,0 +1,41 @@
+{
+  "name": "@tool/nextjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_api.ts",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "ts:find-deadcode": "ts-prune -p tsconfig.json",
+    "ts:check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "import": "./build/_api.mjs",
+    "default": "./_api.ts",
+    "require": "./build/_api.cjs",
+    "browser": "./build/_api.umd.js"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "query-string": "^7.1.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "next": "13.0.5",
+    "react": "18.2.0",
+    "@tool/typescript": "*",
+    "@types/next": "9.0.0",
+    "@types/react": "18.0.25",
+    "@types/uuid": "8.3.4",
+    "@tool/react": "*",
+    "@tool/utils": "*"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "next": "^12.0.0 || ^13.0.0",
+    "@tool/utils": "*",
+    "@tool/react": "*"
+  }
+}

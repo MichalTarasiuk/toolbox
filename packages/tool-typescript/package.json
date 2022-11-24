@@ -1,0 +1,15 @@
+{
+  "name": "@tool/typescript",
+  "version": "1.0.0",
+  "description": "",
+  "build": false,
+  "main": "_api.ts",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "ts:find-deadcode": "ts-prune -p tsconfig.json",
+    "ts:check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

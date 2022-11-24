@@ -1,0 +1,23 @@
+{
+  "name": "@tool/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "_api.ts",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "ts:find-deadcode": "ts-prune -p tsconfig.json",
+    "ts:check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "import": "./build/_api.mjs",
+    "default": "./_api.ts",
+    "require": "./build/_api.cjs",
+    "browser": "./build/_api.umd.js"
+  },
+  "devDependencies": {
+    "@tool/typescript": "*"
+  }
+}

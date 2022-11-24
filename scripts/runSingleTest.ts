@@ -1,13 +1,13 @@
-import { timeout } from '@wren/utils'
-import { $, question } from 'zx'
+import {timeout} from '@tool/utils';
+import {$, question} from 'zx';
 
-const query = 'Can you pass name of test?'
+const query = 'Can you pass name of test?';
 
 const runSingleTest = async () => {
-  const testNamePatternPromise = question(query)
-  const testNamePatternValue = await timeout(testNamePatternPromise, 10_000)
+  const testNamePatternPromise = question(query);
+  const testNamePatternValue = await timeout(testNamePatternPromise, 10_000);
 
-  $`jest --config --testNamePattern '${testNamePatternValue}'`
-}
+  $`jest --config --testNamePattern '${testNamePatternValue}'`;
+};
 
-void runSingleTest()
+void runSingleTest();

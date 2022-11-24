@@ -12,5 +12,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            Hello! :wave: Thanks for your contributions to wren. :rocket:
+            Hello! :wave: Thanks for your contributions to toolbox. :rocket:
           reactions: hooray

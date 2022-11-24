@@ -5,16 +5,16 @@
   },
   "references": [
     {
-      "path": "packages/wren-utils"
+      "path": "packages/tool-utils"
     },
     {
-      "path": "packages/wren-typescript"
+      "path": "packages/tool-typescript"
     },
     {
-      "path": "packages/wren-react"
+      "path": "packages/tool-react"
     },
     {
-      "path": "packages/wren-nextJS"
+      "path": "packages/tool-nextJS"
     }
   ],
   "extends": "./tsconfig.base.json"
