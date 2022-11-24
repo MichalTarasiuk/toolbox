@@ -1,1 +1,1 @@
-export * from './createServerHook/createServerHook';
+export * from './createServerHook';
