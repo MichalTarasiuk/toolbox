@@ -10,10 +10,6 @@ const isTag = (reactNode: ReactNode): reactNode is ReactElement =>
 
 export const flatMapChildren = (children: ReactNode, keys: Array<Key> = []) => {
   return Children.toArray(children).reduce<ReactNode[]>((collector, reactNode, index) => {
-    if (ReactIs.isFragment(reactNode) && hasChildren(reactNode.props)) {
-      collector.push(...flatMapChildren(reactNode.props.children, keys.concat(reactNode.key ?? index)));
-    }
-
     if (isTag(reactNode)) {
       const key = keys.join(signs.dot) + String(reactNode.key);
 
@@ -22,6 +18,10 @@ export const flatMapChildren = (children: ReactNode, keys: Array<Key> = []) => {
           key,
         }),
       );
+    }
+
+    if (ReactIs.isFragment(reactNode) && hasChildren(reactNode.props)) {
+      collector.push(...flatMapChildren(reactNode.props.children, keys.concat(reactNode.key ?? index)));
     }
 
     if (isString(reactNode) || isNumber(reactNode)) {
