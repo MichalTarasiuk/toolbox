@@ -6,12 +6,19 @@ import type {ReactNode, Key, ReactElement} from 'react';
 
 const hasChildren = (props: unknown): props is {children: ReactNode} => isObject(props) && keyIn(props, 'children');
 
-const isTag = (reactNode: ReactNode): reactNode is ReactElement =>
-  ReactIs.isElement(reactNode) && !ReactIs.isFragment(reactNode);
+const isElement = ReactIs.isElement;
+const isFragment = (reactNode: ReactNode): reactNode is ReactElement =>
+  ReactIs.isFragment(reactNode) && hasChildren(reactNode.props);
 
 export const flatMapChildren = (children: ReactNode, keys: Array<Key> = []) => {
   return Children.toArray(children).reduce<ReactNode[]>((collector, reactNode, index) => {
-    if (isTag(reactNode)) {
+    if (isFragment(reactNode)) {
+      collector.push(...flatMapChildren(reactNode.props.children, keys.concat(reactNode.key ?? index)));
+
+      return collector;
+    }
+
+    if (isElement(reactNode)) {
       const key = keys.join(signs.dot) + String(reactNode.key);
 
       collector.push(
@@ -19,14 +26,14 @@ export const flatMapChildren = (children: ReactNode, keys: Array<Key> = []) => {
           key,
         }),
       );
-    }
 
-    if (ReactIs.isFragment(reactNode) && hasChildren(reactNode.props)) {
-      collector.push(...flatMapChildren(reactNode.props.children, keys.concat(reactNode.key ?? index)));
+      return collector;
     }
 
     if (isString(reactNode) || isNumber(reactNode)) {
       collector.push(reactNode);
+
+      return collector;
     }
 
     return collector;
