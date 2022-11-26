@@ -5,6 +5,7 @@ import ReactIs from 'react-is';
 import type {ReactNode, Key, ReactElement} from 'react';
 
 const hasChildren = (props: unknown): props is {children: ReactNode} => isObject(props) && keyIn(props, 'children');
+
 const isTag = (reactNode: ReactNode): reactNode is ReactElement =>
   ReactIs.isElement(reactNode) && !ReactIs.isFragment(reactNode);
 
