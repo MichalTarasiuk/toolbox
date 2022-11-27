@@ -17,7 +17,6 @@ export const reactify = (html: string, customResolvers?: Resolvers) => {
       const {children, attribs} = element;
 
       const name = hasId(element.attribs) ? formatId(element.attribs.id) : formatTag(element.tagName);
-
       const CustomResolver = getCustomResolver(name);
 
       if (CustomResolver) {
