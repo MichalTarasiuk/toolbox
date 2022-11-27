@@ -1,8 +1,7 @@
 export type Get = <State>(atom: Atom<State>) => State;
 export type CustomSet<State> = (
-  get: (atom: Atom<State>) => State,
-  set: (nextInitialization: Initialization<State>) => void,
-  nextInitialization?: Initialization<State>,
+  handler: {get: (atom: Atom<State>) => State; set: (nextInitialization: Initialization<State>) => void},
+  ...params: any[]
 ) => void;
 
 export type LazyInitialization<State> = ((get: Get) => State) & {

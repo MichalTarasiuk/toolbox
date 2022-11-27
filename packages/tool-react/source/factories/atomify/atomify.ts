@@ -38,7 +38,12 @@ export const atomify = () => {
 
       const setInitialization = (nextInitialization?: Initialization<State>) => {
         if (customSet) {
-          customSet(get, set, nextInitialization);
+          const handler = {
+            get,
+            set,
+          };
+
+          customSet(handler);
           return;
         }
 

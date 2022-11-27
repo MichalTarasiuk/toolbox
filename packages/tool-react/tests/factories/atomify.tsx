@@ -92,7 +92,7 @@ describe('jsdom - react:factories:atomify', () => {
   it('should work with custom set', () => {
     const {atom, useAtom} = atomify();
 
-    const firstnameAtom = atom<string | null>(null, (_, set) => {
+    const firstnameAtom = atom<string | null>(null, ({set}) => {
       set('Michał');
     });
     const userAtom = atom(get => ({firstname: get(firstnameAtom)}));
