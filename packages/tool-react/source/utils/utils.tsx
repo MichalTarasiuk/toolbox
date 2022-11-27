@@ -8,6 +8,8 @@ export * from './wrapContext';
 export * from './traverseFiber';
 export * from './contextify';
 export * from './suspensify';
+export * from './flatMapChildren';
+export * from './hookify';
 
 export const Null = () => <></>;
 
