@@ -60,14 +60,14 @@ describe('node - types', () => {
     }
 
     // objectKeys
-    expectType<[1, 3]>(objectKeys(example, 'strict'));
+    expectType<[1, 3]>(objectKeys(example, true));
     expectType<(1 | 3)[]>(objectKeys(example));
 
     // fromEntries
     expectType<{1: 'A'}>(fromEntries([[1, 'A']]));
 
     // entries
-    expectType<[[1, 'A']]>(entries({1: 'A'}));
+    expectType<[[1, string]]>(entries({1: 'A'}));
   });
 
   test('types:boolean', () => {

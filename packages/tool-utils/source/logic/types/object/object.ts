@@ -1,2 +1,2 @@
-export * from './mapKeys';
+export * from './findAndRemoveWhen';
 export * from './renameKeys';

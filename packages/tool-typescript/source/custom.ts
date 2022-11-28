@@ -4,7 +4,9 @@ import type {Any, Array} from './source';
 export type IsAny<Type> = 0 extends 1 & Type ? true : false;
 export type NotAny<Type> = true extends IsAny<Type> ? false : true;
 
-export type Debug<AnyObject> = {[Key in keyof AnyObject]: AnyObject[Key]};
+export type Debug<AnyObject> = AnyObject extends Record<PropertyKey, unknown>
+  ? {[Key in keyof AnyObject]: AnyObject[Key]}
+  : never;
 
 export type MaybePromise<Value> = Promise<Value> | Value;
 

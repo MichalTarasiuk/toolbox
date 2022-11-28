@@ -25,7 +25,7 @@ export type Entries<
     >
   : never;
 
-export type FromEntries<Entry extends Array<[PropertyKey, unknown]>> = {
+export type FromEntries<Entry extends ReadonlyArray<[PropertyKey, unknown]>> = {
   [Key in Extract<keyof Entry, `${number}`> as Entry[0][0]]: Entry[Key][1];
 };
 
@@ -39,3 +39,7 @@ export type Values<
       }[ValueKeys[number]]
     >
   : never;
+
+export type IsKnowableObject<Value extends Any.AnyObject> = Custom.Equals<keyof Value, PropertyKey> extends 0
+  ? true
+  : false;

@@ -70,3 +70,5 @@ export type From<Length extends number, Result extends never[] = []> = Length ex
   : From<Length, [...Result, never]>;
 
 export type IsTuple<Value> = [Value] extends [never] ? false : Value extends readonly [unknown?] ? true : false;
+
+export type MaybeReadonly<Value> = ReadonlyArray<Value> | Array<Value>;
