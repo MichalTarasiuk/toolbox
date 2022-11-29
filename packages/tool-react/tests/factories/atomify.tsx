@@ -155,7 +155,9 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should not rerender component which update atom', () => {
     const {atom, useAtomValue, useUpdateAtom} = atomify();
-    const counterAtom = atom(0);
+    const counterAtom = atom(0, (handler, nextCounter: number) => {
+      handler.set(nextCounter);
+    });
 
     const displayerSpy = jest.fn();
     const updaterSpy = jest.fn();

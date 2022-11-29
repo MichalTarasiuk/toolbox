@@ -3,15 +3,18 @@ import {createEventHub} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';
-import {collectExtensions, createState, createWorker, initialize, resolveState} from './helpers/helpers';
+import {collectExtensions, createState, createWorker, initialize} from './helpers/helpers';
 
-import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
+import type {Atom, CustomSet, InferParams, Initialization, ResolvableState} from './types';
 
 export const atomify = () => {
   const eventHub = createEventHub();
   const secretToken = Symbol();
 
-  const atom = <State>(initialInitialization: Initialization<State>, customSet?: CustomSet<State>) => {
+  const atom = <State, Params extends unknown[] = [resolvableState?: ResolvableState<State>]>(
+    initialInitialization: Initialization<State>,
+    customSet?: CustomSet<State, Params>,
+  ) => {
     const state = createState<State>();
     const worker = createWorker();
 
@@ -36,18 +39,18 @@ export const atomify = () => {
         eventHub.emit(worker.id);
       };
 
-      const setInitialization = (nextInitialization?: Initialization<State>) => {
+      const setInitialization = (...params: InferParams<State, Params>) => {
         if (customSet) {
           const handler = {
             get,
             set,
           };
 
-          customSet(handler);
+          customSet(handler, ...params);
           return;
         }
 
-        nextInitialization && set(nextInitialization);
+        set(nextInitialization);
       };
 
       return {
@@ -69,14 +72,14 @@ export const atomify = () => {
     };
   };
 
-  const useAtom = <State>(atom: Atom<State>) => {
-    const atomValue = useAtomValue(atom);
-    const uodateAtom = useUpdateAtom(atom);
+  const useAtom = <State, Params extends any[]>(atom: Atom<State, Params>) => {
+    const atomValue = useAtomValue<State, Params>(atom);
+    const uodateAtom = useUpdateAtom<State, Params>(atom);
 
     return [atomValue, uodateAtom] as const;
   };
 
-  const useAtomValue = <State>(atom: Atom<State>) => {
+  const useAtomValue = <State, Params extends unknown[]>(atom: Atom<State, Params>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
         const {id, coworkers} = atom.read(secretToken);
@@ -95,12 +98,12 @@ export const atomify = () => {
     return state;
   };
 
-  const useUpdateAtom = <State>(atom: Atom<State>) => {
+  const useUpdateAtom = <State, Params extends unknown[]>(atom: Atom<State, Params>) => {
     const setState = useCallback(
-      (resolvableState?: ResolvableState<State | undefined>) => {
-        const {state, setInitialization} = atom.read(secretToken);
+      (...params: InferParams<State, Params>) => {
+        const {setInitialization} = atom.read(secretToken);
 
-        setInitialization(resolveState(resolvableState, state));
+        setInitialization(...params);
       },
       [atom],
     );

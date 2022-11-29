@@ -2,9 +2,7 @@ import {objectKeys} from '@tool/utils';
 
 import type {AtomInitialize} from '../types';
 
-type FormatExtensionKey<ExtensionKey> = ExtensionKey extends `create${infer First}${infer Rest}`
-  ? `${Lowercase<First>}${Rest}`
-  : never;
+type Extenstions = typeof import('../extensions/extensions');
 
 type CollectExtensions = {
   -readonly [ExtenstionKey in keyof Extenstions as FormatExtensionKey<ExtenstionKey>]: ReturnType<
@@ -12,7 +10,9 @@ type CollectExtensions = {
   >;
 };
 
-type Extenstions = typeof import('../extensions/extensions');
+type FormatExtensionKey<ExtensionKey> = ExtensionKey extends `create${infer First}${infer Rest}`
+  ? `${Lowercase<First>}${Rest}`
+  : never;
 
 const formatExtensionKey = <ExtensionKey extends `create${string}`>(extensionKey: ExtensionKey) =>
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- narrow
