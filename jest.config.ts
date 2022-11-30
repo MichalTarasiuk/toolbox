@@ -23,7 +23,6 @@ const jestConfig: Config = {
   verbose: true,
   errorOnDeprecated: true,
   clearMocks: true,
-  moduleFileExtensions: ['ts', 'tsx'],
   projects,
 };
 
