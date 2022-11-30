@@ -17,8 +17,16 @@
   "license": "MIT",
   "author": {
     "name": "Michał Tarasiuk",
-    "email": "tarasiuk.michal03@gmail.com"
+    "email": "tarasiuk.michal03@gmail.com",
+    "url": "https://github.com/MichalTarasiuk"
   },
+  "contributors": [
+    {
+      "name": "Łukasz Tarasiuk",
+      "email": "lukk12@proton.me",
+      "url": "https://github.com/lukk12"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/MichalTarasiuk/toolbox"

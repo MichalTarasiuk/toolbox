@@ -1,8 +1,5 @@
 {
   "files": [],
-  "compilerOptions": {
-    "module": "CommonJS"
-  },
   "references": [
     {
       "path": "packages/tool-utils"

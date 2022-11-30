@@ -2,9 +2,6 @@
   "compilerOptions": {
     "strict": true,
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noFallthroughCasesInSwitch": true,
@@ -16,6 +13,6 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": false
   }
 }
