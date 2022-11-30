@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- contravariance */
+
 // any:primitives
 
 export type Primitive = string | number | boolean | null | undefined | symbol;

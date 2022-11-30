@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- tests */
 /* eslint-disable @typescript-eslint/consistent-type-assertions -- tests */
+
 import {
   expectNever,
   expectTypeNotAny,
