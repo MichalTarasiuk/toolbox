@@ -1,2 +1,2 @@
 export * from './Freeze';
-export * from './conditions/conditions';
+export * from './Ifs/ifs';

@@ -4,8 +4,8 @@ import {useState} from 'react';
 
 import {When, Unless, If, Then, Else, Switch, Case, Default} from '../../_api';
 
-describe('jsdom - react:components:Conditions', () => {
-  test('react:components:Conditions:When', () => {
+describe('jsdom - react:components:ifs', () => {
+  test('react:components:Ifs:When', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -30,7 +30,7 @@ describe('jsdom - react:components:Conditions', () => {
     getByText('Hello World');
   });
 
-  test('react:components:Conditions:Unless', () => {
+  test('react:components:Ifs:Unless', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -55,7 +55,7 @@ describe('jsdom - react:components:Conditions', () => {
     expect(() => getByText('Hello World')).toThrowError();
   });
 
-  test('react:components:Conditions:If', () => {
+  test('react:components:Ifs:If', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -85,7 +85,7 @@ describe('jsdom - react:components:Conditions', () => {
     getByText('Truthy');
   });
 
-  test('react:components:Conditions:Switch', () => {
+  test('react:components:Ifs:Switch', () => {
     const Component = () => {
       const [condition, setCondition] = useState<boolean | null>(false);
 
