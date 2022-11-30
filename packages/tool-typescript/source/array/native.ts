@@ -1,6 +1,4 @@
-// @TODO: add: ["at", "concat", "copyWithin", "entries", "every", "fill", "filter", "find", "findIndex", "findLast", "findLastIndex", "flat", "flatMap", "forEach", "includes", "indexOf", "join", "map", "pop", "push", "reduce", "reduceRight", "reverse", "shift", "slice", "some", "sort", "splice", "unshift"]
-
-import type {Any, Custom} from './source';
+import type {Any, Custom} from '../source';
 
 export type Map<
   Array extends Any.AnyArray,
@@ -68,7 +66,3 @@ export type Includes<Array extends Any.AnyArray, SearchElement> = Array extends 
 export type From<Length extends number, Result extends never[] = []> = Length extends Result['length']
   ? Result
   : From<Length, [...Result, never]>;
-
-export type IsTuple<Value> = [Value] extends [never] ? false : Value extends readonly [unknown?] ? true : false;
-
-export type MaybeReadonly<Value> = ReadonlyArray<Value> | Array<Value>;

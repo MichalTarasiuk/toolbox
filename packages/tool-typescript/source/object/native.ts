@@ -1,7 +1,4 @@
-// @TODO: add support for array's and create
-
-import type {UnionToTuple} from './custom';
-import type {Any, Custom} from './source';
+import type {Any, Custom} from '../source';
 
 export type Assign<Objects extends Array<Any.AnyObject>, Result extends Any.AnyObject = {}> = Objects extends [
   infer FirstObject extends Any.AnyObject,
@@ -18,7 +15,7 @@ export type Entries<
   Value extends Any.AnyArray | Any.AnyObject,
   ValueKeys = Keys<Value>,
 > = ValueKeys extends PropertyKey[]
-  ? UnionToTuple<
+  ? Custom.UnionToTuple<
       {
         [Key in ValueKeys[number]]: Key extends keyof Value ? [Key, Value[Key]] : never;
       }[ValueKeys[number]]
@@ -33,13 +30,9 @@ export type Values<
   Value extends Any.AnyObject | Any.AnyArray,
   ValueKeys = Keys<Value>,
 > = ValueKeys extends PropertyKey[]
-  ? UnionToTuple<
+  ? Custom.UnionToTuple<
       {
         [Key in ValueKeys[number]]: Key extends keyof Value ? Value[Key] : never;
       }[ValueKeys[number]]
     >
   : never;
-
-export type IsKnowableObject<Value extends Any.AnyObject> = Custom.Equals<keyof Value, PropertyKey> extends 0
-  ? true
-  : false;
