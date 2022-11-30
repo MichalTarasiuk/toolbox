@@ -1,7 +1,7 @@
 import {useEvent} from '@tool/react';
 import {none} from '@tool/utils';
 import {useRouter} from 'next/router';
-import querystring from 'query-string';
+import {stringify} from 'query-string';
 import {useCallback, useEffect, useState} from 'react';
 
 import type {Any} from '@tool/typescript';
@@ -45,7 +45,7 @@ export const useRefreshProps = () => {
 
   const refreshProps = useCallback(
     (searchParams: Any.AnyObject<string, string>) => {
-      const url = `${router.asPath}?${querystring.stringify(searchParams)}`;
+      const url = `${router.asPath}?${stringify(searchParams)}`;
 
       void router.replace(url, undefined);
     },
