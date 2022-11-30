@@ -1,1 +1,6 @@
-export type ToNumber<Value extends string> = Value extends `${infer Number extends number}` ? Number : never;
+// TODO: ["toPrecision", "toFixed"]
+
+/**
+ * ToString type convert to string.
+ */
+export type ToString<Digit extends number> = `${Digit}`;

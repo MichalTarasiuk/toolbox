@@ -1,10 +1,10 @@
-import type {Number as NumberType} from '@tool/typescript';
+import type {String as StringType} from '@tool/typescript';
 
 type ToHSLObject<HSL> = HSL extends `hsl(${infer Hue}, ${infer Saturation}%, ${infer Lightness}%)`
   ? {
-      hue: NumberType.ToNumber<Hue>;
-      saturation: NumberType.ToNumber<Saturation>;
-      lightness: NumberType.ToNumber<Lightness>;
+      hue: StringType.ToNumber<Hue>;
+      saturation: StringType.ToNumber<Saturation>;
+      lightness: StringType.ToNumber<Lightness>;
     }
   : never;
 
