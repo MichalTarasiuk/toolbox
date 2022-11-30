@@ -14,9 +14,9 @@ export type Overwrite<A extends Any.AnyObject, B extends Any.AnyObject> = {
   [key in keyof (A & B)]: key extends keyof B ? B[key] : key extends keyof A ? A[key] : never;
 };
 
-export type Equals<A1 extends any, B2 extends any> = (<A>() => A extends B2 ? 1 : 0) extends <A>() => A extends A1
-  ? 1
-  : 0
+export type Equals<A1 extends unknown, B2 extends unknown> = (<A>() => A extends B2 ? 1 : 0) extends <
+  A,
+>() => A extends A1 ? 1 : 0
   ? 1
   : 0;
 
