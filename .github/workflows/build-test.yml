@@ -26,3 +26,6 @@ jobs:
       - name: Test
         run: |
           pnpm test:jest
+      - name: TS Check
+        run: |
+          pnpm ts:check

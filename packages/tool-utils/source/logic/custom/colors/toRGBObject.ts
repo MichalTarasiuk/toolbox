@@ -1,10 +1,10 @@
-import type {Number as NumberType} from '@tool/typescript';
+import type {String as StringType} from '@tool/typescript';
 
 type ToRGBObject<RGB> = RGB extends `rgb(${infer Red}, ${infer Green}, ${infer Blue})`
   ? {
-      red: NumberType.ToNumber<Red>;
-      green: NumberType.ToNumber<Green>;
-      blue: NumberType.ToNumber<Blue>;
+      red: StringType.ToNumber<Red>;
+      green: StringType.ToNumber<Green>;
+      blue: StringType.ToNumber<Blue>;
     }
   : never;
 

@@ -95,7 +95,8 @@
   "lint-staged": {
     "*.{ts, tsx}": [
       "pnpm run style:format",
-      "pnpm run style:lint"
+      "pnpm run style:lint",
+      "pnpm run ts:check"
     ]
   }
 }
