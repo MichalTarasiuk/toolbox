@@ -129,7 +129,7 @@ importers:
 
   packages/tool-react:
     specifiers:
-      '@react-hookz/web': ^19.0.0
+      '@react-hookz/web': ^20.0.0
       '@tool/typescript': '*'
       '@tool/utils': '*'
       '@types/deep-equal': 1.0.1
@@ -154,7 +154,7 @@ importers:
       use-context-selector: 1.4.1_2szjah6qrhd6fr2kgr64p4pjgm
       uuid: 9.0.0
     devDependencies:
-      '@react-hookz/web': 19.2.0_biqbaboplfbrettd7655fr4n2y
+      '@react-hookz/web': 20.0.0_biqbaboplfbrettd7655fr4n2y
       '@tool/typescript': link:../tool-typescript
       '@tool/utils': link:../tool-utils
       '@types/deep-equal': 1.0.1
@@ -2431,8 +2431,8 @@ packages:
     resolution: {integrity: sha512-lGZR5l3YRjzeIOHtJhiq96vQKrsq+9lsCyv+0fROMQeSNWtLLzX3R+psHNi6nsoP3XEhspiZ92nsiPmdNo8ztQ==}
     dev: true
 
-  /@react-hookz/web/19.2.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-6DbL4FjqmjpHsfNAqmduDoseIg6ciDBv/AIaxDJldMl0GR77g6/fxU8dpXDT/E43FYTLepjt8K0TbyAoXZeOHQ==}
+  /@react-hookz/web/20.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6bTMTzFfvU+9fcvmjab4D+/3Uxx2EiHVr0XmS4TWvdABp8QLx2JShHVBHYGU4IDEMZGKE9hNtDoIffalBtwN6Q==}
     peerDependencies:
       js-cookie: ^3.0.1
       react: ^16.8 || ^17 || ^18
