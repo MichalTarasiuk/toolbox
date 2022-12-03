@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type {Custom} from '@tool/typescript';
 
 /**
@@ -13,4 +14,4 @@ export const expectTypeNotAny = <Type>(_: Custom.IsAny<Type> extends true ? neve
 /**
  * Assert the parameter is not typed as `any`
  */
-export const expectNever = (_value: never): void => undefined;
+export const expectNever = (_: never): void => undefined;

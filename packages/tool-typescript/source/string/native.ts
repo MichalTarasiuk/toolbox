@@ -1,6 +1,6 @@
 // TODO: ["substring", "substr", "slice", "search", "replaceAll", "replace", "repeat", "padEnd", "padStart", "match", "matchAll", "lastIndexOf", "indexOf", "includes", "concat", "charAt", "at"]
 
-type Space = ' ' | '\t' | '\n';
+type Space = ' ' | '\n' | '\t';
 
 /**
  * StartsWith type determines whether a string begins with the characters of a specified string,

@@ -7,7 +7,9 @@ import {isObject, isString, keyIn, none, objectKeys} from '@tool/utils';
 import type {Any} from '@tool/typescript';
 import type {RollupOptions} from 'rollup';
 
-type Reference = {path: string};
+type Reference = {
+  path: string;
+};
 
 type Formats = typeof formats;
 
@@ -52,9 +54,9 @@ const hasValidEntryFileName = <Key extends FormatMapperValues>(
   const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exports');
   const hasValidKey =
     hasExportsProp &&
-    isObject(packageJSON['exports']) &&
-    keyIn(packageJSON['exports'], key) &&
-    isString(packageJSON['exports'][key]);
+    isObject(packageJSON.exports) &&
+    keyIn(packageJSON.exports, key) &&
+    isString(packageJSON.exports[key]);
 
   return hasValidKey;
 };
@@ -101,7 +103,7 @@ const rollup = async () => {
           resolveOnly: readDependencies(packageJSON),
           entryFileNames: readEntryFileNames(packageJSON, format),
         })),
-        import(`./${reference.path}/tsconfig.json`).then(tsconfig => readCompilerOptions(tsconfig)),
+        import(`./${reference.path}/tsconfig.json`).then(packageTsconfig => readCompilerOptions(packageTsconfig)),
       ]);
 
       const rollupOptions: RollupOptions = {

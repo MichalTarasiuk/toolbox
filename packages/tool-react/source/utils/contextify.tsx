@@ -19,7 +19,6 @@ export const contextify = <UseHook extends Any.AnyFunction>(useHook: UseHook) =>
   const [ContextProviderImpl, useContext] = createSafeContext<ReturnType<UseHook>>(name);
 
   const ContextProvider = ({children, settings}: ContextProvider<Parameters<UseHook>>) => {
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- fix later
     const hook = useHook(...Object.values(settings)) as ReturnType<UseHook>;
 
     return <ContextProviderImpl value={hook}>{children}</ContextProviderImpl>;

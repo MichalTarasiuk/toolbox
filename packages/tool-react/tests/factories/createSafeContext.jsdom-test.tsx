@@ -24,7 +24,7 @@ describe('jsdom - react:factories:createSafeContext', () => {
 
   it('should not render', () => {
     const restoreConsole = mockConsole();
-    const [_, useUser] = createSafeContext<{name: string}>('user');
+    const [, useUser] = createSafeContext<{name: string}>('user');
 
     const Component = () => {
       const user = useUser();

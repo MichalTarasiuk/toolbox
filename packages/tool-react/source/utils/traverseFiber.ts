@@ -30,7 +30,6 @@ export const traverseFiber = <StateNode = unknown>(
 
   let child = ascending ? fiber.return : fiber.child;
 
-  // eslint-disable-next-line functional/no-loop-statement -- if match, return
   while (child) {
     const match = traverseFiber(child, ascending, selector);
 

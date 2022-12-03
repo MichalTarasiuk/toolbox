@@ -1,4 +1,5 @@
-import type {Object as ObjectType, Any, Custom} from '@tool/typescript';
+import type {Custom} from '@tool/typescript';
+import type {Object as ObjectType, Any} from '@tool/typescript';
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -44,7 +45,7 @@ export const fromEntries = <
     ? Custom.Debug<ObjectType.FromEntries<Entries>>
     : Any.AnyObject<Entry[1], Entry[0]>;
 
-type KeyIn<Object extends Any.AnyObject, Key extends PropertyKey> = Object & Any.AnyObject<unknown, Key>;
+type KeyIn<Object extends Any.AnyObject, Key extends PropertyKey> = Any.AnyObject<unknown, Key> & Object;
 
 /**
  * @param object - Specified object.

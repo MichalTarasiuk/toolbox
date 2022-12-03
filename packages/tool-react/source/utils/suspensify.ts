@@ -1,10 +1,10 @@
 import {isError} from '@tool/utils';
 
-type Status = 'pending' | 'rejected' | 'fulfilled';
+type Status = 'fulfilled' | 'pending' | 'rejected';
 
 export const suspensify = <Resolved>(promise: Promise<Resolved>) => {
   let status: Status = 'pending';
-  let resolved: Resolved | Error;
+  let resolved: Error | Resolved;
 
   const suspender = promise.then(
     value => {

@@ -10,7 +10,7 @@ const isElement = ReactIs.isElement;
 const isFragment = (reactNode: ReactNode): reactNode is ReactElement =>
   ReactIs.isFragment(reactNode) && hasChildren(reactNode.props);
 
-export const flatMapChildren = (children: ReactNode, keys: Array<Key> = []) => {
+export const flatMapChildren = (children: ReactNode, keys: Key[] = []) => {
   return Children.toArray(children).reduce<ReactNode[]>((collector, reactNode, index) => {
     if (isFragment(reactNode)) {
       collector.push(...flatMapChildren(reactNode.props.children, keys.concat(reactNode.key ?? index)));

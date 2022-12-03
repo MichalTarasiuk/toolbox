@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-this-expression -- access to _reactInternals prop  */
 import React, {createContext, useContext} from 'react';
 
 import {wrapContext} from '../utils/utils';

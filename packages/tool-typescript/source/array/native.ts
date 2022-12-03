@@ -63,6 +63,6 @@ export type Includes<Array extends Any.AnyArray, SearchElement> = Array extends 
     : Includes<Rest, SearchElement>
   : false;
 
-export type From<Length extends number, Result extends never[] = []> = Length extends Result['length']
+export type From<To extends number, Result extends never[] = []> = To extends Result['length']
   ? Result
-  : From<Length, [...Result, never]>;
+  : From<To, [...Result, never]>;

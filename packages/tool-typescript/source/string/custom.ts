@@ -10,4 +10,4 @@ export type DropChar<Word extends string, Char extends string> = Word extends `$
 /**
  * ToNumber type convert string to number.
  */
-export type ToNumber<Word extends string> = Word extends `${infer Number extends number}` ? Number : never;
+export type ToNumber<Word extends string> = Word extends `${infer Digit extends number}` ? Digit : never;

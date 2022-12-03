@@ -9,7 +9,9 @@ describe('jsdom - react:components:ifs', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition);
+      const toggle = () => {
+        setCondition(!condition);
+      };
 
       return (
         <>
@@ -34,7 +36,9 @@ describe('jsdom - react:components:ifs', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition);
+      const toggle = () => {
+        setCondition(!condition);
+      };
 
       return (
         <>
@@ -59,7 +63,9 @@ describe('jsdom - react:components:ifs', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
-      const toggle = () => setCondition(!condition);
+      const toggle = () => {
+        setCondition(!condition);
+      };
 
       return (
         <>
@@ -89,9 +95,13 @@ describe('jsdom - react:components:ifs', () => {
     const Component = () => {
       const [condition, setCondition] = useState<boolean | null>(false);
 
-      const toggle = () => setCondition(!condition);
+      const toggle = () => {
+        setCondition(!condition);
+      };
 
-      const reset = () => setCondition(null);
+      const reset = () => {
+        setCondition(null);
+      };
 
       return (
         <>

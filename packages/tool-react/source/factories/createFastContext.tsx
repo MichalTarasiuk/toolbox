@@ -55,11 +55,7 @@ export const createFastContext = <Store extends Any.AnyObject>(name: string) => 
   ) => {
     const {get, setStore, subscribe} = useFastContextImpl();
 
-    const selectedStore = useSyncExternalStore(
-      subscribe,
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safe assertion (fix later, if can)
-      () => (selector ? selector(get()) : get()) as SafeSelected,
-    );
+    const selectedStore = useSyncExternalStore(subscribe, () => (selector ? selector(get()) : get()) as SafeSelected);
 
     return [selectedStore, setStore] as const;
   };

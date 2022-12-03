@@ -22,10 +22,17 @@ export const useEventHub = <Name extends string>(name: Name, handler: Any.Unknow
 
     savedSubscriber.current = subscriber;
 
-    return () => subscriber.off();
+    return () => {
+      subscriber.off();
+    };
   }, [name, stableHandler]);
 
-  const emit = useCallback((...args: unknown[]) => eventHub.emit(name, ...args), [name]);
+  const emit = useCallback(
+    (...args: unknown[]) => {
+      eventHub.emit(name, ...args);
+    },
+    [name],
+  );
 
   return {
     ...savedSubscriber.current,

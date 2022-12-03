@@ -1,6 +1,7 @@
 import {entries, fromEntries, keyIn, max, min, objectKeys} from '@tool/utils';
 
-import type {Steps, Tokens} from './types';
+import type {Tokens} from './types';
+import type {Steps} from './types';
 
 export const generateTokens = (steps: Steps) => fromEntries(entries(steps).map(([key]) => [key, Symbol()]));
 

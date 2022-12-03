@@ -1,12 +1,8 @@
-# toolbox 🧰
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.
-
-Written in TypeScript with strong typesafety in mind.
+<p align="center">
+  <img src="./media/images/toolbox-logo.png" width="120" alt="toolbox-logo">
+  <h3 align="center">toolbox</h3>
+  <p align="center">A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.</p>
+</p>
 
 # Contributors ✨
 

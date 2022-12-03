@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-loop-statement -- break */
 import React, {cloneElement} from 'react';
 
 import {isCase, isDefault, isTruthy} from './assertions';
@@ -34,7 +33,7 @@ export const Switch = ({children}: SwitchProps) => {
         pushToSelected(Child, reach.done);
       }
 
-      if (canPush && Child.props['shouldBreak']) {
+      if (canPush && Child.props.shouldBreak) {
         break;
       }
     }

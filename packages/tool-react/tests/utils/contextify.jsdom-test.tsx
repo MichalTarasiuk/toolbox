@@ -33,7 +33,7 @@ describe('jsdom - react:utils:contextify', () => {
 
   it('should not render', () => {
     const restoreConsole = mockConsole();
-    const [_, useContext] = contextify(useSettings);
+    const [, useContext] = contextify(useSettings);
 
     const Component = () => {
       const [context] = useContext();
@@ -63,11 +63,12 @@ describe('jsdom - react:utils:contextify', () => {
     const ChildB = () => {
       const [, setContext] = useContext();
 
-      const toggle = () =>
+      const toggle = () => {
         setContext(settings => ({
           ...settings,
           dakrMode: !settings.dakrMode,
         }));
+      };
 
       return <button onClick={toggle}>toggle</button>;
     };

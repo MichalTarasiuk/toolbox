@@ -1,5 +1,3 @@
-import {defer} from '@tool/utils';
-
 import type {Any} from '@tool/typescript';
 
 export * from './areHookInputsEqual';
@@ -13,4 +11,4 @@ export * from './hookify';
 
 export const Null = () => <></>;
 
-export const blockBatching = (fn: Any.UnknownFunction) => defer(fn);
+export const blockBatching = (fn: Any.UnknownFunction) => setTimeout(fn, 0);

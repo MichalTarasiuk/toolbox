@@ -3,17 +3,17 @@ import type {Any, Custom} from '../source';
 /**
  * Overwrites the first object starting from the right.
  */
-export type Assign<Objects extends Array<Any.AnyObject>, Result extends Any.AnyObject = {}> = Objects extends [
-  infer FirstObject extends Any.AnyObject,
-  ...infer RestObjects extends Array<Any.AnyObject>,
-]
+export type Assign<
+  Objects extends Array<Any.AnyObject>,
+  Result extends Any.AnyObject = Any.EmptyObject,
+> = Objects extends [infer FirstObject extends Any.AnyObject, ...infer RestObjects extends Array<Any.AnyObject>]
   ? Assign<RestObjects, Custom.Overwrite<Result, FirstObject>>
   : Result;
 
 /**
  * Keys type returns an array of object properties.
  */
-export type Keys<Value extends Any.AnyObject | Any.AnyArray> = Custom.UnionToTuple<
+export type Keys<Value extends Any.AnyArray | Any.AnyObject> = Custom.UnionToTuple<
   Value extends Any.AnyObject ? keyof Value : Extract<keyof Value, `${number}`>
 >;
 
@@ -42,7 +42,7 @@ export type FromEntries<Entry extends ReadonlyArray<[PropertyKey, unknown]>> = {
  * Values type return array of a given object's values.
  */
 export type Values<
-  Value extends Any.AnyObject | Any.AnyArray,
+  Value extends Any.AnyArray | Any.AnyObject,
   ValueKeys = Keys<Value>,
 > = ValueKeys extends PropertyKey[]
   ? Custom.UnionToTuple<

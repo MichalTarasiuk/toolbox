@@ -1,106 +1,51 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "tsconfig.base.json"
-  },
-  "env": {
-    "es6": true
-  },
-  "plugins": ["functional", "@typescript-eslint", "unicorn", "eslint-comments"],
-  "extends": [
-    "prettier",
-    "plugin:import/errors",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react-hooks/recommended"
-  ],
-  "ignorePatterns": ["*.config.js", "*.config.ts", "**/build/*"],
+  "parserOptions": {"project": "tsconfig.base.json"},
+  "env": {"es6": true},
+  "ignorePatterns": ["**/build/*"],
+  "plugins": ["prettier", "@typescript-eslint", "import"],
+  "extends": ["plugin:react-hooks/recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/consistent-type-assertions": [
-      "error",
-      {
-        "assertionStyle": "never"
-      }
-    ],
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      {
-        "disallowTypeAnnotations": false
-      }
-    ],
-    "@typescript-eslint/restrict-plus-operands": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-confusing-non-null-assertion": "error",
-    "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-extra-non-null-assertion": "error",
-    "@typescript-eslint/no-floating-promises": [
-      "error",
-      {
-        "ignoreVoid": true
-      }
-    ],
-    "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
-    "@typescript-eslint/no-non-null-assertion": "error",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-return": "off",
+    "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "ignoreRestSiblings": true
-      }
-    ],
-    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/return-await": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-invalid-this": "error",
     "@typescript-eslint/switch-exhaustiveness-check": "error",
-    "functional/no-let": [
-      "error",
-      {
-        "allowLocalMutation": true,
-        "ignorePattern": "^mutable"
-      }
-    ],
-    "functional/no-loop-statement": "error",
-    "functional/no-this-expression": "error",
+    "@typescript-eslint/sort-type-constituents": "error",
+    "@typescript-eslint/no-useless-empty-export": "error",
+    "@typescript-eslint/no-confusing-void-expression": "error",
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/consistent-type-imports": ["error", {"disallowTypeAnnotations": false}],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-throw-literal": "off",
     "import/no-anonymous-default-export": "error",
     "import/no-default-export": "error",
-    "import/no-duplicates": "error",
-    "import/no-unresolved": "off",
     "import/order": [
       "error",
       {
         "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc"
-        },
         "groups": ["builtin", "external", "parent", "sibling", "index", "type"]
       }
-    ],
-    "unicorn/prefer-module": "error",
-    "eqeqeq": [
-      "error",
-      "always",
-      {
-        "null": "ignore"
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["packages/**/tests/**/*-test.tsx", "packages/**tests/**/*-test.ts"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/ban-ts-comment": "warn"
       }
-    ],
-    "eslint-comments/require-description": [
-      "error",
-      {
-        "ignore": ["eslint-enable"]
+    },
+    {
+      "files": ["*.config.ts", "*.config.js"],
+      "rules": {
+        "import/no-default-export": "off",
+        "@typescript-eslint/no-require-imports": "off"
       }
-    ],
-    "no-const-assign": "error",
-    "no-param-reassign": "error",
-    "no-unused-vars": "off",
-    "no-var": "error",
-    "prefer-const": "error",
-    "require-await": "error"
-  }
+    }
+  ]
 }
