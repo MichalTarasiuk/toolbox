@@ -4,7 +4,7 @@ import {useMemo} from 'react';
 import {readServerCacheKey} from './helpers';
 import {useServerCache} from './serverContext';
 
-import {type GetServerSidePropsContext, type GetStaticPropsContext} from 'next';
+import type {GetServerSidePropsContext, GetStaticPropsContext} from 'next';
 
 export type ContextUnion = GetServerSidePropsContext | GetStaticPropsContext;
 export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((context: Context) => unknown) & {

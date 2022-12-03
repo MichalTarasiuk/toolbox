@@ -1,4 +1,5 @@
-import {type Object as ObjectType, type Any, type Custom} from '@tool/typescript';
+import type {Custom} from '@tool/typescript';
+import type {Object as ObjectType, Any} from '@tool/typescript';
 
 /**
  * @param object - Object that contains the properties and methods.

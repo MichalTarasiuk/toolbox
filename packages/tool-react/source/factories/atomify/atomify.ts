@@ -4,7 +4,7 @@ import {useCallback, useSyncExternalStore} from 'react';
 import * as extenstions from './extensions/extensions';
 import {collectExtensions, createState, createWorker, initialize, resolveState} from './helpers/helpers';
 
-import {type Atom, type CustomSet, type Initialization, type ResolvableState} from './types';
+import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
 
 export const atomify = () => {
   const eventHub = createEventHub();

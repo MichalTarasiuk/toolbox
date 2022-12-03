@@ -5,7 +5,7 @@ import {ErrorBoundary} from 'react-error-boundary';
 
 import {createFastContext} from '../../_api';
 
-import {type ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 describe('jsdom - react:factories:createFastContext', () => {
   it('should render', () => {

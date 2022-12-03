@@ -2,7 +2,7 @@ import {isNumber, isObject, isString, keyIn, signs} from '@tool/utils';
 import {Children, cloneElement} from 'react';
 import ReactIs from 'react-is';
 
-import {type ReactNode, type Key, type ReactElement} from 'react';
+import type {ReactNode, Key, ReactElement} from 'react';
 
 const hasChildren = (props: unknown): props is {children: ReactNode} => isObject(props) && keyIn(props, 'children');
 

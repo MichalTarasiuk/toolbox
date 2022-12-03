@@ -4,7 +4,7 @@ import {ErrorBoundary} from 'react-error-boundary';
 
 import {createSafeContext} from '../../_api';
 
-import {type ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 describe('jsdom - react:factories:createSafeContext', () => {
   it('should render', () => {

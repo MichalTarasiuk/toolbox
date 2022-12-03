@@ -1,5 +1,5 @@
-import {type Any} from '@tool/typescript';
-import {type DetailedHTMLFactory, type FunctionComponent, type ReactHTML} from 'react';
+import type {Any} from '@tool/typescript';
+import type {DetailedHTMLFactory, FunctionComponent, ReactHTML} from 'react';
 
 export type TagNameUnion = keyof ReactHTML;
 

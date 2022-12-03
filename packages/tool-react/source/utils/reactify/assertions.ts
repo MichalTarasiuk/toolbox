@@ -2,8 +2,8 @@ import {isString, keyIn, isSameOrigin} from '@tool/utils';
 
 import {getSiteOrigin} from './helpers';
 
-import {type AnyAttribs, type TagNameUnion} from './types';
-import {type DOMNode, type Element, type Element as ElementType} from 'html-react-parser';
+import type {DOMNode, Element, Element as ElementType} from 'html-react-parser';
+import type {AnyAttribs, TagNameUnion} from './types';
 
 export const isElement = (domNode: DOMNode): domNode is Element => 'attribs' in domNode;
 

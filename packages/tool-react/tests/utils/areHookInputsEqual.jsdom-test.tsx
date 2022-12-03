@@ -3,8 +3,8 @@ import {renderHook} from '@testing-library/react-hooks';
 
 import {areHookInputsEqual} from '../../_api';
 
-import {type Any} from '@tool/typescript';
-import {type DependencyList} from 'react';
+import type {Any} from '@tool/typescript';
+import type {DependencyList} from 'react';
 
 const useExample = (fn: Any.UnknownFunction, deps: DependencyList) => {
   const savedDeps = usePrevious(deps);

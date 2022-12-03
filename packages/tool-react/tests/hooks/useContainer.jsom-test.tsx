@@ -2,7 +2,7 @@ import {renderHook} from '@testing-library/react-hooks';
 
 import {useContainer, FiberProvider} from '../../_api';
 
-import {type ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 const wrapper = ({children}: {children: ReactNode}) => <FiberProvider>{children}</FiberProvider>;
 

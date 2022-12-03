@@ -1,4 +1,4 @@
-import {type Any, type Array} from './source';
+import type {Any, Array} from './source';
 
 // https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
 export type IsAny<Type> = 0 extends Type & 1 ? true : false;

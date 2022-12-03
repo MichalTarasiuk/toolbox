@@ -2,7 +2,7 @@ import React, {createContext, useContext} from 'react';
 
 import {wrapContext} from '../utils/utils';
 
-import {type Fiber} from 'react-reconciler';
+import type {Fiber} from 'react-reconciler';
 
 export const FiberContext = wrapContext(createContext<Fiber | null>(null));
 

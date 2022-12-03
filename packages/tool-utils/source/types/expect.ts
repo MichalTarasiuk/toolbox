@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {type Custom} from '@tool/typescript';
+import type {Custom} from '@tool/typescript';
 
 /**
  * Assert the parameter is of a specific type.

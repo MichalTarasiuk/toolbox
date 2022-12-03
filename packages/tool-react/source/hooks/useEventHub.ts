@@ -3,7 +3,7 @@ import {useCallback, useEffect, useRef} from 'react';
 
 import {useEvent} from './useEvent';
 
-import {type Any} from '@tool/typescript';
+import type {Any} from '@tool/typescript';
 
 const eventHub = createEventHub();
 

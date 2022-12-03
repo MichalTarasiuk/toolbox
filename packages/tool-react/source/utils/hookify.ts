@@ -1,4 +1,4 @@
-import {type Any as AnyType, type Object as ObjectType} from '@tool/typescript';
+import type {Any as AnyType, Object as ObjectType} from '@tool/typescript';
 
 type Hookify<AnyObject extends AnyType.AnyObject> = AnyObject & ObjectType.Values<AnyObject>;
 

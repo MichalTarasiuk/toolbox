@@ -1,4 +1,4 @@
-import {type DependencyList} from 'react';
+import type {DependencyList} from 'react';
 
 /**
  * inlined Object.is polyfill to avoid requiring consumers ship their own

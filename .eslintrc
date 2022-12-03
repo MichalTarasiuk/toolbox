@@ -4,7 +4,7 @@
   "parserOptions": {"project": "tsconfig.base.json"},
   "env": {"es6": true},
   "ignorePatterns": ["**/build/*"],
-  "plugins": ["prettier", "@typescript-eslint"],
+  "plugins": ["prettier", "@typescript-eslint", "import"],
   "extends": ["plugin:react-hooks/recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "react-hooks/exhaustive-deps": "error",
@@ -19,12 +19,18 @@
     "@typescript-eslint/no-confusing-void-expression": "error",
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/no-require-imports": "error",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      {"fixStyle": "inline-type-imports", "disallowTypeAnnotations": false}
-    ],
+    "@typescript-eslint/consistent-type-imports": ["error", {"disallowTypeAnnotations": false}],
     "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/no-throw-literal": "off"
+    "@typescript-eslint/no-throw-literal": "off",
+    "import/no-anonymous-default-export": "error",
+    "import/no-default-export": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "parent", "sibling", "index", "type"]
+      }
+    ]
   },
   "overrides": [
     {
@@ -32,6 +38,13 @@
       "rules": {
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/ban-ts-comment": "warn"
+      }
+    },
+    {
+      "files": ["*.config.ts", "*.config.js"],
+      "rules": {
+        "import/no-default-export": "off",
+        "@typescript-eslint/no-require-imports": "off"
       }
     }
   ]

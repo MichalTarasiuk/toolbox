@@ -1,8 +1,8 @@
 import {booleanToString, resolve} from '@tool/utils';
 import React from 'react';
 
-import {type Resolvable} from '@tool/utils';
-import {type ReactNode} from 'react';
+import type {Resolvable} from '@tool/utils';
+import type {ReactNode} from 'react';
 
 type IfProps = {
   condition: Resolvable<unknown>;

@@ -1,10 +1,8 @@
 import {usePrevious} from '@react-hookz/web';
 import {sleep} from '@tool/utils';
-import {Suspense, useMemo} from 'react';
+import {Suspense, useMemo, type ReactNode} from 'react';
 
 import {suspensify} from '../source';
-
-import {type ReactNode} from 'react';
 
 type FreezeProps = {
   freeze: boolean;

@@ -8,9 +8,9 @@ import {Null} from '../utils';
 
 import {hasSizes, hasSource, isAnchorTag, isImageTag, isSameSite, isScriptTag} from './assertions';
 
-import {type AnyAttribs} from './types';
-import {type DOMNode, type Element, type HTMLReactParserOptions} from 'html-react-parser';
-import {type Any} from '@tool/typescript';
+import type {DOMNode, Element, HTMLReactParserOptions} from 'html-react-parser';
+import type {AnyAttribs} from './types';
+import type {Any} from '@tool/typescript';
 
 type Resolvers = Any.AnyObject<
   {

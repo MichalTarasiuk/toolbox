@@ -1,7 +1,7 @@
 import {isFunction} from '@tool/utils';
 import equal from 'deep-equal';
 
-import {type ResolvableState} from '../types';
+import type {ResolvableState} from '../types';
 
 export const createState = <State>() => {
   const initialState = Symbol();

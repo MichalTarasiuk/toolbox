@@ -1,6 +1,6 @@
 import {isClient, isString} from '@tool/utils';
 
-import {type AtomInitialize, type LazyInitialization} from '../types';
+import type {AtomInitialize, LazyInitialization} from '../types';
 
 export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
   return <State extends string>(key: string, state: State) => {

@@ -2,7 +2,7 @@ import {render} from '@testing-library/react';
 
 import {useLayout, useNearestChild, FiberProvider} from '../../_api';
 
-import {type ReactNode} from 'react';
+import type {ReactNode} from 'react';
 
 const Wrapper = ({children}: {children: ReactNode}) => <FiberProvider>{children}</FiberProvider>;
 

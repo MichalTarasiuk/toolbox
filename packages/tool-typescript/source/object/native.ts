@@ -1,4 +1,4 @@
-import {type Any, type Custom} from '../source';
+import type {Any, Custom} from '../source';
 
 /**
  * Overwrites the first object starting from the right.

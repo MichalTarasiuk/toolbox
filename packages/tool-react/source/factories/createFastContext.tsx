@@ -3,8 +3,8 @@ import {useCallback, useMemo, useRef, useSyncExternalStore} from 'react';
 
 import {createSafeContext} from './createSafeContext';
 
-import {type Any, type Custom} from '@tool/typescript';
-import {type ReactNode} from 'react';
+import type {Any, Custom} from '@tool/typescript';
+import type {ReactNode} from 'react';
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {
   store: Store;

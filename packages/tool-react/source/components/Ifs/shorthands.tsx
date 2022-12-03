@@ -1,7 +1,7 @@
 import {resolve} from '@tool/utils';
 
-import {type Resolvable} from '@tool/utils';
-import {type ReactNode} from 'react';
+import type {Resolvable} from '@tool/utils';
+import type {ReactNode} from 'react';
 
 type BlockProps = {
   condition: Resolvable<unknown>;

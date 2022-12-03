@@ -4,7 +4,7 @@ import {useRef} from 'react';
 
 import {objectIs} from '../../_api';
 
-import {type MutableRefObject} from 'react';
+import type {MutableRefObject} from 'react';
 
 const canWork = <Current, Initial extends symbol>(
   ref: MutableRefObject<Current>,

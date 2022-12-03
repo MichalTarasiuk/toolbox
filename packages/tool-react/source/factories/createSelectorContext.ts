@@ -1,7 +1,7 @@
 import {uppercaseFirst, empty} from '@tool/utils';
 import {createContext as createContextImpl, useContextSelector} from 'use-context-selector';
 
-import {type Context} from 'use-context-selector';
+import type {Context} from 'use-context-selector';
 
 type Selector<ContextValue, Selected> = (contextValue: ContextValue) => Selected;
 

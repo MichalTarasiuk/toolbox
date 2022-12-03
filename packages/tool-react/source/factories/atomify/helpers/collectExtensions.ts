@@ -1,6 +1,6 @@
 import {objectKeys} from '@tool/utils';
 
-import {type AtomInitialize} from '../types';
+import type {AtomInitialize} from '../types';
 
 type Extenstions = typeof import('../extensions/extensions');
 
