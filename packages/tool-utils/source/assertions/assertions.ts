@@ -1,6 +1,10 @@
 export * from './nullish';
 export * from './typeof/typeof';
 export * from './isClient';
+export * from './boolean';
+export * from './expect';
+export * from './string';
+export * from './object';
 
 import type {Any} from '@tool/typescript';
 
