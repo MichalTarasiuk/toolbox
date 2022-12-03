@@ -1,5 +1,5 @@
-import type {Any, Custom, Array} from '@tool/typescript';
-import type {List} from 'ts-toolbelt';
+import {type Any, type Custom, type Array} from '@tool/typescript';
+import {type List} from 'ts-toolbelt';
 
 type Union<AnyArrayGeneric extends Any.AnyArray, Result extends Any.AnyArray = []> = AnyArrayGeneric extends [
   infer First,
@@ -13,7 +13,5 @@ type Union<AnyArrayGeneric extends Any.AnyArray, Result extends Any.AnyArray = [
 /**
  * Removes duplicates from array.
  */
-export const union = <AnyArrayGenericType extends Any.AnyArray>(
-  array: Custom.Narrow<AnyArrayGenericType>,
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-) => [...new Set(array)] as Union<AnyArrayGenericType>;
+export const union = <AnyArrayGenericType extends Any.AnyArray>(array: Custom.Narrow<AnyArrayGenericType>) =>
+  [...new Set(array)] as Union<AnyArrayGenericType>;

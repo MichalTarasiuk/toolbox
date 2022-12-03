@@ -1,4 +1,4 @@
-import type {Custom} from '@tool/typescript';
+import {type Custom} from '@tool/typescript';
 
 type BooleanToString<Bool extends boolean> = Bool extends true ? 'true' : 'false';
 

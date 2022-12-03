@@ -1,5 +1,5 @@
-import type {Resolvable} from '@tool/utils';
-import type {ReactNode} from 'react';
+import {type Resolvable} from '@tool/utils';
+import {type ReactNode} from 'react';
 import type React from 'react';
 
 export type Childrens = ReturnType<typeof React['Children']['toArray']>;

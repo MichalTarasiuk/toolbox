@@ -36,7 +36,9 @@ describe('jsdom - react:components:Freeze', () => {
     const Component = () => {
       const [freeze, setFreeze] = useState(false);
 
-      const toggle = () => setFreeze(!freeze);
+      const toggle = () => {
+        setFreeze(!freeze);
+      };
 
       return (
         <div>

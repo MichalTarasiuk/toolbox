@@ -4,13 +4,13 @@ import {useRef} from 'react';
 
 import {objectIs} from '../../_api';
 
-import type {MutableRefObject} from 'react';
+import {type MutableRefObject} from 'react';
 
-const canWork = <Current extends unknown, Symbol extends symbol>(
+const canWork = <Current, Initial extends symbol>(
   ref: MutableRefObject<Current>,
-  symbol: Symbol,
-): ref is {current: Exclude<Current, Symbol>} =>
-  isObject(ref) && keyIn(ref, 'current') && !objectIs(ref.current, symbol);
+  initial: Initial,
+): ref is {current: Exclude<Current, Initial>} =>
+  isObject(ref) && keyIn(ref, 'current') && !objectIs(ref.current, initial);
 
 export const useLazyRef = <LazyInitialize extends () => unknown>(lazyInitialize: LazyInitialize) => {
   const canInitialize = Symbol();

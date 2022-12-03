@@ -1,6 +1,6 @@
 import {entries, fromEntries} from '../../../source';
 
-import type {Any as AnyType, Custom} from '@tool/typescript';
+import {type Any as AnyType, type Custom} from '@tool/typescript';
 
 type RemovePrefix<Key extends PropertyKey, Prefix extends string> = Key extends `${Prefix}${infer Value}` ? Value : Key;
 
@@ -12,8 +12,8 @@ export const findAndRemoveWhen = <AnyObject extends AnyType.AnyObject<unknown>, 
   object: AnyObject,
   prefix: Prefix,
 ) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- narrow down
   fromEntries(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     entries(object, false).flatMap(([key, value]) => {
       const stringifyKey = key.toString();

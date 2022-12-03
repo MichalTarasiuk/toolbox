@@ -35,7 +35,7 @@ describe('jsdom - react:factories:createAtoms', () => {
     const userAtom = atom<{name: string; age: number} | null>(null);
 
     const Child = () => {
-      const [_, setUser] = useAtom(userAtom);
+      const [, setUser] = useAtom(userAtom);
 
       const fetchUser = () => {
         setUser({name: 'Michał', age: 19});
@@ -68,9 +68,17 @@ describe('jsdom - react:factories:createAtoms', () => {
     const userAtom = atom(get => ({firstname: get(firstnameAtom)}));
 
     const FirstnameSetter = () => {
-      const [_, setFirstname] = useAtom(firstnameAtom);
+      const [, setFirstname] = useAtom(firstnameAtom);
 
-      return <button onClick={() => setFirstname('Michał')}>set firstname</button>;
+      return (
+        <button
+          onClick={() => {
+            setFirstname('Michał');
+          }}
+        >
+          set firstname
+        </button>
+      );
     };
     const Component = () => {
       const [user] = useAtom(userAtom);
@@ -98,9 +106,17 @@ describe('jsdom - react:factories:createAtoms', () => {
     const userAtom = atom(get => ({firstname: get(firstnameAtom)}));
 
     const FirstnameSetter = () => {
-      const [_, setFirstname] = useAtom(firstnameAtom);
+      const [, setFirstname] = useAtom(firstnameAtom);
 
-      return <button onClick={() => setFirstname()}>set firstname</button>;
+      return (
+        <button
+          onClick={() => {
+            setFirstname();
+          }}
+        >
+          set firstname
+        </button>
+      );
     };
     const Component = () => {
       const [user] = useAtom(userAtom);
@@ -131,8 +147,8 @@ describe('jsdom - react:factories:createAtoms', () => {
           <p>counter: {counter}</p>
           <button
             onClick={() => {
-              setCounter(counter => {
-                const parsedCounter = Number(counter);
+              setCounter(saveCounter => {
+                const parsedCounter = Number(saveCounter);
                 const nextCounter = parsedCounter + 1;
 
                 return nextCounter.toString();

@@ -2,7 +2,7 @@ import {renderHook} from '@testing-library/react-hooks';
 
 import {useNearestParent, FiberProvider} from '../../_api';
 
-import type {ReactNode} from 'react';
+import {type ReactNode} from 'react';
 
 describe('jsdom - react:hooks:useNearestChild', () => {
   it('should return nearest parent', () => {

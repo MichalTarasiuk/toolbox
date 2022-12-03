@@ -3,8 +3,8 @@ import {createContext, useContext} from 'react';
 
 import {isServerCacheKey} from './assertions';
 
-import type {Any} from '@tool/typescript';
-import type {ReactNode} from 'react';
+import {type Any} from '@tool/typescript';
+import {type ReactNode} from 'react';
 
 type ServerCacheProviderProps = {
   children: ReactNode;

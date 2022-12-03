@@ -1,4 +1,4 @@
-import type {Any, Custom} from '@tool/typescript';
+import {type Any, type Custom} from '@tool/typescript';
 
 export const flatMap = <AnyArray extends Any.AnyArray, ReturnType>(
   anyArray: Custom.Narrow<AnyArray>,

@@ -4,7 +4,7 @@ import {ErrorBoundary} from 'react-error-boundary';
 
 import {createSafeContext} from '../../_api';
 
-import type {ReactNode} from 'react';
+import {type ReactNode} from 'react';
 
 describe('jsdom - react:factories:createSafeContext', () => {
   it('should render', () => {
@@ -24,7 +24,7 @@ describe('jsdom - react:factories:createSafeContext', () => {
 
   it('should not render', () => {
     const restoreConsole = mockConsole();
-    const [_, useUser] = createSafeContext<{name: string}>('user');
+    const [, useUser] = createSafeContext<{name: string}>('user');
 
     const Component = () => {
       const user = useUser();

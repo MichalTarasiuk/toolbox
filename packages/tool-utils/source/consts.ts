@@ -1,6 +1,7 @@
 /**
  * This method returns undefined.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
 
 export const none = '';

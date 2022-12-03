@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
 import {createEventHub, isUndefined} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';
 import {collectExtensions, createState, createWorker, initialize, resolveState} from './helpers/helpers';
 
-import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
+import {type Atom, type CustomSet, type Initialization, type ResolvableState} from './types';
 
 export const atomify = () => {
   const eventHub = createEventHub();
   const secretToken = Symbol();
 
   const atom = <State>(initialInitialization: Initialization<State>, customSet?: CustomSet<State>) => {
-    const state = createState<State>();
+    const globalState = createState<State>();
     const worker = createWorker();
 
     let initialization = initialInitialization;
@@ -22,8 +21,8 @@ export const atomify = () => {
         throw Error('You do not have permission to read this atom');
       }
 
-      const get = <AtomState>(atom: Atom<AtomState>) => {
-        const {id, state} = atom.read(secretToken);
+      const get = <AtomState>(anyAtom: Atom<AtomState>) => {
+        const {id, state} = anyAtom.read(secretToken);
 
         worker.addCoworker(id);
 
@@ -47,9 +46,11 @@ export const atomify = () => {
       return {
         get state() {
           const nextState = initialize(initialization, get, {
-            before: () => worker.stop(),
+            before: () => {
+              worker.stop();
+            },
           });
-          const updatedState = state.update(nextState);
+          const updatedState = globalState.update(nextState);
 
           return updatedState;
         },
@@ -63,17 +64,10 @@ export const atomify = () => {
     };
   };
 
-  const useAtom = <State>(atom: Atom<State>) => {
-    const atomValue = useAtomValue(atom);
-    const uodateAtom = useUpdateAtom(atom);
-
-    return [atomValue, uodateAtom] as const;
-  };
-
-  const useAtomValue = <State>(atom: Atom<State>) => {
+  const useAtomValue = <State>(anyAtom: Atom<State>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
-        const {id, coworkers} = atom.read(secretToken);
+        const {id, coworkers} = anyAtom.read(secretToken);
 
         const subscribers = [id, ...coworkers].map(name => eventHub.on(name, onStoreChange));
 
@@ -83,23 +77,30 @@ export const atomify = () => {
           });
         };
       },
-      () => atom.read(secretToken).state,
+      () => anyAtom.read(secretToken).state,
     );
 
     return state;
   };
 
-  const useUpdateAtom = <State>(atom: Atom<State>) => {
+  const useUpdateAtom = <State>(anyAtom: Atom<State>) => {
     const setState = useCallback(
       (resolvableState?: ResolvableState<State | undefined>) => {
-        const {state, setInitialization} = atom.read(secretToken);
+        const {state, setInitialization} = anyAtom.read(secretToken);
 
         setInitialization(resolveState(resolvableState, state));
       },
-      [atom],
+      [anyAtom],
     );
 
     return setState;
+  };
+
+  const useAtom = <State>(anyAtom: Atom<State>) => {
+    const atomValue = useAtomValue(anyAtom);
+    const uodateAtom = useUpdateAtom(anyAtom);
+
+    return [atomValue, uodateAtom] as const;
   };
 
   return {

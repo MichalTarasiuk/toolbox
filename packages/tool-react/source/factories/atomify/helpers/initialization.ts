@@ -1,7 +1,7 @@
 import {isFunction} from '@tool/utils';
 
-import type {Get, Initialization, LazyInitialization} from '../types';
-import type {Any} from '@tool/typescript';
+import {type Get, type Initialization, type LazyInitialization} from '../types';
+import {type Any} from '@tool/typescript';
 
 const canResolvInitialization = <State>(
   initialization: Initialization<State>,

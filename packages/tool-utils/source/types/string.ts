@@ -5,9 +5,7 @@
  *
  * @returns Converted alphabetic characters
  */
-export const lowercase = <Word extends string>(word: Word) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  word.toLowerCase() as Lowercase<Word>;
+export const lowercase = <Word extends string>(word: Word) => word.toLowerCase() as Lowercase<Word>;
 
 /**
  * Converts all the alphabetic characters in a string to uppercase.
@@ -16,6 +14,4 @@ export const lowercase = <Word extends string>(word: Word) =>
  *
  * @returns Converted alphabetic characters
  */
-export const uppercase = <Word extends string>(word: Word) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-  word.toUpperCase() as Uppercase<Word>;
+export const uppercase = <Word extends string>(word: Word) => word.toUpperCase() as Uppercase<Word>;

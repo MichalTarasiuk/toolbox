@@ -1,4 +1,5 @@
-import type {Context} from 'react';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import {type Context} from 'react';
 
 /**
  * In development, React will warn about using contexts between renderers.

@@ -1,5 +1,4 @@
-// @TODO: add to @tool/typescript
-import type {Number as NumberType} from 'ts-toolbelt';
+import {type Number as NumberType} from 'ts-toolbelt';
 
 type SetLightness<
   Delta extends number,
@@ -15,10 +14,9 @@ export const setLightness = <Delta extends number, HSL extends `hsl(${number}, $
   delta: Delta,
   hsl: HSL,
 ) => {
-  const [hue = 0, saturation = 0, lightness = 0] = hsl.match(/\d+/g)?.map(Number) || [];
+  const [hue = 0, saturation = 0, lightness = 0] = hsl.match(/\d+/g)?.map(Number) ?? [];
 
   const newLightness = Math.max(0, Math.min(100, lightness + delta));
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   return `hsl(${hue}, ${saturation}%, ${newLightness}%)` as SetLightness<Delta, HSL>;
 };

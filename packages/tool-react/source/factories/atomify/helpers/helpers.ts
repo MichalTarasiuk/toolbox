@@ -12,7 +12,9 @@ export const createWorker = () => {
     coworkers.add(coworkerId);
   };
 
-  const stop = () => coworkers.clear();
+  const stop = () => {
+    coworkers.clear();
+  };
 
   const read = () => ({id, coworkers: [...coworkers.values()]});
 

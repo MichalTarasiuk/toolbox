@@ -8,15 +8,17 @@ import {Null} from '../utils';
 
 import {hasSizes, hasSource, isAnchorTag, isImageTag, isSameSite, isScriptTag} from './assertions';
 
-import type {AnyAttribs} from './types';
-import type {DOMNode, Element, HTMLReactParserOptions} from 'html-react-parser';
+import {type AnyAttribs} from './types';
+import {type DOMNode, type Element, type HTMLReactParserOptions} from 'html-react-parser';
+import {type Any} from '@tool/typescript';
 
-type Resolvers = {
-  [resolver: string]: {
+type Resolvers = Any.AnyObject<
+  {
     canUse: (element: Element) => boolean;
     use: (children: DOMNode[], attribs: AnyAttribs) => JSX.Element;
-  };
-};
+  },
+  string
+>;
 
 const values = Object.values;
 
@@ -45,7 +47,7 @@ export const getGlobalResolvers = (options: HTMLReactParserOptions) => {
   };
 
   const findOne = (element: Element) => {
-    const resolver = values(resolvers).find(resolver => resolver.canUse(element));
+    const resolver = values(resolvers).find(someResolver => someResolver.canUse(element));
 
     return resolver;
   };

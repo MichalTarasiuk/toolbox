@@ -41,6 +41,5 @@ export function sum(a: number, b: number): number;
  */
 export function sum(a: bigint, b: bigint): bigint;
 export function sum<AnyNumber extends number>(a: AnyNumber, b: AnyNumber) {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   return (a + b) as AnyNumber;
 }

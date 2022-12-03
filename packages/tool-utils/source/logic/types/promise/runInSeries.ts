@@ -1,5 +1,5 @@
 // TODO: add typescript support
-import type {Any} from '@tool/typescript';
+import {type Any} from '@tool/typescript';
 
 type RunPromisesInSeries<
   AnyAsyncFunctions extends Any.AnyAsyncFunction[],

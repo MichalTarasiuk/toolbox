@@ -1,10 +1,8 @@
 import {objectKeys} from '@tool/utils';
 
-import type {AtomInitialize} from '../types';
+import {type AtomInitialize} from '../types';
 
-type FormatExtensionKey<ExtensionKey> = ExtensionKey extends `create${infer First}${infer Rest}`
-  ? `${Lowercase<First>}${Rest}`
-  : never;
+type Extenstions = typeof import('../extensions/extensions');
 
 type CollectExtensions = {
   -readonly [ExtenstionKey in keyof Extenstions as FormatExtensionKey<ExtenstionKey>]: ReturnType<
@@ -12,10 +10,11 @@ type CollectExtensions = {
   >;
 };
 
-type Extenstions = typeof import('../extensions/extensions');
+type FormatExtensionKey<ExtensionKey> = ExtensionKey extends `create${infer First}${infer Rest}`
+  ? `${Lowercase<First>}${Rest}`
+  : never;
 
 const formatExtensionKey = <ExtensionKey extends `create${string}`>(extensionKey: ExtensionKey) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- narrow
   extensionKey.replace(
     /create(\w)(\w+)/g,
     (_: unknown, a: string, b: string) => a.toLowerCase() + b,
@@ -26,5 +25,4 @@ export const collectExtensions = (extenstions: Extenstions, atom: AtomInitialize
     collector[formatExtensionKey(extenstionKey)] = extenstions[extenstionKey](atom);
 
     return collector;
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- define type of collector
   }, {} as CollectExtensions);

@@ -4,7 +4,7 @@ import {useMemo} from 'react';
 import {readServerCacheKey} from './helpers';
 import {useServerCache} from './serverContext';
 
-import type {GetServerSidePropsContext, GetStaticPropsContext} from 'next';
+import {type GetServerSidePropsContext, type GetStaticPropsContext} from 'next';
 
 export type ContextUnion = GetServerSidePropsContext | GetStaticPropsContext;
 export type PropsProviderType<Context extends ContextUnion = ContextUnion> = ((context: Context) => unknown) & {
@@ -32,14 +32,14 @@ export const createServerHook = <PropsProvider extends PropsProviderType>(
     const serverCacheKey = useMemo(() => {
       const serverCacheKeys = objectKeys(serverCache);
       const selectedServerCacheKey = serverCacheKeys.find(
-        (serverCacheKey: unknown): serverCacheKey is string => readServerCacheKey(serverCacheKey) === name,
+        (maybeServerCacheKey: unknown): maybeServerCacheKey is string =>
+          readServerCacheKey(maybeServerCacheKey) === name,
       );
 
       return selectedServerCacheKey;
     }, [serverCache]);
 
     if (isString(serverCacheKey) && keyIn(serverCache, serverCacheKey)) {
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- cache[name] has props provider result
       return serverCache[name] as ReturnType<PropsProvider>;
     }
 

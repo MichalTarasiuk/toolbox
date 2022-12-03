@@ -4,7 +4,7 @@ import ReactIs from 'react-is';
 
 import {flatMapChildren} from '../../_api';
 
-import type {ReactNode} from 'react';
+import {type ReactNode} from 'react';
 
 describe('jsdom - react:utils:flatMapChildren', () => {
   it('should filter all elements which are not a `Item` component', () => {

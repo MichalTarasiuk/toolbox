@@ -1,7 +1,7 @@
 export * from './nullish';
 export * from './typeof/typeof';
 
-import type {Any} from '@tool/typescript';
+import {type Any} from '@tool/typescript';
 
 /**
  * Checks if the passed value is primitive or not.

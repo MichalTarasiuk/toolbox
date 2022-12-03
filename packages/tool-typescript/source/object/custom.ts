@@ -1,4 +1,4 @@
-import type {Any, Custom} from '../source';
+import {type Any, type Custom} from '../source';
 
 /**
  * IsKnowableObject type check that object has specified props.

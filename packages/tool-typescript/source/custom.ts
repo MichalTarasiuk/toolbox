@@ -1,7 +1,7 @@
-import type {Any, Array} from './source';
+import {type Any, type Array} from './source';
 
 // https://stackoverflow.com/questions/49927523/disallow-call-with-any/49928360#49928360
-export type IsAny<Type> = 0 extends 1 & Type ? true : false;
+export type IsAny<Type> = 0 extends Type & 1 ? true : false;
 export type NotAny<Type> = true extends IsAny<Type> ? false : true;
 
 export type Debug<AnyObject> = AnyObject extends Record<PropertyKey, unknown>
@@ -14,11 +14,7 @@ export type Overwrite<A extends Any.AnyObject, B extends Any.AnyObject> = {
   [key in keyof (A & B)]: key extends keyof B ? B[key] : key extends keyof A ? A[key] : never;
 };
 
-export type Equals<A1 extends unknown, B2 extends unknown> = (<A>() => A extends B2 ? 1 : 0) extends <
-  A,
->() => A extends A1 ? 1 : 0
-  ? 1
-  : 0;
+export type Equals<A1, B2> = (<A>() => A extends B2 ? 1 : 0) extends <A>() => A extends A1 ? 1 : 0 ? 1 : 0;
 
 export type UnionToIntersectionFn<Union> = (Union extends Union ? (union: () => Union) => void : never) extends (
   intersection: infer Intersection,
@@ -42,13 +38,16 @@ export type ValueOf<Value extends Any.AnyArray | Any.AnyObject> = Value extends 
   : never;
 
 export type Narrow<Type> =
-  | (Type extends infer TValue ? TValue : never)
-  | Extract<Type, number | string | boolean | bigint | symbol | null | undefined | []>
-  | ([Type] extends [[]] ? [] : {[Key in keyof Type]: Narrow<Type[Key]>});
+  | Extract<Type, bigint | boolean | number | string | symbol | [] | null | undefined>
+  | [Type] extends [[]]
+  ? []
+  : Type | {[Key in keyof Type]: Narrow<Type[Key]>} extends infer TValue
+  ? TValue
+  : never;
 
 export type TypeOf<Target, Value> = Exclude<Value, Target> extends never ? true : false;
 
 declare const UNDEFINED_VOID_ONLY: unique symbol;
 // Destructors are only allowed to return void.
-export type Destructor = () => void | {[UNDEFINED_VOID_ONLY]: never};
-export type VoidOrUndefinedOnly = void | {[UNDEFINED_VOID_ONLY]: never};
+export type Destructor = () => {[UNDEFINED_VOID_ONLY]: never} | void;
+export type VoidOrUndefinedOnly = {[UNDEFINED_VOID_ONLY]: never} | void;

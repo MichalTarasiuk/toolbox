@@ -5,8 +5,8 @@ import {ErrorBoundary} from 'react-error-boundary';
 
 import {createSelectorContext} from '../../_api';
 
-import type {Any} from '@tool/typescript';
-import type {ReactNode} from 'react';
+import {type Any} from '@tool/typescript';
+import {type ReactNode} from 'react';
 
 type ContextValue = {
   name: string;

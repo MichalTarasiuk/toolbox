@@ -4,26 +4,35 @@
   "parserOptions": {"project": "tsconfig.base.json"},
   "env": {"es6": true},
   "ignorePatterns": ["**/build/*"],
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/strict"
-  ],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": ["plugin:react-hooks/recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/return-await": "error",
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-shadow": "error",
-    "@typescript-eslint/no-loop-func": "error",
     "@typescript-eslint/no-invalid-this": "error",
     "@typescript-eslint/switch-exhaustiveness-check": "error",
     "@typescript-eslint/sort-type-constituents": "error",
-    "@typescript-eslint/prefer-readonly-parameter-types": "error",
     "@typescript-eslint/no-useless-empty-export": "error",
-    "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/no-confusing-void-expression": "error",
-    "@typescript-eslint/consistent-type-exports": "error"
-  }
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {"fixStyle": "inline-type-imports", "disallowTypeAnnotations": false}
+    ],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-throw-literal": "off"
+  },
+  "overrides": [
+    {
+      "files": ["packages/**/tests/**/*-test.tsx", "packages/**tests/**/*-test.ts"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/ban-ts-comment": "warn"
+      }
+    }
+  ]
 }

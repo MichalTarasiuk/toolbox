@@ -3,8 +3,8 @@ import {useCallback, useMemo, useRef, useSyncExternalStore} from 'react';
 
 import {createSafeContext} from './createSafeContext';
 
-import type {Any, Custom} from '@tool/typescript';
-import type {ReactNode} from 'react';
+import {type Any, type Custom} from '@tool/typescript';
+import {type ReactNode} from 'react';
 
 type FastContextProviderProps<Store extends Any.AnyObject> = {
   store: Store;
@@ -55,11 +55,7 @@ export const createFastContext = <Store extends Any.AnyObject>(name: string) => 
   ) => {
     const {get, setStore, subscribe} = useFastContextImpl();
 
-    const selectedStore = useSyncExternalStore(
-      subscribe,
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safe assertion (fix later, if can)
-      () => (selector ? selector(get()) : get()) as SafeSelected,
-    );
+    const selectedStore = useSyncExternalStore(subscribe, () => (selector ? selector(get()) : get()) as SafeSelected);
 
     return [selectedStore, setStore] as const;
   };

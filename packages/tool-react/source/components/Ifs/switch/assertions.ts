@@ -2,7 +2,7 @@ import {keyIn, resolve} from '@tool/utils';
 
 import {Case, Default} from './components';
 
-import type {ReactElement} from 'react';
+import {type ReactElement} from 'react';
 
 export const isTruthy = (reactElement: ReactElement) => {
   if (reactElement.type === Case) {

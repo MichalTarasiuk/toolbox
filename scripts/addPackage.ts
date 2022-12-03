@@ -5,21 +5,21 @@ import packageJSON from '../package.json';
 
 import {createTree, getWorkspace} from './utils';
 
-const repositoryName: string = packageJSON.name;
+const repositoryName = packageJSON.name;
 const addPrefix = (name: string) => `${repositoryName}${signs.minus}${name}`;
 
 const getName = () => {
-  const value = 'name';
+  const prop = 'name';
 
   return new Promise<string>((resolve, reject) => {
     prompt.start();
 
-    prompt.get([value], (error, properties) => {
+    prompt.get([prop], (error, properties) => {
       if (error) {
         reject(error);
       }
 
-      const name = properties[value];
+      const name = properties[prop];
 
       if (isString(name)) {
         resolve(name);

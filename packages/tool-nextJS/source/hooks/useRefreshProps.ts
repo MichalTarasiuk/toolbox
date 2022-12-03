@@ -4,11 +4,11 @@ import {useRouter} from 'next/router';
 import {stringify} from 'query-string';
 import {useCallback, useEffect, useState} from 'react';
 
-import type {Any} from '@tool/typescript';
-import type {NextRouter} from 'next/router';
-import type {UrlObject} from 'url';
+import {type Any} from '@tool/typescript';
+import {type NextRouter} from 'next/router';
+import {type UrlObject} from 'url';
 
-type Url = string | UrlObject;
+type Url = UrlObject | string;
 
 type InferTransitionOptions<GenericNextRouter extends NextRouter> = GenericNextRouter extends {
   push: (url: Url, as?: Url, options?: infer TransitionOptions) => unknown;
@@ -29,7 +29,7 @@ export const useRefreshProps = () => {
       }
     };
     const routeChangeFinishHandler = () => {
-      setIsRefreshing(isRefreshing => isRefreshing && false);
+      setIsRefreshing(currentIsRefreshing => currentIsRefreshing && false);
     };
 
     router.events.on('routeChangeStart', routeChangeStartHandler);

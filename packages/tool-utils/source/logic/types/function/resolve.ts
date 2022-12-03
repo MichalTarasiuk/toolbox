@@ -1,8 +1,8 @@
 import {isFunction} from '../../../source';
 
-import type {Any} from '@tool/typescript';
+import {type Any} from '@tool/typescript';
 
-export type Resolvable<Resolved> = (() => Resolved) | Resolved;
+export type Resolvable<Resolved> = Resolved | (() => Resolved);
 
 const isResolvable = <Resolved>(value: unknown): value is Extract<Resolvable<Resolved>, Any.AnyFunction> =>
   isFunction(value);

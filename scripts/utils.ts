@@ -4,14 +4,12 @@ import {isArray, isObject, isString, keyIn} from '@tool/utils';
 import createFile from 'create-file';
 import makeDir from 'make-dir';
 
-export const getWorkspace = (name: string = '') => join(process.cwd(), name);
+export const getWorkspace = (name = '') => join(process.cwd(), name);
 export const hasExtension = (name: string) => /^\w+.\w+$/.test(name);
-
-// scripts:utils:createTree
 
 type Tree = {
   name: string;
-  children: Array<Tree | string>;
+  children: (Tree | string)[];
 };
 
 type TreeNode = Tree | string;

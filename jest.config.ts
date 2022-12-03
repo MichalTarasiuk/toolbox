@@ -1,7 +1,7 @@
 import {lstatSync, readdirSync} from 'fs';
 import * as path from 'path';
 
-import type {Config} from 'jest';
+import {type Config} from 'jest';
 
 const basePath = path.resolve(__dirname, 'packages');
 const packages = readdirSync(basePath)

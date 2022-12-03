@@ -1,7 +1,7 @@
 import {fromEntries} from '@tool/utils';
 import {v4} from 'uuid';
 
-import type {ContextUnion, ServerHook} from './createServerHook';
+import {type ContextUnion, type ServerHook} from './createServerHook';
 
 export const composePropsProviders = async <Context extends ContextUnion>(
   serverHooks: ServerHook[],

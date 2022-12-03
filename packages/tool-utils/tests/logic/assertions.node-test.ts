@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions -- assertions for tests */
 import {
   nullish,
   isString,

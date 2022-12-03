@@ -6,7 +6,7 @@
  *
  * @returns Type of operand.
  */
-export const inferType = (operand: unknown, exact: boolean = false): string => {
+export const inferType = (operand: unknown, exact = false) => {
   const type = typeof operand;
 
   if (type !== 'object' && !exact) {

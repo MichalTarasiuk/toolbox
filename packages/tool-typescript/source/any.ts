@@ -2,41 +2,41 @@
 
 // any:primitives
 
-export type Primitive = string | number | boolean | null | undefined | symbol;
+export type Primitive = boolean | number | string | symbol | null | undefined;
 
-export type FalsyValues = 0 | '' | null | undefined | false;
+export type FalsyValues = '' | 0 | false | null | undefined;
 
 export type TruthyValues = Exclude<
-  | Comparable
-  | AnyFunction
-  | UnknownFunction
-  | AnyGeneratorFunction
-  | AnyAsyncFunction
-  | AnyObject
   | AnyArray
-  | AnyPromise
+  | AnyAsyncFunction
+  | AnyFunction
+  | AnyGeneratorFunction
   | AnyMap
+  | AnyObject
+  | AnyPromise
   | AnySet
   | AnyWeakMap
   | AnyWeakSet
-  | true
-  | string,
-  0 | ''
+  | Comparable
+  | UnknownFunction
+  | string
+  | true,
+  '' | 0
 >;
 
 type Sign = '-' | '+';
 
 export type NumberLike =
-  | {[Symbol.toPrimitive](hint: 'number'): number}
-  | number
   | bigint
-  | Number
   | boolean
-  | `${number | bigint}`
+  | number
+  | number
+  | `${bigint | number}`
   | `${Sign | ''}${'Infinity'}`
+  | {[Symbol.toPrimitive](hint: 'number'): number}
   | null;
 
-export type Comparable = string | Exclude<NumberLike, null>;
+export type Comparable = Exclude<NumberLike, null> | string;
 
 /**
  * `null` or `undefined`.
@@ -49,7 +49,7 @@ export type AnyFunction<Args extends any[] = any[], ReturnType = unknown> = (...
 
 export type UnknownFunction = (...args: unknown[]) => unknown;
 
-export type AnyGeneratorFunction = (...args: any[]) => Generator<unknown, any, unknown>;
+export type AnyGeneratorFunction = (...args: any[]) => Generator;
 
 export type AnyAsyncFunction = (...args: any[]) => Promise<unknown>;
 
@@ -57,11 +57,12 @@ export type Noop = () => void;
 
 // any:objects
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type EmptyObject = {};
 
 export type AnyObject<Value = unknown, Key extends PropertyKey = PropertyKey> = Record<Key, Value>;
 
-export type AnyArray = Array<unknown>;
+export type AnyArray = unknown[];
 
 export type AnyPromise = Promise<unknown>;
 

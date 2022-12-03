@@ -4,7 +4,7 @@ import {Suspense, useMemo} from 'react';
 
 import {suspensify} from '../source';
 
-import type {ReactNode} from 'react';
+import {type ReactNode} from 'react';
 
 type FreezeProps = {
   freeze: boolean;

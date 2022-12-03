@@ -1,4 +1,4 @@
-import type {DependencyList} from 'react';
+import {type DependencyList} from 'react';
 
 /**
  * inlined Object.is polyfill to avoid requiring consumers ship their own
@@ -22,7 +22,6 @@ export const areHookInputsEqual = (nextDeps: DependencyList, prevDeps: Dependenc
     return false;
   }
 
-  // eslint-disable-next-line functional/no-loop-statement -- early return
   for (let i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
     if (objectIs(nextDeps[i], prevDeps[i])) {
       continue;

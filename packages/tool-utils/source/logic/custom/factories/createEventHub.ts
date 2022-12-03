@@ -1,6 +1,6 @@
 import {keyIn, isSet} from '../../../source';
 
-import type {Any} from '@tool/typescript';
+import {type Any} from '@tool/typescript';
 
 type EventHub<Key extends string = string> = Record<Key, Set<Any.UnknownFunction>>;
 
@@ -27,6 +27,18 @@ export const createEventHub = () => {
   };
 
   /**
+   * Stop a specific handler from listening to the event.
+   *
+   * @param name - of specificin event
+   * @param handler - reference to function that invoke on emit call
+   */
+  const offImpl = <Name extends string>(name: Name, handler: Any.UnknownFunction) => {
+    if (hasEvent<Name>(eventHub, name)) {
+      eventHub[name].delete(handler);
+    }
+  };
+
+  /**
    * Listen for different types of events.
    *
    * @param name - of specificin event
@@ -39,25 +51,15 @@ export const createEventHub = () => {
     eventHub[name]?.add(handler);
 
     return {
-      off: () => off(name, handler),
+      off: () => {
+        offImpl(name, handler);
+      },
     };
-  };
-
-  /**
-   * Stop a specific handler from listening to the event.
-   *
-   * @param name - of specificin event
-   * @param handler - reference to function that invoke on emit call
-   */
-  const off = <Name extends string>(name: Name, handler: Any.UnknownFunction) => {
-    if (hasEvent<Name>(eventHub, name)) {
-      eventHub[name].delete(handler);
-    }
   };
 
   return {
     emit,
     on,
-    off,
+    off: offImpl,
   };
 };

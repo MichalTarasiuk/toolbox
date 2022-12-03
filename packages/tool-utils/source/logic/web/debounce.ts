@@ -1,4 +1,4 @@
-import type {Any} from '@tool/typescript';
+import {type Any} from '@tool/typescript';
 
 export const debounce = <Fn extends Any.UnknownFunction>(fn: Fn, wait: number) => {
   let timeoutId: number | null = null;

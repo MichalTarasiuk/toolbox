@@ -1,6 +1,6 @@
 import {useMemo, useRef} from 'react';
 
-import type {DependencyList} from 'react';
+import {type DependencyList} from 'react';
 
 /**
  * @Deprecated - moved to `@react-hookz/web`: https://github.com/react-hookz/web/pull/895

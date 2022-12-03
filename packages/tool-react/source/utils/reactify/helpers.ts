@@ -3,7 +3,7 @@ import reactIs from 'react-is';
 
 import {isElement} from './assertions';
 
-import type {HTMLReactParserOptions, Element as ElementType, DOMNode} from 'html-react-parser';
+import {type HTMLReactParserOptions, type Element as ElementType, type DOMNode} from 'html-react-parser';
 
 export const formatId = (name: string) => `id:${name}` as const;
 export const formatTag = (name: string) => `tag:${name}` as const;

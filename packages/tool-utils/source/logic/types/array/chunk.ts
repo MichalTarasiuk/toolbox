@@ -1,4 +1,4 @@
-import type {Any, Array as ArrayType, Custom} from '@tool/typescript';
+import {type Any, type Array as ArrayType, type Custom} from '@tool/typescript';
 
 type Chunk<
   Arr extends Any.AnyArray,
@@ -17,7 +17,6 @@ type Chunk<
  * @param size - Max length of chunk item.
  */
 export const chunk = <Arr extends Any.AnyArray, Size extends number>(arr: Custom.Narrow<Arr>, size: Size) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
   Array.from({length: Math.ceil(arr.length / size)}, (_, i) => arr.slice(i * size, i * size + size)) as Chunk<
     Arr,
     Size

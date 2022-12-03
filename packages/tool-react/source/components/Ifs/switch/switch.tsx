@@ -1,11 +1,10 @@
-/* eslint-disable functional/no-loop-statement -- break */
 import React, {cloneElement} from 'react';
 
 import {isCase, isDefault, isTruthy} from './assertions';
 import {useReach} from './hooks';
 
-import type {SwitchProps, Childrens} from './types';
-import type {ReactElement} from 'react';
+import {type SwitchProps, type Childrens} from './types';
+import {type ReactElement} from 'react';
 
 export const Switch = ({children}: SwitchProps) => {
   const reach = useReach(true);
@@ -34,7 +33,7 @@ export const Switch = ({children}: SwitchProps) => {
         pushToSelected(Child, reach.done);
       }
 
-      if (canPush && Child.props['shouldBreak']) {
+      if (canPush && Child.props.shouldBreak) {
         break;
       }
     }

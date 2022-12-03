@@ -1,7 +1,7 @@
 import {isString, keyIn} from '@tool/utils';
 
-import type {ContextUnion} from './createServerHook';
-import type {GetServerSidePropsContext} from 'next';
+import {type ContextUnion} from './createServerHook';
+import {type GetServerSidePropsContext} from 'next';
 
 const requiredKeys = ['req', 'res'];
 
