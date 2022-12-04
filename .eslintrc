@@ -34,13 +34,6 @@
   },
   "overrides": [
     {
-      "files": ["packages/**/tests/**/*-test.tsx", "packages/**tests/**/*-test.ts"],
-      "rules": {
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/ban-ts-comment": "warn"
-      }
-    },
-    {
       "files": ["*.config.ts", "*.config.js"],
       "rules": {
         "import/no-default-export": "off",

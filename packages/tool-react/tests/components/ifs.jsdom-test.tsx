@@ -5,7 +5,7 @@ import {useState} from 'react';
 import {When, Unless, If, Then, Else, Switch, Case, Default} from '../../_api';
 
 describe('jsdom - react:components:ifs', () => {
-  test('react:components:Ifs:When', () => {
+  test('react:components:ifs:When', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -32,7 +32,7 @@ describe('jsdom - react:components:ifs', () => {
     getByText('Hello World');
   });
 
-  test('react:components:Ifs:Unless', () => {
+  test('react:components:ifs:Unless', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -59,7 +59,7 @@ describe('jsdom - react:components:ifs', () => {
     expect(() => getByText('Hello World')).toThrowError();
   });
 
-  test('react:components:Ifs:If', () => {
+  test('react:components:ifs:If', () => {
     const Component = () => {
       const [condition, setCondition] = useState(false);
 
@@ -91,7 +91,7 @@ describe('jsdom - react:components:ifs', () => {
     getByText('Truthy');
   });
 
-  test('react:components:Ifs:Switch', () => {
+  test('react:components:ifs:Switch', () => {
     const Component = () => {
       const [condition, setCondition] = useState<boolean | null>(false);
 
