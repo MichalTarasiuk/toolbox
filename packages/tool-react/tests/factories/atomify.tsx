@@ -4,7 +4,7 @@ import {isUndefined} from '@tool/utils';
 import 'mock-local-storage';
 import {atomify} from '../../_api';
 
-describe('jsdom - react:factories:createAtoms', () => {
+describe('jsdom - react:factories:atomify', () => {
   it('should emit update atom', () => {
     const {atom, useAtom} = atomify();
     const userAtom = atom<{name: string; age: number} | null>(null);
@@ -100,7 +100,7 @@ describe('jsdom - react:factories:createAtoms', () => {
   it('should work with custom set', () => {
     const {atom, useAtom} = atomify();
 
-    const firstnameAtom = atom<string | null>(null, (_, set) => {
+    const firstnameAtom = atom<string | null>(null, ({set}) => {
       set('Michał');
     });
     const userAtom = atom(get => ({firstname: get(firstnameAtom)}));
@@ -171,7 +171,9 @@ describe('jsdom - react:factories:createAtoms', () => {
 
   it('should not rerender component which update atom', () => {
     const {atom, useAtomValue, useUpdateAtom} = atomify();
-    const counterAtom = atom(0);
+    const counterAtom = atom(0, (handler, nextCounter: number) => {
+      handler.set(nextCounter);
+    });
 
     const displayerSpy = jest.fn();
     const updaterSpy = jest.fn();

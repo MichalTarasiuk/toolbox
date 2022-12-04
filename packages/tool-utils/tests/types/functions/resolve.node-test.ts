@@ -1,6 +1,6 @@
-import {resolve} from '../../_api';
+import {resolve} from '../../../_api';
 
-import type {Resolvable} from '../../_api';
+import type {Resolvable} from '../../../_api';
 
 describe('node - logic:types:functions:resolve', () => {
   it('should return value when is not resolvable', () => {

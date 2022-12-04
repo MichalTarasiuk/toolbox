@@ -1,16 +1,20 @@
-import {createEventHub, isUndefined} from '@tool/utils';
+/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
+import {createEventHub} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';
-import {collectExtensions, createState, createWorker, initialize, resolveState} from './helpers/helpers';
+import {collectExtensions, createState, createWorker, initialize} from './helpers/helpers';
 
-import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
+import type {Atom, CustomSet, InferParams, Initialization, ResolvableState} from './types';
 
 export const atomify = () => {
   const eventHub = createEventHub();
   const secretToken = Symbol();
 
-  const atom = <State>(initialInitialization: Initialization<State>, customSet?: CustomSet<State>) => {
+  const atom = <State, Params extends unknown[] = [resolvableState?: ResolvableState<State>]>(
+    initialInitialization: Initialization<State>,
+    customSet?: CustomSet<State, Params>,
+  ) => {
     const globalState = createState<State>();
     const worker = createWorker();
 
@@ -29,18 +33,24 @@ export const atomify = () => {
         return state;
       };
 
-      const set = (nextInitialization?: Initialization<State>) => {
-        if (isUndefined(nextInitialization)) {
-          return;
-        }
-
+      const set = (nextInitialization: Initialization<State>) => {
         initialization = nextInitialization;
 
         eventHub.emit(worker.id);
       };
 
-      const setInitialization = (nextInitialization?: Initialization<State>) => {
-        customSet ? customSet(get, set, nextInitialization) : set(nextInitialization);
+      const setInitialization = (...params: InferParams<State, Params>) => {
+        if (customSet) {
+          const handler = {
+            get,
+            set,
+          };
+
+          customSet(handler, ...params);
+          return;
+        }
+
+        set(nextInitialization);
       };
 
       return {
@@ -64,7 +74,7 @@ export const atomify = () => {
     };
   };
 
-  const useAtomValue = <State>(anyAtom: Atom<State>) => {
+  const useAtomValue = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
         const {id, coworkers} = anyAtom.read(secretToken);
@@ -83,12 +93,12 @@ export const atomify = () => {
     return state;
   };
 
-  const useUpdateAtom = <State>(anyAtom: Atom<State>) => {
+  const useUpdateAtom = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const setState = useCallback(
-      (resolvableState?: ResolvableState<State | undefined>) => {
-        const {state, setInitialization} = anyAtom.read(secretToken);
+      (...params: InferParams<State, Params>) => {
+        const {setInitialization} = anyAtom.read(secretToken);
 
-        setInitialization(resolveState(resolvableState, state));
+        setInitialization(...params);
       },
       [anyAtom],
     );
