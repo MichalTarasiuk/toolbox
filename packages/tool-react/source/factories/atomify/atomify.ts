@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import {createEventHub} from '@tool/utils';
+import {createEventHub, resolve} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';
-import {collectExtensions, createState, createWorker, initialize} from './helpers/helpers';
+import {collectExtensions, createState, createWorker, initialize, withNativeSet} from './helpers/helpers';
 
 import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
 
@@ -40,6 +39,13 @@ export const atomify = () => {
       };
 
       const setInitialization = (...params: Params) => {
+        if (withNativeSet(customSet, params)) {
+          const nextInitializtion = resolve(params[0], globalState.read);
+
+          set(nextInitializtion);
+          return;
+        }
+
         if (customSet) {
           const handler = {
             state: globalState.read,
@@ -48,12 +54,7 @@ export const atomify = () => {
           };
 
           customSet(handler, ...params);
-          return;
         }
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        set(...params);
       };
 
       return {
