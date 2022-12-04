@@ -1,9 +1,10 @@
-import {isClient, isString} from '@tool/utils';
+import {isClient, resolve} from '@tool/utils';
 
+import type {Resolvable} from '@tool/utils';
 import type {AtomInitialize, Initialization} from '../types';
 
 export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
-  return <State extends string>(key: string, state: State) => {
+  return (key: string, state: string) => {
     const atom = atomInitialize(
       () => {
         if (isClient()) {
@@ -14,16 +15,15 @@ export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
 
         return state;
       },
-      (_get, set, nextLazyInitialization: Initialization<string>) => {
-        const lazyInitialization: Initialization<string> = isString(nextLazyInitialization)
-          ? () => nextLazyInitialization
-          : nextLazyInitialization;
+      (handler, resolvableState: Resolvable<string, [string]>) => {
+        const resolvedState = resolve(resolvableState, handler.state);
+        const lazyInitialization: Initialization<string> = () => resolvedState;
 
         lazyInitialization.get = (nextState: string) => {
           localStorage.setItem(key, nextState);
         };
 
-        set(lazyInitialization);
+        handler.set(lazyInitialization);
       },
     );
 

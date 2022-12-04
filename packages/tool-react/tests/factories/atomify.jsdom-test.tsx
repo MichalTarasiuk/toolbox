@@ -1,8 +1,10 @@
 import {fireEvent, render} from '@testing-library/react';
-import {isUndefined} from '@tool/utils';
+import {resolve, uppercaseFirst} from '@tool/utils';
 
 import 'mock-local-storage';
 import {atomify} from '../../_api';
+
+import type {ResolvableState} from '../../source/factories/atomify/types';
 
 describe('jsdom - react:factories:atomify', () => {
   it('should emit update atom', () => {
@@ -100,8 +102,8 @@ describe('jsdom - react:factories:atomify', () => {
   it('should work with custom set', () => {
     const {atom, useAtom} = atomify();
 
-    const firstnameAtom = atom<string | null>(null, ({set}) => {
-      set('Michał');
+    const firstnameAtom = atom(null as string | null, (handler, nextName: string) => {
+      handler.set(uppercaseFirst(nextName));
     });
     const userAtom = atom(get => ({firstname: get(firstnameAtom)}));
 
@@ -111,7 +113,7 @@ describe('jsdom - react:factories:atomify', () => {
       return (
         <button
           onClick={() => {
-            setFirstname();
+            setFirstname('michał');
           }}
         >
           set firstname
@@ -171,8 +173,10 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should not rerender component which update atom', () => {
     const {atom, useAtomValue, useUpdateAtom} = atomify();
-    const counterAtom = atom(0, (handler, nextCounter: number) => {
-      handler.set(nextCounter);
+    const counterAtom = atom(0, (handler, lazyCounter: ResolvableState<number>) => {
+      const resolvedCounter = resolve(lazyCounter, handler.state);
+
+      handler.set(resolvedCounter);
     });
 
     const displayerSpy = jest.fn();
@@ -191,7 +195,7 @@ describe('jsdom - react:factories:atomify', () => {
       updaterSpy();
 
       const increase = () => {
-        updateAtom(counter => (isUndefined(counter) ? 0 : counter + 1));
+        updateAtom(counter => counter + 1);
       };
 
       return <button onClick={increase}>increase</button>;

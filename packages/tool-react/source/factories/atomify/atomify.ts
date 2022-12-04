@@ -5,7 +5,7 @@ import {useCallback, useSyncExternalStore} from 'react';
 import * as extenstions from './extensions/extensions';
 import {collectExtensions, createState, createWorker, initialize} from './helpers/helpers';
 
-import type {Atom, CustomSet, InferParams, Initialization, ResolvableState} from './types';
+import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
 
 export const atomify = () => {
   const eventHub = createEventHub();
@@ -39,9 +39,10 @@ export const atomify = () => {
         eventHub.emit(worker.id);
       };
 
-      const setInitialization = (...params: InferParams<State, Params>) => {
+      const setInitialization = (...params: Params) => {
         if (customSet) {
           const handler = {
+            state: globalState.read,
             get,
             set,
           };
@@ -50,7 +51,9 @@ export const atomify = () => {
           return;
         }
 
-        set(nextInitialization);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        set(...params);
       };
 
       return {
@@ -95,7 +98,7 @@ export const atomify = () => {
 
   const useUpdateAtom = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const setState = useCallback(
-      (...params: InferParams<State, Params>) => {
+      (...params: Params) => {
         const {setInitialization} = anyAtom.read(secretToken);
 
         setInitialization(...params);
@@ -106,7 +109,7 @@ export const atomify = () => {
     return setState;
   };
 
-  const useAtom = <State>(anyAtom: Atom<State>) => {
+  const useAtom = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const atomValue = useAtomValue(anyAtom);
     const uodateAtom = useUpdateAtom(anyAtom);
 
