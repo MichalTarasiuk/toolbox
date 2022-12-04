@@ -2,15 +2,19 @@ import {isFunction} from '../../source';
 
 import type {Any} from '@tool/typescript';
 
-export type Resolvable<Resolved> = Resolved | (() => Resolved);
+export type Resolvable<Resolved, Params extends unknown[]> = Resolved | ((...params: Params) => Resolved);
 
-const isResolvable = <Resolved>(value: unknown): value is Extract<Resolvable<Resolved>, Any.AnyFunction> =>
-  isFunction(value);
+const isResolvable = <Resolved, Params extends unknown[]>(
+  value: unknown,
+): value is Extract<Resolvable<Resolved, Params>, Any.AnyFunction> => isFunction(value);
 
-export const resolve = <Resolved>(resolvable: Resolvable<Resolved>) => {
+export const resolve = <Resolved, Params extends unknown[]>(
+  resolvable: Resolvable<Resolved, Params>,
+  ...params: Params
+) => {
   if (isResolvable(resolvable)) {
-    return resolvable();
+    return resolvable(...params) as Resolved;
   }
 
-  return resolvable;
+  return resolvable as Resolved;
 };

@@ -1,7 +1,4 @@
-import {isFunction} from '@tool/utils';
 import equal from 'deep-equal';
-
-import type {ResolvableState} from '../types';
 
 export const createState = <State>() => {
   const initialState = Symbol();
@@ -18,18 +15,13 @@ export const createState = <State>() => {
   };
 
   return {
+    get read() {
+      if (state === initialState) {
+        throw Error('State should be defined');
+      }
+
+      return state;
+    },
     update,
   };
-};
-
-export const isResolveableState = <State>(
-  resolvableState: ResolvableState<State>,
-): resolvableState is (state: State) => State => isFunction(resolvableState);
-
-export const resolveState = <State>(resolvableState: ResolvableState<State>, state: State) => {
-  if (isResolveableState(resolvableState)) {
-    return resolvableState(state);
-  }
-
-  return resolvableState;
 };
