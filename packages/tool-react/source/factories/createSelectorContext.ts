@@ -1,11 +1,11 @@
-import {uppercaseFirst} from '@tool/utils';
+import {uppercaseFirst, empty} from '@tool/utils';
 import {createContext as createContextImpl, useContextSelector} from 'use-context-selector';
 
 import type {Context} from 'use-context-selector';
 
 type Selector<ContextValue, Selected> = (contextValue: ContextValue) => Selected;
 
-const defaultContextValue = {};
+const defaultContextValue = empty.object;
 
 const getErrorMessage = (name: string) => `use${uppercaseFirst(name)} must be used within a ${name}Provider`;
 
@@ -20,16 +20,10 @@ export const createSelectorContext = <ContextValue>(name: string) => {
   const uppercasedName = uppercaseFirst(name);
 
   const useSelectorContext = <Selected = ContextValue>(selectorImpl?: Selector<ContextValue, Selected>) => {
-    const safeSelector = (value: ContextValue) =>
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- safety assertion
-      selectorImpl ? selectorImpl(value) : (value as unknown as Selected);
+    const safeSelector = (value: ContextValue) => (selectorImpl ? selectorImpl(value) : (value as unknown as Selected));
     const selector = (value: ContextValue) =>
       value === defaultContextValue ? defaultContextValue : safeSelector(value);
-    const selected = useContextSelector(
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- developer should't know about default context value
-      selectorContext as Context<ContextValue>,
-      selector,
-    );
+    const selected = useContextSelector(selectorContext as Context<ContextValue>, selector);
 
     if (isInvalidHookCall(selected)) {
       const errorMessage = getErrorMessage(name);

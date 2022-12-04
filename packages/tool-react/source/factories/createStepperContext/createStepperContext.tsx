@@ -3,8 +3,8 @@ import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 
 import {checkSteps, generateTokens, tokenify} from './helpers';
 
-import type {Steps} from './types';
 import type {Custom} from '@tool/typescript';
+import type {Steps} from './types';
 import type {ReactNode} from 'react';
 
 type Tokenify = typeof tokenify;

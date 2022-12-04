@@ -7,7 +7,7 @@ export type CustomSet<State, Params extends any[] = any[]> = (
 export type LazyInitialization<State> = ((get: Get) => State) & {
   get?: (state: State) => void;
 };
-export type Initialization<State> = State | LazyInitialization<State>;
+export type Initialization<State> = LazyInitialization<State> | State;
 export type ResolvableState<State> = State | ((state: State) => State);
 
 export type AtomInitialize = <State>(

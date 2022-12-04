@@ -25,7 +25,7 @@ describe('jsdom - react:factories:createFastContext', () => {
 
   it('should not render', () => {
     const restoreConsole = mockConsole();
-    const [_, useUser] = createFastContext<{name: string}>('user');
+    const [, useUser] = createFastContext<{name: string}>('user');
 
     const Component = () => {
       const [user] = useUser();
@@ -173,7 +173,7 @@ describe('jsdom - react:factories:createFastContext', () => {
       const [user, setUser] = useUser();
 
       const increaseAge = useCallback(() => {
-        setUser(user => ({...user, age: user.age + 1}));
+        setUser(currentUser => ({...currentUser, age: currentUser.age + 1}));
       }, [setUser]);
 
       return (

@@ -7,7 +7,7 @@ export const createState = <State>() => {
   const initialState = Symbol();
   let state: State | typeof initialState = initialState;
 
-  const canUpdate = <State>(state: State, nextState: State) => !equal(state, nextState);
+  const canUpdate = <CurrentState>(currentState: CurrentState, nextState: State) => !equal(currentState, nextState);
 
   const update = (nextState: State) => {
     if (state === initialState || canUpdate(state, nextState)) {

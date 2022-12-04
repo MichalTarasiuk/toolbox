@@ -15,7 +15,7 @@ export const atomify = () => {
     initialInitialization: Initialization<State>,
     customSet?: CustomSet<State, Params>,
   ) => {
-    const state = createState<State>();
+    const globalState = createState<State>();
     const worker = createWorker();
 
     let initialization = initialInitialization;
@@ -25,8 +25,8 @@ export const atomify = () => {
         throw Error('You do not have permission to read this atom');
       }
 
-      const get = <AtomState>(atom: Atom<AtomState>) => {
-        const {id, state} = atom.read(secretToken);
+      const get = <AtomState>(anyAtom: Atom<AtomState>) => {
+        const {id, state} = anyAtom.read(secretToken);
 
         worker.addCoworker(id);
 
@@ -56,9 +56,11 @@ export const atomify = () => {
       return {
         get state() {
           const nextState = initialize(initialization, get, {
-            before: () => worker.stop(),
+            before: () => {
+              worker.stop();
+            },
           });
-          const updatedState = state.update(nextState);
+          const updatedState = globalState.update(nextState);
 
           return updatedState;
         },
@@ -72,17 +74,10 @@ export const atomify = () => {
     };
   };
 
-  const useAtom = <State, Params extends any[]>(atom: Atom<State, Params>) => {
-    const atomValue = useAtomValue<State, Params>(atom);
-    const uodateAtom = useUpdateAtom<State, Params>(atom);
-
-    return [atomValue, uodateAtom] as const;
-  };
-
-  const useAtomValue = <State, Params extends unknown[]>(atom: Atom<State, Params>) => {
+  const useAtomValue = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
-        const {id, coworkers} = atom.read(secretToken);
+        const {id, coworkers} = anyAtom.read(secretToken);
 
         const subscribers = [id, ...coworkers].map(name => eventHub.on(name, onStoreChange));
 
@@ -92,23 +87,30 @@ export const atomify = () => {
           });
         };
       },
-      () => atom.read(secretToken).state,
+      () => anyAtom.read(secretToken).state,
     );
 
     return state;
   };
 
-  const useUpdateAtom = <State, Params extends unknown[]>(atom: Atom<State, Params>) => {
+  const useUpdateAtom = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const setState = useCallback(
       (...params: InferParams<State, Params>) => {
-        const {setInitialization} = atom.read(secretToken);
+        const {setInitialization} = anyAtom.read(secretToken);
 
         setInitialization(...params);
       },
-      [atom],
+      [anyAtom],
     );
 
     return setState;
+  };
+
+  const useAtom = <State>(anyAtom: Atom<State>) => {
+    const atomValue = useAtomValue(anyAtom);
+    const uodateAtom = useUpdateAtom(anyAtom);
+
+    return [atomValue, uodateAtom] as const;
   };
 
   return {

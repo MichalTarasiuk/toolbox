@@ -19,8 +19,8 @@ export const createAtomWithStorage = (atomInitialize: AtomInitialize) => {
           ? () => nextLazyInitialization
           : nextLazyInitialization;
 
-        lazyInitialization.get = (state: string) => {
-          localStorage.setItem(key, state);
+        lazyInitialization.get = (nextState: string) => {
+          localStorage.setItem(key, nextState);
         };
 
         set(lazyInitialization);

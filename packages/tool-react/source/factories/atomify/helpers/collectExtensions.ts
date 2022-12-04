@@ -15,7 +15,6 @@ type FormatExtensionKey<ExtensionKey> = ExtensionKey extends `create${infer Firs
   : never;
 
 const formatExtensionKey = <ExtensionKey extends `create${string}`>(extensionKey: ExtensionKey) =>
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- narrow
   extensionKey.replace(
     /create(\w)(\w+)/g,
     (_: unknown, a: string, b: string) => a.toLowerCase() + b,
@@ -26,5 +25,4 @@ export const collectExtensions = (extenstions: Extenstions, atom: AtomInitialize
     collector[formatExtensionKey(extenstionKey)] = extenstions[extenstionKey](atom);
 
     return collector;
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- define type of collector
   }, {} as CollectExtensions);

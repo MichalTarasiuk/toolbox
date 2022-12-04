@@ -5,8 +5,8 @@ import {hasId, isValidName} from './assertions';
 import {getGlobalResolvers} from './globalResolvers';
 import {elementsGuard, formatId, formatTag} from './helpers';
 
-import type {Resolvers} from './types';
 import type {HTMLReactParserOptions} from 'html-react-parser';
+import type {Resolvers} from './types';
 
 export const reactify = (html: string, customResolvers?: Resolvers) => {
   const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>

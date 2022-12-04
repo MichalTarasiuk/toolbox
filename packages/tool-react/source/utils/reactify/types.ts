@@ -1,6 +1,7 @@
+import type {Any} from '@tool/typescript';
 import type {DetailedHTMLFactory, FunctionComponent, ReactHTML} from 'react';
 
-export type TagName = keyof ReactHTML;
+export type TagNameUnion = keyof ReactHTML;
 
 type RemovePrefix<TKey> = TKey extends `tag:${infer TagName}` ? TagName : never;
 
@@ -8,16 +9,9 @@ type InferAttributes<ReactHtmlElement> = ReactHtmlElement extends DetailedHTMLFa
   ? Attributes
   : never;
 
-export type Resolvers = Partial<{
-  [key in `tag:${TagName}`]: FunctionComponent<InferAttributes<ReactHTML[RemovePrefix<key>]>>;
-}> & {
-  [id: `id:${string}`]: FunctionComponent;
-};
+export type Resolvers = Any.AnyObject<FunctionComponent, `id:${string}`> &
+  Partial<{
+    [key in `tag:${TagNameUnion}`]: FunctionComponent<InferAttributes<ReactHTML[RemovePrefix<key>]>>;
+  }>;
 
-export type ParserConfig = {
-  resolvers?: Resolvers;
-};
-
-export type AnyAttribs = {
-  [x: string]: string;
-};
+export type AnyAttribs = Any.AnyObject<string, string>;
