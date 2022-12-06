@@ -117,10 +117,22 @@ export const atomify = () => {
     return [atomValue, uodateAtom] as const;
   };
 
+  const useResetAtom = <State>(anyAtom: Atom<State, [ResolvableState<State>]>) => {
+    const resetAtom = useCallback(() => {
+      const initial = extenstions.getInitial(anyAtom);
+      const {setInitialization} = anyAtom.read(secretToken);
+
+      setInitialization(initial);
+    }, [anyAtom]);
+
+    return resetAtom;
+  };
+
   return {
     atom,
     useAtom,
     useAtomValue,
+    useResetAtom,
     useUpdateAtom,
     ...collectExtensions(extenstions, atom),
   };

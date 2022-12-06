@@ -220,4 +220,55 @@ describe('jsdom - react:factories:atomify', () => {
     expect(displayerSpy).toHaveBeenCalledTimes(3);
     expect(updaterSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should reset atom to initial value', () => {
+    const {atomWithReset, useAtom, useResetAtom} = atomify();
+    const counterAtom = atomWithReset(0);
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom);
+      const reset = useResetAtom(counterAtom);
+
+      const increase = () => {
+        setCounter(counter + 1);
+      };
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button onClick={increase}>increase</button>
+          <button onClick={reset}>reset</button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
+
+    fireEvent.click(getByText('reset'));
+
+    getByText('counter: 0');
+  });
+
+  it(`should throw error when passed atom to useResetAtom doesn't have initial value`, () => {
+    const {atom, useResetAtom} = atomify();
+    const counterAtom = atom(0);
+
+    const Component = () => {
+      const resetCounter = useResetAtom(counterAtom);
+
+      return <button onClick={resetCounter}>reset counter</button>;
+    };
+
+    const {getByText} = render(<Component />);
+
+    expect(() => {
+      fireEvent.click(getByText('reset'));
+    }).toThrowError();
+  });
 });
