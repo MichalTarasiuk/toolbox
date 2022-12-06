@@ -1,5 +1,5 @@
 import {fireEvent, render} from '@testing-library/react';
-import {resolve, uppercaseFirst} from '@tool/utils';
+import {expectNever, resolve, uppercaseFirst} from '@tool/utils';
 
 import 'mock-local-storage';
 import {atomify} from '../../_api';
@@ -270,5 +270,59 @@ describe('jsdom - react:factories:atomify', () => {
     expect(() => {
       fireEvent.click(getByText('reset'));
     }).toThrowError();
+  });
+
+  it('should work as reducer', () => {
+    const {atomWithReducer, useAtom} = atomify();
+    const counterAtom = atomWithReducer(0, (counter, type: 'decrease' | 'increase') => {
+      if (type === 'decrease') {
+        return counter - 1;
+      }
+
+      if (type === 'increase') {
+        return counter + 1;
+      }
+
+      expectNever(type);
+
+      return counter;
+    });
+
+    const Component = () => {
+      const [counter, action] = useAtom(counterAtom);
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button
+            onClick={() => {
+              action('increase');
+            }}
+          >
+            increase
+          </button>
+          <button
+            onClick={() => {
+              action('decrease');
+            }}
+          >
+            decrease
+          </button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
+
+    fireEvent.click(getByText('decrease'));
+    fireEvent.click(getByText('decrease'));
+
+    getByText('counter: 1');
   });
 });
