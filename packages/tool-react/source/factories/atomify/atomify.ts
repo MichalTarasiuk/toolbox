@@ -81,7 +81,13 @@ export const atomify = () => {
   const splitAtom = <State extends unknown[]>(anyAtom: Atom<State>) => {
     const {state} = anyAtom.read(secretToken);
 
-    const splitedAtom = atom(state.map(value => atom<State[number]>(value)));
+    const splitedAtom = atom(
+      state.map(value => {
+        const newAtom = atom<State[number]>(value);
+
+        return Object.assign(newAtom, {id: newAtom.read(secretToken).id});
+      }),
+    );
 
     return splitedAtom;
   };

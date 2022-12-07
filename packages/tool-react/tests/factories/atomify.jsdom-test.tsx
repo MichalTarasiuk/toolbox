@@ -370,7 +370,7 @@ describe('jsdom - react:factories:atomify', () => {
       return (
         <ul>
           {todoAtoms.map(todoAtom => (
-            <TodoItem todoAtom={todoAtom} />
+            <TodoItem key={todoAtom.id} todoAtom={todoAtom} />
           ))}
         </ul>
       );
