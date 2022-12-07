@@ -357,7 +357,6 @@ describe('jsdom - react:factories:atomify', () => {
           <p>{status}</p>
           <button
             onClick={() => {
-              console.log('click');
               setTodo({...todo, done: !todo.done});
             }}
           >
