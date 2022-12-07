@@ -2,7 +2,7 @@ import {isFunction} from '../../source';
 
 import type {Any} from '@tool/typescript';
 
-export type Resolvable<Resolved, Params extends unknown[]> = Resolved | ((...params: Params) => Resolved);
+export type Resolvable<Resolved, Params extends unknown[] = never[]> = Resolved | ((...params: Params) => Resolved);
 
 const isResolvable = <Resolved, Params extends unknown[]>(
   value: unknown,
