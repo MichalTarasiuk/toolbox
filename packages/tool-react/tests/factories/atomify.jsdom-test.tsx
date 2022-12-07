@@ -1,9 +1,10 @@
 import {fireEvent, render} from '@testing-library/react';
-import {expectNever, resolve, uppercaseFirst} from '@tool/utils';
+import {expectNever, none, resolve, uppercaseFirst} from '@tool/utils';
 
 import 'mock-local-storage';
 import {atomify} from '../../_api';
 
+import type {Atom} from '../../_api';
 import type {ResolvableState} from '../../source/factories/atomify/types';
 
 describe('jsdom - react:factories:atomify', () => {
@@ -324,5 +325,66 @@ describe('jsdom - react:factories:atomify', () => {
     fireEvent.click(getByText('decrease'));
 
     getByText('counter: 1');
+  });
+
+  it('should split atom', () => {
+    const {atom, splitAtom, useAtom} = atomify();
+
+    const taskToToggle = 'help the town';
+    const initialState = [
+      {
+        task: taskToToggle,
+        done: false,
+      },
+      {
+        task: 'feed the dragon',
+        done: false,
+      },
+    ];
+    const todosAtom = atom(initialState);
+    const todoAtomsAtom = splitAtom(todosAtom);
+
+    type TodoType = typeof initialState[number];
+
+    const TodoItem = ({todoAtom}: {todoAtom: Atom<TodoType>}) => {
+      const [todo, setTodo] = useAtom(todoAtom);
+
+      const status = `is ${!todo.done ? 'not' : none} done: ${todo.task}`;
+      const toggleText = `toggle: ${todo.task}`;
+
+      return (
+        <div>
+          <p>{status}</p>
+          <button
+            onClick={() => {
+              console.log('click');
+              setTodo({...todo, done: !todo.done});
+            }}
+          >
+            {toggleText}
+          </button>
+        </div>
+      );
+    };
+    const TodoList = () => {
+      const [todoAtoms] = useAtom(todoAtomsAtom);
+      return (
+        <ul>
+          {todoAtoms.map(todoAtom => (
+            <TodoItem todoAtom={todoAtom} />
+          ))}
+        </ul>
+      );
+    };
+
+    const {getByText} = render(<TodoList />);
+
+    initialState.forEach(({task}) => {
+      getByText(`is not done: ${task}`);
+    });
+
+    fireEvent.click(getByText(`toggle: ${taskToToggle}`));
+
+    getByText(`is done: ${taskToToggle}`);
   });
 });
