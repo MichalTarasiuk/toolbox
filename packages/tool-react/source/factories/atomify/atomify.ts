@@ -78,6 +78,17 @@ export const atomify = () => {
     };
   };
 
+  const select = <State, Slice>(anyAtom: Atom<State>, selector: (state: State) => Slice) => {
+    const parentAtom = anyAtom.read(secretToken);
+    const slice = selector(parentAtom.state);
+
+    const childAtom = atom(slice);
+
+    parentAtom.addCoworker(childAtom.read(secretToken).id);
+
+    return childAtom;
+  };
+
   const useAtomValue = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
@@ -130,6 +141,7 @@ export const atomify = () => {
 
   return {
     atom,
+    select,
     useAtom,
     useAtomValue,
     useResetAtom,

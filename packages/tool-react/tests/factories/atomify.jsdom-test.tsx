@@ -9,6 +9,7 @@ import type {ResolvableState} from '../../source/factories/atomify/types';
 describe('jsdom - react:factories:atomify', () => {
   it('should emit update atom', () => {
     const {atom, useAtom} = atomify();
+
     const userAtom = atom<{name: string; age: number} | null>(null);
 
     const Component = () => {
@@ -34,6 +35,7 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should rerender component on update atom', () => {
     const {atom, useAtom} = atomify();
+
     const userAtom = atom<{name: string; age: number} | null>(null);
 
     const Child = () => {
@@ -139,6 +141,7 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should save counter in localstorage', () => {
     const {atomWithStorage, useAtom} = atomify();
+
     const counterAtom = atomWithStorage('counter', '1');
 
     const Component = () => {
@@ -173,6 +176,7 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should not rerender component which update atom', () => {
     const {atom, useAtomValue, useUpdateAtom} = atomify();
+
     const counterAtom = atom(0, (handler, lazyCounter: ResolvableState<number>) => {
       const resolvedCounter = resolve(lazyCounter, handler.state);
 
@@ -223,6 +227,7 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should reset atom to initial value', () => {
     const {atomWithReset, useAtom, useResetAtom} = atomify();
+
     const counterAtom = atomWithReset(0);
 
     const Component = () => {
@@ -274,6 +279,7 @@ describe('jsdom - react:factories:atomify', () => {
 
   it('should work as reducer', () => {
     const {atomWithReducer, useAtom} = atomify();
+
     const counterAtom = atomWithReducer(0, (counter, type: 'decrease' | 'increase') => {
       if (type === 'decrease') {
         return counter - 1;
@@ -324,5 +330,12 @@ describe('jsdom - react:factories:atomify', () => {
     fireEvent.click(getByText('decrease'));
 
     getByText('counter: 1');
+  });
+
+  it('should select prop of atom state', () => {
+    const {atom, select} = atomify();
+
+    const userAtom = atom({firstname: 'Michał', age: 19});
+    const firstnameAtom = select(userAtom, selectedAtom => selectedAtom.age);
   });
 });
