@@ -85,7 +85,7 @@
     "ts-node": "10.9.1",
     "ts-prune": "0.10.3",
     "ts-toolbelt": "9.6.0",
-    "typescript": "4.8.4",
+    "typescript": "4.9.4",
     "zx": "7.1.1"
   },
   "lint-staged": {
