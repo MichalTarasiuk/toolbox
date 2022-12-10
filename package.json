@@ -64,6 +64,7 @@
     "@types/node": "18.11.10",
     "@types/prompt": "1.1.4",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.46.0",
     "babel-jest": "29.3.1",
     "create-file": "1.0.1",
     "eslint": "8.28.0",

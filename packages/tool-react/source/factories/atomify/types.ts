@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any -- contravariance */
 
 export type Get = <State>(atom: Atom<State>) => State;
 export type CustomSet<State, Params extends unknown[] = unknown[]> = (
