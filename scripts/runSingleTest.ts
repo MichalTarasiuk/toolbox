@@ -1,4 +1,5 @@
-import {timeout} from '@tool/utils';
+import pkg from '@tool/utils';
+const {timeout} = pkg;
 import {$, question} from 'zx';
 
 const query = 'Can you pass name of test?';
