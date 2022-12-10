@@ -1,9 +1,10 @@
 import {fireEvent, render} from '@testing-library/react';
-import {resolve, uppercaseFirst} from '@tool/utils';
+import {expectNever, none, resolve, uppercaseFirst} from '@tool/utils';
 
 import 'mock-local-storage';
 import {atomify} from '../../_api';
 
+import type {Atom} from '../../_api';
 import type {ResolvableState} from '../../source/factories/atomify/types';
 
 describe('jsdom - react:factories:atomify', () => {
@@ -219,5 +220,170 @@ describe('jsdom - react:factories:atomify', () => {
 
     expect(displayerSpy).toHaveBeenCalledTimes(3);
     expect(updaterSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reset atom to initial value', () => {
+    const {atomWithReset, useAtom, useResetAtom} = atomify();
+    const counterAtom = atomWithReset(0);
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom);
+      const reset = useResetAtom(counterAtom);
+
+      const increase = () => {
+        setCounter(counter + 1);
+      };
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button onClick={increase}>increase</button>
+          <button onClick={reset}>reset</button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
+
+    fireEvent.click(getByText('reset'));
+
+    getByText('counter: 0');
+  });
+
+  it(`should throw error when passed atom to useResetAtom doesn't have initial value`, () => {
+    const {atom, useResetAtom} = atomify();
+    const counterAtom = atom(0);
+
+    const Component = () => {
+      const resetCounter = useResetAtom(counterAtom);
+
+      return <button onClick={resetCounter}>reset counter</button>;
+    };
+
+    const {getByText} = render(<Component />);
+
+    expect(() => {
+      fireEvent.click(getByText('reset'));
+    }).toThrowError();
+  });
+
+  it('should work as reducer', () => {
+    const {atomWithReducer, useAtom} = atomify();
+    const counterAtom = atomWithReducer(0, (counter, type: 'decrease' | 'increase') => {
+      if (type === 'decrease') {
+        return counter - 1;
+      }
+
+      if (type === 'increase') {
+        return counter + 1;
+      }
+
+      expectNever(type);
+
+      return counter;
+    });
+
+    const Component = () => {
+      const [counter, action] = useAtom(counterAtom);
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button
+            onClick={() => {
+              action('increase');
+            }}
+          >
+            increase
+          </button>
+          <button
+            onClick={() => {
+              action('decrease');
+            }}
+          >
+            decrease
+          </button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
+
+    fireEvent.click(getByText('decrease'));
+    fireEvent.click(getByText('decrease'));
+
+    getByText('counter: 1');
+  });
+
+  it('should split atom', () => {
+    const {atom, splitAtom, useAtom} = atomify();
+
+    const taskToToggle = 'help the town';
+    const initialState = [
+      {
+        task: taskToToggle,
+        done: false,
+      },
+      {
+        task: 'feed the dragon',
+        done: false,
+      },
+    ];
+    const todosAtom = atom(initialState);
+    const todoAtomsAtom = splitAtom(todosAtom);
+
+    type TodoType = typeof initialState[number];
+
+    const TodoItem = ({todoAtom}: {todoAtom: Atom<TodoType>}) => {
+      const [todo, setTodo] = useAtom(todoAtom);
+
+      const status = `is ${!todo.done ? 'not' : none} done: ${todo.task}`;
+      const toggleText = `toggle: ${todo.task}`;
+
+      return (
+        <div>
+          <p>{status}</p>
+          <button
+            onClick={() => {
+              setTodo({...todo, done: !todo.done});
+            }}
+          >
+            {toggleText}
+          </button>
+        </div>
+      );
+    };
+    const TodoList = () => {
+      const [todoAtoms] = useAtom(todoAtomsAtom);
+      return (
+        <ul>
+          {todoAtoms.map(todoAtom => (
+            <TodoItem key={todoAtom.id} todoAtom={todoAtom} />
+          ))}
+        </ul>
+      );
+    };
+
+    const {getByText} = render(<TodoList />);
+
+    initialState.forEach(({task}) => {
+      getByText(`is not done: ${task}`);
+    });
+
+    fireEvent.click(getByText(`toggle: ${taskToToggle}`));
+
+    getByText(`is done: ${taskToToggle}`);
   });
 });

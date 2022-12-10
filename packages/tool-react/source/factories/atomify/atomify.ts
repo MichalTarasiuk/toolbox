@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions -- resolveState: typescript can't infer return type */
-import {createEventHub} from '@tool/utils';
+import {createEventHub, resolve} from '@tool/utils';
 import {useCallback, useSyncExternalStore} from 'react';
 
 import * as extenstions from './extensions/extensions';
-import {collectExtensions, createState, createWorker, initialize} from './helpers/helpers';
+import {collectExtensions, createState, createWorker, initialize, withNativeSet} from './helpers/helpers';
 
 import type {Atom, CustomSet, Initialization, ResolvableState} from './types';
 
@@ -40,6 +39,13 @@ export const atomify = () => {
       };
 
       const setInitialization = (...params: Params) => {
+        if (withNativeSet(customSet, params)) {
+          const nextInitializtion = resolve(params[0], globalState.read);
+
+          set(nextInitializtion);
+          return;
+        }
+
         if (customSet) {
           const handler = {
             state: globalState.read,
@@ -48,12 +54,7 @@ export const atomify = () => {
           };
 
           customSet(handler, ...params);
-          return;
         }
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        set(...params);
       };
 
       return {
@@ -75,6 +76,20 @@ export const atomify = () => {
     return {
       read,
     };
+  };
+
+  const splitAtom = <State extends unknown[]>(anyAtom: Atom<State>) => {
+    const {state} = anyAtom.read(secretToken);
+
+    const splitedAtom = atom(
+      state.map(value => {
+        const newAtom = atom<State[number]>(value);
+
+        return Object.assign(newAtom, {id: newAtom.read(secretToken).id});
+      }),
+    );
+
+    return splitedAtom;
   };
 
   const useAtomValue = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
@@ -116,10 +131,23 @@ export const atomify = () => {
     return [atomValue, uodateAtom] as const;
   };
 
+  const useResetAtom = <State>(anyAtom: Atom<State, [ResolvableState<State>]>) => {
+    const resetAtom = useCallback(() => {
+      const initial = extenstions.getInitial(anyAtom);
+      const {setInitialization} = anyAtom.read(secretToken);
+
+      setInitialization(initial);
+    }, [anyAtom]);
+
+    return resetAtom;
+  };
+
   return {
     atom,
+    splitAtom,
     useAtom,
     useAtomValue,
+    useResetAtom,
     useUpdateAtom,
     ...collectExtensions(extenstions, atom),
   };
