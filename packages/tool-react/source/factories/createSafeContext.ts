@@ -1,8 +1,9 @@
 import {uppercaseFirst} from '@tool/utils';
 import {createContext, useContext} from 'react';
 
+const initialContextValue = Symbol();
+
 export const createSafeContext = <ContextValue>(name: string) => {
-  const initialContextValue = Symbol();
   const contextName = uppercaseFirst(name);
 
   const safeContext = createContext<ContextValue | typeof initialContextValue>(initialContextValue);
