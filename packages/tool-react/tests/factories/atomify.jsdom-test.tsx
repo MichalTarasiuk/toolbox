@@ -386,4 +386,38 @@ describe('jsdom - react:factories:atomify', () => {
 
     getByText(`is done: ${taskToToggle}`);
   });
+
+  it('should return previous value of atom', () => {
+    const {atomWithPrevious, useAtom} = atomify();
+    const counterAtom = atomWithPrevious(0);
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom);
+
+      const increase = () => {
+        setCounter(currentCounter => currentCounter + 1);
+      };
+
+      return (
+        <div>
+          <p>previous: {counter.previous}</p>
+          <p>current: {counter.current}</p>
+          <button onClick={increase}>increase</button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+
+    getByText('previous: 0');
+    getByText('current: 1');
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('previous: 2');
+    getByText('current: 3');
+  });
 });
