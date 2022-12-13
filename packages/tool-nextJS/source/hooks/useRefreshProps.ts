@@ -54,5 +54,5 @@ export const useRefreshProps = () => {
     [router],
   );
 
-  return [isRefreshing, refreshProps] as const;
+  return {isRefreshing, refreshProps};
 };
