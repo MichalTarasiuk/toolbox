@@ -1,4 +1,4 @@
-import {bound} from '../../../_api';
+import {bound, expectType} from '../../../_api';
 
 describe('node - logic:types:functions:resolve', () => {
   it('should create new function', () => {
@@ -12,6 +12,7 @@ describe('node - logic:types:functions:resolve', () => {
 
     const boundAdd = bound(add, {'1': 5});
 
+    expectType<(arg: string) => void>(boundAdd);
     expect(boundAdd('5')).toBe(10);
   });
 });
