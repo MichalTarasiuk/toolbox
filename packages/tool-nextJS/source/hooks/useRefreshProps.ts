@@ -16,6 +16,8 @@ type InferTransitionOptions<GenericNextRouter extends NextRouter> = GenericNextR
   ? TransitionOptions
   : never;
 
+const cleanUrl = (url: string) => url.replace(/\?(.)+/, none);
+
 export const useRefreshProps = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
@@ -24,7 +26,7 @@ export const useRefreshProps = () => {
 
   useEffect(() => {
     const routeChangeStartHandler = (nextUrl: string, transitionOptions: InferTransitionOptions<typeof router>) => {
-      if (getUrl().replace(/\?(.)+/, none) === nextUrl.replace(/\?(.)+/, none) && !transitionOptions.shallow) {
+      if (cleanUrl(getUrl()) === cleanUrl(nextUrl) && !transitionOptions.shallow) {
         setIsRefreshing(true);
       }
     };
