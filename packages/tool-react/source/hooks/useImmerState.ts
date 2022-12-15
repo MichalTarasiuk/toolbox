@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import {produce} from 'immer';
+import {freeze, produce} from 'immer';
 import {isFunction} from '@tool/utils';
 
 import type {Draft} from 'immer';
@@ -22,13 +22,13 @@ const resolve = <State>(resolvableState: MaybeResolvableState<State>, state: Sta
 };
 
 export const useImmerState = <State>(initial: State) => {
-  const [state, setStateImpl] = useState(initial);
+  const [state, setStateImpl] = useState(() => freeze(initial));
 
   const setState = useCallback((maybeResolvableState: MaybeResolvableState<State>) => {
     setStateImpl(currentState => {
       const resolvedState = resolve(maybeResolvableState, currentState);
 
-      return resolvedState;
+      return freeze(resolvedState);
     });
   }, []);
 
