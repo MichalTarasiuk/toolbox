@@ -133,6 +133,7 @@ importers:
       '@types/uuid': 9.0.0
       deep-equal: ^2.0.5
       html-react-parser: ^3.0.4
+      immer: ^9.0.16
       next: ^13.0.0
       react: 18.2.0
       react-error-boundary: 3.1.4
@@ -156,6 +157,7 @@ importers:
       '@types/react-is': 17.0.3
       '@types/react-reconciler': 0.28.0
       '@types/uuid': 9.0.0
+      immer: 9.0.16
       next: 13.0.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
@@ -4867,6 +4869,10 @@ packages:
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
+    dev: true
+
+  /immer/9.0.16:
+    resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
     dev: true
 
   /import-fresh/3.3.0:

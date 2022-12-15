@@ -420,4 +420,63 @@ describe('jsdom - react:factories:atomify', () => {
     getByText('previous: 2');
     getByText('current: 3');
   });
+
+  it('should work with immer', () => {
+    const {atomWithImmer, useAtom} = atomify();
+
+    const initialTodos = [
+      {
+        id: 'React',
+        title: 'Learn React',
+        done: true,
+      },
+      {
+        id: 'Immer',
+        title: 'Try Immer',
+        done: false,
+      },
+    ];
+    const todosAtom = atomWithImmer(initialTodos);
+
+    const Component = () => {
+      const [todos, setTodos] = useAtom(todosAtom);
+
+      return (
+        <ul>
+          {todos.map(todo => {
+            const content = `${todo.title} is done: ${todo.done}`;
+
+            console.log({content});
+
+            return (
+              <li key={todo.id}>
+                <p>{content}</p>
+                <button
+                  onClick={() => {
+                    setTodos(currentTodos => {
+                      const currentTodo = currentTodos.find(mappedTodo => mappedTodo.id === todo.id);
+
+                      if (currentTodo) {
+                        currentTodo.done = !currentTodo.done;
+                      }
+                    });
+                  }}
+                >
+                  {todo.title} toggle
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    getByText('Learn React is done: true');
+
+    fireEvent.click(getByText('Learn React toggle'));
+
+    getByText('Learn React is done: false');
+  });
 });
