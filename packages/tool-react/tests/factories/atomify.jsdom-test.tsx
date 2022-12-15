@@ -446,8 +446,6 @@ describe('jsdom - react:factories:atomify', () => {
           {todos.map(todo => {
             const content = `${todo.title} is done: ${todo.done}`;
 
-            console.log({content});
-
             return (
               <li key={todo.id}>
                 <p>{content}</p>
