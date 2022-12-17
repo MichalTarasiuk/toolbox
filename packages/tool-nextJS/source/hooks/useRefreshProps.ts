@@ -1,4 +1,4 @@
-import {stringify} from 'query-string';
+import queryString from 'query-string';
 import {useCallback, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useEvent} from '@tool/react';
@@ -47,7 +47,7 @@ export const useRefreshProps = () => {
 
   const refreshProps = useCallback(
     (searchParams: Any.AnyObject<string, string>) => {
-      const url = `${router.asPath}?${stringify(searchParams)}`;
+      const url = `${router.asPath}?${queryString.default.stringify(searchParams)}`;
 
       void router.replace(url, undefined);
     },
