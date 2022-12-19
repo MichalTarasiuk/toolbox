@@ -1,13 +1,15 @@
 import {isString, keyIn, isSameOrigin} from '@tool/utils';
 
 import {getSiteOrigin} from './helpers';
+import {resolveAttributeName} from './consts';
 
 import type {DOMNode, Element, Element as ElementType} from 'html-react-parser';
 import type {AnyAttribs, TagNameUnion} from './types';
 
 export const isElement = (domNode: DOMNode): domNode is Element => 'attribs' in domNode;
 
-export const hasId = (attribs: AnyAttribs): attribs is {id: string} => 'id' in attribs && isString(attribs['id']);
+export const hasResolveAttribute = (attribs: AnyAttribs): attribs is {resolve: string} =>
+  resolveAttributeName in attribs && isString(attribs[resolveAttributeName]);
 
 export const hasSource = (attribs: AnyAttribs): attribs is {src: string} =>
   keyIn(attribs, 'src') && isString(attribs.src);
@@ -31,5 +33,5 @@ export const isSameSite = (destinationOrigin: string) => {
   return false;
 };
 
-export const isValidName = (name: string): name is `id:${string}` | `tag:${TagNameUnion}` =>
-  name.startsWith('id:') || name.startsWith('tag:');
+export const isValidName = (name: string): name is `resolve:${string}` | `tag:${TagNameUnion}` =>
+  name.startsWith(`${resolveAttributeName}:`) || name.startsWith('tag:');
