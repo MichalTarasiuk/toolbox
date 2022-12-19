@@ -506,5 +506,7 @@ describe('jsdom - react:factories:atomify', () => {
     getByText('counter: 3');
 
     fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
   });
 });
