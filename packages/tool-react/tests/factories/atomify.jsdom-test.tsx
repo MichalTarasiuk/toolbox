@@ -477,4 +477,34 @@ describe('jsdom - react:factories:atomify', () => {
 
     getByText('Learn React is done: false');
   });
+
+  it('should assert state on each update', () => {
+    const {atomWithAssert, useAtom} = atomify();
+    const counterAtom = atomWithAssert(0, counter => counter <= 3);
+
+    const Component = () => {
+      const [counter, setCounter] = useAtom(counterAtom);
+
+      const increase = () => {
+        setCounter(currentCounter => currentCounter + 1);
+      };
+
+      return (
+        <div>
+          <p>counter: {counter}</p>
+          <button onClick={increase}>increase</button>
+        </div>
+      );
+    };
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+    fireEvent.click(getByText('increase'));
+
+    getByText('counter: 3');
+
+    fireEvent.click(getByText('increase'));
+  });
 });
