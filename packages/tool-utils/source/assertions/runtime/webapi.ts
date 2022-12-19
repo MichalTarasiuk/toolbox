@@ -1,17 +1,5 @@
-export const isSupportingWebSockets = () => {
-  try {
-    return 'WebSocket' in window;
-  } catch (error) {
-    return false;
-  }
-};
+export const isSupportingWebSockets = () => 'WebSocket' in window;
 
-export const isSupportingClipboard = () => !!navigator.clipboard;
+export const isSupportingClipboard = () => Boolean(navigator.clipboard);
 
-export const isSupportingIndexedDb = () => {
-  try {
-    return !!window.indexedDB;
-  } catch (error) {
-    return false;
-  }
-};
+export const isSupportingIndexedDb = () => Boolean(window.indexedDB);
