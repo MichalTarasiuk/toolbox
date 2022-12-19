@@ -5,6 +5,7 @@ export * from './boolean';
 export * from './expect';
 export * from './string';
 export * from './object';
+export * from './runtime/runtime';
 
 import type {Any} from '@tool/typescript';
 
