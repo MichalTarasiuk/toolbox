@@ -64,6 +64,8 @@ export type AnyObject<Value = unknown, Key extends PropertyKey = PropertyKey> = 
 
 export type AnyArray = unknown[];
 
+export type AnyReadonlyArray = ReadonlyArray<unknown>;
+
 export type AnyPromise = Promise<unknown>;
 
 export type AnyMap = Map<unknown, unknown>;

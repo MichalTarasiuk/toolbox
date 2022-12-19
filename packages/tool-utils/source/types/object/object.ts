@@ -1,1 +1,2 @@
-export * from './findAndRemoveWhen';
+export * from './removeWhen';
+export * from './keysIn';
