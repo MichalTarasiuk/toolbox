@@ -76,7 +76,7 @@ const createTree = (initialContextValue: ContextValue) => {
   return Tree;
 };
 
-describe('jsdom - react:factories:createSelectorContext', () => {
+describe('jsdom - react:factories:selectorContext', () => {
   it('should render correctly', () => {
     const Tree = createTree({name: 'Michał', age: 19});
 
