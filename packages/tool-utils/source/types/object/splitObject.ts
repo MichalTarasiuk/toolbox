@@ -13,7 +13,7 @@ const shouldSkip = Symbol();
 const canSkip = (value: unknown): value is typeof shouldSkip => value === shouldSkip;
 
 export const splitObject = <
-  AnyObject extends Record<PropertyKey, unknown>,
+  AnyObject extends Any.AnyObject,
   Separator,
   FirstPart = Custom.Debug<InferFirstPart<AnyObject, Separator>>,
 >(
