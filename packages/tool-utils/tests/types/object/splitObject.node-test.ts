@@ -1,12 +1,17 @@
-import {isString, splitObject} from '../../../_api';
+import {expectType, isString, splitObject} from '../../../_api';
 
 describe('node - utils:types:object:splitObject', () => {
   it(`return return splited object, second with only string's`, () => {
+    type Example = typeof example;
+
+    type WithStrings = Pick<Example, 'a' | 'b'>;
+    type WithNumbers = Pick<Example, 'c' | 'd'>;
+
     const example = {
-      1: '1',
-      2: '2',
-      '3': 3,
-      '4': 4,
+      a: '1',
+      b: '2',
+      c: 3,
+      d: 4,
     };
 
     const [withNumbers, withStrings] = splitObject(example, (_, value, skip) => {
@@ -17,7 +22,10 @@ describe('node - utils:types:object:splitObject', () => {
       return skip;
     });
 
-    expect(withNumbers).toEqual({'3': 3, '4': 4});
-    expect(withStrings).toEqual({1: '1', 2: '2'});
+    expectType<WithStrings>(withStrings);
+    expect(withStrings).toEqual({a: '1', b: '2'});
+
+    expectType<WithNumbers>(withNumbers);
+    expect(withNumbers).toEqual({c: 3, d: 4});
   });
 });
