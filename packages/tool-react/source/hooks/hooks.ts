@@ -9,3 +9,4 @@ export * from './useHasCommit';
 export * from './useCustomCompareMemo';
 export * from './useLazyRef';
 export * from './useImmerState';
+export * from './useConst';
