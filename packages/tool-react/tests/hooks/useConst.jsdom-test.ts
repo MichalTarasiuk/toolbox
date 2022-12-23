@@ -25,6 +25,8 @@ describe('jsdom - react:hooks:useConst', () => {
     rerender();
 
     rerender();
+
+    expect(result.current).toBe(initial);
   });
 
   it('should throw error on mutation', () => {
