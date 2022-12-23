@@ -1,6 +1,8 @@
+import {render} from '@testing-library/react';
+
 import {createWebSocketSchema} from '../../_api';
 
-import type {InferWebSocketSchema, SelectWebSocketState, InferStateUnion} from '../../_api';
+import type {InferWebSocketSchema, SelectWebSocketState} from '../../_api';
 
 type WebsocketSchema = InferWebSocketSchema<
   {
@@ -28,7 +30,9 @@ type WebsocketSchema = InferWebSocketSchema<
 >;
 
 type Actions = {
-  connect: (state: SelectWebSocketState<WebsocketSchema, 'idle'>) => SelectWebSocketState<WebsocketSchema, 'connected'>;
+  connect: (
+    state: SelectWebSocketState<WebsocketSchema, 'idle'>,
+  ) => SelectWebSocketState<WebsocketSchema, 'connecting'>;
   disconnect: (
     state: SelectWebSocketState<WebsocketSchema, 'connected' | 'connecting'>,
   ) => SelectWebSocketState<WebsocketSchema, 'idle'>;
@@ -37,7 +41,7 @@ type Actions = {
 describe('jsdom - react:factories:webSocketSchema', () => {
   const initial: SelectWebSocketState<WebsocketSchema, 'idle'> = {kind: 'idle', addr: ''};
 
-  createWebSocketSchema<WebsocketSchema, Actions>(initial, (get, transition) => ({
+  const useWebSocketSchema = createWebSocketSchema<WebsocketSchema, Actions>(initial, (get, transition) => ({
     connect(idleState) {
       const socket = new WebSocket(idleState.addr);
 
@@ -67,9 +71,20 @@ describe('jsdom - react:factories:webSocketSchema', () => {
     },
     disconnect(state) {
       state.socket.close();
+
       return transition(state.kind, 'idle', {
         addr: state.addr,
       });
     },
   }));
+
+  it('should render', () => {
+    const Component = () => {
+      useWebSocketSchema();
+
+      return null;
+    };
+
+    render(<Component />);
+  });
 });
