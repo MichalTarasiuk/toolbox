@@ -34,6 +34,7 @@
     "@types/react-reconciler": "0.28.0",
     "@types/uuid": "9.0.0",
     "immer": "^9.0.16",
+    "jest-websocket-mock": "^2.4.0",
     "next": "^13.0.0",
     "react": "18.2.0",
     "react-error-boundary": "3.1.4",

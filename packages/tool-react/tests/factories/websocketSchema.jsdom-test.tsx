@@ -1,6 +1,7 @@
-import {render} from '@testing-library/react';
+import {fireEvent, render} from '@testing-library/react';
+import Server from 'jest-websocket-mock';
 
-import {createWebSocketSchema} from '../../_api';
+import {createWebSocketSchema as createWebSocketSchemaImpl} from '../../_api';
 
 import type {InferWebSocketSchema, SelectWebSocketState} from '../../_api';
 
@@ -38,15 +39,17 @@ type Actions = {
   ) => SelectWebSocketState<WebsocketSchema, 'idle'>;
 };
 
-describe('jsdom - react:factories:webSocketSchema', () => {
-  const initial: SelectWebSocketState<WebsocketSchema, 'idle'> = {kind: 'idle', addr: ''};
+const addr = 'ws://localhost:1234';
 
-  const useWebSocketSchema = createWebSocketSchema<WebsocketSchema, Actions>(initial, (get, transition) => ({
+const createWebSocketSchema = () => {
+  const initial: SelectWebSocketState<WebsocketSchema, 'idle'> = {kind: 'idle', addr};
+  const webSocketSchema = createWebSocketSchemaImpl<WebsocketSchema, Actions>(initial, (get, transition) => ({
     connect(idleState) {
       const socket = new WebSocket(idleState.addr);
 
       socket.addEventListener('error', () => {
         const currentState = get();
+
         if (currentState.kind === 'connecting') {
           transition(currentState.kind, 'error', {
             errorMessage: 'Failed to connect',
@@ -56,6 +59,7 @@ describe('jsdom - react:factories:webSocketSchema', () => {
 
       socket.addEventListener('open', () => {
         const currentState = get();
+
         if (currentState.kind === 'connecting') {
           transition(currentState.kind, 'connected', {
             socket,
@@ -78,13 +82,43 @@ describe('jsdom - react:factories:webSocketSchema', () => {
     },
   }));
 
-  it('should render', () => {
+  return webSocketSchema;
+};
+
+describe('jsdom - react:factories:webSocketSchema', () => {
+  it('should connect', async () => {
+    const server = new Server(addr);
+
+    await server.connected;
+
+    const useWebSocketSchema = createWebSocketSchema();
+
     const Component = () => {
-      useWebSocketSchema();
+      const {state, actions} = useWebSocketSchema();
+
+      if (state.kind === 'idle') {
+        return <button onClick={() => actions.connect(state)}>connect</button>;
+      }
+
+      if (state.kind === 'connecting') {
+        return <p>connecting</p>;
+      }
+
+      if (state.kind === 'connected') {
+        console.log('kind: connected');
+
+        return <p>connected</p>;
+      }
 
       return null;
     };
 
-    render(<Component />);
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('connect'));
+
+    getByText('connecting');
   });
+
+  it.todo('should notify all subscribers');
 });

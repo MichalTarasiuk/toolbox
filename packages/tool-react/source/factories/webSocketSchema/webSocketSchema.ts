@@ -31,8 +31,6 @@ export const createWebSocketSchema = <WebSocketSchema extends AnyWebSocketSchema
 
   // @ts-ignore
   const transition: Transition<WebSocketSchema> = (kind, nextKind, nextState) => {
-    console.log({kind, nextKind});
-
     if (kind !== globalState.kind) {
       throw new Error(`Invalid state, expected: ${String(globalState.kind)} but got ${String(kind)}`);
     }
