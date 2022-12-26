@@ -1,122 +1,106 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import commonJsPlugin from '@rollup/plugin-commonjs';
 import {nodeResolve as nodeResolvePlugin} from '@rollup/plugin-node-resolve';
 import stripPlugin from '@rollup/plugin-strip';
 import typescriptPlugin from '@rollup/plugin-typescript';
-import {isObject, isString, keyIn, none, objectKeys} from '@tool/utils';
+import {isObject, isJSON, keyIn, signs, isString, empty, objectKeys} from '@tool/utils';
 
-import type {Any} from '@tool/typescript';
 import type {RollupOptions} from 'rollup';
+import type {Any} from '@tool/typescript';
 
-type Reference = {
-  path: string;
-};
+type TypescriptConfig = typeof import('./tsconfig.json');
 
-type Formats = typeof formats;
+type References = TypescriptConfig['references'];
+type Reference = References[number];
 
 type FormatMapper = typeof formatMapper;
-type FormatMapperKeys = keyof FormatMapper;
-type FormatMapperValues = FormatMapper[FormatMapperKeys];
 
-const inputFile = '_api.ts';
-const outputDirectory = 'build';
+const config = {
+  inputFile: '_api.ts',
+  outputDirectory: 'build',
+  formats: ['cjs', 'es'],
+} as const;
 
-const formats = ['cjs', 'es'] as const;
 const formatMapper = {
   es: 'import',
   cjs: 'require',
   umd: 'browser',
 } as const;
 
-const basename = (path: string) => {
-  const regExpMatchArray = path.match(/[^\\/]+?(\.\w+$)/);
-
-  return regExpMatchArray ? regExpMatchArray[0] : none;
-};
+const toPath = (...fileNames: string[]) => fileNames.join(signs.slash);
 
 const canBundlePacakge = async (reference: Reference) => {
+  const defaultCanBundlePackage = true;
   const packageJSON = await import(`./${reference.path}/package.json`);
 
-  return isObject(packageJSON) && (keyIn(packageJSON, 'build') ? packageJSON.build : true);
+  return isObject(packageJSON) && (keyIn(packageJSON, 'build') ? packageJSON.build : defaultCanBundlePackage);
 };
 
-const readCompilerOptions = (tsconfig: unknown) => {
-  if (isObject(tsconfig) && keyIn(tsconfig, 'compilerOptions') && isObject(tsconfig.compilerOptions)) {
-    return tsconfig.compilerOptions;
+const isDependencies = (maybeDependencies: unknown): maybeDependencies is Any.AnyObject<string, string> =>
+  isObject(maybeDependencies) &&
+  objectKeys(maybeDependencies).every(isString) &&
+  Object.values(maybeDependencies).every(isString);
+
+const readPackageJSON = async (referencePath: string, format: keyof FormatMapper) => {
+  const packageJSON = await import(`./${referencePath}/package.json`);
+
+  if (!isJSON(packageJSON)) {
+    throw Error('package package.json should be defined');
   }
 
-  return {};
-};
+  const exportName = formatMapper[format];
+  const entryFileNames = (packageJSON['exports'] as any)[exportName];
 
-const hasValidEntryFileName = <Key extends FormatMapperValues>(
-  packageJSON: unknown,
-  key: Key,
-): packageJSON is {exports: Record<Key, string>} => {
-  const hasExportsProp = isObject(packageJSON) && keyIn(packageJSON, 'exports');
-  const hasValidKey =
-    hasExportsProp &&
-    isObject(packageJSON.exports) &&
-    keyIn(packageJSON.exports, key) &&
-    isString(packageJSON.exports[key]);
-
-  return hasValidKey;
-};
-
-const readEntryFileNames = (packageJSON: unknown, format: Formats[number]) => {
-  const key = formatMapper[format];
-
-  if (hasValidEntryFileName(packageJSON, key)) {
-    const path = packageJSON.exports[key];
-
-    return basename(path);
+  if (!isString(entryFileNames)) {
+    throw Error('entryFileNames is not valid');
   }
 
-  return none;
+  const dependencies: unknown = packageJSON['dependencies'] ?? empty.object;
+
+  if (!isDependencies(dependencies)) {
+    throw Error('dependencies are not valid');
+  }
+
+  const resolveOnly = Object.values(dependencies);
+
+  return {
+    entryFileNames,
+    resolveOnly,
+  };
 };
 
-const hasDependencies = (packageJSON: unknown): packageJSON is {dependencies: Any.AnyObject<string, string>} => {
-  const hasDependenciesProp = isObject(packageJSON) && keyIn(packageJSON, 'dependencies');
+const readTypescriptConfig = (referencePath: string) => import(`./${referencePath}/tsconfig.json`);
 
-  return (
-    hasDependenciesProp && isObject(packageJSON.dependencies) && objectKeys(packageJSON.dependencies).every(isString)
-  );
-};
-
-const readDependencies = (packageJSON: unknown) =>
-  hasDependencies(packageJSON) ? objectKeys(packageJSON.dependencies) : [];
-
-const rollup = async () => {
-  const tsconfig = await import('./tsconfig.json');
+const runRollup = async () => {
+  const typescriptConfig = await import('./tsconfig.json');
   const references: Reference[] = [];
 
-  for await (const reference of tsconfig.references) {
+  for await (const reference of typescriptConfig.references) {
     if (await canBundlePacakge(reference)) {
       references.push(reference);
     }
   }
 
-  const referenceEntries = references.flatMap(reference => formats.map(format => [reference, format] as const));
+  const referenceEntries = references.flatMap(reference => config.formats.map(format => [reference, format] as const));
 
   return Promise.all(
     referenceEntries.map(async ([reference, format]) => {
-      const [{entryFileNames, resolveOnly}, compilerOptions] = await Promise.all([
-        import(`./${reference.path}/package.json`).then(packageJSON => ({
-          resolveOnly: readDependencies(packageJSON),
-          entryFileNames: readEntryFileNames(packageJSON, format),
-        })),
-        import(`./${reference.path}/tsconfig.json`).then(packageTsconfig => readCompilerOptions(packageTsconfig)),
+      const [extendedTypescriptConfig, {resolveOnly, entryFileNames}] = await Promise.all([
+        readTypescriptConfig(reference.path),
+        readPackageJSON(reference.path, format),
       ]);
 
       const rollupOptions: RollupOptions = {
-        input: `${reference.path}/${inputFile}`,
+        input: toPath(reference.path, config.inputFile),
         output: {
-          dir: `${reference.path}/${outputDirectory}`,
+          dir: toPath(reference.path, config.outputDirectory),
           format,
           entryFileNames,
         },
         plugins: [
           typescriptPlugin({
             tsconfig: './tsconfig.base.json',
-            compilerOptions,
+            ...extendedTypescriptConfig,
           }),
           stripPlugin(),
           commonJsPlugin(),
@@ -131,4 +115,4 @@ const rollup = async () => {
   );
 };
 
-export default rollup;
+export default runRollup;

@@ -18,3 +18,16 @@ export const isPrimitive = (value: unknown): value is Any.Primitive => Object(va
  * Checks if the passed value is truthy or not.
  */
 export const isTruthy = <Value>(value: Value): value is Exclude<Value, Any.FalsyValues> => Boolean(value);
+
+/**
+ * Checks if the passed value is JSON or not.
+ */
+export const isJSON = (value: unknown): value is Any.AnyObject<unknown, string> => {
+  try {
+    JSON.parse(JSON.stringify(value));
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
