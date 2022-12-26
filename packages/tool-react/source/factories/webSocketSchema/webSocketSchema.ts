@@ -2,13 +2,13 @@
 import {createEventHub} from '@tool/utils';
 import {useSyncExternalStore} from 'react';
 
-import type {AnyWebSocketSchema, Get, InferNextState, InferStateUnion, Transition} from './types';
+import type {AnyWebSocketSchema, InferNextState, InferStateUnion, Transition} from './types';
 
 const name = 'webSocketSchema';
 
 export const createWebSocketSchema = <WebSocketSchema extends AnyWebSocketSchema, Actions>(
   initial: InferStateUnion<WebSocketSchema>,
-  initialization: (get: Get<WebSocketSchema>, transition: Transition<WebSocketSchema>) => Actions,
+  initialization: (get: () => InferStateUnion<WebSocketSchema>, transition: Transition<WebSocketSchema>) => Actions,
 ) => {
   const eventHub = createEventHub();
   let globalState = initial;

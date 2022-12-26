@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react';
+import {fireEvent, render, waitFor} from '@testing-library/react';
 import Server from 'jest-websocket-mock';
 
 import {createWebSocketSchema as createWebSocketSchemaImpl} from '../../_api';
@@ -41,12 +41,14 @@ type Actions = {
 
 const addr = 'ws://localhost:1234';
 
-const createWebSocketSchema = () => {
+const createWebSocketSchema = (socket: WebSocket | null) => {
+  if (!socket) {
+    throw Error('socket should be defined');
+  }
+
   const initial: SelectWebSocketState<WebsocketSchema, 'idle'> = {kind: 'idle', addr};
   const webSocketSchema = createWebSocketSchemaImpl<WebsocketSchema, Actions>(initial, (get, transition) => ({
     connect(idleState) {
-      const socket = new WebSocket(idleState.addr);
-
       socket.addEventListener('error', () => {
         const currentState = get();
 
@@ -86,12 +88,24 @@ const createWebSocketSchema = () => {
 };
 
 describe('jsdom - react:factories:webSocketSchema', () => {
+  let server: Server | null = null;
+  let socket: WebSocket | null = null;
+
+  beforeEach(() => {
+    server = new Server(addr);
+    socket = new WebSocket(addr);
+  });
+
+  afterEach(() => {
+    server?.close();
+    server = null;
+
+    socket?.close();
+    socket = null;
+  });
+
   it('should connect', async () => {
-    const server = new Server(addr);
-
-    await server.connected;
-
-    const useWebSocketSchema = createWebSocketSchema();
+    const useWebSocketSchema = createWebSocketSchema(socket);
 
     const Component = () => {
       const {state, actions} = useWebSocketSchema();
@@ -105,8 +119,6 @@ describe('jsdom - react:factories:webSocketSchema', () => {
       }
 
       if (state.kind === 'connected') {
-        console.log('kind: connected');
-
         return <p>connected</p>;
       }
 
@@ -118,7 +130,59 @@ describe('jsdom - react:factories:webSocketSchema', () => {
     fireEvent.click(getByText('connect'));
 
     getByText('connecting');
+
+    await waitFor(() => {
+      getByText('connected');
+    });
   });
 
-  it.todo('should notify all subscribers');
+  it('should notify all subscribers', async () => {
+    const useWebSocketSchema = createWebSocketSchema(socket);
+
+    const ChildA = () => {
+      const {state, actions} = useWebSocketSchema();
+
+      if (state.kind === 'idle') {
+        return <button onClick={() => actions.connect(state)}>connect</button>;
+      }
+
+      if (state.kind === 'connecting') {
+        return <p>ChildA: connecting</p>;
+      }
+
+      if (state.kind === 'connected') {
+        return <p>ChildA: connected</p>;
+      }
+
+      return null;
+    };
+    const ChildB = () => {
+      const {state} = useWebSocketSchema();
+
+      if (state.kind === 'idle') {
+        return null;
+      }
+
+      return <p>ChildB: {state.kind}</p>;
+    };
+
+    const Component = () => (
+      <>
+        <ChildA />
+        <ChildB />
+      </>
+    );
+
+    const {getByText} = render(<Component />);
+
+    fireEvent.click(getByText('connect'));
+
+    getByText('ChildA: connecting');
+    getByText('ChildB: connecting');
+
+    await waitFor(() => {
+      getByText('ChildA: connected');
+      getByText('ChildB: connected');
+    });
+  });
 });

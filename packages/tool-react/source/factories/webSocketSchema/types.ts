@@ -5,8 +5,6 @@ type AnySteps = Any.AnyObject<Array<keyof AnyStates>, keyof AnyStates>;
 
 export type AnyWebSocketSchema = InferWebSocketSchema<AnyStates, AnySteps>;
 
-export type Get<WebSocketSchema extends AnyWebSocketSchema> = () => InferStateUnion<WebSocketSchema>;
-
 export type Transition<WebSocketSchema extends AnyWebSocketSchema> = <
   Kind extends WebSocketSchema['allKeys'],
   NextKind extends InferNextKind<WebSocketSchema, Kind>,
