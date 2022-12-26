@@ -49,7 +49,7 @@ const readPackageJSON = async (referencePath: string, format: keyof FormatMapper
   }
 
   const exportName = formatMapper[format];
-  const entryFileNames = (packageJSON['exports'] as any)[exportName];
+  const entryFileNames: unknown = (packageJSON['exports'] as any)[exportName];
 
   if (!isString(entryFileNames)) {
     throw Error('entryFileNames is not valid');
