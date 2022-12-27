@@ -61,7 +61,7 @@
     "@tool/typescript": "*",
     "@tool/utils": "*",
     "@types/jest": "29.2.4",
-    "@types/node": "18.11.17",
+    "@types/node": "18.11.18",
     "@types/prompt": "1.1.4",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.46.0",
