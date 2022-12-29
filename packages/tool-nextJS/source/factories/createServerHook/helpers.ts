@@ -6,7 +6,7 @@ import type {ContextUnion, ServerHook} from './createServerHook';
 export const readServerCacheKey = (propertyKey: unknown) =>
   isString(propertyKey) ? propertyKey.replace(/[\w-]+:/g, none) : none;
 
-export const composePropsProviders = async <Context extends ContextUnion>(
+export const composeHookPropsProviders = async <Context extends ContextUnion>(
   serverHooks: ServerHook[],
   context: Context,
 ) => {

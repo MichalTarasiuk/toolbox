@@ -51,3 +51,21 @@ export const Freeze = ({freeze, children, fallback}: FreezeProps) => {
     </Suspense>
   );
 };
+
+const colorsMapper = {
+  red: {isRed: true},
+  blue: 'bg-blue',
+};
+
+type ColorsMapper = typeof colorsMapper;
+
+const is = <CompareKey extends keyof ColorsMapper>(
+  {key, compareKey}: {key: keyof ColorsMapper; compareKey: To},
+  _value: ColorsMapper[keyof ColorsMapper],
+): _value is ColorsMapper[CompareKey] => key === to;
+
+const getMapper = <Key extends keyof ColorsMapper>(key: Key, value: ColorsMapper[Key]) => {
+  if (is({}, value)) {
+    value;
+  }
+};
