@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type {Custom} from '@tool/typescript';
-import type {Object as ObjectType, Any} from '@tool/typescript';
+import type {Object as ObjectType, Any, Array as ArrayType} from '@tool/typescript';
 
 /**
  * @param object - Object that contains the properties and methods.
@@ -10,7 +10,6 @@ import type {Object as ObjectType, Any} from '@tool/typescript';
  */
 export const objectKeys = <GenericObject extends Any.AnyObject, NarrowType extends boolean = true>(
   object: GenericObject,
-  _narrowType?: NarrowType,
 ) => Object.keys(object) as NarrowType extends true ? ObjectType.Keys<GenericObject> : Array<keyof GenericObject>;
 
 /**
@@ -18,30 +17,16 @@ export const objectKeys = <GenericObject extends Any.AnyObject, NarrowType exten
  *
  * @returns an array of key/values of the enumerable properties of an object
  */
-export const entries = <GenericObject extends Any.AnyObject, NarrowType extends boolean = true>(
-  object: GenericObject,
-  _narrowType?: NarrowType,
-) =>
-  Object.entries(object) as NarrowType extends true
-    ? ObjectType.Entries<GenericObject>
-    : Array<[keyof GenericObject, GenericObject[keyof GenericObject]]>;
+export const entries = <AnyObject extends Any.AnyObject>(anyObject: AnyObject) =>
+  Object.entries(anyObject) as ObjectType.Entries<AnyObject>;
 
 /**
  * @param entries - An iterable object that contains key-value entries for properties and methods.
  *
  * @returns an object created by key-value entries for properties and methods
  */
-export const fromEntries = <
-  Entries extends Array<[PropertyKey, unknown]>,
-  NarrowType extends boolean = true,
-  Entry extends Entries[number] = Entries[number],
->(
-  entries: Entries,
-  _narrowType?: NarrowType,
-) =>
-  Object.fromEntries(entries) as NarrowType extends true
-    ? Custom.Debug<ObjectType.FromEntries<Entries>>
-    : Any.AnyObject<Entry[1], Entry[0]>;
+export const fromEntries = <Entries extends Array<ArrayType.Entry>>(entries: Entries) =>
+  Object.fromEntries(entries) as Custom.Debug<ObjectType.FromEntries<Entries[number]>>;
 
 type KeyIn<GenericObject extends Any.AnyObject, Key extends PropertyKey> = Any.AnyObject<unknown, Key> & GenericObject;
 
