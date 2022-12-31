@@ -129,7 +129,7 @@ importers:
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.26
       '@types/react-is': ^17.0.3
-      '@types/react-reconciler': 0.28.0
+      '@types/react-reconciler': 0.28.1
       '@types/uuid': 9.0.0
       deep-equal: ^2.0.5
       html-react-parser: ^3.0.4
@@ -156,7 +156,7 @@ importers:
       '@types/deep-equal': 1.0.1
       '@types/react': 18.0.26
       '@types/react-is': 17.0.3
-      '@types/react-reconciler': 0.28.0
+      '@types/react-reconciler': 0.28.1
       '@types/uuid': 9.0.0
       immer: 9.0.16
       jest-websocket-mock: 2.4.0
@@ -2835,8 +2835,8 @@ packages:
       '@types/react': 18.0.26
     dev: true
 
-  /@types/react-reconciler/0.28.0:
-    resolution: {integrity: sha512-5cjk9ottZAj7eaTsqzPUIlrVbh3hBAO2YaEL1rkjHKB3xNAId7oU8GhzvAX+gfmlfoxTwJnBjPxEHyxkEA1Ffg==}
+  /@types/react-reconciler/0.28.1:
+    resolution: {integrity: sha512-ExBHUBykCcDh0HqqlJb6BA1yNpvW2iluIThK9tr1CX2tRMe3HeLt5/ow/bTpKGWoRBE5v/ISXFyjbnHRSKT6ng==}
     dependencies:
       '@types/react': 18.0.26
     dev: true
