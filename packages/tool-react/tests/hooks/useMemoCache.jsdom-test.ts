@@ -19,8 +19,6 @@ describe('jsdom - react:hooks:useMemoCache', () => {
     const spy = jest.fn();
     const {result, rerender} = renderHook(
       ({dependencyList}) => {
-        console.log({dependencyList});
-
         return useMemoCache(() => {
           spy();
 
