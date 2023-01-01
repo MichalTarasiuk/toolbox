@@ -1,26 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useMemo} from 'react';
-import {errorWhen} from '@tool/utils';
 
-import {useLazyRef} from './useLazyRef';
+import {useLazyRef} from '../useLazyRef';
+
+import {createCache} from './cache';
 
 import type {DependencyList} from 'react';
 
 export const useMemoCache = <State>(factory: () => State, dependencyList: DependencyList) => {
-  const cacheRef = useLazyRef(() => new Map<DependencyList, State>());
+  const cacheRef = useLazyRef(() => createCache<State>());
 
   const memo = useMemo(() => {
     const cache = cacheRef.current;
+    const cachedState = cache.get(dependencyList);
 
-    if (cache.has(dependencyList)) {
-      const cachedState = cache.get(dependencyList);
-
-      errorWhen(cachedState, 'No cached state');
-
+    if (!cache.isNone(cachedState)) {
       return cachedState;
     }
 
     const state = factory();
+
+    cache.set(dependencyList, state);
 
     return state;
   }, dependencyList);
