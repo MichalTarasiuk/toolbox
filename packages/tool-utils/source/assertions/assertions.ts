@@ -31,3 +31,9 @@ export const isJSON = (value: unknown): value is Any.AnyObject<unknown, string> 
     return false;
   }
 };
+
+export function errorWhen(condition: unknown, message: string): asserts condition {
+  if (!condition) {
+    throw Error(message);
+  }
+}

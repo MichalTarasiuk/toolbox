@@ -10,3 +10,4 @@ export * from './useCustomCompareMemo';
 export * from './useLazyRef';
 export * from './useImmerState';
 export * from './useConst';
+export * from './useMemoCache';
