@@ -20,7 +20,7 @@ export const splitObject = <
   anyObject: AnyObject,
   fn: (key: keyof AnyObject, value: unknown, shouldSkip: ShouldSkip) => Separator | ShouldSkip,
 ) =>
-  objectKeys(anyObject, false).reduce(
+  objectKeys(anyObject).reduce(
     (collector, key) => {
       const result = fn(key, anyObject[key], shouldSkip);
 
