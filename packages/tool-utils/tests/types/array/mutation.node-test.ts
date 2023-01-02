@@ -42,8 +42,6 @@ describe('node - utils:types:array:mutation', () => {
 
     const {reference} = splice(example, 1, 0, 'Feb');
 
-    console.log({reference});
-
     expect(reference).not.toBe(example);
   });
 

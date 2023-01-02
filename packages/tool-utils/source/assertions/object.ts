@@ -36,7 +36,7 @@ type KeyIn<GenericObject extends Any.AnyObject, Key extends PropertyKey> = Any.A
  *
  * @returns true if the specified property is in the specified object
  */
-export const keyIn = <GenericObject extends Any.AnyObject, Key extends PropertyKey>(
-  object: GenericObject,
+export const keyIn = <AnyObject extends Any.AnyObject, Key extends PropertyKey>(
+  anyObject: AnyObject,
   key: Key,
-): object is Custom.Debug<KeyIn<GenericObject, Key>> => key in object;
+): anyObject is Custom.Debug<KeyIn<AnyObject, Key>> => Object.hasOwn(anyObject, key);
