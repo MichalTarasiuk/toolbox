@@ -1,6 +1,5 @@
-import {usePrevious} from '@react-hookz/web';
 import {sleep} from '@tool/utils';
-import {Suspense, useMemo, type ReactNode} from 'react';
+import {Suspense, useEffect, useMemo, useRef, type ReactNode} from 'react';
 
 import {suspensify} from '../source';
 
@@ -29,9 +28,14 @@ const createSuspenderState = () => {
 const Suspender = ({freeze, children}: SuspenderProps) => {
   const suspenderState = useMemo(() => createSuspenderState(), []);
 
-  const previousFreeze = usePrevious(freeze);
-  const canStartWork = freeze && !previousFreeze;
-  const canStopWork = !freeze && previousFreeze;
+  const savedFreeze = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    savedFreeze.current = freeze;
+  });
+
+  const canStartWork = freeze && !savedFreeze.current;
+  const canStopWork = !freeze && savedFreeze.current;
 
   if (canStartWork) {
     suspenderState.read();
