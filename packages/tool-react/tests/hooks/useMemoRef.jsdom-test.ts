@@ -1,4 +1,5 @@
 import {renderHook} from '@testing-library/react';
+import {sum} from '@tool/utils';
 
 import {useMemoRef} from '../../_api';
 
@@ -30,5 +31,28 @@ describe('jsdom - react:hooks:useMemoRef', () => {
     rerender();
 
     expect(hook.current).toBe(initialResult);
+  });
+
+  it('should update memo value on dependency list change', () => {
+    const {result: hook, rerender} = renderHook(
+      ({dependencyList}) => useMemoRef(() => dependencyList.reduce(sum), dependencyList),
+      {
+        initialProps: {dependencyList: [1, 2]},
+      },
+    );
+
+    const initial = hook.current;
+
+    expect(initial.current).toBe(3);
+
+    rerender({dependencyList: [2, 3]});
+
+    expect(hook.current).toBe(initial);
+    expect(hook.current.current).toBe(5);
+
+    rerender({dependencyList: [4, 5]});
+
+    expect(hook.current).toBe(initial);
+    expect(hook.current.current).toBe(9);
   });
 });
