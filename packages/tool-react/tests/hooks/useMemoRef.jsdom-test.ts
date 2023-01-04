@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react';
-import {sum} from '@tool/utils';
+import {expectType, sum} from '@tool/utils';
 
 import {useMemoRef} from '../../_api';
 
@@ -10,6 +10,7 @@ describe('jsdom - react:hooks:useMemoRef', () => {
       result: {current: hook},
     } = renderHook(() => useMemoRef(() => example, []));
 
+    expectType<{quantity: number}>(hook.current);
     expect(hook.current).toBe(example);
   });
 
