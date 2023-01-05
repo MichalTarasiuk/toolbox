@@ -1,4 +1,4 @@
-import {areHookInputsEqual} from '../../../_api';
+import {areHookInputsEqual as nativAreHookInputsEqual} from '../../../_api';
 
 import type {DependencyList} from 'react';
 
@@ -7,8 +7,9 @@ const none = Symbol();
 type None = typeof none;
 type CachedItem<State> = {state: State; dependencyList: DependencyList};
 
-export const createCache = <State>() => {
+export const createCache = <State>(customAreHookInputsEqual?: typeof nativAreHookInputsEqual) => {
   const cache = new Map<string, Set<CachedItem<State>>>();
+  const areHookInputsEqual = customAreHookInputsEqual || nativAreHookInputsEqual;
 
   const get = (dependencyList: DependencyList) => {
     const key = String(dependencyList);

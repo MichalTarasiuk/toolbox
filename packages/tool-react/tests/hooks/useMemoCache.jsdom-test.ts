@@ -1,7 +1,9 @@
 import {renderHook} from '@testing-library/react-hooks';
-import {sum} from '@tool/utils';
+import {empty, sum} from '@tool/utils';
 
 import {useMemoCache} from '../../_api';
+
+import type {DependencyList} from 'react';
 
 describe('jsdom - react:hooks:useMemoCache', () => {
   it('should return resolved state', () => {
@@ -67,5 +69,68 @@ describe('jsdom - react:hooks:useMemoCache', () => {
 
     expect(result.current).toEqual([2, 3]);
     expect(spy).toHaveBeenCalledTimes(3);
+  });
+
+  it('should work with custom `areHookInputsEqual`', () => {
+    const spy = jest.fn();
+    const customAreHookInputsEqual = (nextDeps: DependencyList, prevDeps: DependencyList | null) =>
+      JSON.stringify(nextDeps) === JSON.stringify(prevDeps);
+
+    const {result, rerender} = renderHook(
+      ({dependencyList}) => {
+        return useMemoCache(
+          () => {
+            spy();
+
+            return Object.values(dependencyList[0] ?? empty.object);
+          },
+          dependencyList,
+          customAreHookInputsEqual,
+        );
+      },
+      {initialProps: {dependencyList: [{a: 1, b: 2}]}},
+    );
+
+    expect(result.current).toEqual([1, 2]);
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    rerender({dependencyList: [{a: 1, b: 2}]});
+
+    expect(result.current).toEqual([1, 2]);
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    rerender({dependencyList: [{a: 2, b: 3}]});
+
+    expect(result.current).toEqual([2, 3]);
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
+
+  it('should handle unstable refference of `areHookInputsEqual`', () => {
+    const spy = jest.fn();
+    const initialDependencyList = [{a: 1, b: 2}];
+
+    const {result, rerender} = renderHook(
+      ({dependencyList}) => {
+        return useMemoCache(
+          () => {
+            spy();
+
+            return Object.values(dependencyList[0] ?? empty.object);
+          },
+          dependencyList,
+          (nextDeps: DependencyList, prevDeps: DependencyList | null) =>
+            JSON.stringify(nextDeps) === JSON.stringify(prevDeps),
+        );
+      },
+      {initialProps: {dependencyList: initialDependencyList}},
+    );
+
+    expect(result.current).toEqual([1, 2]);
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    rerender({dependencyList: initialDependencyList});
+
+    expect(result.current).toEqual([1, 2]);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });

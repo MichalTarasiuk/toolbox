@@ -25,5 +25,5 @@ export const useLazyRef = <LazyInitialize extends () => unknown>(lazyInitialize:
     return ref;
   }
 
-  throw Error('something went wrong');
+  throw Error('ref is not initialized');
 };
