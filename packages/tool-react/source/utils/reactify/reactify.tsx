@@ -1,26 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {keyIn} from '@tool/utils';
 import parse, {attributesToProps, domToReact} from 'html-react-parser';
 
-import {hasId, isValidName} from './assertions';
+import {hasResolveAttribute, isValidName} from './assertions';
 import {getGlobalResolvers} from './globalResolvers';
-import {elementsGuard, formatId, formatTag} from './helpers';
+import {elementsGuard, formatResolveAttribute, formatTag} from './helpers';
+import {resolveAttributeName} from './consts';
 
+import type {Custom} from '@tool/typescript';
 import type {HTMLReactParserOptions} from 'html-react-parser';
 import type {Resolvers} from './types';
 
 export const reactify = (html: string, customResolvers?: Resolvers) => {
-  const getCustomResolver = (name: string): Resolvers[keyof Resolvers] | null =>
+  const getCustomResolver = (name: string): Custom.ValueOf<Resolvers> | null =>
     customResolvers && keyIn(customResolvers, name) && isValidName(name) ? customResolvers[name] : null;
 
   const options: HTMLReactParserOptions = {
     replace: elementsGuard(element => {
       const {children, attribs} = element;
 
-      const name = hasId(element.attribs) ? formatId(element.attribs.id) : formatTag(element.tagName);
+      const name = hasResolveAttribute(element.attribs)
+        ? formatResolveAttribute(element.attribs.resolve)
+        : formatTag(element.tagName);
       const CustomResolver = getCustomResolver(name);
 
       if (CustomResolver) {
-        return <CustomResolver {...attributesToProps(attribs)}>{domToReact(children, options)}</CustomResolver>;
+        const {[resolveAttributeName]: _, ...restAttribs} = element.attribs;
+
+        return <CustomResolver {...attributesToProps(restAttribs)}>{domToReact(children, options)}</CustomResolver>;
       }
 
       const globalResolver = getGlobalResolvers(options).findOne(element);

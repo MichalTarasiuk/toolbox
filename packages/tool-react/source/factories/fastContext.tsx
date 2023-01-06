@@ -1,7 +1,7 @@
 import {createEventHub, isObject} from '@tool/utils';
 import {useCallback, useMemo, useRef, useSyncExternalStore} from 'react';
 
-import {createSafeContext} from './createSafeContext';
+import {createSafeContext} from './safeContext';
 
 import type {Any, Custom} from '@tool/typescript';
 import type {ReactNode} from 'react';

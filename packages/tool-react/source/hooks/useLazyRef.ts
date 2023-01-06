@@ -6,6 +6,8 @@ import {objectIs} from '../../_api';
 
 import type {MutableRefObject} from 'react';
 
+const canInitialize = Symbol();
+
 const canWork = <Current, Initial extends symbol>(
   ref: MutableRefObject<Current>,
   initial: Initial,
@@ -13,7 +15,6 @@ const canWork = <Current, Initial extends symbol>(
   isObject(ref) && keyIn(ref, 'current') && !objectIs(ref.current, initial);
 
 export const useLazyRef = <LazyInitialize extends () => unknown>(lazyInitialize: LazyInitialize) => {
-  const canInitialize = Symbol();
   const ref = useRef<ReturnType<LazyInitialize> | typeof canInitialize>(canInitialize);
 
   if (ref.current === canInitialize) {
@@ -24,5 +25,5 @@ export const useLazyRef = <LazyInitialize extends () => unknown>(lazyInitialize:
     return ref;
   }
 
-  throw Error('something went wrong');
+  throw Error('ref is not initialized');
 };

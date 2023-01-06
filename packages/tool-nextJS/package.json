@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "ts:find-deadcode": "ts-prune -p tsconfig.json",
-    "ts:check": "tsc --noEmit"
+    "ts:check": "tsc --build --clean"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
-    "query-string": "^7.1.1",
+    "query-string": "^8.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@types/query-string": "^6.3.0",
     "@types/react": "18.0.26",
     "@types/uuid": "9.0.0",
-    "next": "13.0.6",
+    "next": "13.1.1",
     "react": "18.2.0"
   },
   "peerDependencies": {

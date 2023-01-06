@@ -8,3 +8,8 @@ export * from './useNearestParent';
 export * from './useHasCommit';
 export * from './useCustomCompareMemo';
 export * from './useLazyRef';
+export * from './useImmerState';
+export * from './useConst';
+export * from './useMemoCache/useMemoCache';
+export * from './useMemoRef';
+export * from './useSyncedRef';

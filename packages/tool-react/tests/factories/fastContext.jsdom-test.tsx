@@ -7,7 +7,7 @@ import {createFastContext} from '../../_api';
 
 import type {ReactNode} from 'react';
 
-describe('jsdom - react:factories:createFastContext', () => {
+describe('jsdom - react:factories:fastContext', () => {
   it('should render', () => {
     const [UserProvider, useUser] = createFastContext<{name: string}>('user');
 

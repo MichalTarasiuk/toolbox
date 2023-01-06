@@ -6,7 +6,7 @@ import {createSafeContext} from '../../_api';
 
 import type {ReactNode} from 'react';
 
-describe('jsdom - react:factories:createSafeContext', () => {
+describe('jsdom - react:factories:safeContext', () => {
   it('should render', () => {
     const [UserProvider, useUser] = createSafeContext<{name: string}>('user');
 

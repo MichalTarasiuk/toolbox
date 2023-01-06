@@ -1,4 +1,4 @@
-import {stringify} from 'query-string';
+import queryString from 'query-string';
 import {useCallback, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {useEvent} from '@tool/react';
@@ -16,6 +16,8 @@ type InferTransitionOptions<GenericNextRouter extends NextRouter> = GenericNextR
   ? TransitionOptions
   : never;
 
+const cleanUrl = (url: string) => url.replace(/\?(.)+/, none);
+
 export const useRefreshProps = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
@@ -24,7 +26,7 @@ export const useRefreshProps = () => {
 
   useEffect(() => {
     const routeChangeStartHandler = (nextUrl: string, transitionOptions: InferTransitionOptions<typeof router>) => {
-      if (getUrl().replace(/\?(.)+/, none) === nextUrl.replace(/\?(.)+/, none) && !transitionOptions.shallow) {
+      if (cleanUrl(getUrl()) === cleanUrl(nextUrl) && !transitionOptions.shallow) {
         setIsRefreshing(true);
       }
     };
@@ -45,12 +47,12 @@ export const useRefreshProps = () => {
 
   const refreshProps = useCallback(
     (searchParams: Any.AnyObject<string, string>) => {
-      const url = `${router.asPath}?${stringify(searchParams)}`;
+      const url = `${router.asPath}?${queryString.default.stringify(searchParams)}`;
 
       void router.replace(url, undefined);
     },
     [router],
   );
 
-  return [isRefreshing, refreshProps] as const;
+  return {isRefreshing, refreshProps};
 };

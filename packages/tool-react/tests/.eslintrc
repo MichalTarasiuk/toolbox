@@ -1,9 +1,10 @@
 {
   "overrides": [
     {
-      "files": ["*-test.tsx"],
+      "files": ["*-test.tsx", "*-test.ts"],
       "rules": {
-        "@typescript-eslint/no-empty-function": "off"
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
       }
     }
   ]

@@ -2,7 +2,7 @@ import {render, fireEvent} from '@testing-library/react';
 
 import {createStepperContext} from '../../_api';
 
-describe('jsdom - react:factories:createStepperContext', () => {
+describe('jsdom - react:factories:stepperContext', () => {
   it('should throw error when steps are not correct', () => {
     expect(() =>
       createStepperContext({

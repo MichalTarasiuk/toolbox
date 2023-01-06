@@ -5,7 +5,7 @@ import {isElement} from './assertions';
 
 import type {HTMLReactParserOptions, Element as ElementType, DOMNode} from 'html-react-parser';
 
-export const formatId = (name: string) => `id:${name}` as const;
+export const formatResolveAttribute = (name: string) => `resolve:${name}` as const;
 export const formatTag = (name: string) => `tag:${name}` as const;
 
 export const getSiteOrigin = () => {

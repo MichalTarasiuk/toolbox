@@ -1,5 +1,5 @@
 import {render} from '@testing-library/react';
-import {expectType, signs, none, keyIn} from '@tool/utils';
+import {expectType, signs, none} from '@tool/utils';
 
 import {reactify} from '../../_api';
 
@@ -44,19 +44,16 @@ describe('jsdom - react:utils:reactify', () => {
 
     const {getByText} = render(
       <Markup
-        html={`<p id='${selector}'>Hello World</p>`}
+        html={`<p resolve='${selector}'>Hello World</p>`}
         resolvers={{
-          [`id:${selector}` as const]: props => {
-            if (keyIn(props, 'id')) {
-              return <p>{'replaced :)'}</p>;
-            }
-
-            return null;
-          },
+          [`resolve:${selector}` as const]: () => <p>{'replaced :)'}</p>,
         }}
       />,
     );
 
-    getByText('replaced :)');
+    const htmlElement = getByText('replaced :)');
+
+    // @ts-ignore
+    expect(htmlElement.attributes.resolve).not.toBeDefined();
   });
 });

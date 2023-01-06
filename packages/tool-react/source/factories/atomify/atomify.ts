@@ -89,6 +89,20 @@ export const atomify = () => {
     return childAtom;
   };
 
+  const splitAtom = <State extends unknown[]>(anyAtom: Atom<State>) => {
+    const {state} = anyAtom.read(secretToken);
+
+    const splitedAtom = atom(
+      state.map(value => {
+        const newAtom = atom<State[number]>(value);
+
+        return Object.assign(newAtom, {id: newAtom.read(secretToken).id});
+      }),
+    );
+
+    return splitedAtom;
+  };
+
   const useAtomValue = <State, Params extends unknown[]>(anyAtom: Atom<State, Params>) => {
     const state = useSyncExternalStore<State>(
       onStoreChange => {
@@ -142,6 +156,7 @@ export const atomify = () => {
   return {
     atom,
     select,
+    splitAtom,
     useAtom,
     useAtomValue,
     useResetAtom,
