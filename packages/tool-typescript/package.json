@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rm -rf ./build",
     "ts:find-deadcode": "ts-prune -p tsconfig.json",
-    "ts:check": "tsc --build --clean"
+    "ts:check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
