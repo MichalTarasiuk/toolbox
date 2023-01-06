@@ -22,6 +22,7 @@ export type Atom<State = unknown, Params extends unknown[] = any[]> = {
     id: string;
     readonly state: State;
     readonly coworkers: string[];
+    addCoworker: (coworkerId: string) => void;
     setInitialization: (...params: Params) => void;
   };
 };

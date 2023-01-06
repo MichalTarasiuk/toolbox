@@ -78,6 +78,17 @@ export const atomify = () => {
     };
   };
 
+  const select = <State, Slice>(anyAtom: Atom<State>, selector: (state: State) => Slice) => {
+    const parentAtom = anyAtom.read(secretToken);
+    const slice = selector(parentAtom.state);
+
+    const childAtom = atom(slice);
+
+    parentAtom.addCoworker(childAtom.read(secretToken).id);
+
+    return childAtom;
+  };
+
   const splitAtom = <State extends unknown[]>(anyAtom: Atom<State>) => {
     const {state} = anyAtom.read(secretToken);
 
@@ -144,6 +155,7 @@ export const atomify = () => {
 
   return {
     atom,
+    select,
     splitAtom,
     useAtom,
     useAtomValue,
