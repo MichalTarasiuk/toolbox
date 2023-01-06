@@ -1,6 +1,6 @@
 <p align="center">
   <img src="./media/images/toolbox-logo.png" width="120" alt="toolbox-logo">
-  <h3 align="center">Toolbox</h3>
+  <h3 align="center">Toolbox - Test</h3>
   <p align="center">A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.</p>
 </p>
 
