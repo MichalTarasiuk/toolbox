@@ -1,7 +1,7 @@
 import {isString, signs, timeout} from '@tool/utils';
 import prompt from 'prompt';
 
-import packageJSON from '../package.json';
+import packageJSON from '../../package.json';
 
 import {createTree, getWorkspace} from './utils';
 
@@ -28,7 +28,7 @@ const getName = () => {
   });
 };
 
-export const addPackage = async () => {
+export const newPackage = async () => {
   try {
     const namePromise = getName();
     const name = await timeout(namePromise, 4_000);
@@ -47,4 +47,4 @@ export const addPackage = async () => {
   }
 };
 
-void addPackage();
+void newPackage();

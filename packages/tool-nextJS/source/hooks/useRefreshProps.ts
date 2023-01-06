@@ -47,7 +47,7 @@ export const useRefreshProps = () => {
 
   const refreshProps = useCallback(
     (searchParams: Any.AnyObject<string, string>) => {
-      const url = `${router.asPath}?${queryString.default.stringify(searchParams)}`;
+      const url = `${router.asPath}?${queryString.stringify(searchParams)}`;
 
       void router.replace(url, undefined);
     },

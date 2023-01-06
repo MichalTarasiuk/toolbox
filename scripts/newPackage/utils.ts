@@ -1,10 +1,10 @@
 import {join} from 'path';
 
-import {isArray, isObject, isString, keyIn} from '@tool/utils';
+import {isArray, isObject, isString, keyIn, none} from '@tool/utils';
 import createFile from 'create-file';
 import makeDir from 'make-dir';
 
-export const getWorkspace = (name = '') => join(process.cwd(), name);
+export const getWorkspace = (name = none) => join(process.cwd(), name);
 export const hasExtension = (name: string) => /^\w+.\w+$/.test(name);
 
 type Tree = {
