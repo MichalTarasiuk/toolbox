@@ -1,9 +1,10 @@
 import {renderHook} from '@testing-library/react-hooks';
+import {useEffect, useRef} from 'react';
 
 import {areHookInputsEqual} from '../../_api';
 
+import type {DependencyList} from 'react';
 import type {Any} from '@tool/typescript';
-import {DependencyList, useEffect, useRef} from 'react';
 
 const useExample = (fn: Any.UnknownFunction, deps: DependencyList) => {
   const savedDeps = useRef<DependencyList | null>(null);
