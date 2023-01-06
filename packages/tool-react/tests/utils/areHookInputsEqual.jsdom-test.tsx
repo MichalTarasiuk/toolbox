@@ -1,15 +1,18 @@
-import {usePrevious} from '@react-hookz/web';
 import {renderHook} from '@testing-library/react-hooks';
 
 import {areHookInputsEqual} from '../../_api';
 
 import type {Any} from '@tool/typescript';
-import type {DependencyList} from 'react';
+import {DependencyList, useEffect, useRef} from 'react';
 
 const useExample = (fn: Any.UnknownFunction, deps: DependencyList) => {
-  const savedDeps = usePrevious(deps);
+  const savedDeps = useRef<DependencyList | null>(null);
 
-  if (areHookInputsEqual(deps, savedDeps ?? null)) {
+  useEffect(() => {
+    savedDeps.current = deps;
+  });
+
+  if (areHookInputsEqual(deps, savedDeps.current ?? null)) {
     fn();
   }
 };
