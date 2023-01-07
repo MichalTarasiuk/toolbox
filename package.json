@@ -35,7 +35,7 @@
   "scripts": {
     "utils:new-package": "ts-node-esm scripts/newPackage/newPackage.ts",
     "build:clean": "pnpm --filter \"./packages/**\" --parallel --no-bail run clean",
-    "build:run": "pnpm run build:clean && rollup --config rollup.config.js",
+    "build:run": "pnpm run build:clean && rollup --config rollup.config.ts --configPlugin typescript",
     "style:lint": "eslint . --ext .ts,.tsx",
     "style:lint-fix": "eslint . --fix",
     "style:format": "prettier --write \"**/*.{ts,tsx}\"",
