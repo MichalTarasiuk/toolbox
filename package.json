@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "toolbox",
+  "type": "module",
   "version": "1.0.0",
   "description": "A collection of simple, optimized utility functions that help you spend more time implementing real features instead of writing the same snippets over and over.",
   "bugs": "https://github.com/MichalTarasiuk/toolbox/issues",
@@ -32,17 +33,16 @@
     "url": "https://github.com/MichalTarasiuk/toolbox"
   },
   "scripts": {
-    "utils:new-package": "ts-node scripts/newPackage/newPackage.ts",
+    "utils:new-package": "ts-node-esm scripts/newPackage/newPackage.ts",
     "build:clean": "pnpm --filter \"./packages/**\" --parallel --no-bail run clean",
     "build:run": "pnpm run build:clean && rollup --config rollup.config.js",
     "style:lint": "eslint . --ext .ts,.tsx",
     "style:lint-fix": "eslint . --fix",
     "style:format": "prettier --write \"**/*.{ts,tsx}\"",
-    "ts:find-deadcode": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:find-deadcode",
     "ts:check": "pnpm --filter \"./packages/**\" --parallel --no-bail run ts:check",
     "test:jest": "jest --config",
     "test:jest:watch": "jest --config --watch",
-    "test:jest:single-test": "ts-node scripts/runSingleTest.ts"
+    "test:jest:single-test": "ts-node-esm scripts/runSingleTest.ts"
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
