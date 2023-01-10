@@ -16,6 +16,7 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx"
   }
 }
