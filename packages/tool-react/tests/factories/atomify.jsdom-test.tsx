@@ -350,7 +350,7 @@ describe('jsdom - react:factories:atomify', () => {
     const todosAtom = atom(initialState);
     const todoAtomsAtom = splitAtom(todosAtom);
 
-    type TodoType = typeof initialState[number];
+    type TodoType = (typeof initialState)[number];
 
     const TodoItem = ({todoAtom}: {todoAtom: Atom<TodoType>}) => {
       const [todo, setTodo] = useAtom(todoAtom);

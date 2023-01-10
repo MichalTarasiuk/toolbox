@@ -5,6 +5,7 @@ import {
   expectTypeNotAny,
   isClient,
   isPrimitive,
+  isPropertyKey,
   isServer,
   isTruthy,
   lowercase,
@@ -87,5 +88,22 @@ describe('node - utils:assertions', () => {
 
     expect(isPrimitive(example1)).toBeTruthy();
     expect(isPrimitive(example2)).toBeFalsy();
+  });
+
+  it('should return `true` when value is property key', () => {
+    const example = {
+      1: 'A',
+      Symbol: 'B',
+      C: 3,
+    };
+    const example2 = [{a: 1}, [4]];
+
+    Object.keys(example).forEach(maybeKey => {
+      expect(isPropertyKey(maybeKey)).toBeTruthy();
+    });
+
+    example2.forEach(maybeKey => {
+      expect(isPropertyKey(maybeKey)).toBeFalsy();
+    });
   });
 });

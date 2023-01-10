@@ -32,6 +32,12 @@ export const isJSON = (value: unknown): value is Any.AnyObject<unknown, string> 
   }
 };
 
+export const isPropertyKey = (value: unknown) => {
+  const type = typeof value;
+
+  return ['string', 'number', 'symbol'].includes(type);
+};
+
 export function errorWhen(condition: unknown, message: string): asserts condition {
   if (!condition) {
     throw Error(message);

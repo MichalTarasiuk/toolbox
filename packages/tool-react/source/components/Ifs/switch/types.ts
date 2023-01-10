@@ -2,7 +2,7 @@ import type {ReactNode} from 'react';
 import type React from 'react';
 import type {Resolvable} from '@tool/utils';
 
-export type Childrens = ReturnType<typeof React['Children']['toArray']>;
+export type Childrens = ReturnType<(typeof React)['Children']['toArray']>;
 
 export type SwitchProps = {
   children: ReactNode;
