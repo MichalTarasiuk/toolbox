@@ -7,7 +7,7 @@ const none = Symbol();
 type None = typeof none;
 type CachedItem<State> = {state: State; dependencyList: DependencyList};
 
-export const createCache = <State>(customAreHookInputsEqual?: typeof nativAreHookInputsEqual) => {
+export const createMemoCache = <State>(customAreHookInputsEqual?: typeof nativAreHookInputsEqual) => {
   const cache = new Map<string, Set<CachedItem<State>>>();
   const areHookInputsEqual = customAreHookInputsEqual || nativAreHookInputsEqual;
 

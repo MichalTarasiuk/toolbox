@@ -3,7 +3,7 @@ import {useMemo} from 'react';
 
 import {useSyncedRef, useLazyRef} from '../../source';
 
-import {createCache} from './cache';
+import {createMemoCache} from './cache';
 
 import type {areHookInputsEqual} from '../../source';
 import type {DependencyList} from 'react';
@@ -14,7 +14,7 @@ export const useMemoCache = <State>(
   customAreHookInputsEqual?: typeof areHookInputsEqual,
 ) => {
   const syncedAreHookInputsEqual = useSyncedRef(customAreHookInputsEqual);
-  const cacheRef = useLazyRef(() => createCache<State>(syncedAreHookInputsEqual.current));
+  const cacheRef = useLazyRef(() => createMemoCache<State>(syncedAreHookInputsEqual.current));
 
   const memo = useMemo(() => {
     const cache = cacheRef.current;
